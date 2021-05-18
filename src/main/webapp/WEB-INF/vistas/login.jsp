@@ -3,29 +3,30 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	<!-- Bootstrap core CSS -->
+	<!-- Bootstrap core CSS 
 	    <link href="css/bootstrap.min.css" rel="stylesheet" >
-	    <!-- Bootstrap theme -->
+	    <!-- Bootstrap theme 
 	    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+	-->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 	</head>
 	<body>
 		<div class = "container">
-			<div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+			<div id="loginbox" class="pt-5 col-6 mx-auto text-center">
 				<%--Definicion de un form asociado a la accion /validar-login por POST. Se indica ademas que el model attribute se--%>
 				<%--debe referenciar con el nombre usuario, spring mapea los elementos de la vista con los atributos de dicho objeto--%>
 					<%--para eso debe coincidir el valor del elemento path de cada input con el nombre de un atributo del objeto --%>
 				<form:form action="validar-login" method="POST" modelAttribute="usuario">
-			    	<h3 class="form-signin-heading">Taller Web I</h3>
+			    	<h3 class="form-signin-heading display-5">EnerGym</h3>
 					<hr class="colorgraph"><br>
 
 					<%--Elementos de entrada de datos, el elemento path debe indicar en que atributo del objeto usuario se guardan los datos ingresados--%>
-					<form:input path="email" id="email" type="email" class="form-control" />
-					<form:input path="password" type="password" id="password" class="form-control"/>     		  
+					<form:input path="email" id="email" type="email" class="form-control mb-2" placeholder='Ingresar Mail' />
+					<form:input path="password" type="password" id="password" class="form-control mb-2" placeholder='Ingresar contrase�a'/>     		  
 					
-					<button class="btn btn-lg btn-primary btn-block" Type="Submit"/>Login</button>
+					<button class="btn btn-lg btn-primary btn-block mt-2 w-100" Type="Submit"/>Login</button>
 				</form:form>
-				<a href="registro">Ir a registrarse</a>
-
+				<a href='registro'>Ir A registrarme</a>
 				<%--Bloque que es visible si el elemento error no está vacío	--%>
 				<c:if test="${not empty error}">
 			        <h4><span>${error}</span></h4>
