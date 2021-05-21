@@ -24,9 +24,9 @@
 					<form:input path="email" id="email" type="email" class="form-control mb-2" placeholder='Ingresar Mail' />
 					<form:input path="password" type="password" id="password" class="form-control mb-2" placeholder='Ingresar contraseña'/>     		  
 					
-					<button class="btn btn-lg btn-primary btn-block mt-2 w-100" Type="Submit"/>Login</button>
+					<button class="btn btn-lg btn-primary btn-block mt-2 w-100" Type="Submit"/>Ingresar</button>
 				</form:form>
-				<a href='registro'>Ir A registrarme</a>
+				<a href='registro' class="d-block mt-4">¿Todavía no te registraste? Hace click aquí</a>
 				<%--Bloque que es visible si el elemento error no estÃ¡ vacÃ­o	--%>
 				<c:if test="${not empty error}">
 			        <h4><span>${error}</span></h4>
