@@ -3,13 +3,17 @@ import org.junit.Test;
 import org.springframework.test.annotation.Rollback;
 import ar.edu.unlam.tallerweb1.SpringTest;
 import ar.edu.unlam.tallerweb1.modelo.Clase;
+import ar.edu.unlam.tallerweb1.modelo.Profesor;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import static org.assertj.core.api.Assertions.*;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import javax.transaction.Transactional;
 
-public class ClasePersistenciaTest extends SpringTest{
+public class ClasePersistenciaTest extends SpringTest {
 	
 	@Test @Transactional @Rollback(true)
 	public void poderGuardarUnaClase() {
@@ -19,7 +23,8 @@ public class ClasePersistenciaTest extends SpringTest{
 		
 		thenLoPuedoBuscarPorSuId(idClase);
 	}
-
+	
+		
 	private Clase givenExisteUnaClase() {
 		return new Clase();
 		

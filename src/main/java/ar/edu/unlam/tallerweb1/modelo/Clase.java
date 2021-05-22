@@ -1,11 +1,14 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
+import java.util.ArrayList;
+
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
+@Entity(name = "clase")
 public class Clase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,6 +16,7 @@ public class Clase {
 	private String nombre;
 	private	Long capacidad;
 	private String HorarioYFecha;
+	private ArrayList<Long> profesores;
 	
 	public Clase() {
 		super();
@@ -30,12 +34,9 @@ public class Clase {
 		this.id = id;
 	}
 
-
-
 	public String getNombre() {
 		return nombre;
 	}
-
 
 
 	public void setNombre(String nombre) {
@@ -64,6 +65,21 @@ public class Clase {
 
 	public void setHorarioYFecha(String horarioYFecha) {
 		HorarioYFecha = horarioYFecha;
+	}
+
+
+
+	public void setProfesor(Long idProfesor) {
+		if(idProfesor != null)
+			this.profesores.add(idProfesor);
+		
+	}
+
+
+
+	public ArrayList<Long> getProfesores() {
+		
+		return this.profesores;
 	}
 
 
