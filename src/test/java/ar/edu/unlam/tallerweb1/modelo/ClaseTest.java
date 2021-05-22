@@ -21,7 +21,6 @@ public class ClaseTest {
 		//clase.setProfesor(profesor);
 		
 		assertEquals(nombre,clase.getNombre());
-		//assertNotNull(clase.getProfesor());
 	}
 
 }
