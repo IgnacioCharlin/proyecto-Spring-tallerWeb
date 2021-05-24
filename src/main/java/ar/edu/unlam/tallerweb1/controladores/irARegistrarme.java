@@ -13,7 +13,7 @@ import ar.edu.unlam.tallerweb1.modelo.DatosRegistro;
 @Controller
 public class irARegistrarme {
 	@RequestMapping(path="/registro", method = RequestMethod.GET)
-    public ModelAndView saludar(){
+    public ModelAndView irRegistro(){
         ModelMap model = new ModelMap();
         model.put("datosRegistro", new DatosRegistro());
         return new ModelAndView("registro", model);

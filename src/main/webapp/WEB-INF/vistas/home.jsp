@@ -11,6 +11,7 @@
 	<body>
 		<div class = "container">
 			<h1>Bienvenidos a Taller Web 1</h1>
+			<a href="agregar-clase" class="btn btn-success">Agregar Clase</a>
 		</div>
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>

@@ -26,7 +26,6 @@ public class ClasePersistenciaTest extends SpringTest{
 	}
 	private Long whenGuardoLaClase(Clase clase) {
 		session().save(clase);
-		System.out.println(clase.getId());
 		return clase.getId();
 	}
 
