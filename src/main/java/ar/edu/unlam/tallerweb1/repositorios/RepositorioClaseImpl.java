@@ -37,13 +37,7 @@ public class RepositorioClaseImpl implements RepositorioClase{
 		return (Clase) sessionFactory.getCurrentSession().createCriteria(Clase.class)
 					.add(Restrictions.eq("nombre", nombre))
 					.uniqueResult();
-	}
-
-
-	
-
-	
-	
+	}		
 }
 
 
