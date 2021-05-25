@@ -11,7 +11,9 @@ import org.springframework.web.servlet.ModelAndView;
 import ar.edu.unlam.tallerweb1.modelo.Clase;
 import ar.edu.unlam.tallerweb1.servicios.ServicioClase;
 
-public class ContoladorAgregarClaseTest {
+
+public class ContoladorClaseTest {
+
 
 
 	private final String REDIRECT_LOGIN = "redirect:/login";
@@ -25,7 +27,6 @@ public class ContoladorAgregarClaseTest {
 		controladorClase = new ControladorClase();
 		servicioAgregarClase = mock(ServicioClase.class);
 	}
-
 
 	@Test
 	public void queSePuedaRegistrarLaClase() {

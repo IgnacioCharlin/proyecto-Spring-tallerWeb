@@ -31,8 +31,8 @@ public class ServicioClaseTest {
 		repositorioClase = mock(RepositorioClase.class);
 
 		servicio = new ServicioClaseImpl();
-
 	}
+
 	
 	@Test(expected = NoSeCargoUnaFecha.class)
 	public void siUnaClaseNoTieneFechaLanzaUnaExcepcion() {
