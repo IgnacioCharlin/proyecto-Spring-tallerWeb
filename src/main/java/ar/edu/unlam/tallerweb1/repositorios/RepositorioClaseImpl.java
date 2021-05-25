@@ -1,4 +1,4 @@
-/*package ar.edu.unlam.tallerweb1.repositorios;
+package ar.edu.unlam.tallerweb1.repositorios;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -32,6 +32,6 @@ public class RepositorioClaseImpl implements RepositorioClase{
 	
 }
 
-*/
+
 
 

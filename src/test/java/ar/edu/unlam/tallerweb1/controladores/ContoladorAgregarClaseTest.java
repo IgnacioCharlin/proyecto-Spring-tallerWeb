@@ -11,9 +11,9 @@ import ar.edu.unlam.tallerweb1.modelo.Clase;
 public class ContoladorAgregarClaseTest {
 	
 	
-	private final String REDIRECT_LOGIN = "redirect:/login";
+	private final String REDIRECT_LOGIN = "redirect:/login";//crear la vista donde estan las clases dispobibles
 
-	ControladorClase controladorClase = new ControladorClase();
+	private ControladorClase controladorClase = new ControladorClase();
 	
 	ModelAndView mav;
 	
