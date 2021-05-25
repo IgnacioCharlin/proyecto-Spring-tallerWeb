@@ -31,4 +31,6 @@ public class DatosClase {
 	public void setCupo(Long cupo) {
 		this.cupo = cupo;
 	}
+
 }
+
