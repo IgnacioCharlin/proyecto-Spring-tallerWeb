@@ -4,6 +4,7 @@ import java.util.Map;
 
 import java.util.HashMap;
 
+
 import ar.edu.unlam.tallerweb1.modelo.Clase;
 
 public interface RepositorioClase {
