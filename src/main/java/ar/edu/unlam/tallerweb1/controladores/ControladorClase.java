@@ -10,19 +10,21 @@ import ar.edu.unlam.tallerweb1.modelo.Clase;
 
 @Controller
 public class ControladorClase {
-	
+
 	@RequestMapping(path = "/agregar-clase", method = RequestMethod.GET)
 	public ModelAndView irAgregarClase() {
 		ModelMap model = new ModelMap("agregar-clase", new Clase());
-		return new ModelAndView("agregar-clase",model); 
+		return new ModelAndView("agregar-clase", model);
 	}
 
-	public ModelAndView registrar(Clase clase) {
-		return new ModelAndView("redirect:/login");
+	@RequestMapping(path = "/agregar-clase", method = RequestMethod.POST)
+	public ModelAndView registrarClase(Clase clase) {
+		return new ModelAndView("redirect:/home");
 	}
 	
-
+	public ModelAndView registroConClaseExistente() {
+		ModelMap model = new ModelMap("error","La clase ya existe");
+		return new ModelAndView("agregar-clase",model);
+	}
 
 }
-
-

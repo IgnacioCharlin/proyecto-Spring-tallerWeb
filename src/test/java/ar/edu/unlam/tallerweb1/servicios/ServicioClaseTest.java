@@ -20,14 +20,18 @@ public class ServicioClaseTest {
  * 	
  * 
  *  */
-	private ServicioAgregarClaseImpl servicio;
+
+	private ServicioClaseImpl servicio;
+
 	private Profesor profesor;
 	private RepositorioClase repositorioClase;
 	
 	@Before
 	public void init() {
 		repositorioClase = mock(RepositorioClase.class);
-		servicio = new ServicioAgregarClaseImpl();
+
+		servicio = new ServicioClaseImpl();
+
 	}
 	
 	@Test(expected = NoSeCargoUnaFecha.class)
