@@ -14,28 +14,30 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioClase;
 
 public class ContoladorClaseTest {
 
+	private final Long CUPO = 50L;
+	private final String NOMBRE = "Funcional";
 	private final String REDIRECT_LOGIN = "redirect:/login";
 	private final String REDIRECT_HOME = "redirect:/home";
 	ControladorClase controladorClase;
 	private ModelAndView mav;
-	private ServicioClase servicioAgregarClase;
+	private ServicioClase servicioClase;
 
 	@Before
 	public void init() {
 		controladorClase = new ControladorClase();
-		servicioAgregarClase = mock(ServicioClase.class);
+		servicioClase = mock(ServicioClase.class);
 	}
 
 	@Test
 	public void queSePuedaRegistrarLaClase() {
-		Clase clase = givenSeCreaLaClase();
+		DatosClase clase = givenSeCreaLaClase();
 		whenRegistroLaClase(clase);
 		thenLaClaseSeCreoConExito();
 	}
 
 	@Test
 	public void siLaClaseExisteNoSePuedeRegistrar() {
-		Clase clase = givenSeCreaLaClase();
+		DatosClase clase = givenSeCreaLaClase();
 		whenLaClaseCreadaYaExiste(clase.getNombre());
 		thenLaClaseNoSePudoRegistrar("La clase ya existe");
 	}
@@ -51,13 +53,13 @@ public class ContoladorClaseTest {
 
 	}
 
-	private Clase givenSeCreaLaClase() {
-		return new Clase();
+	private DatosClase givenSeCreaLaClase() {
+		return new DatosClase();
 	}
 
-	private void whenRegistroLaClase(Clase clase) {
-		clase.setNombre("Funcional");
-		clase.setCapacidad((long) 50);
+	private void whenRegistroLaClase(DatosClase clase) {
+		clase.setNombre(NOMBRE);
+		//clase.setCapacidad((CUPO));
 		mav = controladorClase.registrarClase(clase);
 	}
 

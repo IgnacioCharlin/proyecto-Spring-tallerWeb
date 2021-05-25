@@ -23,6 +23,7 @@ public class ServicioClaseImpl implements ServicioClase {
 		if(clase.getProfesores().isEmpty())
 			throw new NoSeCargoProfesor();
 		
+		//recibir datos y guardar Clase claseclase -->repositorioClase.agregarClase()
 		return clase;
 	}
 }
