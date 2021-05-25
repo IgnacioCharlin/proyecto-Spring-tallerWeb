@@ -8,17 +8,17 @@ import org.springframework.stereotype.Repository;
 
 import ar.edu.unlam.tallerweb1.modelo.Clase;
 
-@Repository("repositorioClase")
+@Repository
 public class RepositorioClaseImpl implements RepositorioClase{
+	
 
 	private SessionFactory sessionFactory;
 	
 	@Autowired
 	public RepositorioClaseImpl(SessionFactory sessionFactory) {
-		super();
 		this.sessionFactory = sessionFactory;
 	}
-
+	 
 	@Override
 	public Clase agregarClase(Clase clase) {
 		final Session session = sessionFactory.getCurrentSession();

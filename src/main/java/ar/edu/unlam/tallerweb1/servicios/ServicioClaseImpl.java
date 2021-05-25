@@ -9,7 +9,7 @@ import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoUnaFecha;
 import ar.edu.unlam.tallerweb1.modelo.Clase;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioClase;
 
-@Service("servicioClase")
+@Service
 @Transactional
 public class ServicioClaseImpl implements ServicioClase {
 	//private RepositorioClase tablaDeClases = RepositorioClase.getInstance();
