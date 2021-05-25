@@ -14,16 +14,24 @@
 		<div class = "container">
 			<div id="loginbox" class="pt-5 col-6 mx-auto text-center">
 				<form:form action="" method="POST"
-		modelAttribute="agregar-clase">
+		modelAttribute="registrarClase">
 		<h3 class="form-signin-heading display-5">EnerGym</h3>
 		<hr class="colorgraph">
 		<br>
 
-		<%--Elementos de entrada de datos, el elemento path debe indicar en que atributo del objeto usuario se guardan los datos ingresados--%>
-		<form:input path="nombre" id="nombre" type="text"
-			class="form-control mb-2" placeholder="Ingresar Nombre"/>
-		<form:input path="capacidad" type="number" id="capacidad"
-			class="form-control mb-2" placeholder="Ingresar capacidad"/>
+		<%--Elementos de entrada de datos, el elemento path debe indicar en que atributo del objeto usuario se guardan los datos ingresados
+		private String nombre;
+    	private String fechaYHora;
+    	private Long idProfesor;
+    	private Long cupo;
+		
+		
+		--%>
+		<form:input path="nombre" id="nombre" type="text" class="form-control mb-2" placeholder="Ingresar Nombre"/>
+		<form:input path="fechaYHora" id="nombre" type="text" class="form-control mb-2" placeholder="Ingresar fecha y hora de la clase"/>
+		<form:input path="cupo" type="number" id="cupo" class="form-control mb-2" placeholder="Ingresar capacidad"/>
+		<form:input path="idProfesor" type="number" id="cupo" class="form-control mb-2" placeholder="Ingresar el Id del profe"/>
+		
 		<button class="btn btn-lg btn-primary btn-block mt-2 w-100" Type="Submit" />Agregar</button>
 	</form:form>
 	<h3>${email} ${password}</h3>
