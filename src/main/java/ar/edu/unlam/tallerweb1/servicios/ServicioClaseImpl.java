@@ -3,6 +3,7 @@ package ar.edu.unlam.tallerweb1.servicios;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ar.edu.unlam.tallerweb1.controladores.DatosClase;
 import ar.edu.unlam.tallerweb1.excepciones.FaltaCupo;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoProfesor;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoUnaFecha;
@@ -15,16 +16,18 @@ public class ServicioClaseImpl implements ServicioClase {
 	//private RepositorioClase tablaDeClases = RepositorioClase.getInstance();
 	
 	@Override
-	public Clase agregarClase(Clase clase) {
-		if(clase.getHorarioYFecha() == null)
+	public Clase agregarClase(DatosClase clase) {
+		if(clase.getFechaYHora() == null)
 			throw new NoSeCargoUnaFecha();
-		if( clase.getCapacidad() == null ||clase.getCapacidad() <= 0 )
+		if( clase.getCupo() == null ||clase.getCupo() <= 0 )
 			throw new FaltaCupo();
-		if(clase.getProfesores().isEmpty())
+		if(clase.getIdProfesor() == null)
 			throw new NoSeCargoProfesor();
 		
 		//recibir datos y guardar Clase claseclase -->repositorioClase.agregarClase()
-		return clase;
+		
+		Clase nuevaClase = new Clase(clase.getNombre(), clase.getFechaYHora(), clase.getIdProfesor(), clase.getCupo());
+		return nuevaClase;
 	}
 }
 

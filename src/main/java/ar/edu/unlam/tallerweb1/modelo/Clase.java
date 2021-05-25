@@ -17,12 +17,24 @@ public class Clase {
 	private String HorarioYFecha;
 	private ArrayList<Long> profesores;
 	
+	public Clase(String nombre, String horarioYfecha, Long idProfesor, Long capacidad) {
+		super();
+		this.profesores = new ArrayList<Long>();
+		this.nombre = nombre;
+		this.HorarioYFecha = horarioYfecha;
+		this.capacidad = capacidad;
+		this.setProfesor(idProfesor);
+		
+	}
+	
+	
+
 	public Clase() {
 		super();
 		this.profesores = new ArrayList<Long>();
 	}
-	
-	
+
+
 
 	public Long getId() {
 		return id;

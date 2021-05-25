@@ -7,13 +7,15 @@ import static org.mockito.Mockito.mock;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
-
+import static org.assertj.core.api.Assertions.assertThat;
 import ar.edu.unlam.tallerweb1.modelo.Clase;
 import ar.edu.unlam.tallerweb1.servicios.ServicioClase;
 
 
 public class ContoladorClaseTest {
 
+	private static final String FECHAYHORA = "miercoles 10hs";
+	private static final Long ID = 2l;
 	private final Long CUPO = 50L;
 	private final String NOMBRE = "Funcional";
 	private final String REDIRECT_LOGIN = "redirect:/login";
@@ -43,7 +45,7 @@ public class ContoladorClaseTest {
 	}
 	
 	private void whenLaClaseCreadaYaExiste(String nombreClase) {
-		Clase clase = new Clase();
+		DatosClase clase = new DatosClase();
 		clase.setNombre(nombreClase);
 		mav = controladorClase.registroConClaseExistente();
 	}
@@ -59,11 +61,14 @@ public class ContoladorClaseTest {
 
 	private void whenRegistroLaClase(DatosClase clase) {
 		clase.setNombre(NOMBRE);
-		//clase.setCapacidad((CUPO));
+		clase.setCupo((CUPO));
+		clase.setFechaYHora(FECHAYHORA);
+		clase.setIdProfesor(ID);
 		mav = controladorClase.registrarClase(clase);
 	}
 
 	private void thenLaClaseSeCreoConExito() {
 		assertEquals(mav.getViewName(), REDIRECT_HOME);
+		assertThat(mav.getModel().get("cargadaOk")).isEqualTo(Boolean.TRUE);
 	}
 }

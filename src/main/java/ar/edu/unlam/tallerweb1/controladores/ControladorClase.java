@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -11,9 +12,13 @@ import ar.edu.unlam.tallerweb1.excepciones.FaltaCupo;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoProfesor;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoUnaFecha;
 import ar.edu.unlam.tallerweb1.modelo.Clase;
+import ar.edu.unlam.tallerweb1.servicios.ServicioClase;
+import ar.edu.unlam.tallerweb1.servicios.ServicioClaseImpl;
 
 @Controller
 public class ControladorClase {
+	@Autowired
+	private ServicioClase servicioClase = new ServicioClaseImpl();
 
 	@RequestMapping(path = "/agregar-clase", method = RequestMethod.GET)
 	public ModelAndView irAgregarClase() {
@@ -27,7 +32,7 @@ public class ControladorClase {
 		ModelMap model = new ModelMap();
 		
 		try {
-			
+				servicioClase.agregarClase(clase);
 		} catch (FaltaCupo e) {
 			return registrarClaseError(model, "Falto cargar el cupo");
 		}catch (NoSeCargoProfesor e) {

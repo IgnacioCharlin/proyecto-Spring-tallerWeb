@@ -5,6 +5,7 @@ import static org.mockito.Mockito.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import ar.edu.unlam.tallerweb1.controladores.DatosClase;
 import ar.edu.unlam.tallerweb1.excepciones.FaltaCupo;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoProfesor;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoUnaFecha;
@@ -36,7 +37,7 @@ public class ServicioClaseTest {
 	
 	@Test(expected = NoSeCargoUnaFecha.class)
 	public void siUnaClaseNoTieneFechaLanzaUnaExcepcion() {
-		Clase clase = givenClaseNueva();
+		DatosClase clase = givenClaseNueva();
 		
 		 whenRegistroLaClase(clase);
 		
@@ -44,7 +45,7 @@ public class ServicioClaseTest {
 	}
 	@Test(expected = FaltaCupo.class)
 	public void siUnaClaseNoTieneCupoLanzaUnaExcepcion() {
-		Clase clase = givenClaseNuevaSinCupo();
+		DatosClase clase = givenClaseNuevaSinCupo();
 		
 		 whenRegistroLaClase(clase);
 		
@@ -53,7 +54,7 @@ public class ServicioClaseTest {
 	
 	@Test(expected = NoSeCargoProfesor.class)
 	public void siUnaClaseNoTieneProfesorLanzaUnaExcepcion() {
-		Clase clase = givenClaseNuevaSinProfesor();
+		DatosClase clase = givenClaseNuevaSinProfesor();
 		
 		 whenRegistroLaClase(clase);
 		
@@ -61,22 +62,22 @@ public class ServicioClaseTest {
 	}
 	
 
-	private Clase givenClaseNuevaSinProfesor() {
-		Clase nueva = new Clase();
+	private DatosClase givenClaseNuevaSinProfesor() {
+		DatosClase nueva = new DatosClase();
 		nueva.setNombre("Funcional");
-		nueva.setHorarioYFecha("Miercoles 10hs");
-		nueva.setCapacidad(10l);
+		nueva.setFechaYHora("Miercoles 10hs");
+		nueva.setCupo(10l);
 //		seteandoIdProfesor();
 //		nueva.setProfesor(profesor.getId());
 		return nueva;
 	}
 
-	private Clase givenClaseNuevaSinCupo() {
-		Clase nueva = new Clase();
+	private DatosClase givenClaseNuevaSinCupo() {
+		DatosClase nueva = new DatosClase();
 		nueva.setNombre("Funcional");
-		nueva.setHorarioYFecha("Miercoles 10hs");
+		nueva.setFechaYHora("Miercoles 10hs");
 		seteandoIdProfesor();
-		nueva.setProfesor(profesor.getId());
+		nueva.setIdProfesor(profesor.getId());
 //		nueva.setCapacidad(-1l);
 		return nueva;
 	}
@@ -86,15 +87,15 @@ public class ServicioClaseTest {
 		
 	}
 
-	private void whenRegistroLaClase(Clase clase) {
+	private void whenRegistroLaClase(DatosClase clase) {
 		servicio.agregarClase(clase);
 		
 	}
 
-	private Clase givenClaseNueva() {
-		Clase nueva = new Clase();
+	private DatosClase givenClaseNueva() {
+		DatosClase nueva = new DatosClase();
 		nueva.setNombre("Funcional");
-		nueva.setCapacidad(20l);
+		nueva.setCupo(20l);
 		return nueva;
 	}
 	private void seteandoIdProfesor() {
