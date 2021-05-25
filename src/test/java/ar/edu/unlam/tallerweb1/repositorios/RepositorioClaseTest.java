@@ -1,7 +1,6 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
 import static org.junit.Assert.*;
-import static org.mockito.Matchers.isNotNull;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,30 +11,94 @@ import ar.edu.unlam.tallerweb1.SpringTest;
 import ar.edu.unlam.tallerweb1.modelo.Clase;
 
 public class RepositorioClaseTest extends SpringTest{
-	private final String NOMBRE_DE_LA_CLASE ="funcional";
-	private final Long CAPACIDAD =(long)10;
+
+	private final String NOMBRE_CLASE = "funcional";
+	private final long CAPACIDAD=10;
+	private final Clase CLASE = new Clase();
 	@Autowired
 	private RepositorioClase repositorioClase;
 	
+	
+	
 	@Test @Transactional @Rollback
 	public void queSiLaClaseNoExisteSePuedaGuardar() {
-		Clase clase = givenCreoLaClase();
-		whenLaClaseNoExiste(clase,NOMBRE_DE_LA_CLASE,CAPACIDAD);
-		thenGuardadoDeClaseExitoso(clase);
+		Clase clase = whenSeGuardanLosDatos(CLASE,NOMBRE_CLASE,CAPACIDAD);
+		thenSeRegistroConExito(clase);
 	}
-	private Clase givenCreoLaClase() {
-		return new Clase();
+	
+	@Test @Transactional @Rollback
+	public void queSiLaClaseExisteNoSePuedaGuardar() {
+		Clase claseCopia =  new Clase();
+		Clase clase = whenSeGuardanLosDatos(CLASE,NOMBRE_CLASE,CAPACIDAD);
+		Clase clase2 = whenSeGuardanLosDatos(claseCopia,NOMBRE_CLASE,CAPACIDAD);
+		thenSeNoSeRegistro(clase2);
 	}
-	private void whenLaClaseNoExiste(Clase clase,String nombre, Long capacidad) {
+	
+	@Test @Transactional @Rollback
+	public void queBusqueLaClasePorElNombreYLaDevuelva() {
+		Clase clase = whenSeGuardanLosDatos(CLASE,NOMBRE_CLASE,CAPACIDAD);
+		thenDevuelveLaClase(clase.getNombre());
+	}
+	
+	@Test @Transactional @Rollback
+	public void queBusqueLaClasePorElNombreYNoExista() {
+		Clase clase = whenSeGuardanLosDatos(CLASE,NOMBRE_CLASE,CAPACIDAD);
+		thenNoDevuelveLaClase(clase.getNombre()+"aas");
+	}
+	
+	@Test @Transactional @Rollback
+	public void queSePuedaModificarUnaClase() {
+		long nuevaCapacidad = 25;
+		Clase clase = whenSeGuardanLosDatos(CLASE,NOMBRE_CLASE,CAPACIDAD);
+		clase.setCapacidad(nuevaCapacidad);
+		thenLaClaseSeModifico(clase,nuevaCapacidad);
+	}
+	
+	@Test @Transactional @Rollback
+	public void queSePuedaEliminarUnaClase() {
+		Clase clase = whenSeGuardanLosDatos(CLASE,NOMBRE_CLASE,CAPACIDAD);
+		thenLaClaseSeElimino(clase);
+	}
+	
+	private void thenLaClaseSeElimino(Clase clase) {
+		repositorioClase.eliminarClase(clase);
+		assertNull(repositorioClase.buscarClase(clase.getNombre()));
+		
+	}
+
+	private void thenLaClaseSeModifico(Clase clase, long nuevaCapacidad) {
+		repositorioClase.modificarClase(clase);
+		assertEquals((long)clase.getCapacidad(), nuevaCapacidad);
+	}
+
+	private void thenNoDevuelveLaClase(String nombre) {
+		Clase buscada = repositorioClase.buscarClase(nombre);
+		assertNull(buscada);
+	}
+
+	private void thenDevuelveLaClase(String nombre) {
+		Clase buscada = repositorioClase.buscarClase(nombre);
+		assertNotNull(buscada);
+		assertEquals(nombre, buscada.getNombre());
+	}
+
+	private void thenSeNoSeRegistro(Clase clase) {
+		assertNull(clase);
+	}
+
+	private Clase whenSeGuardanLosDatos(Clase clase,String nombre, long capacidad) {
 		if(repositorioClase.buscarClase(nombre)==null) {
 			clase.setNombre(nombre);
 			clase.setCapacidad(capacidad);
-			session().save(clase);
+			return repositorioClase.guardarClase(clase);
 		}
+		return null;
 	}
-	
-	private void thenGuardadoDeClaseExitoso(Clase clase) {
-		Clase buscada = session().get(Clase.class, clase.getNombre());
+
+
+	private void thenSeRegistroConExito(Clase clase) {
+		Clase claseBuscada = repositorioClase.buscarClase(clase.getNombre());
+		assertEquals(claseBuscada.getNombre(), NOMBRE_CLASE);
 	}
 
 }

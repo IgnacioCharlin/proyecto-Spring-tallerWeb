@@ -5,10 +5,11 @@ import ar.edu.unlam.tallerweb1.modelo.Clase;
 
 public interface RepositorioClase {
 	
-	Clase agregarClase (Clase clase);
-	void guardarClase(Clase clase);
+	Clase guardarClase(Clase clase);
 	Clase buscarClase(String nombre);
-
+	void modificarClase(Clase clase);
+	void eliminarClase(Clase clase);
+	
 }
 
 
