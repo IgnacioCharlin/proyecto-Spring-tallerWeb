@@ -26,8 +26,8 @@ public class ContoladorClaseTest {
 
 	@Before
 	public void init() {
-		controladorClase = new ControladorClase();
 		servicioClase = mock(ServicioClase.class);
+		controladorClase = new ControladorClase(servicioClase);
 	}
 
 	@Test

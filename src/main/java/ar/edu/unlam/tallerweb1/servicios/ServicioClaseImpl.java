@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,7 +14,13 @@ import ar.edu.unlam.tallerweb1.repositorios.RepositorioClase;
 @Service
 @Transactional
 public class ServicioClaseImpl implements ServicioClase {
-	//private RepositorioClase tablaDeClases = RepositorioClase.getInstance();
+	
+	private RepositorioClase repositorioClase;
+	
+	@Autowired
+	public ServicioClaseImpl(RepositorioClase repositorioClase) {
+		this.repositorioClase = repositorioClase;
+	}
 	
 	@Override
 	public Clase agregarClase(DatosClase clase) {
@@ -27,6 +34,7 @@ public class ServicioClaseImpl implements ServicioClase {
 		//recibir datos y guardar Clase claseclase -->repositorioClase.agregarClase()
 		
 		Clase nuevaClase = new Clase(clase.getNombre(), clase.getFechaYHora(), clase.getIdProfesor(), clase.getCupo());
+		repositorioClase.guardarClase(nuevaClase);
 		return nuevaClase;
 	}
 }

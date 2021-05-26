@@ -17,8 +17,12 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioClaseImpl;
 
 @Controller
 public class ControladorClase {
+	private ServicioClase servicioClase;
+	
 	@Autowired
-	private ServicioClase servicioClase = new ServicioClaseImpl();
+	public ControladorClase(ServicioClase servicioClase) {
+		this.servicioClase = servicioClase;
+	}
 
 	@RequestMapping(path = "/agregar-clase", method = RequestMethod.GET)
 	public ModelAndView irAgregarClase() {

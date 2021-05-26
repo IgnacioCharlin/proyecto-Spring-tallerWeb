@@ -31,7 +31,7 @@ public class ServicioClaseTest {
 	public void init() {
 		repositorioClase = mock(RepositorioClase.class);
 
-		servicio = new ServicioClaseImpl();
+		servicio = new ServicioClaseImpl(repositorioClase);
 	}
 
 	
