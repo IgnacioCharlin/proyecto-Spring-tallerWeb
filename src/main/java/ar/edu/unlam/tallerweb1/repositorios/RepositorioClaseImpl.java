@@ -1,5 +1,8 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -44,6 +47,12 @@ public class RepositorioClaseImpl implements RepositorioClase{
 	@Override
 	public void eliminarClase(Clase clase) {
 		sessionFactory.getCurrentSession().delete(clase);
+	}
+
+	@Override
+	public List buscarTodasLasClase() {
+		return sessionFactory.getCurrentSession().createCriteria(Clase.class).list();
+		
 	}	
 	
 }

@@ -11,9 +11,9 @@ import org.springframework.web.servlet.ModelAndView;
 import ar.edu.unlam.tallerweb1.excepciones.FaltaCupo;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoProfesor;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoUnaFecha;
-import ar.edu.unlam.tallerweb1.modelo.Clase;
+import ar.edu.unlam.tallerweb1.modelo.DatosClase;
 import ar.edu.unlam.tallerweb1.servicios.ServicioClase;
-import ar.edu.unlam.tallerweb1.servicios.ServicioClaseImpl;
+
 
 @Controller
 public class ControladorClase {

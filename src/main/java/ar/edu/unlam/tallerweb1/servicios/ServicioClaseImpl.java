@@ -1,14 +1,17 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import ar.edu.unlam.tallerweb1.controladores.DatosClase;
 import ar.edu.unlam.tallerweb1.excepciones.FaltaCupo;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoProfesor;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoUnaFecha;
 import ar.edu.unlam.tallerweb1.modelo.Clase;
+import ar.edu.unlam.tallerweb1.modelo.DatosClase;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioClase;
 
 @Service("servicioClase")
@@ -37,5 +40,19 @@ public class ServicioClaseImpl implements ServicioClase {
 		repositorioClase.guardarClase(nuevaClase);
 		return nuevaClase;
 	}
+
+	@Override
+	public Clase consultarClase(String nombre) {
+		return repositorioClase.buscarClase(nombre);
+	}
+
+	@Override
+	public ArrayList<Clase> consultarTodasLasClases() {
+		ArrayList<Clase> clases = new ArrayList<Clase>();
+		clases.addAll(repositorioClase.buscarTodasLasClase());
+		return clases;
+	}
+
+	
 }
 

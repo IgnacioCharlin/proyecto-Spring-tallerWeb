@@ -20,10 +20,10 @@ public class irARegistrarme {
     }
     
     @RequestMapping(path="/registro", method = RequestMethod.POST)
-    public ModelAndView mostrarDatos(DatosRegistro datos , ModelMap model){
+    public ModelAndView registroExitoso(DatosRegistro datos , ModelMap model){
         model.addAttribute("email",datos.getEmail());
         model.addAttribute("password",datos.getPassword());
-        return new ModelAndView("registro", model);
+        return new ModelAndView("redirect:/login", model);
     }
-
+	
 }
