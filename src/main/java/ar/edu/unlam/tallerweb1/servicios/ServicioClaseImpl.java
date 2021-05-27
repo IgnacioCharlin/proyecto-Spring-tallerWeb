@@ -11,7 +11,7 @@ import ar.edu.unlam.tallerweb1.modelo.Clase;
 import ar.edu.unlam.tallerweb1.modelo.DatosClase;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioClase;
 
-@Service
+@Service("servicioClase")
 @Transactional
 public class ServicioClaseImpl implements ServicioClase {
 	

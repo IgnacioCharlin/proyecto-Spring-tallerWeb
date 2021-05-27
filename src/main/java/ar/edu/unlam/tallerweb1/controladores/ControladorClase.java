@@ -35,6 +35,7 @@ public class ControladorClase {
 		model.put("datosClase", new DatosClase());
 		return new ModelAndView("agregar-clase", model);
 	}
+<<<<<<< HEAD
 	
 	/*
 	@RequestMapping(path="/agregar-clase", method = RequestMethod.POST)
@@ -46,20 +47,38 @@ public class ControladorClase {
 	
 	@RequestMapping(path = "/agregar-clase", method = RequestMethod.POST)
 	public ModelAndView registrarClase(@ModelAttribute DatosClase clase) {
+=======
+
+	@RequestMapping(path = "/agregarClase", method = RequestMethod.POST)
+	public ModelAndView registrarClase(@ModelAttribute("registrarClase") DatosClase clase) {
+>>>>>>> 7b282cd68c490fe718da7121a0d5d03f54e9fdab
 		ModelMap model = new ModelMap();
+		String error;
 		
 		try {
+<<<<<<< HEAD
 			servicioClase.agregarClase(clase);
 				model.addAttribute("nombre",clase.getNombre());
+=======
+				servicioClase.agregarClase(clase);
+				return claseCargadaOk(model);
+>>>>>>> 7b282cd68c490fe718da7121a0d5d03f54e9fdab
 		} catch (FaltaCupo e) {
-			return registrarClaseError(model, "Falto cargar el cupo");
+			error ="Falto cargar el cupo";
+			
 		}catch (NoSeCargoProfesor e) {
-			return registrarClaseError(model, "Falto cargar el profesor");
+			error = "Falto cargar el profesor";
 		}catch (NoSeCargoUnaFecha e) {
-			return registrarClaseError(model, "Falto cargar la hora y fecha");
+			error = "Falto cargar la hora y fecha";
 		}
 		
+<<<<<<< HEAD
 		return irAHome(model);
+=======
+		return registrarClaseError(model, error);
+		
+		
+>>>>>>> 7b282cd68c490fe718da7121a0d5d03f54e9fdab
 	}
 
 	@RequestMapping(path = "/home", method = RequestMethod.GET)
@@ -73,7 +92,7 @@ public class ControladorClase {
 		model.put("error", error);
 		model.put("datosClase", new DatosClase());
 		
-		return new ModelAndView("redirect:/agregar-clase");
+		return new ModelAndView("redirect:/agregar-clase", model);
 	}
 
 	public ModelAndView registroConClaseExistente() {
