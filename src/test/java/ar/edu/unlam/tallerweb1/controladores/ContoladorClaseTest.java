@@ -6,15 +6,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
 import static org.assertj.core.api.Assertions.assertThat;
-<<<<<<< HEAD
-import ar.edu.unlam.tallerweb1.modelo.Clase;
 import ar.edu.unlam.tallerweb1.modelo.DatosClase;
-=======
-
 import ar.edu.unlam.tallerweb1.excepciones.FaltaCupo;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoProfesor;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoUnaFecha;
->>>>>>> 7b282cd68c490fe718da7121a0d5d03f54e9fdab
 import ar.edu.unlam.tallerweb1.servicios.ServicioClase;
 
 
