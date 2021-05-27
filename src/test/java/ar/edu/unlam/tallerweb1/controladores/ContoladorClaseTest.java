@@ -7,7 +7,9 @@ import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import ar.edu.unlam.tallerweb1.excepciones.FaltaCupo;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoProfesor;
+import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoUnaFecha;
 import ar.edu.unlam.tallerweb1.servicios.ServicioClase;
 
 
@@ -46,7 +48,7 @@ public class ContoladorClaseTest {
 	public void siLaClaseNoTieneProfesorNoSeRegistra() {
 		DatosClase clase = givenDatosClaseSinProfesor();
 		
-		whenRegistroClase(clase);
+		whenRegistroClaseSinProfesor(clase);
 		
 		thenElRegistroFalla("Falto cargar el profesor");
 	}
@@ -55,9 +57,26 @@ public class ContoladorClaseTest {
 	public void siLaClaseNoTieneCupoNoSeRegistra() {
 		DatosClase clase = givenDatosClaseSinCupo();
 		
-		whenRegistroClase(clase);
+		whenRegistroClaseSinCupo(clase);
 		
 		thenElRegistroFalla("Falto cargar el cupo");
+	}
+	@Test
+	public void siLaClaseNoTieneFechaYHoraNoSeRegistra() {
+		DatosClase clase = givenDatosClaseSinFechaYHora();
+		
+		whenRegistroClaseSinFechaYHora(clase);
+		
+		thenElRegistroFalla("Falto cargar la hora y fecha");
+	}
+	
+	private DatosClase givenDatosClaseSinFechaYHora() {
+		DatosClase clase = new DatosClase();
+		clase.setCupo(CUPO);
+//		clase.setFechaYHora(FECHAYHORA);
+		clase.setNombre(NOMBRE);
+		clase.setIdProfesor(ID);
+		return clase;
 	}
 	
 	private DatosClase givenDatosClaseSinCupo() {
@@ -66,6 +85,14 @@ public class ContoladorClaseTest {
 		clase.setFechaYHora(FECHAYHORA);
 		clase.setNombre(NOMBRE);
 		clase.setIdProfesor(ID);
+		return clase;
+	}
+	
+	private DatosClase givenDatosClaseSinProfesor() {
+		DatosClase clase = new DatosClase();
+		clase.setCupo(CUPO);
+		clase.setFechaYHora(FECHAYHORA);
+		clase.setNombre(NOMBRE);
 		return clase;
 	}
 
@@ -77,20 +104,27 @@ public class ContoladorClaseTest {
 		
 	}
 
-	private void whenRegistroClase(DatosClase clase) {
-	when(servicioClase.agregarClase(any())).thenThrow(NoSeCargoProfesor.class);
+	private void whenRegistroClaseSinProfesor(DatosClase clase) {
+	when(servicioClase.agregarClase(clase)).thenThrow(NoSeCargoProfesor.class);
 		
 		mav = controladorClase.registrarClase(clase);
 		
 	}
-
-	private DatosClase givenDatosClaseSinProfesor() {
-		DatosClase clase = new DatosClase();
-		clase.setCupo(CUPO);
-		clase.setFechaYHora(FECHAYHORA);
-		clase.setNombre(NOMBRE);
-		return clase;
+	private void whenRegistroClaseSinCupo(DatosClase clase) {
+		when(servicioClase.agregarClase(clase)).thenThrow(FaltaCupo.class);
+			
+			mav = controladorClase.registrarClase(clase);
+			
 	}
+	
+	private void whenRegistroClaseSinFechaYHora(DatosClase clase) {
+		when(servicioClase.agregarClase(clase)).thenThrow(NoSeCargoUnaFecha.class);
+			
+			mav = controladorClase.registrarClase(clase);
+			
+	}
+
+
 
 	private void whenLaClaseCreadaYaExiste(String nombreClase) {
 		DatosClase clase = new DatosClase();
