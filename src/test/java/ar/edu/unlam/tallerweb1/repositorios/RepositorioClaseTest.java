@@ -2,6 +2,9 @@ package ar.edu.unlam.tallerweb1.repositorios;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
@@ -15,6 +18,7 @@ public class RepositorioClaseTest extends SpringTest{
 	private final String NOMBRE_CLASE = "funcional";
 	private final long CAPACIDAD=10;
 	private final Clase CLASE = new Clase();
+	
 	@Autowired
 	private RepositorioClase repositorioClase;
 	
@@ -60,6 +64,19 @@ public class RepositorioClaseTest extends SpringTest{
 		thenLaClaseSeElimino(clase);
 	}
 	
+	@Test @Transactional @Rollback
+	public void queSeTraiganTodasLasClases() {
+		Clase otraClase= new Clase();
+		Clase clase = whenSeGuardanLosDatos(CLASE,NOMBRE_CLASE,CAPACIDAD);
+		Clase clase2 = whenSeGuardanLosDatos(otraClase,NOMBRE_CLASE+"asd",CAPACIDAD+10);
+		thenTraeTodasLasClases();
+	}
+	
+	private void thenTraeTodasLasClases() {
+		List clasesList=repositorioClase.buscarTodasLasClase();
+		assertEquals(2, clasesList.size());
+	}
+
 	private void thenLaClaseSeElimino(Clase clase) {
 		repositorioClase.eliminarClase(clase);
 		assertNull(repositorioClase.buscarClase(clase.getNombre()));

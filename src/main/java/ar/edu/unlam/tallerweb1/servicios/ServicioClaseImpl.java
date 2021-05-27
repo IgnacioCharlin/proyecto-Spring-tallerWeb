@@ -45,14 +45,14 @@ public class ServicioClaseImpl implements ServicioClase {
 	public Clase consultarClase(String nombre) {
 		return repositorioClase.buscarClase(nombre);
 	}
-
+	
 	@Override
 	public ArrayList<Clase> consultarTodasLasClases() {
 		ArrayList<Clase> clases = new ArrayList<Clase>();
 		clases.addAll(repositorioClase.buscarTodasLasClase());
 		return clases;
 	}
-
 	
+
 }
 
