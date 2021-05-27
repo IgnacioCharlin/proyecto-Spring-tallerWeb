@@ -31,22 +31,26 @@ public class ControladorClase {
 		return new ModelAndView("agregar-clase", model);
 	}
 
-	@RequestMapping(path = "/agregar-clase", method = RequestMethod.POST)
-	public ModelAndView registrarClase(@ModelAttribute DatosClase clase) {
+	@RequestMapping(path = "/agregarClase", method = RequestMethod.POST)
+	public ModelAndView registrarClase(@ModelAttribute("registrarClase") DatosClase clase) {
 		ModelMap model = new ModelMap();
+		String error;
 		
 		try {
 				servicioClase.agregarClase(clase);
+				return claseCargadaOk(model);
 		} catch (FaltaCupo e) {
-			return registrarClaseError(model, "Falto cargar el cupo");
+			error ="Falto cargar el cupo";
+			
 		}catch (NoSeCargoProfesor e) {
-			return registrarClaseError(model, "Falto cargar el profesor");
+			error = "Falto cargar el profesor";
 		}catch (NoSeCargoUnaFecha e) {
-			return registrarClaseError(model, "Falto cargar la hora y fecha");
+			error = "Falto cargar la hora y fecha";
 		}
 		
+		return registrarClaseError(model, error);
 		
-		return claseCargadaOk(model);
+		
 	}
 	
 	private ModelAndView claseCargadaOk(ModelMap model) {
@@ -59,7 +63,7 @@ public class ControladorClase {
 		model.put("error", error);
 		model.put("registrarClase", new DatosClase());
 		
-		return new ModelAndView("redirect:/agregar-clase");
+		return new ModelAndView("redirect:/agregar-clase", model);
 	}
 
 	public ModelAndView registroConClaseExistente() {

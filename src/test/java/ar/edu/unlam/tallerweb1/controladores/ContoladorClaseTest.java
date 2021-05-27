@@ -1,14 +1,13 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.mock;
-
+import static org.mockito.Mockito.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
 import static org.assertj.core.api.Assertions.assertThat;
-import ar.edu.unlam.tallerweb1.modelo.Clase;
+
+import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoProfesor;
 import ar.edu.unlam.tallerweb1.servicios.ServicioClase;
 
 
@@ -18,7 +17,7 @@ public class ContoladorClaseTest {
 	private static final Long ID = 2l;
 	private final Long CUPO = 50L;
 	private final String NOMBRE = "Funcional";
-	private final String REDIRECT_LOGIN = "redirect:/login";
+	private final String REDIRECT_CLASE = "redirect:/agregar-clase";
 	private final String REDIRECT_HOME = "redirect:/home";
 	ControladorClase controladorClase;
 	private ModelAndView mav;
@@ -43,7 +42,56 @@ public class ContoladorClaseTest {
 		whenLaClaseCreadaYaExiste(clase.getNombre());
 		thenLaClaseNoSePudoRegistrar("La clase ya existe");
 	}
+	@Test
+	public void siLaClaseNoTieneProfesorNoSeRegistra() {
+		DatosClase clase = givenDatosClaseSinProfesor();
+		
+		whenRegistroClase(clase);
+		
+		thenElRegistroFalla("Falto cargar el profesor");
+	}
 	
+	@Test
+	public void siLaClaseNoTieneCupoNoSeRegistra() {
+		DatosClase clase = givenDatosClaseSinCupo();
+		
+		whenRegistroClase(clase);
+		
+		thenElRegistroFalla("Falto cargar el cupo");
+	}
+	
+	private DatosClase givenDatosClaseSinCupo() {
+		DatosClase clase = new DatosClase();
+		//clase.setCupo(CUPO);
+		clase.setFechaYHora(FECHAYHORA);
+		clase.setNombre(NOMBRE);
+		clase.setIdProfesor(ID);
+		return clase;
+	}
+
+	private void thenElRegistroFalla(String motivo) {
+		
+		assertEquals(mav.getModel().get("error"), (motivo));
+		assertEquals(mav.getViewName(), REDIRECT_CLASE);
+		
+		
+	}
+
+	private void whenRegistroClase(DatosClase clase) {
+	when(servicioClase.agregarClase(any())).thenThrow(NoSeCargoProfesor.class);
+		
+		mav = controladorClase.registrarClase(clase);
+		
+	}
+
+	private DatosClase givenDatosClaseSinProfesor() {
+		DatosClase clase = new DatosClase();
+		clase.setCupo(CUPO);
+		clase.setFechaYHora(FECHAYHORA);
+		clase.setNombre(NOMBRE);
+		return clase;
+	}
+
 	private void whenLaClaseCreadaYaExiste(String nombreClase) {
 		DatosClase clase = new DatosClase();
 		clase.setNombre(nombreClase);
