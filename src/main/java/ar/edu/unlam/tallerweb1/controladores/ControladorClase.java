@@ -1,5 +1,7 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -11,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ar.edu.unlam.tallerweb1.excepciones.FaltaCupo;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoProfesor;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoUnaFecha;
+import ar.edu.unlam.tallerweb1.modelo.Clase;
 import ar.edu.unlam.tallerweb1.modelo.DatosClase;
 import ar.edu.unlam.tallerweb1.servicios.ServicioClase;
 
@@ -55,7 +58,6 @@ public class ControladorClase {
 	
 	private ModelAndView claseCargadaOk(ModelMap model) {
 		model.put("cargadaOk", true);
-		
 		return new ModelAndView("redirect:/home", model);
 	}
 
@@ -71,4 +73,13 @@ public class ControladorClase {
 		return new ModelAndView("agregar-clase",model);
 	}
 
+	@RequestMapping(path = "/home", method = RequestMethod.GET)
+	public ModelAndView irAHome() {
+		ModelMap model = new ModelMap();
+		ArrayList<Clase> clases = servicioClase.consultarTodasLasClases();
+		for (Clase clase : clases) {			
+			model.put("nombre", clase.getNombre());
+		}
+		return new ModelAndView("home",model);
+	}
 }

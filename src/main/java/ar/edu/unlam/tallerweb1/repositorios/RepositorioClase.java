@@ -13,7 +13,6 @@ public interface RepositorioClase {
 	void modificarClase(Clase clase);
 	void eliminarClase(Clase clase);
 	List buscarTodasLasClase();
-	
 }
 
 

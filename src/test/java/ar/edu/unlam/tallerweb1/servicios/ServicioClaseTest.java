@@ -1,9 +1,14 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import ar.edu.unlam.tallerweb1.excepciones.FaltaCupo;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoProfesor;
@@ -30,7 +35,6 @@ public class ServicioClaseTest {
 	@Before
 	public void init() {
 		repositorioClase = mock(RepositorioClase.class);
-
 		servicio = new ServicioClaseImpl(repositorioClase);
 	}
 
@@ -61,6 +65,21 @@ public class ServicioClaseTest {
 		thenLaClaseNoSeCarga();
 	}
 	
+	@Test
+	public void queElServicioConsulteTodasLasClases() {
+		thenTraeTodasLasClases();
+	}
+	
+
+	private void thenTraeTodasLasClases() {
+		List<Clase> clase = new ArrayList<>();
+		clase.add(new Clase());
+		clase.add(new Clase());
+		when(repositorioClase.buscarTodasLasClase()).thenReturn(clase);
+		ArrayList<Clase> clases = servicio.consultarTodasLasClases();
+		assertEquals(2, clases.size());
+	}
+
 
 	private DatosClase givenClaseNuevaSinProfesor() {
 		DatosClase nueva = new DatosClase();
@@ -93,6 +112,7 @@ public class ServicioClaseTest {
 	}
 
 	private DatosClase givenClaseNueva() {
+		Long i = (long) 0;
 		DatosClase nueva = new DatosClase();
 		nueva.setNombre("Funcional");
 		nueva.setCupo(20l);
