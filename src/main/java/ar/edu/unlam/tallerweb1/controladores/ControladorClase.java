@@ -12,6 +12,9 @@ import ar.edu.unlam.tallerweb1.excepciones.FaltaCupo;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoProfesor;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoUnaFecha;
 import ar.edu.unlam.tallerweb1.modelo.Clase;
+import ar.edu.unlam.tallerweb1.modelo.DatosClase;
+import ar.edu.unlam.tallerweb1.modelo.DatosRegistro;
+import ar.edu.unlam.tallerweb1.repositorios.RepositorioClase;
 import ar.edu.unlam.tallerweb1.servicios.ServicioClase;
 import ar.edu.unlam.tallerweb1.servicios.ServicioClaseImpl;
 
@@ -19,24 +22,35 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioClaseImpl;
 public class ControladorClase {
 	private ServicioClase servicioClase;
 	
+	
 	@Autowired
 	public ControladorClase(ServicioClase servicioClase) {
 		this.servicioClase = servicioClase;
 	}
-
+	
+	
 	@RequestMapping(path = "/agregar-clase", method = RequestMethod.GET)
 	public ModelAndView irAgregarClase() {
 		ModelMap model = new ModelMap();
-		model.put("registrarClase", new DatosClase());
+		model.put("datosClase", new DatosClase());
 		return new ModelAndView("agregar-clase", model);
 	}
-
+	
+	/*
+	@RequestMapping(path="/agregar-clase", method = RequestMethod.POST)
+    public ModelAndView mostrarDatos(DatosClase datos , ModelMap model){
+        model.addAttribute("nombre",datos.getNombre());
+        return new ModelAndView("agregar-clase", model);
+    }
+	*/
+	
 	@RequestMapping(path = "/agregar-clase", method = RequestMethod.POST)
 	public ModelAndView registrarClase(@ModelAttribute DatosClase clase) {
 		ModelMap model = new ModelMap();
 		
 		try {
-				servicioClase.agregarClase(clase);
+			servicioClase.agregarClase(clase);
+				model.addAttribute("nombre",clase.getNombre());
 		} catch (FaltaCupo e) {
 			return registrarClaseError(model, "Falto cargar el cupo");
 		}catch (NoSeCargoProfesor e) {
@@ -45,19 +59,19 @@ public class ControladorClase {
 			return registrarClaseError(model, "Falto cargar la hora y fecha");
 		}
 		
-		
-		return claseCargadaOk(model);
+		return irAHome(model);
+	}
+
+	@RequestMapping(path = "/home", method = RequestMethod.GET)
+	private ModelAndView irAHome(ModelMap model) {
+		//model.put("cargadaOk", true);
+		return new ModelAndView("home", model);
 	}
 	
-	private ModelAndView claseCargadaOk(ModelMap model) {
-		model.put("cargadaOk", true);
-		
-		return new ModelAndView("redirect:/home", model);
-	}
 
 	private ModelAndView registrarClaseError(ModelMap model, String error) {
 		model.put("error", error);
-		model.put("registrarClase", new DatosClase());
+		model.put("datosClase", new DatosClase());
 		
 		return new ModelAndView("redirect:/agregar-clase");
 	}
