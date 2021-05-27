@@ -28,7 +28,7 @@
 		
 		--%>
 		<form:input path="nombre" id="nombre" type="text" class="form-control mb-2" placeholder="Ingresar Nombre"/>
-		<form:input path="fechaYHora" id="idProfesor" type="text" class="form-control mb-2" placeholder="Ingresar fecha y hora de la clase"/>
+		<form:input path="fechaYHora" id="fechaYHora" type="text" class="form-control mb-2" placeholder="Ingresar fecha y hora de la clase"/>
 		<form:input path="cupo" type="number" id="cupo" class="form-control mb-2" placeholder="Ingresar capacidad"/>
 		<form:input path="idProfesor" type="number" id="idProfesor" class="form-control mb-2" placeholder="Ingresar el Id del profe"/>
 		
