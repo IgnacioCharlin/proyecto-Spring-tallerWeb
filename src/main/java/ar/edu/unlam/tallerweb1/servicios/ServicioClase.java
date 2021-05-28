@@ -9,5 +9,5 @@ public interface ServicioClase {
 
 	Clase agregarClase (DatosClase clase);
 	Clase consultarClase(String nombre);
-	ArrayList<Clase> consultarTodasLasClases();
+	List<Clase> consultarTodasLasClases();
 }

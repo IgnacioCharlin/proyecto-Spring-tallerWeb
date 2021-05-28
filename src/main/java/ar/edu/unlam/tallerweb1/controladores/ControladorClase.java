@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -76,7 +77,7 @@ public class ControladorClase {
 	@RequestMapping(path = "/home", method = RequestMethod.GET)
 	public ModelAndView irAHome() {
 		ModelMap model = new ModelMap();
-		ArrayList<Clase> clases = servicioClase.consultarTodasLasClases();
+		List<Clase> clases = servicioClase.consultarTodasLasClases();
 		for (Clase clase : clases) {			
 			model.put("nombre", clase.getNombre());
 		}
