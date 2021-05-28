@@ -11,6 +11,7 @@
 	rel="stylesheet"
 	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
 	crossorigin="anonymous">
+	<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 </head>
 <body>
 	<div class="container">
@@ -19,8 +20,16 @@
 		<main class="mt-4">
 			<div class="card mx-auto" style="width: 18rem;">
 				<div class="card-body">
-					<h5 class="card-title">${nombre}</h5>
+					<h5 class="card-title">${nombre}</h5> 
 					<p class="card-text"></p>
+					
+					
+			 <h3>Tag Example </h3>
+	
+			<c:forEach var = "i" begin = "1" end = "5">
+				Clases <c:out value = "${nombre}"/><p> 
+			</c:forEach>
+					
 				</div>
 				<div class="card-body">
 					<a href="#" class="card-link">Card link</a> <a href="#"

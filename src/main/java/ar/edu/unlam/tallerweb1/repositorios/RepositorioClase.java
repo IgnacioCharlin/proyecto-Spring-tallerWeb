@@ -12,7 +12,7 @@ public interface RepositorioClase {
 	Clase buscarClase(String nombre);
 	void modificarClase(Clase clase);
 	void eliminarClase(Clase clase);
-	List buscarTodasLasClase();
+	List<Clase> buscarTodasLasClase();
 }
 
 

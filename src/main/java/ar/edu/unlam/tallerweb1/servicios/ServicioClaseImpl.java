@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,8 +48,8 @@ public class ServicioClaseImpl implements ServicioClase {
 	}
 	
 	@Override
-	public ArrayList<Clase> consultarTodasLasClases() {
-		ArrayList<Clase> clases = new ArrayList<Clase>();
+	public List<Clase> consultarTodasLasClases() {
+		List<Clase> clases = new ArrayList<Clase>();
 		clases.addAll(repositorioClase.buscarTodasLasClase());
 		return clases;
 	}

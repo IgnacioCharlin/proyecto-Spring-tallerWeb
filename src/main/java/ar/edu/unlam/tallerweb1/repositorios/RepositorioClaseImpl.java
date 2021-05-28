@@ -50,7 +50,7 @@ public class RepositorioClaseImpl implements RepositorioClase{
 	}
 
 	@Override
-	public List buscarTodasLasClase() {
+	public List<Clase> buscarTodasLasClase() {
 		return sessionFactory.getCurrentSession().createCriteria(Clase.class).list();
 	}
 }
