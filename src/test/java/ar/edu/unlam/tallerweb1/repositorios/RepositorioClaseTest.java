@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import static org.assertj.core.api.Assertions.*;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
@@ -74,7 +74,8 @@ public class RepositorioClaseTest extends SpringTest{
 	
 	private void thenTraeTodasLasClases() {
 		List clasesList=repositorioClase.buscarTodasLasClase();
-		assertEquals(2, clasesList.size());
+		//assertEquals(2, clasesList.size());
+		assertThat(clasesList.size()).isEqualTo(1);
 	}
 
 	private void thenLaClaseSeElimino(Clase clase) {
