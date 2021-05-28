@@ -76,7 +76,7 @@ public class ServicioClaseTest {
 		clase.add(new Clase());
 		clase.add(new Clase());
 		when(repositorioClase.buscarTodasLasClase()).thenReturn(clase);
-		ArrayList<Clase> clases = servicio.consultarTodasLasClases();
+		List<Clase> clases = servicio.consultarTodasLasClases();
 		assertEquals(2, clases.size());
 	}
 

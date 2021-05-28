@@ -75,7 +75,7 @@ public class RepositorioClaseTest extends SpringTest{
 	private void thenTraeTodasLasClases() {
 		List clasesList=repositorioClase.buscarTodasLasClase();
 		//assertEquals(2, clasesList.size());
-		assertThat(clasesList.size()).isEqualTo(1);
+		assertThat(clasesList.size()).isEqualTo(2);
 	}
 
 	private void thenLaClaseSeElimino(Clase clase) {

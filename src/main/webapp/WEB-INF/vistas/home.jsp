@@ -11,31 +11,33 @@
 	rel="stylesheet"
 	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
 	crossorigin="anonymous">
+	
 	<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 </head>
 <body>
 	<div class="container">
 		<h1>Bienvenidos a Taller Web 1</h1>
 		<a href="agregar-clase" class="btn btn-success">Agregar Clase</a>
-		<main class="mt-4">
-			<div class="card mx-auto" style="width: 18rem;">
+		<main class="mt-4 d-flex flex-wrap">
+			
+					
+			 <c:forEach var="i" items="${clasesMap}">
+			 <div class="card mx-auto mb-3" style="width: 18rem;">
 				<div class="card-body">
-					<h5 class="card-title">${nombre}</h5> 
-					<p class="card-text"></p>
-					
-					
-			 <h3>Tag Example </h3>
-	
+					<h5 class="card-title">${i.nombre}</h5> 
+    			</div>
+				<div class="card-body">
+					<p class="card-text">Capacidad: ${i.capacidad}</p>
+				</div>
+			</div>
+			</c:forEach>
+			
+			<!-- 
 			<c:forEach var = "i" begin = "1" end = "5">
 				Clases <c:out value = "${nombre}"/><p> 
 			</c:forEach>
-					
-				</div>
-				<div class="card-body">
-					<a href="#" class="card-link">Card link</a> <a href="#"
-						class="card-link">Another link</a>
-				</div>
-			</div>
+			-->	
+				
 		</main>
 	</div>
 	<!-- Placed at the end of the document so the pages load faster -->

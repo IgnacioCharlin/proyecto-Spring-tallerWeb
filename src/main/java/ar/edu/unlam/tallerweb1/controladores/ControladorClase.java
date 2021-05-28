@@ -1,7 +1,9 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -74,13 +76,26 @@ public class ControladorClase {
 		return new ModelAndView("agregar-clase",model);
 	}
 
+	/*
+	 * 
+	 * Map<User, String> userMap = new HashMap<User, String>();
+
+for (User user : users) {
+    userMap.put(user, calculateSililarity.calculate(sessionUser.getUserId(), user.getUserId()));
+}
+
+model.addAttribute("userMap", userMap);
+	 * 
+	 */
 	@RequestMapping(path = "/home", method = RequestMethod.GET)
 	public ModelAndView irAHome() {
+		Map<Clase, Clase> clasesMap = new HashMap<Clase, Clase>();
 		ModelMap model = new ModelMap();
 		List<Clase> clases = servicioClase.consultarTodasLasClases();
-		for (Clase clase : clases) {			
-			model.put("nombre", clase.getNombre());
+		for (Clase clase : clases) {
+			clasesMap.put(clase, clase);
 		}
+		model.addAttribute("clasesMap",clases);
 		return new ModelAndView("home",model);
 	}
 }

@@ -47,6 +47,7 @@ public class ServicioClaseImpl implements ServicioClase {
 		return repositorioClase.buscarClase(nombre);
 	}
 	
+
 	@Override
 	public List<Clase> consultarTodasLasClases() {
 		List<Clase> clases = new ArrayList<Clase>();
