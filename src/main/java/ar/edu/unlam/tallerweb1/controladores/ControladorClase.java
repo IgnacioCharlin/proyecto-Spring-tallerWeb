@@ -92,9 +92,7 @@ model.addAttribute("userMap", userMap);
 		Map<Clase, Clase> clasesMap = new HashMap<Clase, Clase>();
 		ModelMap model = new ModelMap();
 		List<Clase> clases = servicioClase.consultarTodasLasClases();
-		for (Clase clase : clases) {
-			clasesMap.put(clase, clase);
-		}
+		
 		model.addAttribute("clasesMap",clases);
 		return new ModelAndView("home",model);
 	}

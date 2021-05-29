@@ -27,6 +27,7 @@
 					<h5 class="card-title">${i.nombre}</h5> 
     			</div>
 				<div class="card-body">
+				 <p class="card-text"> ${i.getHorarioYFecha()}</p>
 					<p class="card-text">Capacidad: ${i.capacidad}</p>
 				</div>
 			</div>
