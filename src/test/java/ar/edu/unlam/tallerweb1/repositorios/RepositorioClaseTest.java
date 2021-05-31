@@ -40,14 +40,15 @@ public class RepositorioClaseTest extends SpringTest{
 	
 	@Test @Transactional @Rollback
 	public void queBusqueLaClasePorElNombreYLaDevuelva() {
-		Clase clase = whenSeGuardanLosDatos(CLASE,NOMBRE_CLASE,CAPACIDAD);
-		thenDevuelveLaClase(clase.getNombre());
+		Clase claseBuscada = whenSeGuardanLosDatos(CLASE,NOMBRE_CLASE,CAPACIDAD);
+		thenDevuelveLaClase(claseBuscada.getNombre(),claseBuscada);
 	}
 	
 	@Test @Transactional @Rollback
 	public void queBusqueLaClasePorElNombreYNoExista() {
 		Clase clase = whenSeGuardanLosDatos(CLASE,NOMBRE_CLASE,CAPACIDAD);
-		thenNoDevuelveLaClase(clase.getNombre()+"aas");
+		Clase buscada = repositorioClase.buscarClase(clase.getNombre()+"asd");
+		thenNoDevuelveLaClase(buscada);
 	}
 	
 	@Test @Transactional @Rollback
@@ -55,12 +56,14 @@ public class RepositorioClaseTest extends SpringTest{
 		long nuevaCapacidad = 25;
 		Clase clase = whenSeGuardanLosDatos(CLASE,NOMBRE_CLASE,CAPACIDAD);
 		clase.setCapacidad(nuevaCapacidad);
+		repositorioClase.modificarClase(clase);
 		thenLaClaseSeModifico(clase,nuevaCapacidad);
 	}
 	
 	@Test @Transactional @Rollback
 	public void queSePuedaEliminarUnaClase() {
 		Clase clase = whenSeGuardanLosDatos(CLASE,NOMBRE_CLASE,CAPACIDAD);
+		repositorioClase.eliminarClase(clase);
 		thenLaClaseSeElimino(clase);
 	}
 	
@@ -69,35 +72,29 @@ public class RepositorioClaseTest extends SpringTest{
 		Clase otraClase= new Clase();
 		Clase clase = whenSeGuardanLosDatos(CLASE,NOMBRE_CLASE,CAPACIDAD);
 		Clase clase2 = whenSeGuardanLosDatos(otraClase,NOMBRE_CLASE+"asd",CAPACIDAD+10);
-		thenTraeTodasLasClases();
+		List clasesList=repositorioClase.buscarTodasLasClase();
+		thenTraeTodasLasClases(clasesList);
 	}
 	
-	private void thenTraeTodasLasClases() {
-		List clasesList=repositorioClase.buscarTodasLasClase();
-		//assertEquals(2, clasesList.size());
+	private void thenTraeTodasLasClases(List clasesList) {
 		assertThat(clasesList.size()).isEqualTo(2);
 	}
 
 	private void thenLaClaseSeElimino(Clase clase) {
-		repositorioClase.eliminarClase(clase);
-		assertNull(repositorioClase.buscarClase(clase.getNombre()));
-		
+		assertThat(repositorioClase.buscarClase(clase.getNombre())).isNull();
 	}
 
 	private void thenLaClaseSeModifico(Clase clase, long nuevaCapacidad) {
-		repositorioClase.modificarClase(clase);
-		assertEquals((long)clase.getCapacidad(), nuevaCapacidad);
+		assertThat((long)clase.getCapacidad()).isEqualTo(nuevaCapacidad);
 	}
 
-	private void thenNoDevuelveLaClase(String nombre) {
-		Clase buscada = repositorioClase.buscarClase(nombre);
-		assertNull(buscada);
+	private void thenNoDevuelveLaClase(Clase buscada) {
+		assertThat(buscada).isNull();
 	}
 
-	private void thenDevuelveLaClase(String nombre) {
-		Clase buscada = repositorioClase.buscarClase(nombre);
-		assertNotNull(buscada);
-		assertEquals(nombre, buscada.getNombre());
+	private void thenDevuelveLaClase(String nombre ,Clase claseABuscar) {
+		assertThat(claseABuscar).isNotNull();
+		assertThat(nombre).isEqualTo(claseABuscar.getNombre());
 	}
 
 	private void thenSeNoSeRegistro(Clase clase) {
@@ -108,15 +105,15 @@ public class RepositorioClaseTest extends SpringTest{
 		if(repositorioClase.buscarClase(nombre)==null) {
 			clase.setNombre(nombre);
 			clase.setCapacidad(capacidad);
-			return repositorioClase.guardarClase(clase);
+			repositorioClase.guardarClase(clase);
+			return repositorioClase.buscarClase(nombre);
 		}
 		return null;
 	}
 
 
 	private void thenSeRegistroConExito(Clase clase) {
-		Clase claseBuscada = repositorioClase.buscarClase(clase.getNombre());
-		assertEquals(claseBuscada.getNombre(), NOMBRE_CLASE);
+		assertThat(clase.getNombre()).isEqualTo(NOMBRE_CLASE);
 	}
 
 }

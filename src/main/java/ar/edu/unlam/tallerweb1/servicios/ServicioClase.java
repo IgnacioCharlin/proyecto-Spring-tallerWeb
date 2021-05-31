@@ -11,4 +11,7 @@ public interface ServicioClase {
 	Clase agregarClase (DatosClase clase);
 	Clase consultarClase(String nombre);
 	List<Clase> consultarTodasLasClases();
+	void eliminarClase(Clase clase);
+	Clase consultarClasePorId(Long id);
+	void modificarClase(DatosClase clase);
 }

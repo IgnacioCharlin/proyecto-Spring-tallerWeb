@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -58,6 +59,44 @@ public class ControladorClase {
 		
 		
 	}
+	
+	@RequestMapping(path = "/eliminar/{id}", method = RequestMethod.GET)
+	public ModelAndView eliminarClase(@PathVariable("id") Long id) {
+		Clase buscada = servicioClase.consultarClasePorId(id);
+		servicioClase.eliminarClase(buscada);
+		return new ModelAndView("redirect:/home");
+	}
+	
+	@RequestMapping(path = "/modificar/{id}", method = RequestMethod.GET)
+	public ModelAndView irAModificarClase(@PathVariable("id") Long id , @ModelAttribute("modificar") DatosClase clase) {
+		ModelMap model = new ModelMap();
+		Clase claseBuscada = servicioClase.consultarClasePorId(id);
+		model.addAttribute("clase",claseBuscada);
+		return new ModelAndView("modificar",model);
+	}
+	
+	
+	/*
+	@RequestMapping(path = "/modificar/{id}", method = RequestMethod.POST)
+	public ModelAndView modificarClase(@PathVariable("id") Long id, @ModelAttribute("modificar") DatosClase clase) {
+		ModelMap model = new ModelMap();
+		try {
+				Clase claseBuscada = servicioClase.consultarClasePorId(id);
+				DatosClase datos = new DatosClase();
+				
+				//servicioClase.modificarClase(claseBuscada);
+				return claseCargadaOk(model);
+		} catch (FaltaCupo e) {
+			error ="Falto cargar el cupo";
+			
+		}catch (NoSeCargoProfesor e) {
+			error = "Falto cargar el profesor";
+		}catch (NoSeCargoUnaFecha e) {
+			error = "Falto cargar la hora y fecha";
+		}
+		return new ModelAndView("modificar",model);
+	}
+	 */
 	
 	private ModelAndView claseCargadaOk(ModelMap model) {
 		model.put("cargadaOk", true);
