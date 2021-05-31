@@ -68,7 +68,7 @@ public class ControladorClase {
 		model.put("error", error);
 		model.put("registrarClase", new DatosClase());
 		
-		return new ModelAndView("redirect:/agregar-clase", model);
+		return new ModelAndView("agregar-clase", model);
 	}
 
 	public ModelAndView registroConClaseExistente() {
