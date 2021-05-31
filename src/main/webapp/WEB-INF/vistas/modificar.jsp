@@ -13,8 +13,8 @@
 	<body>
 		<div class = "container">
 			<div id="loginbox" class="pt-5 col-6 mx-auto text-center">
-				<form:form action="agregarClase" method="POST"
-		modelAttribute="registrarClase">
+				<form:form action="home" method="POST"
+		modelAttribute="modificar">
 		<h3 class="form-signin-heading display-5">EnerGym</h3>
 		<hr class="colorgraph">
 		<br>
@@ -28,21 +28,21 @@
 		
 		--%>
 
-		<form:input path="nombre" id="nombre" type="text" class="form-control mb-2" placeholder="Ingresar Nombre"/>
-		<form:input path="fechaYHora" id="fechaYHora" type="datetime-local" class="form-control mb-2" />
-		<form:input path="cupo" type="number" id="cupo" class="form-control mb-2" placeholder="Ingresar capacidad"/>
-		<form:input path="idProfesor" type="number" id="idProfesor" class="form-control mb-2" placeholder="Ingresar el Id del profe"/>
+		<form:input path="nombre" id="nombre" type="text" class="form-control mb-2" placeholder="Ingresar Nombre" value="${clase.getNombre()}"/>
+		<form:input path="fechaYHora" id="fechaYHora" type="text" class="form-control mb-2" placeholder="Ingresar fecha y hora de la clase" value="${clase.getHorarioYFecha()}"/>
+		<form:input path="cupo" type="number" id="cupo" class="form-control mb-2" placeholder="Ingresar capacidad" value="${clase.getCapacidad()}"/>
+		<form:input path="idProfesor" type="number" id="idProfesor" class="form-control mb-2" placeholder="Ingresar el Id del profe" value="${clase.getCapacidad()}"/>
 		
-				<%--Bloque que es visible si el elemento error no está vacío	--%>
-				<c:if test="${not empty error}">
-			        <div class="alert alert-danger mt-2" role="alert" >${error}</div>
-		
-		        </c:if>
 		
 		<button class="btn btn-lg btn-primary btn-block mt-2 w-100" Type="Submit" />Agregar</button>
 		
 	</form:form>
-
+	<h3>${email} ${password}</h3>
+				<%--Bloque que es visible si el elemento error no está vacío	--%>
+				<c:if test="${not empty error}">
+			        <h4><span>${error}</span></h4>
+			        <br>
+		        </c:if>	
 			</div>
 
 		</div>
