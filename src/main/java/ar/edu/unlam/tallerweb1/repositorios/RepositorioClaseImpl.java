@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import ar.edu.unlam.tallerweb1.modelo.Clase;
 
-@Repository
+@Repository("repositorioClase")
 public class RepositorioClaseImpl implements RepositorioClase{
 	
 
@@ -41,6 +41,8 @@ public class RepositorioClaseImpl implements RepositorioClase{
 	
 	@Override
 	public void modificarClase(Clase clase) {
+		
+		System.out.println("nombre de la clase antes de ser guardada" + clase.getNombre());
 		sessionFactory.getCurrentSession().update(clase);
 	}
 	
@@ -52,6 +54,13 @@ public class RepositorioClaseImpl implements RepositorioClase{
 	@Override
 	public List<Clase> buscarTodasLasClase() {
 		return sessionFactory.getCurrentSession().createCriteria(Clase.class).list();
+	}
+
+	@Override
+	public Clase buscarClasePorId(Long id) {
+		return (Clase) sessionFactory.getCurrentSession().createCriteria(Clase.class)
+				.add(Restrictions.eq("id", id))
+				.uniqueResult();
 	}
 }
 

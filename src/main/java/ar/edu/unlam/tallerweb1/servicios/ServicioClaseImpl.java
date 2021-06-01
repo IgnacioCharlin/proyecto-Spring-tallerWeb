@@ -63,16 +63,12 @@ public class ServicioClaseImpl implements ServicioClase {
 
 	@Override
 	public Clase consultarClasePorId(Long id) {
-		List<Clase> clases = repositorioClase.buscarTodasLasClase();
-		for (Clase clase : clases) {
-			clase.getId().equals(id);
-			return clase;
-		}
-		return null;
+		return repositorioClase.buscarClasePorId(id);
 	}
 
 	@Override
-	public void modificarClase(Clase clase, DatosClase datos) {
+	public void modificarClase(Long id, DatosClase datos) {
+		
 		if(datos.getFechaYHora() == null)
 			throw new NoSeCargoUnaFecha();
 		if( datos.getCupo() == null ||datos.getCupo() <= 0 )
@@ -80,13 +76,14 @@ public class ServicioClaseImpl implements ServicioClase {
 		if(datos.getIdProfesor() == null)
 			throw new NoSeCargoProfesor();
 		
-		//recibir datos y guardar Clase claseclase -->repositorioClase.agregarClase()
+		final Clase claseBuscada = repositorioClase.buscarClasePorId(id);
+		claseBuscada.setCapacidad(datos.getCupo());
+		claseBuscada.setHorarioYFecha(datos.getFechaYHora());
+		claseBuscada.setNombre(datos.getNombre());
+		claseBuscada.setProfesor(datos.getIdProfesor());
 		
-		clase.setCapacidad(datos.getCupo());
-		clase.setHorarioYFecha(datos.getFechaYHora());
-		clase.setNombre(datos.getNombre());
-		clase.setProfesor(datos.getIdProfesor());
-		repositorioClase.modificarClase(clase);
+		
+		repositorioClase.modificarClase(claseBuscada);
 	}
 }
 
