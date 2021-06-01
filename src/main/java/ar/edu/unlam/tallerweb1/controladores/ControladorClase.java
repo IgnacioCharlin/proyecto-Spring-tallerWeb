@@ -66,7 +66,6 @@ public class ControladorClase {
 		servicioClase.eliminarClase(buscada);
 		return new ModelAndView("redirect:/home");
 	}
-	
 	@RequestMapping(path = "/modificar/{id}", method = RequestMethod.GET)
 	public ModelAndView irAModificarClase(@PathVariable("id") Long id , @ModelAttribute("modificar") DatosClase clase) {
 		ModelMap model = new ModelMap();
@@ -76,12 +75,14 @@ public class ControladorClase {
 	}
 	
 	
-	/*
 	@RequestMapping(path = "/modificar/{id}", method = RequestMethod.POST)
 	public ModelAndView modificarClase(@PathVariable("id") Long id, @ModelAttribute("modificar") DatosClase clase) {
 		ModelMap model = new ModelMap();
+		Clase claseBuscada = servicioClase.consultarClasePorId(id);
+		servicioClase.modificarClase(claseBuscada, clase);
+		return claseCargadaOk(model);
+		/*
 		try {
-				Clase claseBuscada = servicioClase.consultarClasePorId(id);
 				DatosClase datos = new DatosClase();
 				
 				//servicioClase.modificarClase(claseBuscada);
@@ -94,9 +95,10 @@ public class ControladorClase {
 		}catch (NoSeCargoUnaFecha e) {
 			error = "Falto cargar la hora y fecha";
 		}
+		 
 		return new ModelAndView("modificar",model);
+		*/
 	}
-	 */
 	
 	private ModelAndView claseCargadaOk(ModelMap model) {
 		model.put("cargadaOk", true);
