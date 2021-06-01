@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ar.edu.unlam.tallerweb1.modelo.DatosRegistro;
 
 @Controller
-public class irARegistrarme {
+public class ControladorRegistro {
 	@RequestMapping(path="/registro", method = RequestMethod.GET)
     public ModelAndView irRegistro(){
         ModelMap model = new ModelMap();

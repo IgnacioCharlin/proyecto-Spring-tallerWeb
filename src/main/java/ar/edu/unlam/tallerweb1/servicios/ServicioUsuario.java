@@ -4,7 +4,11 @@ import ar.edu.unlam.tallerweb1.modelo.DatosRegistro;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 
 public interface ServicioUsuario {
-    Usuario registrar(DatosRegistro datos);
+	
+	
+    Usuario registrarUsuario(DatosRegistro datos);
 
     void cambiarClave(String email, String claveNueva, String repiteClaveNueva, String claveActual);
+    
+    Usuario consultarUsuario(DatosRegistro datos);
 }

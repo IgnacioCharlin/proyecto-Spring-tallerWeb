@@ -12,12 +12,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service("servicioUsuarios")
 @Transactional
-public class ServicioUsuarioDefault implements ServicioUsuario {
+public class ServicioUsuarioImp implements ServicioUsuario {
 
     private RepositorioUsuario repositorioUsuario;
 
     @Autowired
-    public ServicioUsuarioDefault(RepositorioUsuario repositorioUsuario){
+    public ServicioUsuarioImp(RepositorioUsuario repositorioUsuario){
         this.repositorioUsuario = repositorioUsuario;
     }
 
@@ -46,8 +46,10 @@ public class ServicioUsuarioDefault implements ServicioUsuario {
     }
 
 	@Override
-	public Usuario registrar(ar.edu.unlam.tallerweb1.modelo.DatosRegistro datos) {
+	public Usuario consultarUsuario(DatosRegistro datos) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
 }

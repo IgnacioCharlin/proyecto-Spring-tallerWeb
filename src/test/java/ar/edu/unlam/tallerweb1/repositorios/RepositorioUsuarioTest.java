@@ -6,35 +6,50 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 
+import javax.transaction.TransactionScoped;
 import javax.transaction.Transactional;
 
 import static org.assertj.core.api.Assertions.*;
 
 public class RepositorioUsuarioTest extends SpringTest {
-
+	private final String EMAIL = "asd@asd.com";
+	private final String CONTRASEÑA="123";
+	private final String ROL ="Administrador";
+	private final long ID = 2L;
+	
+	
     @Autowired
     private RepositorioUsuario repositorioUsuario;
     
     @Test @Transactional @Rollback
-    public void modificarDeberiaCambiarLosDatos(){
-        Usuario guardado = givenExisteUsuarioGuardado();
+    public void queSePuedaAgregarUnUsuario() {
+    	Usuario usuario = givenCreoUnUsuario();
+    	whenElUsuarioNoExisteYTodoEstaCorrectoGuarda(usuario);
+    	thenElUsuarioSeGuardoExitosamente(usuario.getEmail());
+    	
+    }
+    
 
-        guardado.setPassword("nueva");
-        whenModificoElUsuario(guardado);
-        thenElUsuarioSeModifica(guardado);
+	@Test @Transactional @Rollback
+    public void modificarDeberiaCambiarLosDatos(){
+		String contraseñaNueva = "456";
+        Usuario	usuario = givenCreoUnUsuario();
+        usuario.setPassword(contraseñaNueva);
+        whenModificoElUsuario(usuario);
+        thenElUsuarioSeModifica(usuario,contraseñaNueva);
     }
 
     @Test @Transactional @Rollback
-    public void buscarUsuarioQUeExisteDevuelveUnUsuario(){
-        Usuario guardado = givenExisteUsuarioGuardado();
-
+    public void buscarUsuarioQueExisteDevuelveUnUsuario(){
+        Usuario guardado = givenCreoUnUsuario();
+        repositorioUsuario.guardar(guardado);
         Usuario buscado = whenBuscoElUsuario(guardado.getEmail());
         thenElUsuarioExiste(buscado);
     }
 
     @Test @Transactional @Rollback
-    public void buscarUsuarioQUeNoExisteNoDevuelveUnUsuario(){
-        Usuario guardado = givenExisteUsuarioGuardado();
+    public void buscarUsuarioQueNoExisteNoDevuelveUnUsuario(){
+        Usuario guardado = givenCreoUnUsuario();
 
         Usuario buscado = whenBuscoElUsuario(guardado.getEmail()+"kdkdkdkdkd");
         thenElUsuarioNoExiste(buscado);
@@ -52,20 +67,29 @@ public class RepositorioUsuarioTest extends SpringTest {
         return repositorioUsuario.buscar(email);
     }
 
-    private void thenElUsuarioSeModifica(Usuario guardado) {
-        Usuario buscado = session().get(Usuario.class, guardado.getId());
-        assertThat(buscado.getPassword()).isEqualTo(guardado.getPassword());
+    private void thenElUsuarioSeModifica(Usuario usuario,String contraseñaNueva) {
+        assertThat(usuario.getPassword()).isEqualTo(contraseñaNueva);
     }
 
     private void whenModificoElUsuario(Usuario usuario) {
         repositorioUsuario.modificar(usuario);
     }
 
-    private Usuario givenExisteUsuarioGuardado() {
-        Usuario usuario = new Usuario();
-        usuario.setEmail("seba@seba.com");
-        usuario.setPassword("clave");
-        session().save(usuario);
-        return usuario;
+   
+    private Usuario givenCreoUnUsuario() {
+    	Usuario usuario = new Usuario();
+    	usuario.setId(ID);
+    	usuario.setEmail(EMAIL);
+    	usuario.setPassword(CONTRASEÑA);
+    	usuario.setRol(ROL);
+    	return usuario;
+    }
+    
+    private void whenElUsuarioNoExisteYTodoEstaCorrectoGuarda(Usuario usuario) {
+    	repositorioUsuario.guardar(usuario);
+    }
+    
+    private void thenElUsuarioSeGuardoExitosamente(String email) {
+    	assertThat(repositorioUsuario.buscar(EMAIL)).isNotNull();
     }
 }

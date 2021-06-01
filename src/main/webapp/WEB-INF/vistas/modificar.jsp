@@ -13,7 +13,7 @@
 	<body>
 		<div class = "container">
 			<div id="loginbox" class="pt-5 col-6 mx-auto text-center">
-				<form:form action="../home" method="POST"
+				<form:form action="modificarClase" method="POST"
 		modelAttribute="modificar">
 		<h3 class="form-signin-heading display-5">EnerGym</h3>
 		<hr class="colorgraph">
