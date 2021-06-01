@@ -72,18 +72,21 @@ public class ServicioClaseImpl implements ServicioClase {
 	}
 
 	@Override
-	public void modificarClase(DatosClase clase) {
-		if(clase.getFechaYHora() == null)
+	public void modificarClase(Clase clase, DatosClase datos) {
+		if(datos.getFechaYHora() == null)
 			throw new NoSeCargoUnaFecha();
-		if( clase.getCupo() == null ||clase.getCupo() <= 0 )
+		if( datos.getCupo() == null ||datos.getCupo() <= 0 )
 			throw new FaltaCupo();
-		if(clase.getIdProfesor() == null)
+		if(datos.getIdProfesor() == null)
 			throw new NoSeCargoProfesor();
 		
 		//recibir datos y guardar Clase claseclase -->repositorioClase.agregarClase()
 		
-		Clase nuevaClase = new Clase(clase.getNombre(), clase.getFechaYHora(), clase.getIdProfesor(), clase.getCupo());
-		repositorioClase.modificarClase(nuevaClase);
+		clase.setCapacidad(datos.getCupo());
+		clase.setHorarioYFecha(datos.getFechaYHora());
+		clase.setNombre(datos.getNombre());
+		clase.setProfesor(datos.getIdProfesor());
+		repositorioClase.modificarClase(clase);
 	}
 }
 
