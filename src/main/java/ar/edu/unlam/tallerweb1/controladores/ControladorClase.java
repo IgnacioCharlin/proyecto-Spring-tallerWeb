@@ -70,34 +70,30 @@ public class ControladorClase {
 	public ModelAndView irAModificarClase(@PathVariable("id") Long id , @ModelAttribute("modificar") DatosClase clase) {
 		ModelMap model = new ModelMap();
 		Clase claseBuscada = servicioClase.consultarClasePorId(id);
-		model.addAttribute("clase",claseBuscada);
+		System.out.println(claseBuscada.getHorarioYFecha() + " " +claseBuscada.getId());
+		model.put("clase", claseBuscada);
 		return new ModelAndView("modificar",model);
 	}
 	
 	
 	@RequestMapping(path = "/modificar/{id}", method = RequestMethod.POST)
-	public ModelAndView modificarClase(@PathVariable("id") Long id, @ModelAttribute("modificar") DatosClase clase) {
+	public ModelAndView modificarClase(@PathVariable("id") Long id, @ModelAttribute("modificar") DatosClase datos) {
 		ModelMap model = new ModelMap();
-		Clase claseBuscada = servicioClase.consultarClasePorId(id);
-		servicioClase.modificarClase(claseBuscada, clase);
-		return claseCargadaOk(model);
-		/*
+		String error;
+		
 		try {
-				DatosClase datos = new DatosClase();
-				
-				//servicioClase.modificarClase(claseBuscada);
+				servicioClase.modificarClase(id, datos);
 				return claseCargadaOk(model);
 		} catch (FaltaCupo e) {
 			error ="Falto cargar el cupo";
-			
-		}catch (NoSeCargoProfesor e) {
+		} catch (NoSeCargoProfesor e) {
 			error = "Falto cargar el profesor";
-		}catch (NoSeCargoUnaFecha e) {
+		} catch (NoSeCargoUnaFecha e) {
 			error = "Falto cargar la hora y fecha";
 		}
-		 
+		model.put("error", error);
 		return new ModelAndView("modificar",model);
-		*/
+		
 	}
 	
 	private ModelAndView claseCargadaOk(ModelMap model) {
@@ -109,7 +105,7 @@ public class ControladorClase {
 		model.put("error", error);
 		model.put("registrarClase", new DatosClase());
 		
-		return new ModelAndView("redirect:/agregar-clase", model);
+		return new ModelAndView("agregar-clase", model);
 	}
 
 	public ModelAndView registroConClaseExistente() {

@@ -10,6 +10,7 @@ public interface RepositorioClase {
 	
 	Clase guardarClase(Clase clase);
 	Clase buscarClase(String nombre);
+	Clase buscarClasePorId(Long id);
 	void modificarClase(Clase clase);
 	void eliminarClase(Clase clase);
 	List<Clase> buscarTodasLasClase();
