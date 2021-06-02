@@ -3,6 +3,8 @@ package ar.edu.unlam.tallerweb1.servicios;
 import ar.edu.unlam.tallerweb1.excepciones.ClaveNuevaIgualActual;
 import ar.edu.unlam.tallerweb1.excepciones.ClavesNoCoinciden;
 import ar.edu.unlam.tallerweb1.excepciones.UsuarioExistente;
+import ar.edu.unlam.tallerweb1.excepciones.UsuarioNoExiste;
+import ar.edu.unlam.tallerweb1.modelo.Clase;
 import ar.edu.unlam.tallerweb1.modelo.DatosRegistro;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioUsuario;
@@ -29,6 +31,8 @@ public class ServicioUsuarioImp implements ServicioUsuario {
             throw new UsuarioExistente();
         }
         Usuario nuevoUsuario = new Usuario();
+        nuevoUsuario.setEmail(datos.getEmail());
+        nuevoUsuario.setPassword(datos.getPassword());
         repositorioUsuario.guardar(nuevoUsuario);
         return nuevoUsuario;
     }
@@ -47,9 +51,15 @@ public class ServicioUsuarioImp implements ServicioUsuario {
 
 	@Override
 	public Usuario consultarUsuario(DatosRegistro datos) {
-		// TODO Auto-generated method stub
-		return null;
+		Usuario usuario = repositorioUsuario.buscar(datos.getEmail());
+		if (usuario != null) {
+			if (usuario.getPassword().equals(datos.getPassword())) {
+				return usuario;
+			}else {
+				throw new ClavesNoCoinciden();
+			}
+		}else {
+			throw new UsuarioNoExiste();
+		}
 	}
-
-
 }

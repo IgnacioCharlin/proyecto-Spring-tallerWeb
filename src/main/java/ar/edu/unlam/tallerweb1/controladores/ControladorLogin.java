@@ -1,5 +1,7 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import ar.edu.unlam.tallerweb1.excepciones.ClavesNoCoinciden;
+import ar.edu.unlam.tallerweb1.excepciones.UsuarioNoExiste;
 import ar.edu.unlam.tallerweb1.modelo.DatosRegistro;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioClase;
@@ -55,23 +57,17 @@ public class ControladorLogin {
 
 		// invoca el metodo consultarUsuario del servicio y hace un redirect a la URL /home, esto es, en lugar de enviar a una vista
 		// hace una llamada a otro action a través de la URL correspondiente a ésta
-		Usuario usuarioBuscado = servicioUsuario.consultarUsuario(datos);
-		if (usuarioBuscado != null) {
-			request.getSession().setAttribute("ROL", usuarioBuscado.getRol());
+		try {
+			Usuario usuarioBuscado = servicioUsuario.consultarUsuario(datos);
 			return new ModelAndView("redirect:/home");
-		} else {
-			// si el usuario no existe agrega un mensaje de error en el modelo.
+			
+		} catch (UsuarioNoExiste e) {
+			model.put("error", "Usuario no existe");
+		} catch (ClavesNoCoinciden e) {
 			model.put("error", "Usuario o clave incorrecta");
 		}
 		return new ModelAndView("login", model);
 	}
-	/*
-	// Escucha la URL /home por GET, y redirige a una vista.
-	@RequestMapping(path = "/home", method = RequestMethod.GET)
-	public ModelAndView irAHome() {
-		return new ModelAndView("home");
-	}
-	*/
 	// Escucha la url /, y redirige a la URL /login, es lo mismo que si se invoca la url /login directamente.
 	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public ModelAndView inicio() {
