@@ -1,7 +1,5 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
-
-import java.util.ArrayList;
 import java.util.List;
 
 import ar.edu.unlam.tallerweb1.modelo.Clase;
@@ -15,5 +13,4 @@ public interface RepositorioClase {
 	void eliminarClase(Clase clase);
 	List<Clase> buscarTodasLasClase();
 }
-
 

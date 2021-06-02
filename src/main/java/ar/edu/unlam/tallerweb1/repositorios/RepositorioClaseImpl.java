@@ -63,7 +63,3 @@ public class RepositorioClaseImpl implements RepositorioClase{
 				.uniqueResult();
 	}
 }
-
-
-
-

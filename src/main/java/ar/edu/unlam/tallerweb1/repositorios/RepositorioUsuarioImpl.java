@@ -37,7 +37,9 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 
 	@Override
 	public void guardar(Usuario usuario) {
-		sessionFactory.getCurrentSession().save(usuario);
+		if (buscar(usuario.getEmail()) == null) {			
+			sessionFactory.getCurrentSession().save(usuario);
+		}
 	}
 
 	@Override
@@ -50,6 +52,11 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 	@Override
 	public void modificar(Usuario usuario) {
 		sessionFactory.getCurrentSession().update(usuario);
+	}
+
+	@Override
+	public void eliminar(Usuario usuario) {
+		sessionFactory.getCurrentSession().delete(usuario);
 	}
 
 }

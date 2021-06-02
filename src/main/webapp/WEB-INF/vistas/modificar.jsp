@@ -13,12 +13,7 @@
 	<body>
 		<div class = "container">
 			<div id="loginbox" class="pt-5 col-6 mx-auto text-center">
-<<<<<<< HEAD
-				<form:form action="modificarClase" method="POST"
-		modelAttribute="modificar">
-=======
-				<form:form action="/EnerGym/modificar/${id}" method="POST" modelAttribute="modificar">
->>>>>>> 0f16b973cf86f13d8739de9b24a7cf04d59208ae
+				<form:form action="../modificar/${id}" method="POST" modelAttribute="modificar">
 		<h3 class="form-signin-heading display-5">EnerGym</h3>
 		<hr class="colorgraph">
 		<br>
@@ -31,10 +26,9 @@
 		
 		
 		<button class="btn btn-lg btn-primary btn-block mt-2 w-50" Type="Submit" />Modificar</button>
-		<a href="/EnerGym/home" class="btn btn-lg btn-danger btn-block mt-2 w-50"/>Volver</a>
+		<a href="../home" class="btn btn-lg btn-danger btn-block mt-2 w-50"/>Volver</a>
 	</form:form>
-	<h3>${email} ${password}</h3>
-				<%--Bloque que es visible si el elemento error no estÃ¡ vacÃ­o	--%>
+				<%--Bloque que es visible si el elemento error no está vacío	--%>
 				<c:if test="${not empty error}">
 			        <h4><span>${error}</span></h4>
 			        <br>

@@ -29,6 +29,19 @@ public class RepositorioUsuarioTest extends SpringTest {
     	
     }
     
+    @Test @Transactional @Rollback
+    public void queNoSePuedaAgregarDosUsuariosConElMismoMail() {
+    	String rolNuevo = "Profesor";
+    	String contraseñaNueva ="789";
+    	Usuario usuario1 = givenCreoUnUsuario();
+    	Usuario usuario2 = givenCreoUnUsuario();
+    	usuario2.setRol(rolNuevo);
+    	usuario2.setPassword(contraseñaNueva);
+    	whenGuardoLosUsuarioYTienenElMismoMail(usuario1,usuario2);
+    	thenNoSeGuardaUsuario(usuario2,rolNuevo,contraseñaNueva);
+    }
+    
+
 
 	@Test @Transactional @Rollback
     public void modificarDeberiaCambiarLosDatos(){
@@ -54,7 +67,30 @@ public class RepositorioUsuarioTest extends SpringTest {
         Usuario buscado = whenBuscoElUsuario(guardado.getEmail()+"kdkdkdkdkd");
         thenElUsuarioNoExiste(buscado);
     }
+    
+    @Test @Transactional @Rollback
+    public void queSeElimineUsuarioCreado(){
+        Usuario	usuario = givenCreoUnUsuario();
+        whenGuardoUsuarioYLuegoLoElimino(usuario);
+        Usuario buscado = repositorioUsuario.buscar(EMAIL);
+        thenElUsuarioNoExiste(buscado);
+    }
 
+	private void whenGuardoUsuarioYLuegoLoElimino(Usuario usuario) {
+		repositorioUsuario.guardar(usuario);
+		repositorioUsuario.eliminar(usuario);
+	}
+
+	private void whenGuardoLosUsuarioYTienenElMismoMail(Usuario usuario1, Usuario usuario2) {
+    	repositorioUsuario.guardar(usuario1);
+    	repositorioUsuario.guardar(usuario2);
+    }
+    
+    private void thenNoSeGuardaUsuario(Usuario usuario,String rolNuevo , String contraseñaNueva) {
+    	assertThat(repositorioUsuario.buscar(EMAIL)).isNotNull();
+    	assertThat(repositorioUsuario.buscar(EMAIL).getRol()).isNotEqualTo(rolNuevo);
+    	assertThat(repositorioUsuario.buscar(EMAIL).getPassword()).isNotEqualTo(contraseñaNueva);
+    }
     private void thenElUsuarioNoExiste(Usuario buscado) {
         assertThat(buscado).isNull();
     }
