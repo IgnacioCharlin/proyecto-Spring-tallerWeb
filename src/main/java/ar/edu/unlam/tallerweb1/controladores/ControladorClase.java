@@ -113,15 +113,6 @@ public class ControladorClase {
 		return new ModelAndView("agregar-clase",model);
 	}
 
-	/*
-	 * 
-	 * Map<User, String> userMap = new HashMap<User, String>();
-for (User user : users) {
-    userMap.put(user, calculateSililarity.calculate(sessionUser.getUserId(), user.getUserId()));
-}
-model.addAttribute("userMap", userMap);
-	 * 
-	 */
 	@RequestMapping(path = "/home", method = RequestMethod.GET)
 	public ModelAndView irAHome() {
 		Map<Clase, Clase> clasesMap = new HashMap<Clase, Clase>();
