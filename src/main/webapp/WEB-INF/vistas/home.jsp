@@ -19,7 +19,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-2 p-3 mb-2 bg-primary text-white">
-				<a>Clases Disponibles</a>
+				<a href="clases-disponibles" class="text-white text-decoration-none fw-bold">Clases Disponibles</a>
 			</div>
 			<div class="col-10">
 				<div class="container">

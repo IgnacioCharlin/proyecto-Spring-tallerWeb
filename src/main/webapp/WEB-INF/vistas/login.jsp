@@ -25,12 +25,12 @@
 					
 					<button class="btn btn-lg btn-primary btn-block mt-2 w-100" Type="Submit"/>Ingresar</button>
 				</form:form>
-				<a href='registro' class="d-block mt-4">¿Todavía no te registraste? Hace click aquí</a>
-				<%--Bloque que es visible si el elemento error no estÃ¡ vacÃ­o	--%>
 				<c:if test="${not empty error}">
-			        <h4><span>${error}</span></h4>
+			        <div class="alert alert-danger mt-2" role="alert" >${error}</div>
 			        <br>
 		        </c:if>	
+				<a href='registro' class="d-block mt-4">¿Todavía no te registraste? Hace click aquí</a>
+				<%--Bloque que es visible si el elemento error no estÃ¡ vacÃ­o	--%>
 			</div>
 		</div>
 		
