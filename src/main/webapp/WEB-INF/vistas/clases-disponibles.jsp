@@ -34,7 +34,7 @@
 								<div class="card-body">
 									<p class="card-text">${i.getHorarioYFecha()}</p>
 									<p class="card-text">Capacidad: ${i.capacidad}</p>
-									<a class="btn btn-success text-white w-100" href="modificar/${i.id}">Inscribirse</a>
+									<a class="btn btn-success text-white w-100" href="inscribirseclase/${i.id}">Inscribirse</a>
 								</div>
 							</div>
 						</c:forEach>
