@@ -17,6 +17,7 @@ import ar.edu.unlam.tallerweb1.modelo.Clase;
 import ar.edu.unlam.tallerweb1.modelo.DatosClase;
 import ar.edu.unlam.tallerweb1.modelo.Profesor;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioClase;
+import ar.edu.unlam.tallerweb1.repositorios.RepositorioProfesor;
 
 public class ServicioClaseTest {
 /*	una clase no se tiene que guardar
@@ -31,11 +32,12 @@ public class ServicioClaseTest {
 
 	private Profesor profesor;
 	private RepositorioClase repositorioClase;
+	private RepositorioProfesor repositorioProfesor;
 	
 	@Before
 	public void init() {
 		repositorioClase = mock(RepositorioClase.class);
-		servicio = new ServicioClaseImpl(repositorioClase);
+		servicio = new ServicioClaseImpl(repositorioClase,repositorioProfesor);
 	}
 
 	
@@ -96,7 +98,7 @@ public class ServicioClaseTest {
 		nueva.setNombre("Funcional");
 		nueva.setFechaYHora("Miercoles 10hs");
 		seteandoIdProfesor();
-		nueva.setIdProfesor(profesor.getId());
+		nueva.setIdProfesor(2l);
 //		nueva.setCapacidad(-1l);
 		return nueva;
 	}

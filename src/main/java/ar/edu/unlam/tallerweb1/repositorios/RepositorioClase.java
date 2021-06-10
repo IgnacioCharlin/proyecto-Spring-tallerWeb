@@ -3,6 +3,7 @@ package ar.edu.unlam.tallerweb1.repositorios;
 import java.util.List;
 
 import ar.edu.unlam.tallerweb1.modelo.Clase;
+import ar.edu.unlam.tallerweb1.modelo.Profesor;
 
 public interface RepositorioClase {
 	
@@ -12,5 +13,6 @@ public interface RepositorioClase {
 	void modificarClase(Clase clase);
 	void eliminarClase(Clase clase);
 	List<Clase> buscarTodasLasClase();
+	List<Clase> buscarClasePorProfesor(Profesor profesor);
 }
 
