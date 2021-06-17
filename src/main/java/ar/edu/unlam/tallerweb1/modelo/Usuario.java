@@ -4,7 +4,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.*;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 // Clase que modela el concepto de Usuario, la anotacion @Entity le avisa a hibernate que esta clase es persistible
@@ -26,6 +32,14 @@ public class Usuario {
 	private String email;
 	private String password;
 	private String rol;
+	
+	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@JoinTable(
+			name="clases_inscriptas",
+			joinColumns = @JoinColumn(name = "usuario_id"),
+			inverseJoinColumns = @JoinColumn(name = "clases_id")
+			)
+	private Set<Clase>  clases = new HashSet<Clase>();//helpers
 	
 	public Long getId() {
 		return id;
@@ -52,5 +66,12 @@ public class Usuario {
 
 	public void setRol(String rol) {
 		this.rol = rol;
+	}
+	
+	public void setClase(Clase clase) {
+		this.clases.add(clase);
+	}
+	public Set<Clase> getClases() {
+		return clases;
 	}
 }

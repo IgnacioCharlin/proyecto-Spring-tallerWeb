@@ -11,4 +11,8 @@ public interface ServicioUsuario {
     void cambiarClave(String email, String claveNueva, String repiteClaveNueva, String claveActual);
     
     Usuario consultarUsuario(DatosRegistro datos);
+
+	Usuario consultarUsuarioPorId(Long idUsuario);
+
+	void actualizarUsuario(Usuario usuarioAinscribirse);
 }

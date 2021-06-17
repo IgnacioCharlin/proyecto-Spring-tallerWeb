@@ -25,6 +25,7 @@ public class ContoladorClaseTest {
 	private final String REDIRECT_CLASE = "redirect:/agregar-clase";
 	private final String REDIRECT_HOME = "redirect:/home";
 	ControladorClase controladorClase;
+	private ControladorInscibirseClases controladorInscribirse;
 	private ModelAndView mav;
 	private ServicioClase servicioClase;
 
@@ -89,7 +90,7 @@ public class ContoladorClaseTest {
 	}
 
 	private void whenElUsiarioQuiereAnotarseAlaClase(Usuario usuario, Clase claseAInscribirse) {
-		mav = controladorClase.inscribirseAunaClase(usuario, claseAInscribirse.getId());
+		mav = controladorInscribirse.inscribirseAunaClase(usuario, claseAInscribirse.getId());
 		
 	}
 

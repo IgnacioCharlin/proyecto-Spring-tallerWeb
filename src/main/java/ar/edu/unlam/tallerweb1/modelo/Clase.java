@@ -1,11 +1,14 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Clase {
@@ -16,6 +19,9 @@ public class Clase {
 	private	Long capacidad;
 	private String HorarioYFecha;
 	private ArrayList<Long> profesores;
+	
+	@ManyToMany(mappedBy = "clases")
+	private Set<Usuario> usuarios = new HashSet<Usuario>();
 	
 	public Clase(String nombre, String horarioYfecha, Long idProfesor, Long capacidad) {
 		super();
@@ -94,6 +100,18 @@ public class Clase {
 
 	public ArrayList<Long> getProfesores() {
 		return profesores;
+	}
+
+
+
+	public Set<Usuario> getUsuarios() {
+		return usuarios;
+	}
+
+
+
+	public void setUsuarios(Set<Usuario> usuarios) {
+		this.usuarios = usuarios;
 	}
 
 

@@ -107,17 +107,6 @@ public class ControladorClase {
 		return new ModelAndView("home",model);
 	}
 	
-	@RequestMapping(path = "/inscribirseclase/{id}", method = RequestMethod.GET)
-	public ModelAndView inscribirseAunaClase(Usuario usuario, @PathVariable("id") Long id) {
-		
-		Clase buscadaAInscribirse = servicioClase.consultarClasePorId(id);
-		ModelMap model = new ModelMap();
-		model.put("clase", buscadaAInscribirse);
-		
-		return new ModelAndView("inscribirseClase", model);
-		
-	}
-	
 	
 	private ModelAndView claseCargadaOk(ModelMap model) {
 		model.put("cargadaOk", true);
@@ -126,8 +115,7 @@ public class ControladorClase {
 
 	private ModelAndView registrarClaseError(ModelMap model, String error) {
 		model.put("error", error);
-		model.put("registrarClase", new DatosClase());
-		
+				
 		return new ModelAndView("agregar-clase", model);
 	}
 

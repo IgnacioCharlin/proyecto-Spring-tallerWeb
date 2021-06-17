@@ -62,4 +62,16 @@ public class ServicioUsuarioImp implements ServicioUsuario {
 			throw new UsuarioNoExiste();
 		}
 	}
+
+	@Override
+	public Usuario consultarUsuarioPorId(Long idUsuario) {
+		
+		return repositorioUsuario.buscarPorId(idUsuario);
+	}
+
+	@Override
+	public void actualizarUsuario(Usuario usuario) {
+		repositorioUsuario.modificar(usuario);
+		
+	}
 }
