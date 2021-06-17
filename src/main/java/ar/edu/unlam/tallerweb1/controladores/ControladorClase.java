@@ -20,6 +20,7 @@ import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoProfesor;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoUnaFecha;
 import ar.edu.unlam.tallerweb1.modelo.Clase;
 import ar.edu.unlam.tallerweb1.modelo.DatosClase;
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioClase;
 
 
@@ -99,6 +100,17 @@ public class ControladorClase {
 		
 	}
 	
+	@RequestMapping(path = "/home", method = RequestMethod.GET)
+	public ModelAndView irAHome() {
+		Map<Clase, Clase> clasesMap = new HashMap<Clase, Clase>();
+		ModelMap model = new ModelMap();
+		List<Clase> clases = servicioClase.consultarTodasLasClases();
+		
+		model.addAttribute("clasesMap",clases);
+		return new ModelAndView("home",model);
+	}
+	
+	
 	private ModelAndView claseCargadaOk(ModelMap model) {
 		model.put("cargadaOk", true);
 		return new ModelAndView("redirect:/home", model);
@@ -112,15 +124,5 @@ public class ControladorClase {
 	public ModelAndView registroConClaseExistente() {
 		ModelMap model = new ModelMap("error","La clase ya existe");
 		return new ModelAndView("agregar-clase",model);
-	}
-
-	@RequestMapping(path = "/home", method = RequestMethod.GET)
-	public ModelAndView irAHome() {
-		Map<Clase, Clase> clasesMap = new HashMap<Clase, Clase>();
-		ModelMap model = new ModelMap();
-		List<Clase> clases = servicioClase.consultarTodasLasClases();
-		
-		model.addAttribute("clasesMap",clases);
-		return new ModelAndView("home",model);
 	}
 }

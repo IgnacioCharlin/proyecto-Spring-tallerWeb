@@ -6,7 +6,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
 import static org.assertj.core.api.Assertions.assertThat;
+
+import ar.edu.unlam.tallerweb1.modelo.Clase;
 import ar.edu.unlam.tallerweb1.modelo.DatosClase;
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.excepciones.FaltaCupo;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoProfesor;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoUnaFecha;
@@ -22,6 +25,7 @@ public class ContoladorClaseTest {
 	private final String REDIRECT_CLASE = "redirect:/agregar-clase";
 	private final String REDIRECT_HOME = "redirect:/home";
 	ControladorClase controladorClase;
+	private ControladorInscibirseClases controladorInscribirse;
 	private ModelAndView mav;
 	private ServicioClase servicioClase;
 
@@ -73,7 +77,46 @@ public class ContoladorClaseTest {
 		
 		thenElRegistroFalla("Falto cargar la hora y fecha");
 	}
+<<<<<<< HEAD
 	*/
+=======
+	
+	@Test
+	public void queUnUsuarioPuedaInscribirseAUnaClase() {
+		Usuario usuario = gvenUnUsuario("jose@gmail.com");
+		Clase claseAInscribirse = givenClaseDisponible();
+		
+		whenElUsiarioQuiereAnotarseAlaClase(usuario, claseAInscribirse);
+		
+		thenLaInscripcionEsExitosa();
+	}
+	
+	private void thenLaInscripcionEsExitosa() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void whenElUsiarioQuiereAnotarseAlaClase(Usuario usuario, Clase claseAInscribirse) {
+		mav = controladorInscribirse.inscribirseAunaClase(usuario, claseAInscribirse.getId());
+		
+	}
+
+	private Clase givenClaseDisponible() {
+		Clase clase = new Clase();
+		clase.setCapacidad(CUPO);
+		clase.setHorarioYFecha(FECHAYHORA);
+		clase.setNombre(NOMBRE);
+		clase.setProfesor(ID);
+		return clase;
+	}
+
+	private Usuario gvenUnUsuario(String Nombre) {
+		Usuario usuario = new Usuario();
+		usuario.setEmail(Nombre);
+		return usuario;
+	}
+
+>>>>>>> cd7b57efc4f5a0b74715c8a7cf40b4ef79139e5b
 	private DatosClase givenDatosClaseSinFechaYHora() {
 		DatosClase clase = new DatosClase();
 		clase.setCupo(CUPO);

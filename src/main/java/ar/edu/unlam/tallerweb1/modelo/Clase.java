@@ -1,6 +1,8 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -8,7 +10,11 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import javax.persistence.ManyToMany;
+
 import javax.persistence.ManyToOne;
+
 
 @Entity
 public class Clase {
@@ -22,8 +28,20 @@ public class Clase {
 	@ManyToOne(optional = false , cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Profesor profesor;
 	
+<<<<<<< HEAD
 	public Clase(String nombre, String horarioYfecha, Profesor profesor, Long capacidad) {
 		this.profesor = profesor;
+=======
+
+	@ManyToMany(mappedBy = "clases")
+	private Set<Usuario> usuarios = new HashSet<Usuario>();
+	
+
+	public Clase(String nombre, String horarioYfecha, Long idProfesor, Long capacidad) {
+
+		super();
+		this.profesor = idProfesor;
+>>>>>>> cd7b57efc4f5a0b74715c8a7cf40b4ef79139e5b
 		this.nombre = nombre;
 		this.HorarioYFecha = horarioYfecha;
 		this.capacidad = capacidad;
@@ -108,6 +126,18 @@ public class Clase {
 		this.profesor = profesor;
 	}
 	*/
+
+
+	public Set<Usuario> getUsuarios() {
+		return usuarios;
+	}
+
+
+
+	public void setUsuarios(Set<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
+
 
 
 	
