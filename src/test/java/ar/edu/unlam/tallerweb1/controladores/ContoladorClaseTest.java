@@ -77,9 +77,9 @@ public class ContoladorClaseTest {
 		
 		thenElRegistroFalla("Falto cargar la hora y fecha");
 	}
-<<<<<<< HEAD
+
 	*/
-=======
+
 	
 	@Test
 	public void queUnUsuarioPuedaInscribirseAUnaClase() {
@@ -106,7 +106,7 @@ public class ContoladorClaseTest {
 		clase.setCapacidad(CUPO);
 		clase.setHorarioYFecha(FECHAYHORA);
 		clase.setNombre(NOMBRE);
-		clase.setProfesor(ID);
+		//clase.setProfesor(ID);
 		return clase;
 	}
 
@@ -116,13 +116,13 @@ public class ContoladorClaseTest {
 		return usuario;
 	}
 
->>>>>>> cd7b57efc4f5a0b74715c8a7cf40b4ef79139e5b
+
 	private DatosClase givenDatosClaseSinFechaYHora() {
 		DatosClase clase = new DatosClase();
 		clase.setCupo(CUPO);
 //		clase.setFechaYHora(FECHAYHORA);
 		clase.setNombre(NOMBRE);
-		clase.setIdProfesor(ID);
+	//	clase.setIdProfesor(ID);
 		return clase;
 	}
 	
