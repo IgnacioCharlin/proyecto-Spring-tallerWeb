@@ -27,21 +27,13 @@ public class Clase {
 
 	@ManyToOne(optional = false , cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Profesor profesor;
-	
-<<<<<<< HEAD
-	public Clase(String nombre, String horarioYfecha, Profesor profesor, Long capacidad) {
-		this.profesor = profesor;
-=======
 
 	@ManyToMany(mappedBy = "clases")
 	private Set<Usuario> usuarios = new HashSet<Usuario>();
 	
 
-	public Clase(String nombre, String horarioYfecha, Long idProfesor, Long capacidad) {
-
-		super();
-		this.profesor = idProfesor;
->>>>>>> cd7b57efc4f5a0b74715c8a7cf40b4ef79139e5b
+	public Clase(String nombre, String horarioYfecha, Profesor profesor, Long capacidad) {
+		this.profesor = profesor;
 		this.nombre = nombre;
 		this.HorarioYFecha = horarioYfecha;
 		this.capacidad = capacidad;
