@@ -9,21 +9,26 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.excepciones.FaltaCupo;
+import ar.edu.unlam.tallerweb1.excepciones.NoEsProfesor;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoProfesor;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoUnaFecha;
 import ar.edu.unlam.tallerweb1.modelo.Clase;
 import ar.edu.unlam.tallerweb1.modelo.DatosClase;
+import ar.edu.unlam.tallerweb1.modelo.Profesor;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioClase;
+import ar.edu.unlam.tallerweb1.repositorios.RepositorioProfesor;
 
 @Service("servicioClase")
 @Transactional
 public class ServicioClaseImpl implements ServicioClase {
 	
 	private RepositorioClase repositorioClase;
+	private RepositorioProfesor repositorioProfesor;
 	
 	@Autowired
-	public ServicioClaseImpl(RepositorioClase repositorioClase) {
+	public ServicioClaseImpl(RepositorioClase repositorioClase, RepositorioProfesor repositorioProfesor) {
 		this.repositorioClase = repositorioClase;
+		this.repositorioProfesor = repositorioProfesor;
 	}
 	
 	@Override
@@ -34,9 +39,10 @@ public class ServicioClaseImpl implements ServicioClase {
 			throw new FaltaCupo();
 		if(clase.getIdProfesor() == null)
 			throw new NoSeCargoProfesor();
-		
+		if(repositorioProfesor.buscarProfesorPorId(clase.getIdProfesor())== null)
+			throw new NoEsProfesor();
 		//recibir datos y guardar Clase claseclase -->repositorioClase.agregarClase()
-		
+		//repositorioClase.buscarClasePorId();
 		Clase nuevaClase = new Clase(clase.getNombre(), clase.getFechaYHora(), clase.getIdProfesor(), clase.getCupo());
 		repositorioClase.guardarClase(nuevaClase);
 		return nuevaClase;

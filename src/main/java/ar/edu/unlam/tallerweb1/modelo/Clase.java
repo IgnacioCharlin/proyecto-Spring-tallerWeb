@@ -4,11 +4,17 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
 import javax.persistence.ManyToMany;
+
+import javax.persistence.ManyToOne;
+
 
 @Entity
 public class Clase {
@@ -18,26 +24,28 @@ public class Clase {
 	private String nombre;
 	private	Long capacidad;
 	private String HorarioYFecha;
-	private ArrayList<Long> profesores;
+
+	//@ManyToOne(optional = false , cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Long profesor;
 	
+
 	@ManyToMany(mappedBy = "clases")
 	private Set<Usuario> usuarios = new HashSet<Usuario>();
 	
+
 	public Clase(String nombre, String horarioYfecha, Long idProfesor, Long capacidad) {
+
 		super();
-		this.profesores = new ArrayList<Long>();
+		this.profesor = idProfesor;
 		this.nombre = nombre;
 		this.HorarioYFecha = horarioYfecha;
 		this.capacidad = capacidad;
-		this.setProfesor(idProfesor);
-		
 	}
 	
 	
 
 	public Clase() {
 		super();
-		this.profesores = new ArrayList<Long>();
 	}
 
 
@@ -90,16 +98,14 @@ public class Clase {
 
 
 
-	public void setProfesor(Long idProfesor) {
-		if(idProfesor != null)
-			profesores.add(idProfesor);
-		
+	public Long getProfesor() {
+		return profesor;
 	}
 
 
 
-	public ArrayList<Long> getProfesores() {
-		return profesores;
+	public void setProfesor(Long profesor) {
+		this.profesor = profesor;
 	}
 
 

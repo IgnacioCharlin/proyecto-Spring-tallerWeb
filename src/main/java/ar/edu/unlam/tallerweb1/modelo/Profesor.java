@@ -6,7 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity(name = "profesor")
+@Entity
 public class Profesor {
 	
 	@Id
@@ -16,11 +16,6 @@ public class Profesor {
 	private String email;
 	private String password;
 	private String rol;
-	
-	public Profesor() {
-		super();
-		
-	}
 	
 	public Long getId() {
 		return id;
@@ -46,5 +41,6 @@ public class Profesor {
 	public void setRol(String rol) {
 		this.rol = rol;
 	}
-
+	
+	
 }

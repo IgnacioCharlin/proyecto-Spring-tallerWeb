@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import ar.edu.unlam.tallerweb1.modelo.Clase;
+import ar.edu.unlam.tallerweb1.modelo.Profesor;
 
 @Repository("repositorioClase")
 public class RepositorioClaseImpl implements RepositorioClase{
@@ -62,4 +63,12 @@ public class RepositorioClaseImpl implements RepositorioClase{
 				.add(Restrictions.eq("id", id))
 				.uniqueResult();
 	}
+	
+	@Override
+	public List<Clase> buscarClasePorProfesor(Profesor profesor) {
+		return sessionFactory.getCurrentSession().createCriteria(Clase.class)
+				.add(Restrictions.eq("profesor", profesor))
+				.list();
+	}
+	
 }

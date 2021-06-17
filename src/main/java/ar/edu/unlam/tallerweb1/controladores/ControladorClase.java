@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.excepciones.FaltaCupo;
+import ar.edu.unlam.tallerweb1.excepciones.NoEsProfesor;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoProfesor;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoUnaFecha;
 import ar.edu.unlam.tallerweb1.modelo.Clase;
@@ -54,6 +55,8 @@ public class ControladorClase {
 			error = "Falto cargar el profesor";
 		}catch (NoSeCargoUnaFecha e) {
 			error = "Falto cargar la hora y fecha";
+		}catch (NoEsProfesor e) {
+			error = "No existe ese profesor";
 		}
 		
 		return registrarClaseError(model, error);
@@ -115,7 +118,6 @@ public class ControladorClase {
 
 	private ModelAndView registrarClaseError(ModelMap model, String error) {
 		model.put("error", error);
-				
 		return new ModelAndView("agregar-clase", model);
 	}
 

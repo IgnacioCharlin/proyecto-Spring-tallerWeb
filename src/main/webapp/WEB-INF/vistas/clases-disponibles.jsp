@@ -38,13 +38,6 @@
 								</div>
 							</div>
 						</c:forEach>
-
-						<!-- 
-			<c:forEach var = "i" begin = "1" end = "5">
-				Clases <c:out value = "${nombre}"/><p> 
-			</c:forEach>
-			-->
-
 					</main>
 				</div>
 			</div>
