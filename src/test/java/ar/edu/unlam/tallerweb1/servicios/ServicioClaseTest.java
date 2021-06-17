@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
@@ -29,18 +30,21 @@ public class ServicioClaseTest {
  *  */
 
 	private ServicioClaseImpl servicio;
-
-	private Profesor profesor;
+	private ServicioProfesorImpl servicioProfesor;
+	private Profesor profesor = givenCreoUnProfesor();
+	private final DatosClase CLASE = givenCreoUnaClase(profesor);
 	private RepositorioClase repositorioClase;
 	private RepositorioProfesor repositorioProfesor;
 	
 	@Before
 	public void init() {
 		repositorioClase = mock(RepositorioClase.class);
+		repositorioProfesor = mock(RepositorioProfesor.class);
 		servicio = new ServicioClaseImpl(repositorioClase,repositorioProfesor);
+		servicioProfesor =  new ServicioProfesorImpl(repositorioProfesor);
 	}
 
-	
+
 	@Test(expected = NoSeCargoUnaFecha.class)
 	public void siUnaClaseNoTieneFechaLanzaUnaExcepcion() {
 		DatosClase clase = givenClaseNueva();
@@ -72,6 +76,62 @@ public class ServicioClaseTest {
 		thenTraeTodasLasClases();
 	}
 	
+	@Test
+	public void queSeGuardeUnaClase() {
+		whenRegistroElProfesorQueNoExisteSeGuarda();
+		Clase claseRegistrada = whenRegistroLaClaseConProfesor(CLASE);
+		thenLaSeGuardoLaClase(claseRegistrada);
+	}
+	
+	private Clase whenRegistroLaClaseConProfesor(DatosClase clase) {
+		when(repositorioClase.buscarClase(clase.getNombre())).thenReturn(null);
+		when(repositorioProfesor.buscarProfesorPorId(clase.getIdProfesor())).thenReturn(profesor);
+		return servicio.agregarClase(clase);
+	}
+	
+	
+	private Clase whenRegistroLaClase(DatosClase clase) {
+		when(repositorioClase.buscarClase(clase.getNombre())).thenReturn(null);
+		return servicio.agregarClase(clase);
+	}
+
+
+	private void thenLaSeGuardoLaClase(Clase claseRegistrada) {
+		assertThat(claseRegistrada).isNotNull();
+	}
+
+
+	private void thenLaCLaseSeGuardoConExito(DatosClase clase) {
+		assertThat(servicio.consultarClase(clase.getNombre())).isNotNull();
+		
+	}
+
+	private void whenRegistroElProfesorQueNoExisteSeGuarda() {
+		when(repositorioProfesor.buscarProfesorPorId(profesor.getId())).thenReturn(null);
+		repositorioProfesor.agregarProfesor(profesor);
+	}
+	
+	private Profesor givenCreoUnProfesor() {
+		Profesor profesor = new Profesor();
+		profesor.setId(10l);
+		profesor.setRol("profesor");
+		profesor.setEmail("pepe@pepe.com");
+		return profesor;
+	}
+	
+	private DatosClase givenCreoUnaClase(Profesor profesor) {
+		DatosClase datos = new DatosClase();
+		datos.setNombre("Funcional");
+		datos.setFechaYHora("Miercoles 10hs");
+		datos.setCupo(10l);
+		datos.setIdProfesor(profesor.getId());;
+		return datos;
+	}
+
+	private void thenTraeLasClasesDeEseProfesor(long id) {
+		assertThat(servicio.consultarClasesPorIdProfesor(id)).hasSize(2);
+	}
+
 
 	private void thenTraeTodasLasClases() {
 		List<Clase> clase = new ArrayList<>();
@@ -98,7 +158,7 @@ public class ServicioClaseTest {
 		nueva.setNombre("Funcional");
 		nueva.setFechaYHora("Miercoles 10hs");
 		seteandoIdProfesor();
-		nueva.setIdProfesor(2l);
+		nueva.setIdProfesor(profesor.getId());;
 //		nueva.setCapacidad(-1l);
 		return nueva;
 	}
@@ -108,10 +168,7 @@ public class ServicioClaseTest {
 		
 	}
 
-	private void whenRegistroLaClase(DatosClase clase) {
-		servicio.agregarClase(clase);
-		
-	}
+	
 
 	private DatosClase givenClaseNueva() {
 		Long i = (long) 0;
@@ -123,6 +180,7 @@ public class ServicioClaseTest {
 	private void seteandoIdProfesor() {
 		profesor = new Profesor();
 		profesor.setId(10L);
+		profesor.setRol("profesor");
 	}
 	
 }

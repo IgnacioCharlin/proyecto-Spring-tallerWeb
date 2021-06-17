@@ -15,4 +15,5 @@ public interface ServicioClase {
 	void eliminarClase(Clase clase);
 	Clase consultarClasePorId(Long id);
 	void modificarClase(Long id,DatosClase datos);
+	List<Clase> consultarClasesPorIdProfesor(long id);
 }

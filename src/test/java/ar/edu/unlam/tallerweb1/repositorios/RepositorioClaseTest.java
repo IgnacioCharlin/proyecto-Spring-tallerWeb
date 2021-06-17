@@ -18,17 +18,17 @@ public class RepositorioClaseTest extends SpringTest{
 
 	private final String NOMBRE_CLASE = "funcional";
 	private final long CAPACIDAD=10;
-	//private final Profesor PROFESOR = new Profesor();
-	private Long PROFESOR =2L;
+	private final Profesor PROFESOR = givenCreoElProfesor();
+	//private Long PROFESOR =2L;
 	private final Clase CLASE = new Clase();
 	
 	@Autowired
 	private RepositorioClase repositorioClase;
 	
 	
-	
 	@Test @Transactional @Rollback
 	public void queSiLaClaseNoExisteSePuedaGuardar() {
+		Profesor profesor = givenCreoElProfesor();
 		Clase clase = whenSeGuardanLosDatos(CLASE,NOMBRE_CLASE,CAPACIDAD,PROFESOR);
 		thenSeRegistroConExito(clase);
 	}
@@ -79,7 +79,6 @@ public class RepositorioClaseTest extends SpringTest{
 		thenTraeTodasLasClases(clasesList);
 	}
 	
-	/*
 	@Test @Transactional @Rollback
 	public void queTraigaLasClasesDadasPorUnProfesor() {
 		Profesor profesor = givenCreoElProfesor();
@@ -87,14 +86,14 @@ public class RepositorioClaseTest extends SpringTest{
 		Clase clase1 = new Clase();
 		Clase clase2 = new Clase();
 		Clase clase3 = new Clase();
-		whenSeGuardanLosDatos(clase1, "Funcional", 50L,PROFESOR);
-		whenSeGuardanLosDatos(clase2, "Zumba", 20L, PROFESOR);
-		whenSeGuardanLosDatos(clase3, "Intensivo", 10L, 10L);
+		whenSeGuardanLosDatos(clase1, "Funcional", 50L,profesor);
+		whenSeGuardanLosDatos(clase2, "Zumba", 20L, profesor);
+		whenSeGuardanLosDatos(clase3, "Intensivo", 10L, profesor2);
 		List<Clase> clases = whenBuscoClasesConElProfesor(profesor);
 		thenMeTraeTodasLasClases(clases,2);
 		
 	}
-	*/
+	
 	private Profesor givenCreoElProfesor() {
 		String emailProfesor= "asd@asd.com";
 		Profesor profesor = new Profesor();
@@ -137,13 +136,13 @@ public class RepositorioClaseTest extends SpringTest{
 		assertNull(clase);
 	}
 
-	private Clase whenSeGuardanLosDatos(Clase clase,String nombre, long capacidad,Long profesor) {
+	private Clase whenSeGuardanLosDatos(Clase clase,String nombre, long capacidad,Profesor profesor) {
 		if(repositorioClase.buscarClase(nombre)==null) {
 			clase.setNombre(nombre);
 			clase.setCapacidad(capacidad);
 			clase.setProfesor(profesor);
 			repositorioClase.guardarClase(clase);
-			return repositorioClase.buscarClase(nombre);
+			return clase;
 		}
 		return null;
 	}

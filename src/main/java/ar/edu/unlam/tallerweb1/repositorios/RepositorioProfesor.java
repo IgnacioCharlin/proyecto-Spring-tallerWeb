@@ -6,4 +6,5 @@ public interface RepositorioProfesor {
 	Profesor agregarProfesor(Profesor profesor);
 	Profesor buscarProfesorPorMail(String mail);
 	Profesor buscarProfesorPorId(long id);
+	void modificarProfesor(Profesor profesor);
 }

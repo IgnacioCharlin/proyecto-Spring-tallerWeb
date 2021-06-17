@@ -2,6 +2,7 @@ package ar.edu.unlam.tallerweb1.servicios;
 
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,11 +40,13 @@ public class ServicioClaseImpl implements ServicioClase {
 			throw new FaltaCupo();
 		if(clase.getIdProfesor() == null)
 			throw new NoSeCargoProfesor();
-		if(repositorioProfesor.buscarProfesorPorId(clase.getIdProfesor())== null)
+		if(repositorioProfesor.buscarProfesorPorId(clase.getIdProfesor()) == null)
 			throw new NoEsProfesor();
+		System.out.println(clase.getFechaYHora());
 		//recibir datos y guardar Clase claseclase -->repositorioClase.agregarClase()
 		//repositorioClase.buscarClasePorId();
-		Clase nuevaClase = new Clase(clase.getNombre(), clase.getFechaYHora(), clase.getIdProfesor(), clase.getCupo());
+		Profesor profesor = repositorioProfesor.buscarProfesorPorId(clase.getIdProfesor());
+		Clase nuevaClase = new Clase(clase.getNombre(), clase.getFechaYHora(), profesor, clase.getCupo());
 		repositorioClase.guardarClase(nuevaClase);
 		return nuevaClase;
 	}
@@ -83,13 +86,20 @@ public class ServicioClaseImpl implements ServicioClase {
 			throw new NoSeCargoProfesor();
 		
 		final Clase claseBuscada = repositorioClase.buscarClasePorId(id);
+		Profesor profesor = repositorioProfesor.buscarProfesorPorId(datos.getIdProfesor());
 		claseBuscada.setCapacidad(datos.getCupo());
 		claseBuscada.setHorarioYFecha(datos.getFechaYHora());
 		claseBuscada.setNombre(datos.getNombre());
-		claseBuscada.setProfesor(datos.getIdProfesor());
+		claseBuscada.setProfesor(profesor);
 		
 		
 		repositorioClase.modificarClase(claseBuscada);
+	}
+
+	@Override
+	public List<Clase> consultarClasesPorIdProfesor(long id) {
+		Profesor profesor = repositorioProfesor.buscarProfesorPorId(id);
+		return repositorioClase.buscarClasePorProfesor(profesor);
 	}
 }
 

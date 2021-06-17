@@ -3,17 +3,21 @@ package ar.edu.unlam.tallerweb1.servicios;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import ar.edu.unlam.tallerweb1.excepciones.ProfesorYaExiste;
 import ar.edu.unlam.tallerweb1.modelo.Profesor;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioProfesor;
 
 public class ServicioProfesorTest {
+	private final long ID = 1l;
 	private final String EMAIL="asd@asd.com";
 	private final String PASSWORD ="123";
 	private final String ROL ="profesor";
+	private Profesor profesorRegistrado;
 	
 	ServicioProfesorImpl servicioProfesor;
 	RepositorioProfesor repositorioProfesor;
@@ -27,27 +31,51 @@ public class ServicioProfesorTest {
 	
 	@Test
 	public void queSePuedaAgregarUnProfesorQueNoExiste() {
-		Profesor profesor = givenTengoUnProfesor();
-		whenElProfesorNoExiste(profesor);
-		thenElProfesorSeGuardaConExito(profesor);
+		givenProfesorNoExiste(ID);
+		whenRegistroProfesor(ID,EMAIL,PASSWORD,ROL);
+		thenElProfesorSeGuardaConExito();
+	}
+	
+	@Test(expected = ProfesorYaExiste.class)
+	public void queNoSePuedaAgregarProfesorQueYaExiste() {
+		givenProfesorExiste(EMAIL);
+		whenRegistroProfesor(ID,EMAIL,PASSWORD,ROL);
+		thenElProfesorNoSeGuardo();
+	}
+	
+	
+	private void thenElProfesorNoSeGuardo() {
+		assertThat(profesorRegistrado).isNull();
 	}
 
-	private Profesor givenTengoUnProfesor() {
+
+	private void givenProfesorExiste(String email) {
+		when(repositorioProfesor.buscarProfesorPorMail(email)).thenReturn(new Profesor());
+	}
+
+
+	private void thenElProfesorSeGuardaConExito() {
+		assertThat(profesorRegistrado).isNotNull();
+	}
+
+
+	private void whenRegistroProfesor(long id, String email, String password, String rol) {
 		Profesor profesor = new Profesor();
-		profesor.setEmail(EMAIL);
-		profesor.setPassword(PASSWORD);
-		profesor.setRol(ROL);
-		return profesor;
+		profesor.setId(id);
+		profesor.setEmail(email);
+		profesor.setPassword(password);
+		profesor.setRol(rol);
+		profesorRegistrado = servicioProfesor.agregarProfesor(profesor);
 	}
 
-	private void whenElProfesorNoExiste(Profesor profesor) {
-		if(servicioProfesor.existeProfesor(profesor)== false) {
-			servicioProfesor.agregarProfesor(profesor);
-		}
+
+	private void givenProfesorNoExiste(long id) {
+		when(repositorioProfesor.buscarProfesorPorId(id)).thenReturn(null);
 	}
 
-	private void thenElProfesorSeGuardaConExito(Profesor profesor) {
-		assertThat(servicioProfesor.existeProfesor(profesor)).isNotNull();
-	}
+
+	
+
+
 
 }

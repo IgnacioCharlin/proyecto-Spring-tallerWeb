@@ -17,10 +17,10 @@ public class RepositorioProfesorTest extends SpringTest{
 	@Autowired
 	private RepositorioProfesor repositorioProfesor;
 	
-	private final String EMAIL ="asd@asd.com";
+	private final long ID = 1l;
+	private final String EMAIL ="pepe@asd.com";
 	private final String PASSWORD ="123";
 	private final String ROL="profesor";
-	
 	
 	
 	@Test @Transactional @Rollback
@@ -48,6 +48,36 @@ public class RepositorioProfesorTest extends SpringTest{
 		whenElProfesorSeGuarda(profesor);
 		thenElProfesorNoExiste(profesor);
 	}
+	
+	@Test @Transactional @Rollback
+	public void queSeBusqueProfesorPorId() {
+		Profesor profesor = givenCreoUnProfesor();
+		whenElProfesorSeGuarda(profesor);
+		thenTraeProfesorPorId(profesor.getId(),profesor);
+	}
+	
+	@Test @Transactional @Rollback
+	public void queSeModifiqueElProfesor() {
+		Profesor profesor = givenCreoUnProfesor();
+		whenElProfesorSeGuarda(profesor);
+		whenElProfesorSeModifica(profesor);
+		thenElProfesorSeModificoConExito(profesor);
+	}
+	
+	private void whenElProfesorSeModifica(Profesor profesor) {
+		String emailNuevo = "nuevo@nuevo.com";
+		profesor.setEmail(emailNuevo);
+		repositorioProfesor.modificarProfesor(profesor);
+	}
+
+	private void thenElProfesorSeModificoConExito(Profesor profesor) {
+		assertThat(profesor.getEmail()).isNotEqualTo(EMAIL);
+	}
+
+	private void thenTraeProfesorPorId(Long id,Profesor profesorBuscado) {
+		assertThat(repositorioProfesor.buscarProfesorPorId(id)).isEqualTo(profesorBuscado);
+	}
+
 
 	private void thenElProfesorNoExiste(Profesor profesor) {
 		assertThat(repositorioProfesor.buscarProfesorPorMail(EMAIL)).isNull();
@@ -59,6 +89,7 @@ public class RepositorioProfesorTest extends SpringTest{
 
 	private Profesor givenCreoUnProfesor() {
 		Profesor profesor = new Profesor();
+		profesor.setId(ID);
 		profesor.setEmail(EMAIL);
 		profesor.setPassword(PASSWORD);
 		profesor.setRol(ROL);
@@ -72,6 +103,6 @@ public class RepositorioProfesorTest extends SpringTest{
 	}
 
 	private void thenElProfesorSeGuardaConExisto(Profesor profesor) {
-		assertThat(repositorioProfesor.buscarProfesorPorMail(profesor.getEmail())).isNotNull();
+		assertThat(repositorioProfesor.buscarProfesorPorId(profesor.getId())).isNotNull();
 	}
 }

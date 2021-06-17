@@ -19,18 +19,29 @@ public class Clase {
 	private	Long capacidad;
 	private String HorarioYFecha;
 
-	//@ManyToOne(optional = false , cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Long profesor;
+	@ManyToOne(optional = false , cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Profesor profesor;
 	
-	public Clase(String nombre, String horarioYfecha, Long long1, Long capacidad) {
-		super();
-		this.profesor = long1;
+	public Clase(String nombre, String horarioYfecha, Profesor profesor, Long capacidad) {
+		this.profesor = profesor;
 		this.nombre = nombre;
 		this.HorarioYFecha = horarioYfecha;
 		this.capacidad = capacidad;
 	}
 	
 	
+
+	public Profesor getProfesor() {
+		return profesor;
+	}
+
+
+
+	public void setProfesor(Profesor profesor) {
+		this.profesor = profesor;
+	}
+
+
 
 	public Clase() {
 		super();
@@ -86,6 +97,7 @@ public class Clase {
 
 
 
+	/*
 	public Long getProfesor() {
 		return profesor;
 	}
@@ -95,7 +107,7 @@ public class Clase {
 	public void setProfesor(Long profesor) {
 		this.profesor = profesor;
 	}
-
+	*/
 
 
 	

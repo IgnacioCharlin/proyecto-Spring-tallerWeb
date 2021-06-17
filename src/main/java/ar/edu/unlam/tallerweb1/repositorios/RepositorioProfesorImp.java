@@ -41,4 +41,9 @@ public class RepositorioProfesorImp implements RepositorioProfesor {
 		.uniqueResult();
 	}
 
+	@Override
+	public void modificarProfesor(Profesor profesor) {
+		sessionFactory.getCurrentSession().update(profesor);
+	}
+
 }
