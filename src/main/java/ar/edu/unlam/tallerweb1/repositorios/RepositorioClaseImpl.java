@@ -1,6 +1,9 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -17,7 +20,6 @@ public class RepositorioClaseImpl implements RepositorioClase{
 	
 
 	private SessionFactory sessionFactory;
-	
 	@Autowired
 	public RepositorioClaseImpl(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
@@ -54,7 +56,10 @@ public class RepositorioClaseImpl implements RepositorioClase{
 
 	@Override
 	public List<Clase> buscarTodasLasClase() {
-		return sessionFactory.getCurrentSession().createCriteria(Clase.class).list();
+		String fechaHoy = LocalDate.now().toString();
+		return sessionFactory.getCurrentSession().createCriteria(Clase.class)
+				.add(Restrictions.ge("HorarioYFecha",fechaHoy))
+				.list();
 	}
 
 	@Override

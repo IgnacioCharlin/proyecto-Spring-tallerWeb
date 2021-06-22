@@ -23,7 +23,7 @@ public class ControladorClasesDisponibles {
 	public ControladorClasesDisponibles(ServicioClase servicioClase) {
 		this.servicioClase = servicioClase; 
 	}
-	
+	/*
 	@RequestMapping("clases-disponibles")
 	public ModelAndView irAClasesDisponibles(){
 		ModelMap model = new ModelMap();
@@ -32,4 +32,5 @@ public class ControladorClasesDisponibles {
 		model.addAttribute("clasesMap",clases);
 		return new ModelAndView("clases-disponibles",model);
 	}
+	*/
 }

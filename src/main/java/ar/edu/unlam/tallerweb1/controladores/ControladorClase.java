@@ -110,6 +110,15 @@ public class ControladorClase {
 		return new ModelAndView("home",model);
 	}
 	
+	@RequestMapping("clases-disponibles")
+	public ModelAndView irAClasesDisponibles(){
+		ModelMap model = new ModelMap();
+		Map<Clase, Clase> clasesMap = new HashMap<Clase, Clase>();
+		List<Clase> clases = servicioClase.consultarTodasLasClases();
+		model.addAttribute("clasesMap",clases);
+		return new ModelAndView("clases-disponibles",model);
+	}
+	
 	
 	private ModelAndView claseCargadaOk(ModelMap model) {
 		model.put("cargadaOk", true);

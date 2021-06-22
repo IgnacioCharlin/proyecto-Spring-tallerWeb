@@ -27,21 +27,12 @@ public class Clase {
 
 	@ManyToOne(optional = false , cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Profesor profesor;
-<<<<<<< HEAD
-
-	@ManyToMany(mappedBy = "clases")
-	private Set<Usuario> usuarios = new HashSet<Usuario>();
-	
-
-	public Clase(String nombre, String horarioYfecha, Profesor profesor, Long capacidad) {
-=======
 	
 	@ManyToMany(mappedBy = "clases")
 	private Set<Usuario> usuarios = new HashSet<Usuario>();
 	
 	public Clase(String nombre, String horarioYfecha, Profesor profesor, Long capacidad) {
 		super();
->>>>>>> cbcb6dd18f2d8bb3cdf70ac9010482d6142bef25
 		this.profesor = profesor;
 		this.nombre = nombre;
 		this.HorarioYFecha = horarioYfecha;
@@ -120,9 +111,6 @@ public class Clase {
 	public Long getProfesor() {
 		return profesor;
 	}
-
-
-
 	public void setProfesor(Long profesor) {
 		this.profesor = profesor;
 	}
