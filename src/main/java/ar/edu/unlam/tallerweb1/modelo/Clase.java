@@ -111,9 +111,6 @@ public class Clase {
 	public Long getProfesor() {
 		return profesor;
 	}
-
-
-
 	public void setProfesor(Long profesor) {
 		this.profesor = profesor;
 	}
