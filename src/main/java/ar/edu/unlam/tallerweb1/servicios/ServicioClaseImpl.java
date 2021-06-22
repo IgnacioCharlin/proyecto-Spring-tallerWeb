@@ -45,8 +45,9 @@ public class ServicioClaseImpl implements ServicioClase {
 		System.out.println(clase.getFechaYHora());
 		//recibir datos y guardar Clase claseclase -->repositorioClase.agregarClase()
 		//repositorioClase.buscarClasePorId();
+		String fechaYHora = clase.getFechaYHora().replace("T", " ");
 		Profesor profesor = repositorioProfesor.buscarProfesorPorId(clase.getIdProfesor());
-		Clase nuevaClase = new Clase(clase.getNombre(), clase.getFechaYHora(), profesor, clase.getCupo());
+		Clase nuevaClase = new Clase(clase.getNombre(), fechaYHora, profesor, clase.getCupo());
 		repositorioClase.guardarClase(nuevaClase);
 		return nuevaClase;
 	}
