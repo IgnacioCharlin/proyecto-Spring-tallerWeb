@@ -2,8 +2,14 @@ package ar.edu.unlam.tallerweb1.controladores;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
+
+
+import java.sql.Date;
+
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,25 +20,29 @@ import ar.edu.unlam.tallerweb1.excepciones.FaltaCupo;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoProfesor;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoUnaFecha;
 import ar.edu.unlam.tallerweb1.servicios.ServicioClase;
+import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
 
 
 public class ContoladorClaseTest {
 
-	private static final String FECHAYHORA = "miercoles 10hs";
+	private static final String FECHAYHORA = "2021,11,03";
 	private static final Long ID = 2l;
 	private final Long CUPO = 50L;
 	private final String NOMBRE = "Funcional";
-	private final String REDIRECT_CLASE = "redirect:/agregar-clase";
+	private final String REDIRECT_CLASE = "agregar-clase";
 	private final String REDIRECT_HOME = "redirect:/home";
 	ControladorClase controladorClase;
 	private ControladorInscibirseClases controladorInscribirse;
 	private ModelAndView mav;
 	private ServicioClase servicioClase;
+	private ServicioUsuario servicioUsuario;
 
 	@Before
 	public void init() {
 		servicioClase = mock(ServicioClase.class);
+		servicioUsuario = mock(ServicioUsuario.class);
 		controladorClase = new ControladorClase(servicioClase);
+		controladorInscribirse = new ControladorInscibirseClases(servicioClase, servicioUsuario);
 	}
 	/*
 	@Test
@@ -59,7 +69,7 @@ public class ContoladorClaseTest {
 		
 		thenElRegistroFalla("Falto cargar el profesor");
 	}
-	/*
+	
 	@Test
 	public void siLaClaseNoTieneCupoNoSeRegistra() {
 		DatosClase clase = givenDatosClaseSinCupo();
@@ -68,6 +78,7 @@ public class ContoladorClaseTest {
 		
 		thenElRegistroFalla("Falto cargar el cupo");
 	}
+	/*
 	
 	@Test
 	public void siLaClaseNoTieneFechaYHoraNoSeRegistra() {
@@ -78,9 +89,7 @@ public class ContoladorClaseTest {
 		thenElRegistroFalla("Falto cargar la hora y fecha");
 	}
 
-	*/
-
-	
+	*/	
 	@Test
 	public void queUnUsuarioPuedaInscribirseAUnaClase() {
 		Usuario usuario = gvenUnUsuario("jose@gmail.com");
@@ -92,19 +101,24 @@ public class ContoladorClaseTest {
 	}
 	
 	private void thenLaInscripcionEsExitosa() {
-		// TODO Auto-generated method stub
+		Mockito.verify(servicioUsuario, times(1)).actualizarUsuario(any());
 		
 	}
 
 	private void whenElUsiarioQuiereAnotarseAlaClase(Usuario usuario, Clase claseAInscribirse) {
-		mav = controladorInscribirse.inscribirseAunaClase(usuario, claseAInscribirse.getId());
+		ModelMap model = new ModelMap();
+				
+		when(servicioUsuario.consultarUsuarioPorId(usuario.getId())).thenReturn(usuario);
+		when(servicioClase.consultarClasePorId(claseAInscribirse.getId())).thenReturn(claseAInscribirse);
+		
+		mav = controladorInscribirse.confirmaInscripcion(claseAInscribirse.getId(),usuario.getId());
 		
 	}
 
 	private Clase givenClaseDisponible() {
 		Clase clase = new Clase();
 		clase.setCapacidad(CUPO);
-		clase.setHorarioYFecha(FECHAYHORA);
+		clase.setHorarioYFecha("abril 2, 2021 14:30:00 GMT");
 		clase.setNombre(NOMBRE);
 		//clase.setProfesor(ID);
 		return clase;

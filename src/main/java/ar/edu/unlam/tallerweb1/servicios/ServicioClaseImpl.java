@@ -46,7 +46,7 @@ public class ServicioClaseImpl implements ServicioClase {
 		//recibir datos y guardar Clase claseclase -->repositorioClase.agregarClase()
 		//repositorioClase.buscarClasePorId();
 		Profesor profesor = repositorioProfesor.buscarProfesorPorId(clase.getIdProfesor());
-		Clase nuevaClase = new Clase(clase.getNombre(), clase.getFechaYHora(), profesor, clase.getCupo());
+		Clase nuevaClase = new Clase(clase.getNombre(), clase.getFechaYHora().toString(), profesor, clase.getCupo());
 		repositorioClase.guardarClase(nuevaClase);
 		return nuevaClase;
 	}
@@ -88,7 +88,7 @@ public class ServicioClaseImpl implements ServicioClase {
 		final Clase claseBuscada = repositorioClase.buscarClasePorId(id);
 		Profesor profesor = repositorioProfesor.buscarProfesorPorId(datos.getIdProfesor());
 		claseBuscada.setCapacidad(datos.getCupo());
-		claseBuscada.setHorarioYFecha(datos.getFechaYHora());
+		claseBuscada.setHorarioYFecha(datos.getFechaYHora().toString());
 		claseBuscada.setNombre(datos.getNombre());
 		claseBuscada.setProfesor(profesor);
 		
