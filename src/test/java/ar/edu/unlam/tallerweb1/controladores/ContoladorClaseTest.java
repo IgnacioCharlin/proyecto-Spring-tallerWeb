@@ -44,7 +44,7 @@ public class ContoladorClaseTest {
 		controladorClase = new ControladorClase(servicioClase);
 		controladorInscribirse = new ControladorInscibirseClases(servicioClase, servicioUsuario);
 	}
-	/*
+	
 	@Test
 	public void queSePuedaRegistrarLaClase() {
 		DatosClase clase = givenSeCreaLaClase();
@@ -52,7 +52,7 @@ public class ContoladorClaseTest {
 		thenLaClaseSeCreoConExito();
 	}
 	
-
+	/*
 
 	@Test
 	public void siLaClaseExisteNoSePuedeRegistrar() {
@@ -78,7 +78,7 @@ public class ContoladorClaseTest {
 		
 		thenElRegistroFalla("Falto cargar el cupo");
 	}
-	/*
+	
 	
 	@Test
 	public void siLaClaseNoTieneFechaYHoraNoSeRegistra() {
@@ -88,8 +88,7 @@ public class ContoladorClaseTest {
 		
 		thenElRegistroFalla("Falto cargar la hora y fecha");
 	}
-
-	*/	
+	
 	@Test
 	public void queUnUsuarioPuedaInscribirseAUnaClase() {
 		Usuario usuario = gvenUnUsuario("jose@gmail.com");
@@ -136,7 +135,7 @@ public class ContoladorClaseTest {
 		clase.setCupo(CUPO);
 //		clase.setFechaYHora(FECHAYHORA);
 		clase.setNombre(NOMBRE);
-	//	clase.setIdProfesor(ID);
+		clase.setIdProfesor(ID);
 		return clase;
 	}
 	
@@ -207,6 +206,7 @@ public class ContoladorClaseTest {
 		clase.setCupo((CUPO));
 		clase.setFechaYHora(FECHAYHORA);
 		clase.setIdProfesor(ID);
+		
 		mav = controladorClase.registrarClase(clase);
 	}
 
