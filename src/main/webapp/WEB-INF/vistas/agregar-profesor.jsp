@@ -15,7 +15,7 @@
 
 
 	<form:form action="agregarProfesor" method="POST" 
-	modelAttribute="registrarProfesor">
+	modelAttribute="registrarProfesor" class="w-75 mx-auto mt-4">
 		<form:input path="email" id="email" type="mail"
 			class="form-control mb-2" placeholder="Ingresar email" />
 		<form:input path="password" id="password" type="password"
@@ -26,10 +26,11 @@
 		<c:if test="${not empty error}">
 			<div class="alert alert-danger mt-2" role="alert">${error}</div>
 		</c:if>
-
-		<button class="btn btn-lg btn-primary btn-block mt-2 w-100"
-			Type="Submit" />Agregar</button>
-
+		<div class="d-flex justify-content-around">
+			<a href="home" class="btn btn-lg btn-danger btn-block mt-2 w-25">Volver</a>
+			<button class="btn btn-lg btn-primary btn-block mt-2 w-25"
+				Type="Submit" />Agregar</button>
+		</div>
 	</form:form>
 
 

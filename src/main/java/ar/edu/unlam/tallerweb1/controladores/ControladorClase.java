@@ -44,7 +44,9 @@ public class ControladorClase {
 	public ModelAndView registrarClase(@ModelAttribute("registrarClase") DatosClase clase) {
 		ModelMap model = new ModelMap();
 		String error;
-		
+		String fecha = clase.getFechaYHora();
+		fecha = fecha.replace("T", " ");
+		System.out.println(fecha);
 		try {
 				servicioClase.agregarClase(clase);
 				return claseCargadaOk(model);

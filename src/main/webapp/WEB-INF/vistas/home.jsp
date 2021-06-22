@@ -18,7 +18,8 @@
 <body class="mw-100">
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-2 p-3 mb-2 bg-primary text-white">
+			<div class="d-flex flex-column col-2 p-3 mb-2 bg-primary text-white">
+				<a href="home" class="text-white text-decoration-none fw-bold">Home</a>
 				<a href="clases-disponibles" class="text-white text-decoration-none fw-bold">Clases Disponibles</a>
 				<a href="agregar-profesor" class="text-white text-decoration-none fw-bold">Agregar Profesor</a>
 			</div>
@@ -30,7 +31,7 @@
 
 
 						<c:forEach var="i" items="${clasesMap}">
-							<div class="card mx-auto mb-3" style="width: 18rem;">
+							<div class="card mx-auto mb-3 text-center" style="width: 18rem;">
 								<div class="card-body">
 									<h5 class="card-title">${i.nombre}</h5>
 								</div>
