@@ -71,8 +71,6 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 	}
 
 	
-<<<<<<< HEAD
+
 }
-=======
-}
->>>>>>> 902e334fc01fec5d6f99e51da526c199bd61338d
+
