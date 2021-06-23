@@ -39,7 +39,7 @@ public class Usuario {
 			joinColumns = @JoinColumn(name = "usuario_id"),
 			inverseJoinColumns = @JoinColumn(name = "clases_id")
 			)
-	private Set<Clase>  clases = new HashSet<Clase>();//helpers
+	private Set<Clase>  clases = new HashSet<Clase>();
 	
 	public Long getId() {
 		return id;
