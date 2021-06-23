@@ -91,8 +91,7 @@ public class RepositorioUsuarioTest extends SpringTest {
         thenLasCantidadDeClasesSonLasQueAsistio(usuario);
         
     }
-    
-<<<<<<< HEAD
+
     @Test @Transactional @Rollback
     public void queTraigaTodasLasClasesQueSeInscribioElAlumno(){
        Usuario usuario = givenTengoUnUsuarioConClases();
@@ -137,10 +136,7 @@ public class RepositorioUsuarioTest extends SpringTest {
     	repositorioClase.guardarClase(clase1);
     	return usuario;
     }
-=======
-    
->>>>>>> 902e334fc01fec5d6f99e51da526c199bd61338d
-    
+
 
 	private void thenLasCantidadDeClasesSonLasQueAsistio(Usuario usuario) {
 	Usuario historialClases =repositorioUsuario.buscarPorId(usuario.getId());
