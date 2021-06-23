@@ -24,6 +24,7 @@ public class RepositorioUsuarioTest extends SpringTest {
 	
     @Autowired
     private RepositorioUsuario repositorioUsuario;
+    
     @Autowired
     private RepositorioClase repositorioClase;
     
@@ -83,6 +84,15 @@ public class RepositorioUsuarioTest extends SpringTest {
     }
     
     @Test @Transactional @Rollback
+    public void queSePuedaListarLasClasesQueAsistioUnUsuario(){
+        Usuario usuario = givenCreoUnUsuario();
+        usuario = givenClasesQueAsisteUnUsuario(usuario);
+        whenElusuarioAsisteAUnaClase(usuario);
+        thenLasCantidadDeClasesSonLasQueAsistio(usuario);
+        
+    }
+    
+    @Test @Transactional @Rollback
     public void queTraigaTodasLasClasesQueSeInscribioElAlumno(){
        Usuario usuario = givenTengoUnUsuarioConClases();
        whenGuardoLasClasesAlUsuario(usuario);
@@ -90,43 +100,76 @@ public class RepositorioUsuarioTest extends SpringTest {
     }
 
 
-	private void thenTraeLasClasesInscriptas(String email) {
-		assertThat(repositorioUsuario.buscar(email)).isNotNull();
-		assertThat(repositorioUsuario.buscar(email).getClases()).hasSize(2);
-	}
+    private void thenTraeLasClasesInscriptas(String email) {
+    	assertThat(repositorioUsuario.buscar(email)).isNotNull();
+    	assertThat(repositorioUsuario.buscar(email).getClases()).hasSize(2);
+    }
 
-	private void whenGuardoLasClasesAlUsuario(Usuario usuario) {
-		List<Clase> clases = repositorioClase.buscarTodasLasClase();
-		for (Clase clase : clases) {
-			usuario.setClase(clase);
-		}
-		repositorioUsuario.guardar(usuario);
-	}
+    private void whenGuardoLasClasesAlUsuario(Usuario usuario) {
+    	List<Clase> clases = repositorioClase.buscarTodasLasClase();
+    	for (Clase clase : clases) {
+    		usuario.setClase(clase);
+    	}
+    	repositorioUsuario.guardar(usuario);
+    }
 
-	private Usuario givenTengoUnUsuarioConClases() {
-		String nombre = "Funcional";
-		String horarioYFecha ="2022-01-01";
-		long capacidad = 50L;
-		Profesor profesor = new Profesor();
-		Usuario usuario = givenCreoUnUsuario();
-		Clase clase1 = new Clase();
-		Clase clase2 = new Clase();
-		clase1.setId(1L);
-		clase1.setNombre(nombre);
-		clase1.setCapacidad(capacidad);
-		clase1.setHorarioYFecha(horarioYFecha);
-		clase1.setProfesor(profesor);
-		clase2.setId(2L);
-		clase2.setNombre(nombre+"asd");
-		clase2.setHorarioYFecha(horarioYFecha);
-		clase2.setCapacidad(capacidad);
-		clase2.setProfesor(profesor);
+    private Usuario givenTengoUnUsuarioConClases() {
+    	String nombre = "Funcional";
+    	String horarioYFecha ="2022-01-01";
+    	long capacidad = 50L;
+    	Profesor profesor = new Profesor();
+    	Usuario usuario = givenCreoUnUsuario();
+    	Clase clase1 = new Clase();
+    	Clase clase2 = new Clase();
+    	clase1.setId(1L);
+    	clase1.setNombre(nombre);
+    	clase1.setCapacidad(capacidad);
+    	clase1.setHorarioYFecha(horarioYFecha);
+    	clase1.setProfesor(profesor);
+    	clase2.setId(2L);
+    	clase2.setNombre(nombre+"asd");
+    	clase2.setHorarioYFecha(horarioYFecha);
+    	clase2.setCapacidad(capacidad);
+    	clase2.setProfesor(profesor);
+    	
+    	repositorioClase.guardarClase(clase2);
+    	repositorioClase.guardarClase(clase1);
+    	return usuario;
+    }
+    
+
+	private void thenLasCantidadDeClasesSonLasQueAsistio(Usuario usuario) {
+	Usuario historialClases =repositorioUsuario.buscarPorId(usuario.getId());
+	for (Clase asistida : historialClases.getClases()) {
+		System.out.println(asistida.getNombre());
 		
-		repositorioClase.guardarClase(clase2);
-		repositorioClase.guardarClase(clase1);
-		return usuario;
 	}
+		assertThat(historialClases.getClases().size()).isEqualTo(usuario.getClases().size());
+	}
+
+	private void whenElusuarioAsisteAUnaClase(Usuario usuario) {
+		repositorioUsuario.modificar(usuario);
+		
+	}
+
+	private Usuario givenClasesQueAsisteUnUsuario(Usuario usuario) {
+		Profesor carlos = new Profesor();
+		Clase funcional = new Clase("funcional","2021-06-23 20:30",carlos,50l);
+		Clase crossfit = new Clase("crossfit","2021-06-23 20:30",carlos,50l);
+		Clase pilates = new Clase("Pilates","2021-06-23 20:30",carlos,50l);
+		Clase musculacion = new Clase("Musculacion","2021-06-23 20:30",carlos,50l);
+		session().save(usuario);
+		session().save(musculacion);
+		session().save(funcional);
+		session().save(pilates);
+		session().save(crossfit);
 	
+		usuario.setClase(musculacion);
+		usuario.setClase(pilates);
+		usuario.setClase(funcional);
+		return usuario;
+		
+	}
 
 	private void whenGuardoUsuarioYLuegoLoElimino(Usuario usuario) {
 		repositorioUsuario.guardar(usuario);
@@ -181,3 +224,14 @@ public class RepositorioUsuarioTest extends SpringTest {
     	assertThat(repositorioUsuario.buscar(EMAIL)).isNotNull();
     }
 }
+
+
+
+
+
+
+
+
+
+
+

@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
+
 import java.util.List;
 
 import ar.edu.unlam.tallerweb1.modelo.Clase;
@@ -14,5 +15,5 @@ public interface RepositorioUsuario {
     void modificar(Usuario usuario);
 	void eliminar(Usuario usuario);
 	Usuario buscarPorId(Long idUsuario);
-	List<Clase>ClasesInscriptas(Usuario usuario);
+	
 }

@@ -17,8 +17,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class RepositorioUsuarioImpl implements RepositorioUsuario {
 
-	// Como todo repositorio maneja acciones de persistencia, normalmente estar√° inyectado el session factory de hibernate
-	// el mismo est√° difinido en el archivo hibernateContext.xml
+	// Como todo repositorio maneja acciones de persistencia, normalmente estar· inyectado el session factory de hibernate
+	// el mismo est· difinido en el archivo hibernateContext.xml
 	private SessionFactory sessionFactory;
 	
 	@Autowired
@@ -69,12 +69,6 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 				.add(Restrictions.eq("id", idUsuario))
 				.uniqueResult();
 	}
-	
-	@Override
-	public List<Clase> ClasesInscriptas(Usuario usuario) {
-		return (List<Clase>) sessionFactory.getCurrentSession().createCriteria(Usuario.class,"usuario")
-				.createAlias("usuario.id", "usuario_id")
-				.list();
-	}
 
+	
 }

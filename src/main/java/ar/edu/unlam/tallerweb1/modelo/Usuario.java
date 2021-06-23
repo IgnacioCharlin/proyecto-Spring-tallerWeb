@@ -15,7 +15,7 @@ import javax.persistence.Table;
 
 // Clase que modela el concepto de Usuario, la anotacion @Entity le avisa a hibernate que esta clase es persistible
 // el paquete ar.edu.unlam.tallerweb1.modelo esta indicado en el archivo hibernateCOntext.xml para que hibernate
-// busque entities en Ã©l
+// busque entities en él
 @Entity
 //Puede o no tener la anotacion table
 //@Table(name="USERS")
@@ -39,7 +39,7 @@ public class Usuario {
 			joinColumns = @JoinColumn(name = "usuario_id"),
 			inverseJoinColumns = @JoinColumn(name = "clases_id")
 			)
-	private Set<Clase>  clases = new HashSet<Clase>();//helpers
+	private Set<Clase>  clases = new HashSet<Clase>();
 	
 	public Long getId() {
 		return id;
