@@ -2,6 +2,9 @@ package ar.edu.unlam.tallerweb1.repositorios;
 
 import ar.edu.unlam.tallerweb1.modelo.Clase;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -65,6 +68,13 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 		return (Usuario) sessionFactory.getCurrentSession().createCriteria(Usuario.class)
 				.add(Restrictions.eq("id", idUsuario))
 				.uniqueResult();
+	}
+	
+	@Override
+	public List<Clase> ClasesInscriptas(Usuario usuario) {
+		return (List<Clase>) sessionFactory.getCurrentSession().createCriteria(Usuario.class,"usuario")
+				.createAlias("usuario.id", "usuario_id")
+				.list();
 	}
 
 }

@@ -21,6 +21,7 @@ public class RepositorioClaseTest extends SpringTest{
 	private final Profesor PROFESOR = givenCreoElProfesor();
 	//private Long PROFESOR =2L;
 	private final Clase CLASE = new Clase();
+	private final String FECHAYHORA = "2022-01-03";
 	
 	@Autowired
 	private RepositorioClase repositorioClase;
@@ -29,27 +30,27 @@ public class RepositorioClaseTest extends SpringTest{
 	@Test @Transactional @Rollback
 	public void queSiLaClaseNoExisteSePuedaGuardar() {
 		Profesor profesor = givenCreoElProfesor();
-		Clase clase = whenSeGuardanLosDatos(CLASE,NOMBRE_CLASE,CAPACIDAD,PROFESOR);
+		Clase clase = whenSeGuardanLosDatos(CLASE,NOMBRE_CLASE,CAPACIDAD,PROFESOR,FECHAYHORA);
 		thenSeRegistroConExito(clase);
 	}
 	
 	@Test @Transactional @Rollback
 	public void queSiLaClaseExisteNoSePuedaGuardar() {
 		Clase claseCopia =  new Clase();
-		Clase clase = whenSeGuardanLosDatos(CLASE,NOMBRE_CLASE,CAPACIDAD, PROFESOR);
-		Clase clase2 = whenSeGuardanLosDatos(claseCopia,NOMBRE_CLASE,CAPACIDAD, PROFESOR);
+		Clase clase = whenSeGuardanLosDatos(CLASE,NOMBRE_CLASE,CAPACIDAD, PROFESOR,FECHAYHORA);
+		Clase clase2 = whenSeGuardanLosDatos(claseCopia,NOMBRE_CLASE,CAPACIDAD, PROFESOR,FECHAYHORA);
 		thenSeNoSeRegistro(clase2);
 	}
 	
 	@Test @Transactional @Rollback
 	public void queBusqueLaClasePorElNombreYLaDevuelva() {
-		Clase claseBuscada = whenSeGuardanLosDatos(CLASE,NOMBRE_CLASE,CAPACIDAD, PROFESOR);
+		Clase claseBuscada = whenSeGuardanLosDatos(CLASE,NOMBRE_CLASE,CAPACIDAD, PROFESOR,FECHAYHORA);
 		thenDevuelveLaClase(claseBuscada.getNombre(),claseBuscada);
 	}
 	
 	@Test @Transactional @Rollback
 	public void queBusqueLaClasePorElNombreYNoExista() {
-		Clase clase = whenSeGuardanLosDatos(CLASE,NOMBRE_CLASE,CAPACIDAD, PROFESOR);
+		Clase clase = whenSeGuardanLosDatos(CLASE,NOMBRE_CLASE,CAPACIDAD, PROFESOR,FECHAYHORA);
 		Clase buscada = repositorioClase.buscarClase(clase.getNombre()+"asd");
 		thenNoDevuelveLaClase(buscada);
 	}
@@ -57,7 +58,7 @@ public class RepositorioClaseTest extends SpringTest{
 	@Test @Transactional @Rollback
 	public void queSePuedaModificarUnaClase() {
 		long nuevaCapacidad = 25;
-		Clase clase = whenSeGuardanLosDatos(CLASE,NOMBRE_CLASE,CAPACIDAD, PROFESOR);
+		Clase clase = whenSeGuardanLosDatos(CLASE,NOMBRE_CLASE,CAPACIDAD, PROFESOR,FECHAYHORA);
 		clase.setCapacidad(nuevaCapacidad);
 		repositorioClase.modificarClase(clase);
 		thenLaClaseSeModifico(clase,nuevaCapacidad);
@@ -65,7 +66,7 @@ public class RepositorioClaseTest extends SpringTest{
 	
 	@Test @Transactional @Rollback
 	public void queSePuedaEliminarUnaClase() {
-		Clase clase = whenSeGuardanLosDatos(CLASE,NOMBRE_CLASE,CAPACIDAD, PROFESOR);
+		Clase clase = whenSeGuardanLosDatos(CLASE,NOMBRE_CLASE,CAPACIDAD, PROFESOR,FECHAYHORA);
 		repositorioClase.eliminarClase(clase);
 		thenLaClaseSeElimino(clase);
 	}
@@ -73,8 +74,8 @@ public class RepositorioClaseTest extends SpringTest{
 	@Test @Transactional @Rollback
 	public void queSeTraiganTodasLasClases() {
 		Clase otraClase= new Clase();
-		Clase clase = whenSeGuardanLosDatos(CLASE,NOMBRE_CLASE,CAPACIDAD, PROFESOR);
-		Clase clase2 = whenSeGuardanLosDatos(otraClase,NOMBRE_CLASE+"asd",CAPACIDAD+10, PROFESOR);
+		Clase clase = whenSeGuardanLosDatos(CLASE,NOMBRE_CLASE,CAPACIDAD, PROFESOR,FECHAYHORA);
+		Clase clase2 = whenSeGuardanLosDatos(otraClase,NOMBRE_CLASE+"asd",CAPACIDAD+10, PROFESOR,FECHAYHORA);
 		List clasesList=repositorioClase.buscarTodasLasClase();
 		thenTraeTodasLasClases(clasesList);
 	}
@@ -86,9 +87,9 @@ public class RepositorioClaseTest extends SpringTest{
 		Clase clase1 = new Clase();
 		Clase clase2 = new Clase();
 		Clase clase3 = new Clase();
-		whenSeGuardanLosDatos(clase1, "Funcional", 50L,profesor);
-		whenSeGuardanLosDatos(clase2, "Zumba", 20L, profesor);
-		whenSeGuardanLosDatos(clase3, "Intensivo", 10L, profesor2);
+		whenSeGuardanLosDatos(clase1, "Funcional", 50L,profesor,FECHAYHORA);
+		whenSeGuardanLosDatos(clase2, "Zumba", 20L, profesor,FECHAYHORA);
+		whenSeGuardanLosDatos(clase3, "Intensivo", 10L, profesor2,FECHAYHORA);
 		List<Clase> clases = whenBuscoClasesConElProfesor(profesor);
 		thenMeTraeTodasLasClases(clases,2);
 		
@@ -136,11 +137,12 @@ public class RepositorioClaseTest extends SpringTest{
 		assertNull(clase);
 	}
 
-	private Clase whenSeGuardanLosDatos(Clase clase,String nombre, long capacidad,Profesor profesor) {
+	private Clase whenSeGuardanLosDatos(Clase clase,String nombre, long capacidad,Profesor profesor, String fechaYHora) {
 		if(repositorioClase.buscarClase(nombre)==null) {
 			clase.setNombre(nombre);
 			clase.setCapacidad(capacidad);
 			clase.setProfesor(profesor);
+			clase.setHorarioYFecha(fechaYHora);
 			repositorioClase.guardarClase(clase);
 			return clase;
 		}

@@ -20,7 +20,7 @@
 									<p class="card-text">${clase.getHorarioYFecha()}</p>
 									<p class="card-text">Con el profe: Seba</p>
 									<p class="card-text">Recomendaciones: trae tu botella de agua para hidratarte durante toda la clase...etc</p>						
-									<a class="btn btn-success text-white btn-block mt-2 w-50" href="/EnerGym/inscribirseclase/${clase.getId()}/1">Confirmar</a>
+									<a class="btn btn-success text-white btn-block mt-2 w-50" href="../inscribirseclase/${clase.getId()}/1">Confirmar</a>
 									<a href="../home" class="btn btn-danger btn-block mt-2 w-50"/>Volver</a>
 						</div>
 						

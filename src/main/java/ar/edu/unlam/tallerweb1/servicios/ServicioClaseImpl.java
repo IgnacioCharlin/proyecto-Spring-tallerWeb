@@ -2,7 +2,6 @@ package ar.edu.unlam.tallerweb1.servicios;
 
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,4 +104,3 @@ public class ServicioClaseImpl implements ServicioClase {
 		return repositorioClase.buscarClasePorProfesor(profesor);
 	}
 }
-

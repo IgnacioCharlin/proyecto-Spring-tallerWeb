@@ -53,7 +53,6 @@ public class ContoladorClaseTest {
 	}
 	
 	/*
-
 	@Test
 	public void siLaClaseExisteNoSePuedeRegistrar() {
 		DatosClase clase = givenSeCreaLaClase();

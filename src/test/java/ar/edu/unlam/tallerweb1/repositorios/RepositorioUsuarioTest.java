@@ -1,6 +1,8 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
 import ar.edu.unlam.tallerweb1.SpringTest;
+import ar.edu.unlam.tallerweb1.modelo.Clase;
+import ar.edu.unlam.tallerweb1.modelo.Profesor;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,8 @@ import javax.transaction.Transactional;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.List;
+
 public class RepositorioUsuarioTest extends SpringTest {
 	private final String EMAIL = "asd@asd.com";
 	private final String CONTRASEÑA="123";
@@ -20,6 +24,8 @@ public class RepositorioUsuarioTest extends SpringTest {
 	
     @Autowired
     private RepositorioUsuario repositorioUsuario;
+    @Autowired
+    private RepositorioClase repositorioClase;
     
     @Test @Transactional @Rollback
     public void queSePuedaAgregarUnUsuario() {
@@ -75,6 +81,52 @@ public class RepositorioUsuarioTest extends SpringTest {
         Usuario buscado = repositorioUsuario.buscar(EMAIL);
         thenElUsuarioNoExiste(buscado);
     }
+    
+    @Test @Transactional @Rollback
+    public void queTraigaTodasLasClasesQueSeInscribioElAlumno(){
+       Usuario usuario = givenTengoUnUsuarioConClases();
+       whenGuardoLasClasesAlUsuario(usuario);
+       thenTraeLasClasesInscriptas(usuario.getEmail());
+    }
+
+
+	private void thenTraeLasClasesInscriptas(String email) {
+		assertThat(repositorioUsuario.buscar(email)).isNotNull();
+		assertThat(repositorioUsuario.buscar(email).getClases()).hasSize(2);
+	}
+
+	private void whenGuardoLasClasesAlUsuario(Usuario usuario) {
+		List<Clase> clases = repositorioClase.buscarTodasLasClase();
+		for (Clase clase : clases) {
+			usuario.setClase(clase);
+		}
+		repositorioUsuario.guardar(usuario);
+	}
+
+	private Usuario givenTengoUnUsuarioConClases() {
+		String nombre = "Funcional";
+		String horarioYFecha ="2022-01-01";
+		long capacidad = 50L;
+		Profesor profesor = new Profesor();
+		Usuario usuario = givenCreoUnUsuario();
+		Clase clase1 = new Clase();
+		Clase clase2 = new Clase();
+		clase1.setId(1L);
+		clase1.setNombre(nombre);
+		clase1.setCapacidad(capacidad);
+		clase1.setHorarioYFecha(horarioYFecha);
+		clase1.setProfesor(profesor);
+		clase2.setId(2L);
+		clase2.setNombre(nombre+"asd");
+		clase2.setHorarioYFecha(horarioYFecha);
+		clase2.setCapacidad(capacidad);
+		clase2.setProfesor(profesor);
+		
+		repositorioClase.guardarClase(clase2);
+		repositorioClase.guardarClase(clase1);
+		return usuario;
+	}
+	
 
 	private void whenGuardoUsuarioYLuegoLoElimino(Usuario usuario) {
 		repositorioUsuario.guardar(usuario);

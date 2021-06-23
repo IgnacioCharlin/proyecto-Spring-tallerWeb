@@ -1,5 +1,8 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
+import java.util.List;
+
+import ar.edu.unlam.tallerweb1.modelo.Clase;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 
 // Interface que define los metodos del Repositorio de Usuarios.
@@ -11,4 +14,5 @@ public interface RepositorioUsuario {
     void modificar(Usuario usuario);
 	void eliminar(Usuario usuario);
 	Usuario buscarPorId(Long idUsuario);
+	List<Clase>ClasesInscriptas(Usuario usuario);
 }
