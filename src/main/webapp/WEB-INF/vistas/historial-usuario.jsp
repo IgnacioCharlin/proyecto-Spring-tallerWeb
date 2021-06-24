@@ -22,29 +22,26 @@
 				<a href="home" class="text-white text-decoration-none fw-bold">Home</a>
 				<a href="clases-disponibles" class="text-white text-decoration-none fw-bold">Clases Disponibles</a>
 				<a href="agregar-profesor" class="text-white text-decoration-none fw-bold">Agregar Profesor</a>
-				<a href="clases-inscriptas" class="text-white text-decoration-none fw-bold">Clases incriptas</a>
+				<a href="clases-inscriptas" class="text-white text-decoration-none fw-bold">Clases inscriptas</a>
 			</div>
+			
 			<div class="col-10">
 				<div class="container">
-					<h1 class="display-5 text-center">Bienvenidos a Taller Web 1</h1>
-					<a href="agregar-clase" class="btn btn-success">Agregar Clase</a>
 					<main class="mt-4 d-flex flex-wrap">
-
+						<h1 class="display-5 text-center col-12 mb-5">Clases inscriptas</h1>
 
 						<c:forEach var="i" items="${clasesMap}">
 							<div class="card mx-auto mb-3 text-center" style="width: 18rem;">
 								<div class="card-body">
 									<h5 class="card-title">${i.nombre}</h5>
 								</div>
-								<div class="card-body">
+								<div class="card-body ">
 									<p class="card-text">${i.getHorarioYFecha()}</p>
 									<p class="card-text">Capacidad: ${i.capacidad}</p>
-									<a class="btn btn-warning text-white" href="modificar/${i.id}">Modificar</a>
-									<a class="btn btn-danger" href="eliminar/${i.id}">Eliminar</a>
+									<a class="btn btn-success text-white w-100" href="inscribirseclase/${i.id}">Inscribirse</a>
 								</div>
 							</div>
 						</c:forEach>
-
 					</main>
 				</div>
 			</div>

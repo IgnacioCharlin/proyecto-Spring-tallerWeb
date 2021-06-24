@@ -4,9 +4,7 @@ import ar.edu.unlam.tallerweb1.excepciones.ClavesNoCoinciden;
 import ar.edu.unlam.tallerweb1.excepciones.UsuarioNoExiste;
 import ar.edu.unlam.tallerweb1.modelo.DatosRegistro;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
-import ar.edu.unlam.tallerweb1.servicios.ServicioClase;
 import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -26,7 +24,7 @@ public class ControladorLogin {
 	// dicha clase debe estar anotada como @Service o @Repository y debe estar en un paquete de los indicados en
 	// applicationContext.xml
 	private ServicioUsuario servicioUsuario;
-	private ServicioClase servicioClase;
+	
 
 	@Autowired
 	public ControladorLogin(ServicioUsuario servicioLogin){
