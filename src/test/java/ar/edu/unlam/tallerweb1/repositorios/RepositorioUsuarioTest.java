@@ -1,4 +1,4 @@
-/*package ar.edu.unlam.tallerweb1.repositorios;
+package ar.edu.unlam.tallerweb1.repositorios;
 
 import ar.edu.unlam.tallerweb1.SpringTest;
 import ar.edu.unlam.tallerweb1.modelo.Clase;
@@ -225,7 +225,6 @@ public class RepositorioUsuarioTest extends SpringTest {
     }
 }
 
-*/
 
 
 

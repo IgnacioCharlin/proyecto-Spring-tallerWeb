@@ -41,6 +41,7 @@ public class ControladorInscibirseClases {
 	public ModelAndView confirmaInscripcion(@PathVariable("idUsuario")Long idUsuario, @PathVariable("id") Long id) {
 		
 		Clase buscadaAInscribirse = servicioClase.consultarClasePorId(id);
+				
 		Usuario usuarioAinscribirse = servicioUsuario.consultarUsuarioPorId(idUsuario);
 		ModelMap model = new ModelMap();
 		

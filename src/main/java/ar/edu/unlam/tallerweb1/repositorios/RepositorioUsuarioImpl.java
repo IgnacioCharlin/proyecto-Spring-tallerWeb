@@ -70,5 +70,10 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 				.uniqueResult();
 	}
 
+<<<<<<< HEAD
+=======
+	
+
+>>>>>>> 70c97fdfe12b01e9ce1e457c252494ea5bcdbcab
 }
 

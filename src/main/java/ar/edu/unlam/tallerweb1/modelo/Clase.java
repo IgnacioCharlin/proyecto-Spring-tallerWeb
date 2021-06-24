@@ -45,8 +45,6 @@ public class Clase {
 		return profesor;
 	}
 
-
-
 	public void setProfesor(Profesor profesor) {
 		this.profesor = profesor;
 	}

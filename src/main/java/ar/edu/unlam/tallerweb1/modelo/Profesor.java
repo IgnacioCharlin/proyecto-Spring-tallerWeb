@@ -11,17 +11,17 @@ public class Profesor {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long Id;
 		
 	private String email;
 	private String password;
 	private String rol;
 	
 	public Long getId() {
-		return id;
+		return Id;
 	}
 	public void setId(Long id) {
-		this.id = id;
+		this.Id = id;
 	}
 	public String getEmail() {
 		return email;
