@@ -22,6 +22,7 @@
 				<a href="home" class="text-white text-decoration-none fw-bold">Home</a>
 				<a href="clases-disponibles" class="text-white text-decoration-none fw-bold">Clases Disponibles</a>
 				<a href="agregar-profesor" class="text-white text-decoration-none fw-bold">Agregar Profesor</a>
+				<a href="clases-inscriptas" class="text-white text-decoration-none fw-bold">Clases incriptas</a>
 			</div>
 			
 			<div class="col-10">

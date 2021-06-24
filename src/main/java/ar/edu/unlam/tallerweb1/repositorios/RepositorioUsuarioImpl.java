@@ -54,7 +54,7 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 
 	@Override
 	public void modificar(Usuario usuario) {
-		sessionFactory.getCurrentSession().update(usuario);
+		sessionFactory.getCurrentSession().merge(usuario);
 	}
 
 	@Override
@@ -70,10 +70,5 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 				.uniqueResult();
 	}
 
-<<<<<<< HEAD
-=======
-	
-
->>>>>>> 70c97fdfe12b01e9ce1e457c252494ea5bcdbcab
 }
 

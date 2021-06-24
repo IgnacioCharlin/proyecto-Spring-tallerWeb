@@ -25,7 +25,7 @@ public class Clase {
 	private	Long capacidad;
 	private String HorarioYFecha;
 
-	@ManyToOne(optional = false , cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(optional = false , cascade = {CascadeType.PERSIST,CascadeType.REMOVE}, fetch = FetchType.EAGER)
 	private Profesor profesor;
 	
 	@ManyToMany(mappedBy = "clases")
