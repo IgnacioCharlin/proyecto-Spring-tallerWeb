@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.excepciones.FaltaCupo;
+import ar.edu.unlam.tallerweb1.excepciones.FechaYaPaso;
 import ar.edu.unlam.tallerweb1.excepciones.NoEsProfesor;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoProfesor;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoUnaFecha;
@@ -21,7 +23,7 @@ import ar.edu.unlam.tallerweb1.repositorios.RepositorioProfesor;
 @Service("servicioClase")
 @Transactional
 public class ServicioClaseImpl implements ServicioClase {
-	
+	private String fechaHoy = LocalDate.now().toString();
 	private RepositorioClase repositorioClase;
 	private RepositorioProfesor repositorioProfesor;
 	
@@ -33,6 +35,8 @@ public class ServicioClaseImpl implements ServicioClase {
 	
 	@Override
 	public Clase agregarClase(DatosClase clase) {
+		String fechaYHora = clase.getFechaYHora().replace("T", " ");
+		String fechaClase = fechaYHora.substring(0, 10);
 		if(clase.getFechaYHora() == null)
 			throw new NoSeCargoUnaFecha();
 		if( clase.getCupo() == null ||clase.getCupo() <= 0 )
@@ -41,10 +45,11 @@ public class ServicioClaseImpl implements ServicioClase {
 			throw new NoSeCargoProfesor();
 		if(repositorioProfesor.buscarProfesorPorId(clase.getIdProfesor()) == null)
 			throw new NoEsProfesor();
+		if(fechaClase.compareTo(fechaHoy) == -1) 
+			throw new FechaYaPaso();
+		
 		System.out.println(clase.getFechaYHora());
-		//recibir datos y guardar Clase claseclase -->repositorioClase.agregarClase()
-		//repositorioClase.buscarClasePorId();
-		String fechaYHora = clase.getFechaYHora().replace("T", " ");
+		
 		Profesor profesor = repositorioProfesor.buscarProfesorPorId(clase.getIdProfesor());
 
 		Clase nuevaClase = new Clase(clase.getNombre(), fechaYHora, profesor, clase.getCupo());

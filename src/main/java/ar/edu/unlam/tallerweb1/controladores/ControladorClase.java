@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.excepciones.FaltaCupo;
+import ar.edu.unlam.tallerweb1.excepciones.FechaYaPaso;
 import ar.edu.unlam.tallerweb1.excepciones.NoEsProfesor;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoProfesor;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoUnaFecha;
@@ -44,9 +45,6 @@ public class ControladorClase {
 	public ModelAndView registrarClase(@ModelAttribute("registrarClase") DatosClase clase) {
 		ModelMap model = new ModelMap();
 		String error;
-//		String fecha = clase.getFechaYHora();
-//		fecha = fecha.replace("T", " ");
-//		System.out.println(fecha);
 		try {
 				servicioClase.agregarClase(clase);
 				return claseCargadaOk(model);
@@ -59,6 +57,8 @@ public class ControladorClase {
 			error = "Falto cargar la hora y fecha";
 		}catch (NoEsProfesor e) {
 			error = "No existe ese profesor";
+		}catch (FechaYaPaso e) {
+			error = "Fecha pasada";
 		}
 		
 		return registrarClaseError(model, error);
