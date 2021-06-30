@@ -18,8 +18,6 @@ public class RepositorioClaseTest extends SpringTest{
 
 	private final String NOMBRE_CLASE = "funcional";
 	private final long CAPACIDAD=10;
-	private final Profesor PROFESOR = givenCreoElProfesor();
-	//private Long PROFESOR =2L;
 	private final Clase CLASE = new Clase();
 	private final String FECHAYHORA = "2022-01-03";
 	
@@ -30,27 +28,30 @@ public class RepositorioClaseTest extends SpringTest{
 	@Test @Transactional @Rollback
 	public void queSiLaClaseNoExisteSePuedaGuardar() {
 		Profesor profesor = givenCreoElProfesor();
-		Clase clase = whenSeGuardanLosDatos(CLASE,NOMBRE_CLASE,CAPACIDAD,PROFESOR,FECHAYHORA);
+		Clase clase = whenSeGuardanLosDatos(CLASE,NOMBRE_CLASE,CAPACIDAD,profesor,FECHAYHORA);
 		thenSeRegistroConExito(clase);
 	}
 	
 	@Test @Transactional @Rollback
 	public void queSiLaClaseExisteNoSePuedaGuardar() {
+		Profesor profesor = givenCreoElProfesor();
 		Clase claseCopia =  new Clase();
-		Clase clase = whenSeGuardanLosDatos(CLASE,NOMBRE_CLASE,CAPACIDAD, PROFESOR,FECHAYHORA);
-		Clase clase2 = whenSeGuardanLosDatos(claseCopia,NOMBRE_CLASE,CAPACIDAD, PROFESOR,FECHAYHORA);
+		Clase clase = whenSeGuardanLosDatos(CLASE,NOMBRE_CLASE,CAPACIDAD, profesor,FECHAYHORA);
+		Clase clase2 = whenSeGuardanLosDatos(claseCopia,NOMBRE_CLASE,CAPACIDAD, profesor,FECHAYHORA);
 		thenSeNoSeRegistro(clase2);
 	}
 	
 	@Test @Transactional @Rollback
 	public void queBusqueLaClasePorElNombreYLaDevuelva() {
-		Clase claseBuscada = whenSeGuardanLosDatos(CLASE,NOMBRE_CLASE,CAPACIDAD, PROFESOR,FECHAYHORA);
+		Profesor profesor = givenCreoElProfesor();
+		Clase claseBuscada = whenSeGuardanLosDatos(CLASE,NOMBRE_CLASE,CAPACIDAD, profesor,FECHAYHORA);
 		thenDevuelveLaClase(claseBuscada.getNombre(),claseBuscada);
 	}
 	
 	@Test @Transactional @Rollback
 	public void queBusqueLaClasePorElNombreYNoExista() {
-		Clase clase = whenSeGuardanLosDatos(CLASE,NOMBRE_CLASE,CAPACIDAD, PROFESOR,FECHAYHORA);
+		Profesor profesor = givenCreoElProfesor();
+		Clase clase = whenSeGuardanLosDatos(CLASE,NOMBRE_CLASE,CAPACIDAD, profesor,FECHAYHORA);
 		Clase buscada = repositorioClase.buscarClase(clase.getNombre()+"asd");
 		thenNoDevuelveLaClase(buscada);
 	}
@@ -58,7 +59,8 @@ public class RepositorioClaseTest extends SpringTest{
 	@Test @Transactional @Rollback
 	public void queSePuedaModificarUnaClase() {
 		long nuevaCapacidad = 25;
-		Clase clase = whenSeGuardanLosDatos(CLASE,NOMBRE_CLASE,CAPACIDAD, PROFESOR,FECHAYHORA);
+		Profesor profesor = givenCreoElProfesor();
+		Clase clase = whenSeGuardanLosDatos(CLASE,NOMBRE_CLASE,CAPACIDAD, profesor,FECHAYHORA);
 		clase.setCapacidad(nuevaCapacidad);
 		repositorioClase.modificarClase(clase);
 		thenLaClaseSeModifico(clase,nuevaCapacidad);
@@ -66,7 +68,8 @@ public class RepositorioClaseTest extends SpringTest{
 	
 	@Test @Transactional @Rollback
 	public void queSePuedaEliminarUnaClase() {
-		Clase clase = whenSeGuardanLosDatos(CLASE,NOMBRE_CLASE,CAPACIDAD, PROFESOR,FECHAYHORA);
+		Profesor profesor = givenCreoElProfesor();
+		Clase clase = whenSeGuardanLosDatos(CLASE,NOMBRE_CLASE,CAPACIDAD, profesor,FECHAYHORA);
 		repositorioClase.eliminarClase(clase);
 		thenLaClaseSeElimino(clase);
 	}
@@ -74,8 +77,9 @@ public class RepositorioClaseTest extends SpringTest{
 	@Test @Transactional @Rollback
 	public void queSeTraiganTodasLasClases() {
 		Clase otraClase= new Clase();
-		Clase clase = whenSeGuardanLosDatos(CLASE,NOMBRE_CLASE,CAPACIDAD, PROFESOR,FECHAYHORA);
-		Clase clase2 = whenSeGuardanLosDatos(otraClase,NOMBRE_CLASE+"asd",CAPACIDAD+10, PROFESOR,FECHAYHORA);
+		Profesor profesor = givenCreoElProfesor();
+		Clase clase = whenSeGuardanLosDatos(CLASE,NOMBRE_CLASE,CAPACIDAD, profesor,FECHAYHORA);
+		Clase clase2 = whenSeGuardanLosDatos(otraClase,NOMBRE_CLASE+"asd",CAPACIDAD+10, profesor,FECHAYHORA);
 		List clasesList=repositorioClase.buscarTodasLasClase();
 		thenTraeTodasLasClases(clasesList);
 	}
@@ -99,6 +103,7 @@ public class RepositorioClaseTest extends SpringTest{
 		String emailProfesor= "asd@asd.com";
 		Profesor profesor = new Profesor();
 		profesor.setEmail(emailProfesor);
+		session().save(profesor);
 		return profesor;
 	}
 	
