@@ -6,9 +6,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -76,10 +78,37 @@ public class RepositorioClaseImpl implements RepositorioClase{
 				.list();
 	}
 	
+<<<<<<< HEAD
 	@Override
 	public List<Clase> filtrarClasesPorFecha(String fechaDesde, String fechaHasta) {
 		return sessionFactory.getCurrentSession().createCriteria(Clase.class)
 		.add(Restrictions.between("HorarioYFecha", fechaDesde, fechaHasta))
 		.list();
 	}
+=======
+	
+	@Override
+	public List<Clase> dameClasesConDisponibilidad() {
+		String fechaHoy = LocalDate.now().toString();
+
+		String where =" clase.HorarioYFecha >='"+fechaHoy+"'";
+   
+		SQLQuery query =	sessionFactory.getCurrentSession().createSQLQuery(""
+				+ " SELECT clase.*,count(clases_inscriptas.usuario_id) as inscriptos"
+				+ " FROM `clase`  "
+				+ " LEFT join clases_inscriptas on clases_inscriptas.clases_id=clase.id "
+				+ " where"
+				+ where + ""
+			    + " GROUP by (clase.id) "
+			    + " HAVING clase.capacidad>count(clases_inscriptas.usuario_id)"
+ 			    )
+				;
+		
+ 			query.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+ return query.list();
+ 		
+ 
+ 	} 
+	
+>>>>>>> db4922b1a1225ec8476fbf850b2cbb3ed84b9770
 }

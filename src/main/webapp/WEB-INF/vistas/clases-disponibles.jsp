@@ -44,9 +44,16 @@
 									<h5 class="card-title">${i.nombre}</h5>
 								</div>
 								<div class="card-body">
-									<p class="card-text">${i.getHorarioYFecha()}</p>
+									<p class="card-text">${i.HorarioYFecha}</p>
 									<p class="card-text">Capacidad: ${i.capacidad}</p>
-									<a class="btn btn-success text-white w-100" href="inscribirseclase/${i.id}">Inscribirse</a>
+									<p class="card-text">Inscriptos: ${i.inscriptos}</p> 
+									<p class="card-text">Disponibilidad: ${i.capacidad - i.inscriptos}</p>
+									
+									
+									   <c:if test="${ i.capacidad>i.inscriptos}">
+										<a class="btn btn-success text-white w-100" href="inscribirseclase/${i.id}">Inscribirse</a>
+  									  </c:if>
+    
 								</div>
 							</div>
 						</c:forEach>
