@@ -14,7 +14,21 @@
 	crossorigin="anonymous">
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<style>
+    .formulario{
+    display: inline;
+    width: 33%;
+    float: left;
+    }
+    </style>
 </head>
+
+	<c:set  value='<%= session.getAttribute("idUsuario") %>' var="idUsuario"  /> 
+  <c:if test="${empty idUsuario}">
+  <c:set  value="0" var="idUsuario"  />
+  </c:if>	
+  
 <body class="mw-100">
 	<div class="container-fluid">
 		<div class="row">
@@ -31,6 +45,8 @@
 						<h1 class="display-5 text-center col-12 mb-5">Clases inscriptas</h1>
 
 						<c:forEach var="i" items="${clasesMap}">
+						  <c:set  value="0" var="estrellas"  />
+						
 							<div class="card mx-auto mb-3 text-center" style="width: 18rem;">
 								<div class="card-body">
 									<h5 class="card-title">${i.nombre}</h5>
@@ -38,8 +54,43 @@
 								<div class="card-body ">
 									<p class="card-text">${i.getHorarioYFecha()}</p>
 									<p class="card-text">Capacidad: ${i.capacidad}</p>
+							
+								
+								
+							<c:forEach var="calificacion" items="${calificaciones}">
+							  <c:if test="${calificacion.clase.id==i.id}">
+  						 	  <c:set  value="${calificacion.calificacion}" var="estrellas"  />
+							  </c:if>  
+							</c:forEach>
+							
+	
+<c:forEach begin="1" step="1" end="3" var="estrella"> 
+		<form action="/EnerGym/agregarCalificacion/${i.id}/${idUsuario}/${estrella}" class="formulario">
+		
+		<c:if test="${estrellas>=estrella}">			
+		<input title="boton enviar" alt="Completa" src="/EnerGym/images/estrellaCompleta.png" type="image" />
+ 		</c:if> 
+		<c:if test="${estrellas<estrella}">			
+		<input title="boton enviar" alt="Vacia" src="/EnerGym/images/estrellaVacia.png" type="image" />
+		</c:if> 
+		
+		</form> 
+		
+</c:forEach>
+
+	
+	  
+	  
+	  
+	 
 								</div>
 							</div>
+							
+							
+				
+							
+							
+							
 						</c:forEach>
 					</main>
 				</div>
