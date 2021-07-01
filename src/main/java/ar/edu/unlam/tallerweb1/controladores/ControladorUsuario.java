@@ -35,6 +35,10 @@ private ServicioCalificar servicioCalificar;
 	
 	@RequestMapping(path = "/clases-inscriptas/{idUsuario}", method = RequestMethod.GET)
 	public ModelAndView verClasesInscriptas(@PathVariable Integer idUsuario) {
+		
+		
+	 	if (idUsuario!=0) {  
+	 	
 		Map<Clase, Clase> clasesMap = new HashMap<Clase, Clase>();
 		ModelMap model = new ModelMap();
 		Set<Clase> clases = servicioUsuario.consultarUsuarioPorId((long)idUsuario).getClases();
@@ -43,6 +47,11 @@ private ServicioCalificar servicioCalificar;
 		model.addAttribute("clasesMap",clases);
 		model.addAttribute("calificaciones",calificaciones);
 		return new ModelAndView("historial-usuario",model);
+		
+	 	}else {
+	   		 return new ModelAndView("redirect:/login");
+	   		}
+	 	
 	}
 
 }
