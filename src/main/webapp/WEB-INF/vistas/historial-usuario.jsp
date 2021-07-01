@@ -68,10 +68,10 @@
 		<form action="/EnerGym/agregarCalificacion/${i.id}/${idUsuario}/${estrella}" class="formulario">
 		
 		<c:if test="${estrellas>=estrella}">			
-		<input title="boton enviar" alt="Completa" src="/EnerGym/images/estrellaCompleta.png" type="image" />
+		<input title="boton enviar" alt="Completa" src="/EnerGym/images/estrellaComleta.png" type="image" style=" width: 50px;"/>
  		</c:if> 
 		<c:if test="${estrellas<estrella}">			
-		<input title="boton enviar" alt="Vacia" src="/EnerGym/images/estrellaVacia.png" type="image" />
+		<input title="boton enviar" alt="Vacia"    src="/EnerGym/images/estrellaVacia.png" type="image" style=" width: 50px;"/>
 		</c:if> 
 		
 		</form> 
