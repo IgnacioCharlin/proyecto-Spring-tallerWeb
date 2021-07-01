@@ -52,7 +52,7 @@ public class ControladorCalificar {
 		 
 		   	 	if (idUsuario!=0) { 
 		   	 	servicioCalificar.agregarCalificacion((long)idUsuario,(long)idClase,calificacion); 
-		   	 	return new ModelAndView("redirect:/clases-inscriptas");
+		   	 	return new ModelAndView("redirect:/clases-inscriptas/"+idUsuario+"");
 		   		}else {
 		   		 return new ModelAndView("redirect:/login");
 		   		}

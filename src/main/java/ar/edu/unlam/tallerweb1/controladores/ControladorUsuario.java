@@ -7,6 +7,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -32,12 +33,12 @@ private ServicioCalificar servicioCalificar;
 	}
 	
 	
-	@RequestMapping(path = "/clases-inscriptas", method = RequestMethod.GET)
-	public ModelAndView verClasesInscriptas() {
+	@RequestMapping(path = "/clases-inscriptas/{idUsuario}", method = RequestMethod.GET)
+	public ModelAndView verClasesInscriptas(@PathVariable Integer idUsuario) {
 		Map<Clase, Clase> clasesMap = new HashMap<Clase, Clase>();
 		ModelMap model = new ModelMap();
-		Set<Clase> clases = servicioUsuario.consultarUsuarioPorId((long)1).getClases();
-		List<CalificacionClase> calificaciones = servicioCalificar.consultarPorIdUsuario((long)1);
+		Set<Clase> clases = servicioUsuario.consultarUsuarioPorId((long)idUsuario).getClases();
+		List<CalificacionClase> calificaciones = servicioCalificar.consultarPorIdUsuario((long)idUsuario);
 
 		model.addAttribute("clasesMap",clases);
 		model.addAttribute("calificaciones",calificaciones);

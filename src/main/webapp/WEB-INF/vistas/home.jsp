@@ -14,6 +14,12 @@
 	crossorigin="anonymous">
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<c:set  value='<%= session.getAttribute("idUsuario") %>' var="idUsuario"  /> 
+  <c:if test="${empty idUsuario}">
+  <c:set  value="0" var="idUsuario"  />
+  </c:if>	
+  
 </head>
 <body class="mw-100">
 	<div class="container-fluid">
@@ -22,7 +28,7 @@
 				<a href="home" class="text-white text-decoration-none fw-bold">Home</a>
 				<a href="clases-disponibles" class="text-white text-decoration-none fw-bold">Clases Disponibles</a>
 				<a href="agregar-profesor" class="text-white text-decoration-none fw-bold">Agregar Profesor</a>
-				<a href="clases-inscriptas" class="text-white text-decoration-none fw-bold">Clases incriptas</a>
+				<a href="clases-inscriptas/${idUsuario}" class="text-white text-decoration-none fw-bold">Clases incriptas</a>
 			</div>
 			<div class="col-10">
 				<div class="container">
