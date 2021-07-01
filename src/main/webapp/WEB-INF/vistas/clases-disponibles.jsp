@@ -1,5 +1,4 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,16 +27,17 @@
 			</div>
 			<div class="col-10">
 				<div class="container">
-				<form:form action="filtrarClases" method="POST" modelAttribute="filtrarClase">
-	
-					<form:input path="desde" id="desde" type="datetime-local" class="form-control mb-2" />
-					<form:input path="hasta" id="hasta" type="datetime-local" class="form-control mb-2" />
-		
-					<button class="btn btn-lg btn-primary btn-block mt-2 w-100" Type="Submit" />Buscar</button>
-		
-				</form:form>
+				
 					<main class="mt-4 d-flex flex-wrap">
 						<h1 class="display-5 text-center col-12 mb-5">Clases disponibles</h1>
+						
+						<div class="col-9 mx-auto">
+						<form class="d-flex" action="/proyecto-limpio-spring/buscar-platos/${idUsuario}">
+			 					<input type="date" name="desde" class="form-control">
+			 					<input type="date" name="hasta" class="form-control">
+			 					<input type="submit" value="Buscar" class="btn btn-success w-100 mt-4"> 
+			 			</form>
+			 			</div>
 						<c:forEach var="i" items="${clasesMap}">
 							<div class="card mx-auto mb-3 text-center" style="width: 18rem;">
 								<div class="card-body">

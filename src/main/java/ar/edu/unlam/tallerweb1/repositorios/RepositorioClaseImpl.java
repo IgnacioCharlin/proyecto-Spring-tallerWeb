@@ -78,14 +78,13 @@ public class RepositorioClaseImpl implements RepositorioClase{
 				.list();
 	}
 	
-<<<<<<< HEAD
 	@Override
 	public List<Clase> filtrarClasesPorFecha(String fechaDesde, String fechaHasta) {
 		return sessionFactory.getCurrentSession().createCriteria(Clase.class)
 		.add(Restrictions.between("HorarioYFecha", fechaDesde, fechaHasta))
 		.list();
 	}
-=======
+
 	
 	@Override
 	public List<Clase> dameClasesConDisponibilidad() {
@@ -109,6 +108,4 @@ public class RepositorioClaseImpl implements RepositorioClase{
  		
  
  	} 
-	
->>>>>>> db4922b1a1225ec8476fbf850b2cbb3ed84b9770
 }

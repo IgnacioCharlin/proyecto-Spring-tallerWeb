@@ -37,7 +37,7 @@
 									<h5 class="card-title">${i.nombre}</h5>
 								</div>
 								<div class="card-body">
-									<p class="card-text">${i.getHorarioYFecha()}</p>
+									<p class="card-text">${i.HorarioYFecha}</p>
 									<p class="card-text">Capacidad: ${i.capacidad}</p>
 									<a class="btn btn-warning text-white" href="modificar/${i.id}">Modificar</a>
 									<a class="btn btn-danger" href="eliminar/${i.id}">Eliminar</a>

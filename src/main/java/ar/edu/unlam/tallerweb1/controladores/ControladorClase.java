@@ -121,12 +121,6 @@ public class ControladorClase {
 		return new ModelAndView("clases-disponibles",model);
 	}
 	
-	@RequestMapping(path = "/filtrarClases", method = RequestMethod.POST)
-	public ModelAndView filtrarClase(@ModelAttribute("filtrarClase") DatosClase clase) {
-		ModelMap model = new ModelMap();
-		return new ModelAndView("agregar-clase", model);
-	}
-	
 	
 	private ModelAndView claseCargadaOk(ModelMap model) {
 		model.put("cargadaOk", true);
