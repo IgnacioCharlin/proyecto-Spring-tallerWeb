@@ -80,9 +80,28 @@ public class RepositorioClaseImpl implements RepositorioClase{
 	
 	@Override
 	public List<Clase> filtrarClasesPorFecha(String fechaDesde, String fechaHasta) {
-		return sessionFactory.getCurrentSession().createCriteria(Clase.class)
+		
+
+		String where =" clase.HorarioYFecha between '" +fechaDesde+ "' and '"+fechaHasta+"'";
+   
+		SQLQuery query =	sessionFactory.getCurrentSession().createSQLQuery(""
+				+ " SELECT clase.*,count(clases_inscriptas.usuario_id) as inscriptos"
+				+ " FROM `clase`  "
+				+ " LEFT join clases_inscriptas on clases_inscriptas.clases_id=clase.id "
+				+ " where"
+				+ where + ""
+			    + " GROUP by (clase.id) "
+			    + " HAVING clase.capacidad>count(clases_inscriptas.usuario_id)"
+ 			    )
+				;
+		
+ 			query.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+ return query.list();
+		
+		/*return sessionFactory.getCurrentSession().createCriteria(Clase.class)
 		.add(Restrictions.between("HorarioYFecha", fechaDesde, fechaHasta))
 		.list();
+		*/
 	}
 
 	

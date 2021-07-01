@@ -47,12 +47,15 @@ public class ServicioClaseTest {
 
 	@Test(expected = NoSeCargoUnaFecha.class)
 	public void siUnaClaseNoTieneFechaLanzaUnaExcepcion() {
-		DatosClase clase = givenClaseNueva();
-		
-		 whenRegistroLaClase(clase);
-		
-		thenLaClaseNoSeCarga();
+		DatosClase claseSinFecha = CLASE;
+		claseSinFecha.setFechaYHora(null);
+		whenRegistroElProfesorQueNoExisteSeGuarda();
+		Clase claseRegistrada = whenRegistroLaClaseConProfesor(claseSinFecha);
+		claseRegistrada.setHorarioYFecha(null);
+		thenLaSeGuardoLaClase(claseRegistrada);
 	}
+
+
 	@Test(expected = FaltaCupo.class)
 	public void siUnaClaseNoTieneCupoLanzaUnaExcepcion() {
 		DatosClase clase = givenClaseNuevaSinCupo();
@@ -82,7 +85,7 @@ public class ServicioClaseTest {
 		Clase claseRegistrada = whenRegistroLaClaseConProfesor(CLASE);
 		thenLaSeGuardoLaClase(claseRegistrada);
 	}
-	
+
 	private Clase whenRegistroLaClaseConProfesor(DatosClase clase) {
 		when(repositorioClase.buscarClase(clase.getNombre())).thenReturn(null);
 		when(repositorioProfesor.buscarProfesorPorId(clase.getIdProfesor())).thenReturn(profesor);
@@ -122,7 +125,7 @@ public class ServicioClaseTest {
 	private DatosClase givenCreoUnaClase(Profesor profesor) {
 		DatosClase datos = new DatosClase();
 		datos.setNombre("Funcional");
-		datos.setFechaYHora("Miercoles 10hs");
+		datos.setFechaYHora("2021-01-01");
 		datos.setCupo(10l);
 		datos.setIdProfesor(profesor.getId());;
 		return datos;
@@ -134,9 +137,13 @@ public class ServicioClaseTest {
 
 
 	private void thenTraeTodasLasClases() {
+		Clase clase1= new Clase();
+		Clase clase2 = new Clase();
+		clase1.setCapacidad(10L);
+		clase2.setCapacidad(20L);
 		List<Clase> clase = new ArrayList<>();
-		clase.add(new Clase());
-		clase.add(new Clase());
+		clase.add(clase1);
+		clase.add(clase2);
 		when(repositorioClase.buscarTodasLasClase()).thenReturn(clase);
 		List<Clase> clases = servicio.consultarTodasLasClases();
 		assertEquals(2, clases.size());
@@ -175,6 +182,7 @@ public class ServicioClaseTest {
 		DatosClase nueva = new DatosClase();
 		nueva.setNombre("Funcional");
 		nueva.setCupo(20l);
+		nueva.setIdProfesor(1L);
 		return nueva;
 	}
 	private void seteandoIdProfesor() {
