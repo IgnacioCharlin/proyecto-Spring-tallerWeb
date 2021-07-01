@@ -67,7 +67,8 @@ public class ServicioClaseImpl implements ServicioClase {
 	@Override
 	public List<Clase> consultarTodasLasClases() {
 		List<Clase> clases = new ArrayList<Clase>();
-		clases.addAll(repositorioClase.buscarTodasLasClase());
+		//clases.addAll(repositorioClase.buscarTodasLasClase());
+		clases.addAll(repositorioClase.dameClasesConDisponibilidad());
 		return clases;
 	}
 
