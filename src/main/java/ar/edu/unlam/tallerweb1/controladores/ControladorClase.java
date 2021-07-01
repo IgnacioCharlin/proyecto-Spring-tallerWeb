@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.excepciones.FaltaCupo;
@@ -120,6 +121,16 @@ public class ControladorClase {
 		model.addAttribute("clasesMap",clases);
 		return new ModelAndView("clases-disponibles",model);
 	}
+	
+	@RequestMapping(path = "filtar-clase" , method = RequestMethod.GET)
+	public ModelAndView buscoClasePorFechas(@RequestParam("desde") String desde,@RequestParam("hasta") String hasta) {
+		ModelMap model = new ModelMap();
+		Map<Clase, Clase> clasesMap = new HashMap<Clase, Clase>();
+		List<Clase> clases = servicioClase.consultarClasePorFiltroFecha(desde, hasta);
+		
+		model.addAttribute("clasesMap",clases);
+		return new ModelAndView("clases-disponibles",model);
+    }
 	
 	
 	private ModelAndView claseCargadaOk(ModelMap model) {

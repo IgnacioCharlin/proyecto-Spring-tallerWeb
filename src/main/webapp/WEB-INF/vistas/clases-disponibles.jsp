@@ -31,11 +31,21 @@
 					<main class="mt-4 d-flex flex-wrap">
 						<h1 class="display-5 text-center col-12 mb-5">Clases disponibles</h1>
 						
-						<div class="col-9 mx-auto">
-						<form class="d-flex" action="/proyecto-limpio-spring/buscar-platos/${idUsuario}">
-			 					<input type="date" name="desde" class="form-control">
-			 					<input type="date" name="hasta" class="form-control">
-			 					<input type="submit" value="Buscar" class="btn btn-success w-100 mt-4"> 
+						<div class="col-12">
+						<form class="d-flex col-6 mx-auto flex-column mb-4" action="filtar-clase">
+			 					<div class="d-flex flex-row justify-content-between">
+			 						<div class="col-4">
+			 							<label id="desde" class="text-secondary">Desde</label>
+			 							<input type="date" name="desde" class="form-control">
+			 						</div>
+			 						<div class="col-4">
+			 							<label id="hasta" class="text-secondary">Hasta</label>
+			 							<input type="date" name="hasta" class="form-control">
+			 						</div>
+			 					</div>
+			 					<div class="">
+			 						<input type="submit" value="Buscar" class="btn btn-primary w-100 mt-4"> 
+			 					</div>
 			 			</form>
 			 			</div>
 						<c:forEach var="i" items="${clasesMap}">

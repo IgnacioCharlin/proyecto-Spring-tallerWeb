@@ -15,7 +15,6 @@ public interface RepositorioClase {
 	List<Clase> buscarTodasLasClase();
 	List<Clase> buscarClasePorProfesor(Profesor profesor);
 	List<Clase> filtrarClasesPorFecha(String fechaDesde , String fechaHasta);
-
 	List<Clase> dameClasesConDisponibilidad();
 
 }

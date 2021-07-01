@@ -35,8 +35,6 @@ public class ServicioClaseImpl implements ServicioClase {
 	
 	@Override
 	public Clase agregarClase(DatosClase clase) {
-		String fechaYHora = clase.getFechaYHora().replace("T", " ");
-		String fechaClase = fechaYHora.substring(0, 10);
 		if(clase.getFechaYHora() == null)
 			throw new NoSeCargoUnaFecha();
 		if( clase.getCupo() == null ||clase.getCupo() <= 0 )
@@ -45,6 +43,9 @@ public class ServicioClaseImpl implements ServicioClase {
 			throw new NoSeCargoProfesor();
 		if(repositorioProfesor.buscarProfesorPorId(clase.getIdProfesor()) == null)
 			throw new NoEsProfesor();
+		
+		String fechaYHora = clase.getFechaYHora().replace("T", " ");
+		String fechaClase = fechaYHora.substring(0, 10);
 		if(fechaClase.compareTo(fechaHoy) == -1) 
 			throw new FechaYaPaso();
 		
@@ -67,7 +68,6 @@ public class ServicioClaseImpl implements ServicioClase {
 	@Override
 	public List<Clase> consultarTodasLasClases() {
 		List<Clase> clases = new ArrayList<Clase>();
-		//clases.addAll(repositorioClase.buscarTodasLasClase());
 		clases.addAll(repositorioClase.dameClasesConDisponibilidad());
 		return clases;
 	}
@@ -108,5 +108,10 @@ public class ServicioClaseImpl implements ServicioClase {
 	public List<Clase> consultarClasesPorIdProfesor(long id) {
 		Profesor profesor = repositorioProfesor.buscarProfesorPorId(id);
 		return repositorioClase.buscarClasePorProfesor(profesor);
+	}
+
+	@Override
+	public List<Clase> consultarClasePorFiltroFecha(String desde, String hasta) {
+		return repositorioClase.filtrarClasesPorFecha(desde, hasta);
 	}
 }
