@@ -10,7 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 
 import javax.persistence.ManyToOne;
@@ -24,8 +24,11 @@ public class Clase {
 	private String nombre;
 	private	Long capacidad;
 	private String HorarioYFecha;
-
+	private String desde;
+	private String hasta;
+	
 	@ManyToOne(optional = false , cascade = {CascadeType.PERSIST,CascadeType.REMOVE}, fetch = FetchType.EAGER)
+	@JoinColumn(name="PROFESOR_ID", nullable=false)
 	private Profesor profesor;
 	
 	@ManyToMany(mappedBy = "clases")
@@ -124,6 +127,32 @@ public class Clase {
 	public void setUsuarios(Set<Usuario> usuarios) {
 		this.usuarios = usuarios;
 	}
+
+
+
+	public String getDesde() {
+		return desde;
+	}
+
+
+
+	public void setDesde(String desde) {
+		this.desde = desde;
+	}
+
+
+
+	public String getHasta() {
+		return hasta;
+	}
+
+
+
+	public void setHasta(String hasta) {
+		this.hasta = hasta;
+	}
+	
+	
 
 
 

@@ -14,5 +14,6 @@ public interface RepositorioClase {
 	void eliminarClase(Clase clase);
 	List<Clase> buscarTodasLasClase();
 	List<Clase> buscarClasePorProfesor(Profesor profesor);
+	List<Clase> filtrarClasesPorFecha(String fechaDesde , String fechaHasta);
 }
 

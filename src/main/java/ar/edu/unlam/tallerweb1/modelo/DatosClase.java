@@ -12,9 +12,23 @@ public class DatosClase {
     //private Profesor profesor;	
     private Long idProfesor;
     private Long cupo;
+    private String desde;
+    private String hasta;
 	
     
-    public String getNombre() {
+    public String getDesde() {
+		return desde;
+	}
+	public void setDesde(String desde) {
+		this.desde = desde;
+	}
+	public String getHasta() {
+		return hasta;
+	}
+	public void setHasta(String hasta) {
+		this.hasta = hasta;
+	}
+	public String getNombre() {
 		return nombre;
 	}
 	public void setNombre(String nombre) {

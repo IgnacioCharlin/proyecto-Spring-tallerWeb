@@ -45,15 +45,10 @@ public class ControladorInscibirseClases {
 		Usuario usuarioAinscribirse = servicioUsuario.consultarUsuarioPorId(idUsuario);
 		ModelMap model = new ModelMap();
 		
-		
-		
 			usuarioAinscribirse.setClase(buscadaAInscribirse);
 			servicioUsuario.actualizarUsuario(usuarioAinscribirse);
-		
 		
 		return new ModelAndView("redirect:/home", model);
 		
 	}
-	
-
 }
