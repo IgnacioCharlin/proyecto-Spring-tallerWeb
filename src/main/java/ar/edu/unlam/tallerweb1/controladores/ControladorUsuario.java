@@ -14,7 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.modelo.CalificacionClase;
 import ar.edu.unlam.tallerweb1.modelo.Clase;
+import ar.edu.unlam.tallerweb1.modelo.ClasesInscriptas;
 import ar.edu.unlam.tallerweb1.servicios.ServicioCalificar;
+import ar.edu.unlam.tallerweb1.servicios.ServicioInscribirse;
 import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
 
 @Controller
@@ -23,12 +25,14 @@ public class ControladorUsuario {
 	
 private ServicioUsuario servicioUsuario;
 private ServicioCalificar servicioCalificar;
+private ServicioInscribirse servicioInscribirse;
 
 
 	@Autowired
-	public ControladorUsuario(ServicioUsuario servicioLogin,ServicioCalificar servicioCalificar){
+	public ControladorUsuario(ServicioInscribirse servicioInscribirse,ServicioUsuario servicioLogin,ServicioCalificar servicioCalificar){
 		this.servicioUsuario = servicioLogin;
 		this.servicioCalificar = servicioCalificar;
+		this.servicioInscribirse = servicioInscribirse;
 		
 	}
 	
@@ -41,7 +45,9 @@ private ServicioCalificar servicioCalificar;
 	 	
 		Map<Clase, Clase> clasesMap = new HashMap<Clase, Clase>();
 		ModelMap model = new ModelMap();
-		Set<Clase> clases = servicioUsuario.consultarUsuarioPorId((long)idUsuario).getClases();
+	//	Set<Clase> clases = servicioUsuario.consultarUsuarioPorId((long)idUsuario).getClases();
+		
+		List<ClasesInscriptas> clases = servicioInscribirse.consultarUsuarioPorId((long)idUsuario);
 		List<CalificacionClase> calificaciones = servicioCalificar.consultarPorIdUsuario((long)idUsuario);
 
 		model.addAttribute("clasesMap",clases);

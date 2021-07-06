@@ -73,8 +73,8 @@ public class RepositorioAsistenciaImpl implements RepositorioAsistencia{
 	public AsistenciaClase buscarPorUsuarioYClase(Usuario usuario, Clase clase, Integer presente) {
 	    final Session session = this.sessionFactory.getCurrentSession();
 	    return (AsistenciaClase) session.createCriteria(AsistenciaClase.class)
-	           .add( Restrictions.eq("usuario", usuario ) )
-		       .add( Restrictions.eq("clase", clase ) )
+	           .add( Restrictions.eq("usuario.id", usuario.getId() ) )
+		       .add( Restrictions.eq("clase.id", clase.getId() ) )
 	           .add( Restrictions.eq("presente", presente ) )
 	           .uniqueResult();
 	}

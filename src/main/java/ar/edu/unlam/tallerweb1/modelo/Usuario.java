@@ -32,7 +32,7 @@ public class Usuario {
 	private String email;
 	private String password;
 	private String rol;
-	
+	/*
 	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	@JoinTable(
 			name="clases_inscriptas",
@@ -40,6 +40,7 @@ public class Usuario {
 			inverseJoinColumns = @JoinColumn(name = "clase_id")
 			)
 	private Set<Clase>  clases = new HashSet<Clase>();
+	*/
 	
 	public Long getId() {
 		return id;
@@ -67,11 +68,11 @@ public class Usuario {
 	public void setRol(String rol) {
 		this.rol = rol;
 	}
-	
+	/*
 	public void setClase(Clase clase) {
 		this.clases.add(clase);
 	}
 	public Set<Clase> getClases() {
 		return clases;
-	}
+	}*/
 }

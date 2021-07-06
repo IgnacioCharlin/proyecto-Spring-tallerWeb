@@ -22,30 +22,53 @@ import javax.persistence.Table;
 @Table(name = "clases_inscriptas")
 public class ClasesInscriptas{
  
-    @Column(name = "usuario_id")
-	private Integer usuario; 
 	@Id
-    @Column(name = "clase_id")
- 	private Integer clase; 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	 
+
+    public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	@ManyToOne
+    @JoinColumn(name = "id_usuario")
+	private Usuario usuario; 
+   
+    @ManyToOne
+    @JoinColumn(name = "id_clase")
+ 	private Clase clase; 
 	
  
-	public Integer getUsuario() {
+  
+	public Usuario getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(Integer usuario) {
+	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
 
-	public Integer getClase() {
+	public Clase getClase() {
 		return clase;
 	}
 
-	public void setClase(Integer clase) {
+	public void setClase(Clase clase) {
 		this.clase = clase;
 	}
 
-  
+ 
+	public ClasesInscriptas(){}
+ 
+    public ClasesInscriptas(Usuario idUsuario,Clase idClase){
+		this.usuario = idUsuario;
+		this.clase = idClase;
+ 
+	}	 
 
 
 	

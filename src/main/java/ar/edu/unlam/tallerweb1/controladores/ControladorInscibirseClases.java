@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.modelo.Clase;
+import ar.edu.unlam.tallerweb1.modelo.ClasesInscriptas;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioAsistencia;
 import ar.edu.unlam.tallerweb1.servicios.ServicioClase;
+import ar.edu.unlam.tallerweb1.servicios.ServicioInscribirse;
 import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
 
 @Controller
@@ -21,12 +23,14 @@ public class ControladorInscibirseClases {
 	private ServicioUsuario servicioUsuario;
 	private ServicioClase servicioClase;
 	private ServicioAsistencia servicioAsistencia;
+	private ServicioInscribirse servicioInscribirse;
 	
 	@Autowired
-	public ControladorInscibirseClases(ServicioClase servicioClase, ServicioUsuario servicioUsuario, ServicioAsistencia servicioAsistencia) {
+	public ControladorInscibirseClases(ServicioInscribirse servicioInscribirse,ServicioClase servicioClase, ServicioUsuario servicioUsuario, ServicioAsistencia servicioAsistencia) {
 		this.servicioClase = servicioClase;
 		this.servicioUsuario = servicioUsuario;
 		this.servicioAsistencia = servicioAsistencia;
+		this.servicioInscribirse = servicioInscribirse;
 	}
 	
 	
@@ -48,9 +52,14 @@ public class ControladorInscibirseClases {
 		Usuario usuarioAinscribirse = servicioUsuario.consultarUsuarioPorId(idUsuario);
 		ModelMap model = new ModelMap();
 		
-			usuarioAinscribirse.setClase(buscadaAInscribirse);
-			servicioUsuario.actualizarUsuario(usuarioAinscribirse);
+			//usuarioAinscribirse.setClase(buscadaAInscribirse);
+			//servicioUsuario.actualizarUsuario(usuarioAinscribirse);
+		ClasesInscriptas clasesInscripta=servicioInscribirse.buscarInscripcion(buscadaAInscribirse,usuarioAinscribirse);
+		if(clasesInscripta == null) {
+			servicioInscribirse.guardarInscripcion(buscadaAInscribirse,usuarioAinscribirse);
 			servicioAsistencia.actualizarAsistencia(buscadaAInscribirse,usuarioAinscribirse);
+		}
+		
 		return new ModelAndView("redirect:/home", model);
 		
 	}

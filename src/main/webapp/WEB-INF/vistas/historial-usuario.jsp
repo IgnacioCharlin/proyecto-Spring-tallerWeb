@@ -48,23 +48,23 @@
 						
 							<div class="card mx-auto mb-3 text-center" style="width: 18rem;">
 								<div class="card-body">
-									<h5 class="card-title">${i.nombre}</h5>
+									<h5 class="card-title">${i.clase.nombre}</h5>
 								</div>
 								<div class="card-body ">
-									<p class="card-text">${i.getHorarioYFecha()}</p>
-									<p class="card-text">Capacidad: ${i.capacidad}</p>
+									<p class="card-text">${i.clase.getHorarioYFecha()}</p>
+									<p class="card-text">Capacidad: ${i.clase.capacidad}</p>
 							
 								
 								
 							<c:forEach var="calificacion" items="${calificaciones}">
-							  <c:if test="${calificacion.clase.id==i.id}">
+							  <c:if test="${calificacion.clase.id==i.clase.id}">
   						 	  <c:set  value="${calificacion.calificacion}" var="estrellas"  />
 							  </c:if>  
 							</c:forEach>
 							
 	
 <c:forEach begin="1" step="1" end="3" var="estrella"> 
-		<form action="/EnerGym/agregarCalificacion/${i.id}/${idUsuario}/${estrella}" class="formulario">
+		<form action="/EnerGym/agregarCalificacion/${i.clase.id}/${idUsuario}/${estrella}" class="formulario">
 		
 		<c:if test="${estrellas>=estrella}">			
 		<input title="boton enviar" alt="Completa" src="/EnerGym/images/estrellaComleta.png" type="image" style=" width: 50px;"/>

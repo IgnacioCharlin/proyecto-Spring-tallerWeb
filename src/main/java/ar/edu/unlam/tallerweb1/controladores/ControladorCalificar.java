@@ -63,7 +63,9 @@ public class ControladorCalificar {
 		   	 	
 				Clase clase = servicioClase.consultarClasePorId((long)idClase);
 				Usuario usuario = servicioUsuario.consultarUsuarioPorId((long)idUsuario); 
-		   	 	AsistenciaClase tieneAsistencia= servicioAsistencia.consultarAsistenciaPorClaseYusuario(clase,usuario,1);
+				Integer alumnoPresente = 1;
+		   	 	AsistenciaClase tieneAsistencia= servicioAsistencia.consultarAsistenciaPorClaseYusuario(clase,usuario,alumnoPresente);
+		   
 
 		   	 	if(tieneAsistencia!=null) { 
 			   	 	servicioCalificar.agregarCalificacion((long)idUsuario,(long)idClase,calificacion); 

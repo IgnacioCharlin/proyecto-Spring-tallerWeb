@@ -17,4 +17,5 @@ public interface ServicioClase {
 	void modificarClase(Long id,DatosClase datos);
 	List<Clase> consultarClasesPorIdProfesor(long id);
 	List<Clase> consultarClasePorFiltroFecha(String desde, String hasta);
+	Clase buscarClaseId(Long id);
 }

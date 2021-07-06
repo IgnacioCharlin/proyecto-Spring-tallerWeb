@@ -43,6 +43,14 @@ public class AsistenciaClase {
 		this.presente = presente;
 	}
 
+	public Long getId_asistencia_clases() {
+		return id_asistencia_clases;
+	}
+
+	public void setId_asistencia_clases(Long id_asistencia_clases) {
+		this.id_asistencia_clases = id_asistencia_clases;
+	}
+
 	public Usuario getUsuario() {
 		return usuario;
 	}

@@ -85,13 +85,13 @@ public class RepositorioClaseImpl implements RepositorioClase{
 		String where =" clase.HorarioYFecha between '" +fechaDesde+ "' and '"+fechaHasta+"'";
    
 		SQLQuery query =	sessionFactory.getCurrentSession().createSQLQuery(""
-				+ " SELECT clase.*,count(clases_inscriptas.usuario_id) as inscriptos"
+				+ " SELECT clase.*,count(clases_inscriptas.id_usuario) as inscriptos"
 				+ " FROM `clase`  "
-				+ " LEFT join clases_inscriptas on clases_inscriptas.clase_id=clase.id "
+				+ " LEFT join clases_inscriptas on clases_inscriptas.id_clase=clase.id "
 				+ " where"
 				+ where + ""
 			    + " GROUP by (clase.id) "
-			    + " HAVING clase.capacidad>count(clases_inscriptas.usuario_id)"
+			    + " HAVING clase.capacidad>count(clases_inscriptas.id_usuario)"
  			    )
 				;
 		
@@ -112,13 +112,13 @@ public class RepositorioClaseImpl implements RepositorioClase{
 		String where =" clase.HorarioYFecha >='"+fechaHoy+"'";
    
 		SQLQuery query =	sessionFactory.getCurrentSession().createSQLQuery(""
-				+ " SELECT clase.*,count(clases_inscriptas.usuario_id) as inscriptos"
+				+ " SELECT clase.*,count(clases_inscriptas.id_usuario) as inscriptos"
 				+ " FROM `clase`  "
-				+ " LEFT join clases_inscriptas on clases_inscriptas.clase_id=clase.id "
+				+ " LEFT join clases_inscriptas on clases_inscriptas.id_clase=clase.id "
 				+ " where"
 				+ where + ""
 			    + " GROUP by (clase.id) "
-			    + " HAVING clase.capacidad>count(clases_inscriptas.usuario_id)"
+			 //   + " HAVING clase.capacidad>count(clases_inscriptas.id_usuario)"
  			    )
 				;
 		

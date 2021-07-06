@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ar.edu.unlam.tallerweb1.excepciones.ClaseInvalida;
 import ar.edu.unlam.tallerweb1.excepciones.FaltaCupo;
 import ar.edu.unlam.tallerweb1.excepciones.FechaYaPaso;
 import ar.edu.unlam.tallerweb1.excepciones.NoEsProfesor;
@@ -113,5 +114,21 @@ public class ServicioClaseImpl implements ServicioClase {
 	@Override
 	public List<Clase> consultarClasePorFiltroFecha(String desde, String hasta) {
 		return repositorioClase.filtrarClasesPorFecha(desde, hasta);
+	}
+	
+	
+	
+	@Override
+	public Clase buscarClaseId(Long id) {
+		if(id==0 || id==null) {
+			throw new ClaseInvalida();  
+		}
+		Clase claseBuscada = repositorioClase.buscarClasePorId(id);
+		
+		  if (claseBuscada == null) {
+			  throw new ClaseInvalida();  
+		}
+		
+		return claseBuscada;
 	}
 }

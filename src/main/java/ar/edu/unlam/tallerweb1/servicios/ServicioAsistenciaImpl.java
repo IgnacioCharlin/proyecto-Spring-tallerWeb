@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ar.edu.unlam.tallerweb1.excepciones.ClaseInvalida;
 import ar.edu.unlam.tallerweb1.excepciones.FaltaCupo;
 import ar.edu.unlam.tallerweb1.excepciones.FechaYaPaso;
 import ar.edu.unlam.tallerweb1.excepciones.NoEsProfesor;
@@ -65,8 +66,8 @@ public class ServicioAsistenciaImpl implements ServicioAsistencia{
 	@Override
 	public List<AsistenciaClase> consultarAsistenciaPorClase(Clase clase ) {
 		List<AsistenciaClase> clases = new ArrayList<AsistenciaClase>();
-		clases.addAll(repositorioAsistencia.dameAsistenciaPorClase(clase));
-		return clases;
+		clases.addAll(repositorioAsistencia.dameAsistenciaPorClase(clase)); 
+ 		return clases; 
 		
 	}
 	

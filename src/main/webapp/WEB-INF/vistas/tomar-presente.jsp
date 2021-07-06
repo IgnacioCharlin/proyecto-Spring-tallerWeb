@@ -46,6 +46,15 @@
 								</div>
 								
 								<div class="card-body">
+								
+								
+		 <c:if test="${not empty msj}">
+                <div class="alert alert-warning" role="alert">
+                    <p>${msj}</p>
+                </div>
+            </c:if>	
+            
+            
 								<table>
 							<tr>
 							<td>Alumno</td>

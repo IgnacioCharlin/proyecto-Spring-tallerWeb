@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unlam.tallerweb1.excepciones.ClaseInvalida;
 import ar.edu.unlam.tallerweb1.excepciones.FaltaCupo;
 import ar.edu.unlam.tallerweb1.excepciones.FechaYaPaso;
 import ar.edu.unlam.tallerweb1.excepciones.NoEsProfesor;
@@ -50,22 +51,40 @@ public class ControladorAsistencia{
 	public ModelAndView tomarPresente(@PathVariable Integer idClase,@PathVariable Integer idUsuario) {
         ModelMap model = new ModelMap(); 
 		 
-   	 	if (idUsuario!=0) { 
-   		Clase clase = servicioClase.consultarClasePorId((long)idClase);
-   		List<AsistenciaClase> asistencia = servicioAsistencia.consultarAsistenciaPorClase(clase);
-  
-		model.addAttribute("asistencia",asistencia);
+        try {
+		   	 	if (idUsuario!=0) { 
+		   		Clase clase = servicioClase.buscarClaseId((long)idClase);
+		   		List<AsistenciaClase> asistencia = servicioAsistencia.consultarAsistenciaPorClase(clase);
+		  	
+		   		
+		   			if(asistencia.size()==0) { 
+		   	            model.put("msj","Esta clase no contiene alumnos.");         
+		   			}else {  
+		   				model.addAttribute("asistencia",asistencia);
+		   				return new ModelAndView("tomar-presente",model); 
+		   			}
+		   		}else {
+		      		 return new ModelAndView("redirect:/login");
+		      	}
+        }
+        catch(ClaseInvalida e){
+            model.put("msj","Debe ingresar una clase valida.");         
 
-        return new ModelAndView("tomar-presente",model); 
-        
-   		}else {
-      		 return new ModelAndView("redirect:/login");
-      	}
-   	 	
+        	
+        } 
+		return new ModelAndView("tomar-presente",model); 
+
 	 
     }
     
-    
+    /*
+     * 		if(clases.size()>0) {
+		return clases;
+		}else {
+		throw new ClaseSinAlumnos();  	
+		}
+		
+		*/
     
     @RequestMapping(path = "guardarAsistencia/{idClase}/{idUsuario}" , method = RequestMethod.GET)
 	public ModelAndView guardarAsistencia(@PathVariable Integer idClase,@PathVariable Integer idUsuario) {
