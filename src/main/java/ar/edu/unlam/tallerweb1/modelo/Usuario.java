@@ -37,7 +37,7 @@ public class Usuario {
 	@JoinTable(
 			name="clases_inscriptas",
 			joinColumns = @JoinColumn(name = "usuario_id"),
-			inverseJoinColumns = @JoinColumn(name = "clases_id")
+			inverseJoinColumns = @JoinColumn(name = "clase_id")
 			)
 	private Set<Clase>  clases = new HashSet<Clase>();
 	

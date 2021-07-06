@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.modelo.Clase;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.servicios.ServicioAsistencia;
 import ar.edu.unlam.tallerweb1.servicios.ServicioClase;
 import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
 
@@ -19,11 +20,13 @@ public class ControladorInscibirseClases {
 	
 	private ServicioUsuario servicioUsuario;
 	private ServicioClase servicioClase;
+	private ServicioAsistencia servicioAsistencia;
 	
 	@Autowired
-	public ControladorInscibirseClases(ServicioClase servicioClase, ServicioUsuario servicioUsuario) {
+	public ControladorInscibirseClases(ServicioClase servicioClase, ServicioUsuario servicioUsuario, ServicioAsistencia servicioAsistencia) {
 		this.servicioClase = servicioClase;
 		this.servicioUsuario = servicioUsuario;
+		this.servicioAsistencia = servicioAsistencia;
 	}
 	
 	
@@ -47,7 +50,7 @@ public class ControladorInscibirseClases {
 		
 			usuarioAinscribirse.setClase(buscadaAInscribirse);
 			servicioUsuario.actualizarUsuario(usuarioAinscribirse);
-		
+			servicioAsistencia.actualizarAsistencia(buscadaAInscribirse,usuarioAinscribirse);
 		return new ModelAndView("redirect:/home", model);
 		
 	}

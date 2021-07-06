@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,51 +31,60 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
 
 
 @Controller
-public class ControladorCalificar {
-	private ServicioCalificar servicioCalificar;
+public class ControladorAsistencia{
 	private ServicioAsistencia servicioAsistencia;
-	private ServicioClase servicioClase;
 	private ServicioUsuario servicioUsuario;
+	private ServicioClase servicioClase;
+
     private ModelAndView mav; 
 
 	@Autowired
-	public ControladorCalificar(ServicioUsuario servicioUsuario,ServicioClase servicioClase,ServicioCalificar servicioCalificar,ServicioAsistencia servicioAsistencia) {
-		this.servicioCalificar = servicioCalificar;
+	public ControladorAsistencia(ServicioAsistencia servicioAsistencia,ServicioUsuario servicioUsuario,ServicioClase servicioClase) {
 		this.servicioAsistencia = servicioAsistencia;
 		this.servicioUsuario = servicioUsuario;
 		this.servicioClase = servicioClase;
 	} 
 	
 	
-    @RequestMapping(path = "estrellas" , method = RequestMethod.GET)
-	public ModelAndView estrellas() {
+    @RequestMapping(path = "tomarPresente/{idClase}/{idUsuario}" , method = RequestMethod.GET)
+	public ModelAndView tomarPresente(@PathVariable Integer idClase,@PathVariable Integer idUsuario) {
+        ModelMap model = new ModelMap(); 
+		 
+   	 	if (idUsuario!=0) { 
+   		Clase clase = servicioClase.consultarClasePorId((long)idClase);
+   		List<AsistenciaClase> asistencia = servicioAsistencia.consultarAsistenciaPorClase(clase);
+  
+		model.addAttribute("asistencia",asistencia);
+
+        return new ModelAndView("tomar-presente",model); 
+        
+   		}else {
+      		 return new ModelAndView("redirect:/login");
+      	}
+   	 	
+	 
+    }
+    
+    
+    
+    @RequestMapping(path = "guardarAsistencia/{idClase}/{idUsuario}" , method = RequestMethod.GET)
+	public ModelAndView guardarAsistencia(@PathVariable Integer idClase,@PathVariable Integer idUsuario) {
         ModelMap model = new ModelMap();
-        return new ModelAndView("estrellas",model); 
+        
+		Clase clase = servicioClase.consultarClasePorId((long)idClase);
+		Usuario usuario = servicioUsuario.consultarUsuarioPorId((long)idUsuario); 
+    	servicioAsistencia.actualizarAsistencia(clase,usuario); 
+    	return new ModelAndView("redirect:/tomarPresente/"+idClase+"/"+idUsuario);
+      	 
+   	 	
 	 
     }
     
     
 	
-    @RequestMapping(path = "/agregarCalificacion/{idClase}/{idUsuario}/{calificacion}" , method = RequestMethod.GET)
-	public ModelAndView agregarCalificacion(@PathVariable Integer idClase,@PathVariable Integer idUsuario,@PathVariable Integer calificacion) {
-		ModelMap model = new ModelMap(); 
-		 
-		   	 	if (idUsuario!=0) { 
-		   	 	
-				Clase clase = servicioClase.consultarClasePorId((long)idClase);
-				Usuario usuario = servicioUsuario.consultarUsuarioPorId((long)idUsuario); 
-		   	 	AsistenciaClase tieneAsistencia= servicioAsistencia.consultarAsistenciaPorClaseYusuario(clase,usuario,1);
-
-		   	 	if(tieneAsistencia!=null) { 
-			   	 	servicioCalificar.agregarCalificacion((long)idUsuario,(long)idClase,calificacion); 
-		   	 	}
-		   	 	return new ModelAndView("redirect:/clases-inscriptas/"+idUsuario+"");
-		   		}else {
-		   		 return new ModelAndView("redirect:/login");
-		   		}
-
- }
+   
     
+
     
     
 }

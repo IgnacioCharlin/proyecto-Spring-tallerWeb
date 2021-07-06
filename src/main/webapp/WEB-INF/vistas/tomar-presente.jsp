@@ -37,48 +37,42 @@
 			<div class="col-10">
 				<div class="container">
 				
-					<main class="mt-4 d-flex flex-wrap">
-						<h1 class="display-5 text-center col-12 mb-5">Clases disponibles</h1>
-						
-						<div class="col-12">
-						<form class="d-flex col-6 mx-auto flex-column mb-4" action="filtar-clase">
-			 					<div class="d-flex flex-row justify-content-between">
-			 						<div class="col-4">
-			 							<label id="desde" class="text-secondary">Desde</label>
-			 							<input type="date" name="desde" class="form-control">
-			 						</div>
-			 						<div class="col-4">
-			 							<label id="hasta" class="text-secondary">Hasta</label>
-			 							<input type="date" name="hasta" class="form-control">
-			 						</div>
-			 					</div>
-			 					<div class="">
-			 						<input type="submit" value="Buscar" class="btn btn-primary w-100 mt-4"> 
-			 					</div>
-			 			</form>
-			 			</div>
-						<c:forEach var="i" items="${clasesMap}">
-							<div class="card mx-auto mb-3 text-center" style="width: 18rem;">
+					<main class="mt-12 d-flex flex-wrap">
+						<h1 class="display-12 text-center col-12 mb-5">Tomar Presente</h1>
+ 
+ 							<div class="card mx-auto mb-12 text-center"  >
 								<div class="card-body">
-									<h5 class="card-title">${i.nombre}</h5>
+									<h5 class="card-title">Listado de alumnos</h5>
 								</div>
-								<div class="card-body">
-									<p class="card-text">${i.HorarioYFecha}</p>
-									<p class="card-text">Capacidad: ${i.capacidad}</p>
-									<p class="card-text">Inscriptos: ${i.inscriptos}</p> 
-									<p class="card-text">Disponibilidad: ${i.capacidad - i.inscriptos}</p>
-									<p>
-									<a class="btn btn-primary text-white w-100" href="/EnerGym/tomarPresente/${i.id}/${idUsuario}">Tomar Asistencia</a>
-									</p>
 								
-									   <c:if test="${ i.capacidad>i.inscriptos}">
-									<p>	<a class="btn btn-success text-white w-100" href="/EnerGym/inscribirseclase/${i.id}">Inscribirse</a>
-  									  </p>
-  									  </c:if>
-    
+								<div class="card-body">
+								<table>
+							<tr>
+							<td>Alumno</td>
+							<td style="    width: 200px;">Estado</td>
+							<td>Accion</td>
+ 							</tr>
+						<c:forEach var="i" items="${asistencia}">
+						
+	<c:set  value='Ausente' var="asistio"  /> 
+  <c:if test="${i.presente==1}">
+	<c:set  value='Presente' var="asistio"  /> 
+  </c:if>	
+						
+							<tr>
+							<td>${i.usuario.email}</td>
+							<td>${asistio}</td>
+							<td><a href="/EnerGym/guardarAsistencia/${i.clase.id}/${i.usuario.id}" class="btn btn-primary">Cambiar</a></td>
+ 							</tr>
+ 							
+						</c:forEach>
+								
+						 	</table>
+								
+								
 								</div>
 							</div>
-						</c:forEach>
+				 
 					</main>
 				</div>
 			</div>
