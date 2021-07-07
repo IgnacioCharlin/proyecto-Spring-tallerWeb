@@ -19,7 +19,9 @@ import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.excepciones.FaltaCupo;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoProfesor;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoUnaFecha;
+import ar.edu.unlam.tallerweb1.servicios.ServicioAsistencia;
 import ar.edu.unlam.tallerweb1.servicios.ServicioClase;
+import ar.edu.unlam.tallerweb1.servicios.ServicioInscribirse;
 import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
 
 
@@ -36,14 +38,25 @@ public class ContoladorClaseTest {
 	private ModelAndView mav;
 	private ServicioClase servicioClase;
 	private ServicioUsuario servicioUsuario;
-
+	private ServicioInscribirse servicioInscribirse;
+	private ServicioAsistencia servicioAsistencia;
+	
 	@Before
 	public void init() {
 		servicioClase = mock(ServicioClase.class);
 		servicioUsuario = mock(ServicioUsuario.class);
+		servicioInscribirse = mock(ServicioInscribirse.class);
+		servicioAsistencia = mock(ServicioAsistencia.class);
+		
 		controladorClase = new ControladorClase(servicioClase);
+<<<<<<< HEAD
 		controladorInscribirse = new ControladorInscibirseClases(null, servicioClase, servicioUsuario, null);
 	}
+=======
+		controladorInscribirse = new ControladorInscibirseClases(servicioInscribirse, servicioClase, servicioUsuario, servicioAsistencia);
+	}	 
+
+>>>>>>> 217f524eccddc66fc8cf56e479575c16c05c3b31
 	
 	@Test
 	public void queSePuedaRegistrarLaClase() {
@@ -95,12 +108,12 @@ public class ContoladorClaseTest {
 		
 		whenElUsiarioQuiereAnotarseAlaClase(usuario, claseAInscribirse);
 		
-		thenLaInscripcionEsExitosa();
+		thenLaInscripcionEsExitosa(claseAInscribirse,usuario);
 	}
 	
-	private void thenLaInscripcionEsExitosa() {
-		Mockito.verify(servicioUsuario, times(1)).actualizarUsuario(any());
-		
+	private void thenLaInscripcionEsExitosa(Clase clase, Usuario usuario) {
+ 		verify(servicioInscribirse,times(1)).guardarInscripcion(clase,usuario);
+
 	}
 
 	private void whenElUsiarioQuiereAnotarseAlaClase(Usuario usuario, Clase claseAInscribirse) {
@@ -108,7 +121,8 @@ public class ContoladorClaseTest {
 				
 		when(servicioUsuario.consultarUsuarioPorId(usuario.getId())).thenReturn(usuario);
 		when(servicioClase.consultarClasePorId(claseAInscribirse.getId())).thenReturn(claseAInscribirse);
-		
+		//when(servicioAsistencia.actualizarAsistencia(claseAInscribirse,usuario)).thenReturn(claseAInscribirse);
+
 		mav = controladorInscribirse.confirmaInscripcion(claseAInscribirse.getId(),usuario.getId());
 		
 	}
