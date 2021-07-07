@@ -19,6 +19,7 @@ public interface RepositorioAsistencia {
 	AsistenciaClase buscarPorUsuarioYClase(Usuario usuario, Clase clase);
 	List <AsistenciaClase> dameAsistenciaPorClase(Clase idClase);
 	AsistenciaClase buscarPorUsuarioYClase(Usuario usuario, Clase clase, Integer presente);
+	List<AsistenciaClase> dameAsistenciaPorUsuario(Usuario usuairo);
 }
 
 

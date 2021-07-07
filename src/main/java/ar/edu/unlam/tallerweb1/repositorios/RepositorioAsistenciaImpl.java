@@ -80,5 +80,16 @@ public class RepositorioAsistenciaImpl implements RepositorioAsistencia{
 	}
 	
 	
+	@Override
+	public List<AsistenciaClase> dameAsistenciaPorUsuario(Usuario usuario) {
+		
+	
+        final Session session = this.sessionFactory.getCurrentSession();
+        return session.createCriteria(AsistenciaClase.class)
+               .add(Restrictions.eq("usuario", usuario) )
+               .list();
+    
+	}
+	
 	
 }

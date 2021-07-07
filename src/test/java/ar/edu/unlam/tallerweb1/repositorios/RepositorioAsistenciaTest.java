@@ -1,7 +1,6 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
 import ar.edu.unlam.tallerweb1.SpringTest;
-import ar.edu.unlam.tallerweb1.modelo.AsistenciaClase;
 import ar.edu.unlam.tallerweb1.modelo.Clase;
 import ar.edu.unlam.tallerweb1.modelo.ClasesInscriptas;
 import ar.edu.unlam.tallerweb1.modelo.Profesor;
@@ -17,7 +16,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
 
-public class RepositorioClasesInscriptasTest extends SpringTest {
+public class RepositorioAsistenciaTest extends SpringTest {
  
 	private final String EMAIL = "asd@asd.com";
 	private final String CONTRASEÑA="123";
@@ -33,9 +32,6 @@ public class RepositorioClasesInscriptasTest extends SpringTest {
     @Autowired
     private RepositorioUsuario repositorioUsuario;
     
-    @Autowired
-    private RepositorioAsistencia repositorioAsistencia;
-    
     
  
     @Test @Transactional @Rollback
@@ -49,33 +45,6 @@ public class RepositorioClasesInscriptasTest extends SpringTest {
     }
 
      
-    @Test @Transactional @Rollback
-    public void queTraigaPlanilladeAsistenciaDeLaClasesQueSeInscribioElAlumno(){
-        Usuario usuario = givenCreoUnUsuario();
-        Clase clase = givenObtengoClase();
-        
-        whenElusuarioTienePlanilladeAsistenciaDeUnaClase(clase,usuario);
-        thenLasCantidadDePlanillasSonLasQueSeInscribio(usuario);
-        
-    }
-
-     
-    
-    
-	private void thenLasCantidadDePlanillasSonLasQueSeInscribio(Usuario usuario) {
-
-		List<AsistenciaClase>  planillaAsistencia =repositorioAsistencia.dameAsistenciaPorUsuario(usuario);
-		 
-		assertThat(planillaAsistencia.size()).isEqualTo(1);
-		
-	}
-
-
-	private void whenElusuarioTienePlanilladeAsistenciaDeUnaClase(Clase clase, Usuario usuario) {
- 		 repositorioAsistencia.guardarAsistencia(clase,usuario);
-		
-	}
-
 
 	private void thenLasCantidadDeClasesSonLasQueSeInscribio(Usuario usuario) {
 	List<ClasesInscriptas> historialClases =repositorioInscribirse.buscarPorUsuario(usuario.getId());
