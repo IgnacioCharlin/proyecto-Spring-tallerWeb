@@ -14,7 +14,7 @@
 <body>
 
 
-	<form:form action="/EnerGym/agregarProfesor" method="POST" 
+	<form:form action="agregarProfesor" method="POST" 
 	modelAttribute="registrarProfesor" class="w-75 mx-auto mt-4">
 		<form:input path="email" id="email" type="mail"
 			class="form-control mb-2" placeholder="Ingresar email" />

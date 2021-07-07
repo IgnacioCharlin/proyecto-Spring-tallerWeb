@@ -24,6 +24,7 @@ public class Clase {
 	private String nombre;
 	private	Long capacidad;
 	private String HorarioYFecha;
+	private String estado;
 
 	@ManyToOne(optional = false , cascade = {CascadeType.PERSIST,CascadeType.REMOVE}, fetch = FetchType.EAGER)
 	private Profesor profesor;
@@ -37,6 +38,7 @@ public class Clase {
 		this.nombre = nombre;
 		this.HorarioYFecha = horarioYfecha;
 		this.capacidad = capacidad;
+		this.estado = "activa";
 	}
 	
 	
@@ -53,6 +55,7 @@ public class Clase {
 
 	public Clase() {
 		super();
+		this.estado = "activa";
 	}
 
 
@@ -101,6 +104,18 @@ public class Clase {
 
 	public void setHorarioYFecha(String horarioYFecha) {
 		HorarioYFecha = horarioYFecha;
+	}
+
+
+
+	public String getEstado() {
+		return estado;
+	}
+
+
+
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 
 

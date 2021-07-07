@@ -53,7 +53,8 @@ public class RepositorioClaseImpl implements RepositorioClase{
 	
 	@Override
 	public void eliminarClase(Clase clase) {
-		sessionFactory.getCurrentSession().delete(clase);
+		clase.setEstado("cancelada");
+		sessionFactory.getCurrentSession().update(clase);
 	}
 
 	@Override
@@ -61,6 +62,7 @@ public class RepositorioClaseImpl implements RepositorioClase{
 		String fechaHoy = LocalDate.now().toString();
 		return sessionFactory.getCurrentSession().createCriteria(Clase.class)
 				.add(Restrictions.ge("HorarioYFecha",fechaHoy))
+				.add(Restrictions.eq("estado", "activa"))
 				.list();
 	}
 
@@ -82,11 +84,11 @@ public class RepositorioClaseImpl implements RepositorioClase{
 	public List<Clase> filtrarClasesPorFecha(String fechaDesde, String fechaHasta) {
 		
 
-		String where =" clase.HorarioYFecha between '" +fechaDesde+ "' and '"+fechaHasta+"'";
+		String where =" clase.HorarioYFecha between  '"+fechaDesde+ "' and '"+fechaHasta+"'";
    
 		SQLQuery query =	sessionFactory.getCurrentSession().createSQLQuery(""
 				+ " SELECT clase.*,count(clases_inscriptas.id_usuario) as inscriptos"
-				+ " FROM `clase`  "
+				+ " FROM clase  "
 				+ " LEFT join clases_inscriptas on clases_inscriptas.id_clase=clase.id "
 				+ " where"
 				+ where + ""
@@ -116,7 +118,7 @@ public class RepositorioClaseImpl implements RepositorioClase{
 				+ " FROM `clase`  "
 				+ " LEFT join clases_inscriptas on clases_inscriptas.id_clase=clase.id "
 				+ " where"
-				+ where + ""
+				+ where + "and clase.estado = 'activa'"
 			    + " GROUP by (clase.id) "
 			 //   + " HAVING clase.capacidad>count(clases_inscriptas.id_usuario)"
  			    )

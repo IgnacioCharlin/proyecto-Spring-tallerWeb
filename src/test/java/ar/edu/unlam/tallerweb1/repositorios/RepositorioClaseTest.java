@@ -80,7 +80,7 @@ public class RepositorioClaseTest extends SpringTest{
 		Profesor profesor = givenCreoElProfesor();
 		Clase clase = whenSeGuardanLosDatos(CLASE,NOMBRE_CLASE,CAPACIDAD, profesor,FECHAYHORA);
 		Clase clase2 = whenSeGuardanLosDatos(otraClase,NOMBRE_CLASE+"asd",CAPACIDAD+10, profesor,FECHAYHORA);
-		List clasesList=repositorioClase.buscarTodasLasClase();
+		List clasesList= repositorioClase.buscarTodasLasClase();
 		thenTraeTodasLasClases(clasesList);
 	}
 	
@@ -138,7 +138,7 @@ public class RepositorioClaseTest extends SpringTest{
 	}
 
 	private void thenLaClaseSeElimino(Clase clase) {
-		assertThat(repositorioClase.buscarClase(clase.getNombre())).isNull();
+		assertThat(repositorioClase.buscarClase(clase.getNombre()).getEstado()).isEqualTo("cancelada");
 	}
 
 	private void thenLaClaseSeModifico(Clase clase, long nuevaCapacidad) {

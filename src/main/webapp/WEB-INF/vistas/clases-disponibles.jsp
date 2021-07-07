@@ -29,10 +29,10 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="d-flex flex-column col-2 p-3 mb-2 bg-primary text-white">
-				<a href="/EnerGym/home" class="text-white text-decoration-none fw-bold">Home</a>
-				<a href="/EnerGym/clases-disponibles" class="text-white text-decoration-none fw-bold">Clases Disponibles</a>
-				<a href="/EnerGym/agregar-profesor" class="text-white text-decoration-none fw-bold">Agregar Profesor</a>
-				<a href="/EnerGym/clases-inscriptas/${idUsuario}" class="text-white text-decoration-none fw-bold">Clases incriptas</a>
+				<a href="home" class="text-white text-decoration-none fw-bold">Home</a>
+				<a href="clases-disponibles" class="text-white text-decoration-none fw-bold">Clases Disponibles</a>
+				<a href="agregar-profesor" class="text-white text-decoration-none fw-bold">Agregar Profesor</a>
+				<a href="clases-inscriptas/${idUsuario}" class="text-white text-decoration-none fw-bold">Clases incriptas</a>
 			</div>
 			<div class="col-10">
 				<div class="container">
@@ -68,11 +68,11 @@
 									<p class="card-text">Inscriptos: ${i.inscriptos}</p> 
 									<p class="card-text">Disponibilidad: ${i.capacidad - i.inscriptos}</p>
 									<p>
-									<a class="btn btn-primary text-white w-100" href="/EnerGym/tomarPresente/${i.id}/${idUsuario}">Tomar Asistencia</a>
+									<a class="btn btn-primary text-white w-100" href="tomarPresente/${i.id}/${idUsuario}">Tomar Asistencia</a>
 									</p>
 								
 									   <c:if test="${ i.capacidad>i.inscriptos}">
-									<p>	<a class="btn btn-success text-white w-100" href="/EnerGym/inscribirseclase/${i.id}">Inscribirse</a>
+									<p>	<a class="btn btn-success text-white w-100" href="inscribirseclase/${i.id}">Inscribirse</a>
   									  </p>
   									  </c:if>
     

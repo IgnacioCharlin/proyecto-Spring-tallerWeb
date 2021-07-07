@@ -32,10 +32,10 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="d-flex flex-column col-2 p-3 mb-2 bg-primary text-white">
-				<a href="/EnerGym/home" class="text-white text-decoration-none fw-bold">Home</a>
-				<a href="/EnerGym/clases-disponibles" class="text-white text-decoration-none fw-bold">Clases Disponibles</a>
-				<a href="/EnerGym/agregar-profesor" class="text-white text-decoration-none fw-bold">Agregar Profesor</a>
-				<a href="/EnerGym/clases-inscriptas/${idUsuario}" class="text-white text-decoration-none fw-bold">Clases inscriptas</a>
+				<a href="../home" class="text-white text-decoration-none fw-bold">Home</a>
+				<a href="../clases-disponibles" class="text-white text-decoration-none fw-bold">Clases Disponibles</a>
+				<a href="../agregar-profesor" class="text-white text-decoration-none fw-bold">Agregar Profesor</a>
+				<a href="../clases-inscriptas/${idUsuario}" class="text-white text-decoration-none fw-bold">Clases inscriptas</a>
 			</div>
 			
 			<div class="col-10">
@@ -64,13 +64,13 @@
 							
 	
 <c:forEach begin="1" step="1" end="3" var="estrella"> 
-		<form action="/EnerGym/agregarCalificacion/${i.clase.id}/${idUsuario}/${estrella}" class="formulario">
+		<form action="../agregarCalificacion/${i.clase.id}/${idUsuario}/${estrella}" class="formulario">
 		
 		<c:if test="${estrellas>=estrella}">			
-		<input title="boton enviar" alt="Completa" src="/EnerGym/images/estrellaComleta.png" type="image" style=" width: 50px;"/>
+		<input title="boton enviar" alt="Completa" src="../images/estrellaComleta.png" type="image" style=" width: 50px;"/>
  		</c:if> 
 		<c:if test="${estrellas<estrella}">			
-		<input title="boton enviar" alt="Vacia"    src="/EnerGym/images/estrellaVacia.png" type="image" style=" width: 50px;"/>
+		<input title="boton enviar" alt="Vacia"    src="../images/estrellaVacia.png" type="image" style=" width: 50px;"/>
 		</c:if> 
 		
 		</form> 
