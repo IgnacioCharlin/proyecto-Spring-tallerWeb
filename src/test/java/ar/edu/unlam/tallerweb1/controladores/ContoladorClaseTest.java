@@ -49,14 +49,9 @@ public class ContoladorClaseTest {
 		servicioAsistencia = mock(ServicioAsistencia.class);
 		
 		controladorClase = new ControladorClase(servicioClase);
-<<<<<<< HEAD
-		controladorInscribirse = new ControladorInscibirseClases(null, servicioClase, servicioUsuario, null);
-	}
-=======
 		controladorInscribirse = new ControladorInscibirseClases(servicioInscribirse, servicioClase, servicioUsuario, servicioAsistencia);
 	}	 
 
->>>>>>> 217f524eccddc66fc8cf56e479575c16c05c3b31
 	
 	@Test
 	public void queSePuedaRegistrarLaClase() {
