@@ -27,6 +27,8 @@ public class RepositorioUsuarioTest extends SpringTest {
     
     @Autowired
     private RepositorioClase repositorioClase;
+    @Autowired
+    private RepositorioInscribirse repositorioInscribirse;
     
     @Test @Transactional @Rollback
     public void queSePuedaAgregarUnUsuario() {
@@ -96,21 +98,22 @@ public class RepositorioUsuarioTest extends SpringTest {
     public void queTraigaTodasLasClasesQueSeInscribioElAlumno(){
        Usuario usuario = givenTengoUnUsuarioConClases();
        whenGuardoLasClasesAlUsuario(usuario);
-       thenTraeLasClasesInscriptas(usuario.getEmail());
+       thenTraeLasClasesInscriptas(usuario);
     }
 
 
-    private void thenTraeLasClasesInscriptas(String email) {
-    	assertThat(repositorioUsuario.buscar(email)).isNotNull();
-    	assertThat(repositorioUsuario.buscar(email).getClases()).hasSize(2);
+    private void thenTraeLasClasesInscriptas(Usuario usuario) {
+    	
+//    	assertThat(usuario).isNotNull();
+    	assertThat(repositorioInscribirse.buscarPorUsuario(usuario.getId()).size()).isEqualTo(2);
     }
 
     private void whenGuardoLasClasesAlUsuario(Usuario usuario) {
     	List<Clase> clases = repositorioClase.buscarTodasLasClase();
     	for (Clase clase : clases) {
-    		usuario.setClase(clase);
+    		repositorioInscribirse.guardarInscripcion(clase, usuario);
     	}
-    	repositorioUsuario.guardar(usuario);
+//    	repositorioUsuario.guardar(usuario);
     }
 
     private Usuario givenTengoUnUsuarioConClases() {
@@ -118,6 +121,7 @@ public class RepositorioUsuarioTest extends SpringTest {
     	String horarioYFecha ="2022-01-01";
     	long capacidad = 50L;
     	Profesor profesor = new Profesor();
+    	session().save(profesor);
     	Usuario usuario = givenCreoUnUsuario();
     	Clase clase1 = new Clase();
     	Clase clase2 = new Clase();
