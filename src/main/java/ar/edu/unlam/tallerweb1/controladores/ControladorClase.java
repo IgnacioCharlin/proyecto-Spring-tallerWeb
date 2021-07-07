@@ -131,7 +131,17 @@ public class ControladorClase {
 		model.addAttribute("clasesMap",clases);
 		return new ModelAndView("clases-disponibles",model);
     }
-	
+	/*
+	@RequestMapping(path = "filtar-clase" )
+	public ModelAndView buscoClasePorProfesor() {
+		ModelMap model = new ModelMap();
+		Map<Clase, Clase> clasesMap = new HashMap<Clase, Clase>();
+		List<Clase> clases = servicioClase.;
+		
+		model.addAttribute("clasesMap",clases);
+		return new ModelAndView("clases-disponibles",model);
+    }
+	*/
 	
 	private ModelAndView claseCargadaOk(ModelMap model) {
 		model.put("cargadaOk", true);

@@ -96,7 +96,6 @@ public class RepositorioClaseImpl implements RepositorioClase{
 			    + " HAVING clase.capacidad>count(clases_inscriptas.id_usuario)"
  			    )
 				;
-		
  			query.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
  return query.list();
 		

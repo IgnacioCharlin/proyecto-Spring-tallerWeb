@@ -83,14 +83,6 @@ public class RepositorioUsuarioTest extends SpringTest {
         thenElUsuarioNoExiste(buscado);
     }
  
-
- 
-
-  
-
- 
- 
-
 	private void whenGuardoUsuarioYLuegoLoElimino(Usuario usuario) {
 		repositorioUsuario.guardar(usuario);
 		repositorioUsuario.eliminar(usuario);
