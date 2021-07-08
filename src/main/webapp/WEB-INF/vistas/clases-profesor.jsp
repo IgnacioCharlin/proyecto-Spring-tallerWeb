@@ -33,6 +33,7 @@
 				<a href="./clases-disponibles" class="text-white text-decoration-none fw-bold">Clases Disponibles</a>
 				<a href="./agregar-profesor" class="text-white text-decoration-none fw-bold">Agregar Profesor</a>
 				<a href="./clases-inscriptas/${idUsuario}" class="text-white text-decoration-none fw-bold">Clases incriptas</a>
+				<a href="./filtar-profesor" class="text-white text-decoration-none fw-bold">Clase Por Profesor</a>
 			</div>
 			<div class="col-10">
 				<div class="container">
@@ -52,6 +53,10 @@
 			 						<input type="submit" value="Buscar" class="btn btn-primary w-100 mt-4"> 
 			 					</div>
 			 			</form>
+			 			<c:if test="${not empty error}">
+			        <div class="alert alert-danger mt-2" role="alert" >${error}</div>
+			        <br>
+		        </c:if>	
 			 			</div>
 						<c:forEach var="i" items="${clasesMap}">
 							<div class="card mx-auto mb-3 text-center" style="width: 18rem;">

@@ -77,9 +77,27 @@ public class RepositorioClaseImpl implements RepositorioClase{
 	
 	@Override
 	public List<Clase> buscarClasePorProfesor(Profesor profesor) {
-		return sessionFactory.getCurrentSession().createCriteria(Clase.class)
+		String where =" clase.profesor_Id = " + profesor.getId();
+		   
+		SQLQuery  query =	sessionFactory.getCurrentSession().createSQLQuery(""
+				+ " SELECT clase.*,count(clases_inscriptas.id_usuario) as inscriptos"
+				+ " FROM clase  "
+				+ " LEFT join clases_inscriptas on clases_inscriptas.id_clase=clase.id "
+				+ " where"
+				+ where + ""
+			    + " GROUP by (clase.id) "
+			    //+ " HAVING clase.capacidad>count(clases_inscriptas.id_usuario)"
+
+ 			    )
+				;
+ 			query.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+ 			return query.list();
+		
+ /*return sessionFactory.getCurrentSession().createCriteria(Clase.class)
 				.add(Restrictions.eq("profesor", profesor))
 				.list();
+  */	
+		
 	}
 	
 	@Override

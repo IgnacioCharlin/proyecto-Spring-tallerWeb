@@ -138,16 +138,23 @@ public class ControladorClase {
 	
 	@RequestMapping(path = "filtar-profesor" , method = RequestMethod.GET)
 	public ModelAndView buscoClase(@RequestParam(required = false ,name = "email") String email) {
+		String error;
 		ModelMap model = new ModelMap();
 		Map<Clase, Clase> clasesMap = new HashMap<Clase, Clase>();
 		List<Clase> clases;
-		if (email != null) {
-			Profesor profesor = servicioProfesor.buscarProfesorPorEmail(email);
-			clases = servicioClase.consultarClasesPorIdProfesor(profesor.getId());			
-		}else {
-			clases = servicioClase.consultarTodasLasClases();
+		try {
+			
+			if (email != null) {
+				Profesor profesor = servicioProfesor.buscarProfesorPorEmail(email);
+				clases = servicioClase.consultarClasesPorIdProfesor(profesor.getId());			
+			}else {
+				clases = servicioClase.consultarTodasLasClases();
+			}
+			model.addAttribute("clasesMap",clases);
+		} catch (NoEsProfesor e) {
+			error = "No Existe profesor con ese email";
+			model.put("error", error);
 		}
-		model.addAttribute("clasesMap",clases);
 		return new ModelAndView("clases-profesor",model);
     }
 	
