@@ -136,7 +136,7 @@ public class ControladorClase {
 		return new ModelAndView("clases-disponibles",model);
     }
 	
-	@RequestMapping(path = "filtar-profesor" )
+	@RequestMapping(path = "filtar-profesor" , method = RequestMethod.GET)
 	public ModelAndView buscoClase(@RequestParam(required = false ,name = "email") String email) {
 		ModelMap model = new ModelMap();
 		Map<Clase, Clase> clasesMap = new HashMap<Clase, Clase>();
@@ -150,17 +150,6 @@ public class ControladorClase {
 		model.addAttribute("clasesMap",clases);
 		return new ModelAndView("clases-profesor",model);
     }
-	/*
-	@RequestMapping(path = "filtar-profesor" )
-	public ModelAndView buscoClasePorProfesor(@RequestParam("email") String email) {
-		ModelMap model = new ModelMap();
-		Map<Clase, Clase> clasesMap = new HashMap<Clase, Clase>();
-		Profesor profesor = servicioProfesor.buscarProfesorPorEmail(email);
-		List<Clase> clases = servicioClase.consultarClasesPorIdProfesor(profesor.getId());
-		model.addAttribute("clasesMap",clases);
-		return new ModelAndView("clases-profesor",model);
-    }
-    */
 	
 	private ModelAndView claseCargadaOk(ModelMap model) {
 		model.put("cargadaOk", true);
