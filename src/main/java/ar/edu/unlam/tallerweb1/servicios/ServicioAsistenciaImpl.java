@@ -15,6 +15,9 @@ import ar.edu.unlam.tallerweb1.excepciones.FechaYaPaso;
 import ar.edu.unlam.tallerweb1.excepciones.NoEsProfesor;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoProfesor;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoUnaFecha;
+import ar.edu.unlam.tallerweb1.excepciones.NoTengoClase;
+import ar.edu.unlam.tallerweb1.excepciones.NoTengoUsuario;
+import ar.edu.unlam.tallerweb1.excepciones.UsuarioNoExiste;
 import ar.edu.unlam.tallerweb1.modelo.AsistenciaClase;
 import ar.edu.unlam.tallerweb1.modelo.CalificacionClase;
 import ar.edu.unlam.tallerweb1.modelo.Clase;
@@ -43,6 +46,15 @@ public class ServicioAsistenciaImpl implements ServicioAsistencia{
 
 	@Override
 	public void actualizarAsistencia(Clase clase, Usuario usuario) {
+		
+		
+		if(usuario==null) {
+			throw new NoTengoUsuario();
+		} 
+		
+		if(clase==null) {
+			throw new NoTengoClase();
+		} 
 		
 	 	AsistenciaClase buscoAsistencia= repositorioAsistencia.buscarPorUsuarioYClase(usuario,clase);
 		if(buscoAsistencia==null) {
