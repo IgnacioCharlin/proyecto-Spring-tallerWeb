@@ -19,6 +19,7 @@ import ar.edu.unlam.tallerweb1.excepciones.FechaYaPaso;
 import ar.edu.unlam.tallerweb1.excepciones.NoEsProfesor;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoProfesor;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoUnaFecha;
+import ar.edu.unlam.tallerweb1.excepciones.UsuarioNoEstaPresenteEnLaClase;
 import ar.edu.unlam.tallerweb1.modelo.AsistenciaClase;
 import ar.edu.unlam.tallerweb1.modelo.Clase;
 import ar.edu.unlam.tallerweb1.modelo.DatosClase;
@@ -59,6 +60,7 @@ public class ControladorCalificar {
 	public ModelAndView agregarCalificacion(@PathVariable Integer idClase,@PathVariable Integer idUsuario,@PathVariable Integer calificacion) {
 		ModelMap model = new ModelMap(); 
 		 
+		try {		
 		   	 	if (idUsuario!=0) { 
 		   	 	
 				Clase clase = servicioClase.consultarClasePorId((long)idClase);
@@ -66,14 +68,16 @@ public class ControladorCalificar {
 				Integer alumnoPresente = 1;
 		   	 	AsistenciaClase tieneAsistencia= servicioAsistencia.consultarAsistenciaPorClaseYusuario(clase,usuario,alumnoPresente);
 		   
-
-		   	 	if(tieneAsistencia!=null) { 
-			   	 	servicioCalificar.agregarCalificacion((long)idUsuario,(long)idClase,calificacion); 
-		   	 	}
+		   	 	servicioCalificar.agregarCalificacion((long)idUsuario,(long)idClase,calificacion); 
+		   	  
 		   	 	return new ModelAndView("redirect:/clases-inscriptas/"+idUsuario+"");
 		   		}else {
 		   		 return new ModelAndView("redirect:/login");
 		   		}
+		}catch(UsuarioNoEstaPresenteEnLaClase e) {
+			model.addAttribute("msj","El usuario no participo de la clase, por tal motivo no puedo calificarla.");
+			return new ModelAndView("notificacion",model); 
+		}
 
  }
     

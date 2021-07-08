@@ -14,7 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  
 import ar.edu.unlam.tallerweb1.excepciones.NoTengoClase;
 import ar.edu.unlam.tallerweb1.excepciones.NoTengoUsuario;
- import ar.edu.unlam.tallerweb1.modelo.AsistenciaClase;
+import ar.edu.unlam.tallerweb1.excepciones.UsuarioNoEstaPresenteEnLaClase;
+import ar.edu.unlam.tallerweb1.modelo.AsistenciaClase;
 import ar.edu.unlam.tallerweb1.modelo.Clase;
  import ar.edu.unlam.tallerweb1.modelo.Profesor;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
@@ -98,6 +99,30 @@ public class ServicioAsistenciaTest {
 
 	  }
 	  
+	  
+		
+	  @Test(expected = UsuarioNoEstaPresenteEnLaClase.class)
+	  public void siNoTengoUsuarioPresenteNoPuedoCalificarLaClase() {
+		  Usuario usuario= givenTengoUnUsuario();
+		  Clase clase= givenObtenClase();
+		  Integer alumnoPresente = 1;
+		  
+		  whenVerificoAsistencia(clase,usuario,alumnoPresente);
+		  
+	  }
+	  
+	  
+	  
+		private AsistenciaClase whenVerificoAsistencia(Clase clase, Usuario usuario,Integer alumnoPresente) {
+			AsistenciaClase	alumnoAusente =  null;
+			
+			when(repositorioAsistencia.buscarPorUsuarioYClase(usuario, clase,alumnoPresente)).thenReturn(alumnoAusente);
+			AsistenciaClase  consultoAsistencia= servicioAsistencia.consultarAsistenciaPorClaseYusuario(clase,usuario,alumnoPresente);
+			return consultoAsistencia;
+ 	}
+
+
+
 		private void thenPuedeActualizarAsistencia(AsistenciaClase buscoAsistencia, Integer presente) { 
 			verify(repositorioAsistencia,times(1)).modificarAsistencia(buscoAsistencia,presente);
 		}
