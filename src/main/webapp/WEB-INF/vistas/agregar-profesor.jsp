@@ -14,6 +14,7 @@
 <body>
 
 
+
 	<form:form action="agregarProfesor" method="POST" 
 	modelAttribute="registrarProfesor" class="w-75 mx-auto mt-4">
 		<form:input path="email" id="email" type="mail"

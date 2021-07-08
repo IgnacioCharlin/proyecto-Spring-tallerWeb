@@ -10,6 +10,8 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.query.NativeQuery;
+//import org.hibernate.query.Query;
 import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -75,28 +77,46 @@ public class RepositorioClaseImpl implements RepositorioClase{
 	
 	@Override
 	public List<Clase> buscarClasePorProfesor(Profesor profesor) {
-		return sessionFactory.getCurrentSession().createCriteria(Clase.class)
-				.add(Restrictions.eq("profesor", profesor))
-				.list();
-	}
-	
-	@Override
-	public List<Clase> filtrarClasesPorFecha(String fechaDesde, String fechaHasta) {
-		
-
-		String where =" clase.HorarioYFecha between  '"+fechaDesde+ "' and '"+fechaHasta+"'";
-   
-		SQLQuery query =	sessionFactory.getCurrentSession().createSQLQuery(""
+		String where =" clase.profesor_Id = " + profesor.getId();
+		   
+		SQLQuery  query =	sessionFactory.getCurrentSession().createSQLQuery(""
 				+ " SELECT clase.*,count(clases_inscriptas.id_usuario) as inscriptos"
 				+ " FROM clase  "
 				+ " LEFT join clases_inscriptas on clases_inscriptas.id_clase=clase.id "
 				+ " where"
 				+ where + ""
 			    + " GROUP by (clase.id) "
-			    + " HAVING clase.capacidad>count(clases_inscriptas.id_usuario)"
+			    //+ " HAVING clase.capacidad>count(clases_inscriptas.id_usuario)"
+
  			    )
 				;
+ 			query.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+ 			return query.list();
 		
+ /*return sessionFactory.getCurrentSession().createCriteria(Clase.class)
+				.add(Restrictions.eq("profesor", profesor))
+				.list();
+  */	
+		
+	}
+	
+	@Override
+	public List<Clase> filtrarClasesPorFecha(String fechaDesde, String fechaHasta) {
+ 
+
+		String where =" clase.HorarioYFecha between  '"+fechaDesde+ "' and '"+fechaHasta+"'";
+   
+		SQLQuery  query =	sessionFactory.getCurrentSession().createSQLQuery(""
+				+ " SELECT clase.*,count(clases_inscriptas.id_usuario) as inscriptos"
+				+ " FROM clase  "
+				+ " LEFT join clases_inscriptas on clases_inscriptas.id_clase=clase.id "
+				+ " where"
+				+ where + ""
+			    + " GROUP by (clase.id) "
+			    //+ " HAVING clase.capacidad>count(clases_inscriptas.id_usuario)"
+
+ 			    )
+				;
  			query.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
  return query.list();
 		

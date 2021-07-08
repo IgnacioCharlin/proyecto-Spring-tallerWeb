@@ -22,17 +22,21 @@ import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoProfesor;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoUnaFecha;
 import ar.edu.unlam.tallerweb1.modelo.Clase;
 import ar.edu.unlam.tallerweb1.modelo.DatosClase;
+import ar.edu.unlam.tallerweb1.modelo.Profesor;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioClase;
+import ar.edu.unlam.tallerweb1.servicios.ServicioProfesor;
 
 
 @Controller
 public class ControladorClase {
 	private ServicioClase servicioClase;
+	private ServicioProfesor servicioProfesor;
 	
 	@Autowired
-	public ControladorClase(ServicioClase servicioClase) {
+	public ControladorClase(ServicioClase servicioClase,ServicioProfesor servicioProfesor) {
 		this.servicioClase = servicioClase;
+		this.servicioProfesor = servicioProfesor;
 	}
 
 	@RequestMapping(path = "/agregar-clase", method = RequestMethod.GET)
@@ -132,6 +136,27 @@ public class ControladorClase {
 		return new ModelAndView("clases-disponibles",model);
     }
 	
+	@RequestMapping(path = "filtar-profesor" , method = RequestMethod.GET)
+	public ModelAndView buscoClase(@RequestParam(required = false ,name = "email") String email) {
+		String error;
+		ModelMap model = new ModelMap();
+		Map<Clase, Clase> clasesMap = new HashMap<Clase, Clase>();
+		List<Clase> clases;
+		try {
+			
+			if (email != null) {
+				Profesor profesor = servicioProfesor.buscarProfesorPorEmail(email);
+				clases = servicioClase.consultarClasesPorIdProfesor(profesor.getId());			
+			}else {
+				clases = servicioClase.consultarTodasLasClases();
+			}
+			model.addAttribute("clasesMap",clases);
+		} catch (NoEsProfesor e) {
+			error = "No Existe profesor con ese email";
+			model.put("error", error);
+		}
+		return new ModelAndView("clases-profesor",model);
+    }
 	
 	private ModelAndView claseCargadaOk(ModelMap model) {
 		model.put("cargadaOk", true);

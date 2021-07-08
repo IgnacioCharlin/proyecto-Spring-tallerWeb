@@ -57,6 +57,19 @@ public class ServicioProfesorImpl implements ServicioProfesor {
 		
 	}
 
+	@Override
+	public Profesor buscarProfesorPorEmail(String email) {
+		if(repositorioProfesor.buscarProfesorPorMail(email) == null) {
+			throw new NoEsProfesor();
+		}
+		return repositorioProfesor.buscarProfesorPorMail(email);
+		/*try {
+			return repositorioProfesor.buscarProfesorPorMail(email);
+		} catch (Exception e) {
+			throw new NoEsProfesor();
+		}*/
+	}
+
 
 
 

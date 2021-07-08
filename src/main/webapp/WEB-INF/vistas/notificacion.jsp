@@ -8,7 +8,7 @@
 	
 	
 <meta charset="ISO-8859-1">
-<title>Incribirme</title>
+<title>Notificacion</title>
 </head>
 <body>
 
@@ -23,22 +23,21 @@
 					
 					
 													
-		 <c:if test="${not empty msj}">
-                <div class="alert alert-warning" role="alert">
-                    <p>${msj}</p>
-                </div>
-            </c:if>	
+
             
             
-						<h1 class="display-5 text-center col-12 mb-5">Inscribirse</h1>
+						<h1 class="display-5 text-center col-12 mb-5">Notificación</h1>
 						<div class="card mx-auto" >
-									<p class="card-text"><strong>${clase.getNombre()}</strong></p>
+							 
 						<div class="card-body">
-									<p class="card-text">${clase.getHorarioYFecha()}</p>
-									<p class="card-text">Con el profe: Seba</p>
-									<p class="card-text">Recomendaciones: trae tu botella de agua para hidratarte durante toda la clase...etc</p>						
-									<a class="btn btn-success text-white btn-block mt-2 w-50" href="../inscribirseclase/${clase.getId()}/${idUsuario}">Confirmar</a>
-									<a onClick="history.go(-2);" class="btn btn-danger btn-block mt-2 w-50"/>Volver</a>
+			
+					 <c:if test="${not empty msj}">
+			                <div class="alert alert-warning" role="alert">
+			                    <p>${msj}</p>
+			                </div>
+			            </c:if>	
+            
+            			<a onClick="history.go(-1);" class="btn btn-danger btn-block mt-2 w-50"/>Volver</a>
 						</div>
 						
 	</main>

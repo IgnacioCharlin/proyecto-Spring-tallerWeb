@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unlam.tallerweb1.excepciones.NoTengoClase;
+import ar.edu.unlam.tallerweb1.excepciones.NoTengoUsuario;
 import ar.edu.unlam.tallerweb1.modelo.Clase;
 import ar.edu.unlam.tallerweb1.modelo.ClasesInscriptas;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
@@ -46,21 +48,29 @@ public class ControladorInscibirseClases {
 	}
 	@RequestMapping(path = "/inscribirseclase/{id}/{idUsuario}", method = RequestMethod.GET)
 	public ModelAndView confirmaInscripcion(@PathVariable("idUsuario")Long idUsuario, @PathVariable("id") Long id) {
-		
+		ModelMap model = new ModelMap();
+
+	 try {
 		Clase buscadaAInscribirse = servicioClase.consultarClasePorId(id);
 				
 		Usuario usuarioAinscribirse = servicioUsuario.consultarUsuarioPorId(idUsuario);
-		ModelMap model = new ModelMap();
 		
-			//usuarioAinscribirse.setClase(buscadaAInscribirse);
-			//servicioUsuario.actualizarUsuario(usuarioAinscribirse);
+
 		ClasesInscriptas clasesInscripta=servicioInscribirse.buscarInscripcion(buscadaAInscribirse,usuarioAinscribirse);
 		if(clasesInscripta == null) {
 			servicioInscribirse.guardarInscripcion(buscadaAInscribirse,usuarioAinscribirse);
-			servicioAsistencia.actualizarAsistencia(buscadaAInscribirse,usuarioAinscribirse);
-		}
-		
+			servicioAsistencia.cargarAsistencia(buscadaAInscribirse,usuarioAinscribirse);
+		}else{
+            model.put("msj","El usuario ya estaba inscripto."); 
+    		return new ModelAndView("inscribirseClase", model);
+
+		}  
 		return new ModelAndView("redirect:/home", model);
+	 }catch(NoTengoUsuario e) {
+			return new ModelAndView("redirect:/login", model);
+
+	 }
+		
 		
 	}
 }
