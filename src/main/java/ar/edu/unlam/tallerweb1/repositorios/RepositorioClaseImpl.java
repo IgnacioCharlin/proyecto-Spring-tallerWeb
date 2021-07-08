@@ -11,6 +11,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.NativeQuery;
+//import org.hibernate.query.Query;
 import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -87,14 +88,14 @@ public class RepositorioClaseImpl implements RepositorioClase{
 
 		String where =" clase.HorarioYFecha between  '"+fechaDesde+ "' and '"+fechaHasta+"'";
    
-		NativeQuery query =	sessionFactory.getCurrentSession().createSQLQuery(""
+		SQLQuery  query =	sessionFactory.getCurrentSession().createSQLQuery(""
 				+ " SELECT clase.*,count(clases_inscriptas.id_usuario) as inscriptos"
 				+ " FROM clase  "
 				+ " LEFT join clases_inscriptas on clases_inscriptas.id_clase=clase.id "
 				+ " where"
 				+ where + ""
 			    + " GROUP by (clase.id) "
-			    + " HAVING clase.capacidad>count(clases_inscriptas.id_usuario)"
+		//	    + " HAVING (clase.capacidad)>count(clases_inscriptas.id_usuario) "
  			    )
 				;
 		
@@ -114,7 +115,7 @@ public class RepositorioClaseImpl implements RepositorioClase{
 
 		String where =" clase.HorarioYFecha >='"+fechaHoy+"'";
    
-		NativeQuery query =	sessionFactory.getCurrentSession().createSQLQuery(""
+		SQLQuery query =	sessionFactory.getCurrentSession().createSQLQuery(""
 				+ " SELECT clase.*,count(clases_inscriptas.id_usuario) as inscriptos"
 				+ " FROM `clase`  "
 				+ " LEFT join clases_inscriptas on clases_inscriptas.id_clase=clase.id "
