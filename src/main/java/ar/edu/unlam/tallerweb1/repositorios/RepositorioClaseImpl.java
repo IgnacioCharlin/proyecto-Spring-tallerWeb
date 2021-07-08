@@ -95,11 +95,8 @@ public class RepositorioClaseImpl implements RepositorioClase{
 				+ " where"
 				+ where + ""
 			    + " GROUP by (clase.id) "
-<<<<<<< HEAD
 			    //+ " HAVING clase.capacidad>count(clases_inscriptas.id_usuario)"
-=======
-		//	    + " HAVING (clase.capacidad)>count(clases_inscriptas.id_usuario) "
->>>>>>> aa557c2a3d1794385eed61d3e46995d7c8a4b510
+
  			    )
 				;
  			query.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
