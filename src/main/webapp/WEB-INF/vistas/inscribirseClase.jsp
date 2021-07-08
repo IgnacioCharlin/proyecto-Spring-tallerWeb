@@ -38,7 +38,7 @@
 									<p class="card-text">Con el profe: Seba</p>
 									<p class="card-text">Recomendaciones: trae tu botella de agua para hidratarte durante toda la clase...etc</p>						
 									<a class="btn btn-success text-white btn-block mt-2 w-50" href="../inscribirseclase/${clase.getId()}/${idUsuario}">Confirmar</a>
-									<a href="../home" class="btn btn-danger btn-block mt-2 w-50"/>Volver</a>
+									<a onClick="history.go(-2);" class="btn btn-danger btn-block mt-2 w-50"/>Volver</a>
 						</div>
 						
 	</main>
