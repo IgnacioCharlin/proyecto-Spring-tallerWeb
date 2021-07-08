@@ -144,7 +144,7 @@ public class ServicioClaseTest {
 		List<Clase> clase = new ArrayList<>();
 		clase.add(clase1);
 		clase.add(clase2);
-		when(repositorioClase.buscarTodasLasClase()).thenReturn(clase);
+		when(repositorioClase.dameClasesConDisponibilidad()).thenReturn(clase);
 		List<Clase> clases = servicio.consultarTodasLasClases();
 		assertEquals(2, clases.size());
 	}

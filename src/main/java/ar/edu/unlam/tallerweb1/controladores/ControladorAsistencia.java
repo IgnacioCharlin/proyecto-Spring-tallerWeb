@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unlam.tallerweb1.excepciones.AlumnoNoPerteneceAlaClase;
 import ar.edu.unlam.tallerweb1.excepciones.ClaseInvalida;
 import ar.edu.unlam.tallerweb1.excepciones.FaltaCupo;
 import ar.edu.unlam.tallerweb1.excepciones.FechaYaPaso;
@@ -104,7 +105,9 @@ public class ControladorAsistencia{
         catch(NoTengoClase e){
             model.put("msj","Clase invalida.");         
        } 
-        
+        catch(AlumnoNoPerteneceAlaClase e){
+            model.put("msj","El alumno no pertence a esta clase.");         
+       } 
  		return new ModelAndView("tomar-presente",model); 
 
    	 	

@@ -14,4 +14,5 @@ public interface ServicioAsistencia {
 	AsistenciaClase actualizarAsistencia(Clase buscadaAInscribirse, Usuario usuarioAinscribirse);
 	List<AsistenciaClase> consultarAsistenciaPorClase(Clase clase);
 	AsistenciaClase consultarAsistenciaPorClaseYusuario(Clase clase, Usuario usuario,Integer presente);
+	AsistenciaClase cargarAsistencia(Clase clase, Usuario usuario);
 }

@@ -131,7 +131,7 @@ public class ServicioAsistenciaTest {
 		
 		
 		private AsistenciaClase whenCargoAsistencia(Clase clase, Usuario usuario) {
-			return servicioAsistencia.actualizarAsistencia(clase,usuario);
+			return servicioAsistencia.cargarAsistencia(clase,usuario);
 			
 		}
 		

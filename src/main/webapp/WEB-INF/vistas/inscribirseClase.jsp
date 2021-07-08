@@ -20,6 +20,16 @@
   
 	<div class="container-fluid">
 					<main class="pt-5 col-6 mx-auto text-center">
+					
+					
+													
+		 <c:if test="${not empty msj}">
+                <div class="alert alert-warning" role="alert">
+                    <p>${msj}</p>
+                </div>
+            </c:if>	
+            
+            
 						<h1 class="display-5 text-center col-12 mb-5">Inscribirse</h1>
 						<div class="card mx-auto" >
 									<p class="card-text"><strong>${clase.getNombre()}</strong></p>
