@@ -22,17 +22,21 @@ import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoProfesor;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoUnaFecha;
 import ar.edu.unlam.tallerweb1.modelo.Clase;
 import ar.edu.unlam.tallerweb1.modelo.DatosClase;
+import ar.edu.unlam.tallerweb1.modelo.Profesor;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioClase;
+import ar.edu.unlam.tallerweb1.servicios.ServicioProfesor;
 
 
 @Controller
 public class ControladorClase {
 	private ServicioClase servicioClase;
+	private ServicioProfesor servicioProfesor;
 	
 	@Autowired
-	public ControladorClase(ServicioClase servicioClase) {
+	public ControladorClase(ServicioClase servicioClase,ServicioProfesor servicioProfesor) {
 		this.servicioClase = servicioClase;
+		this.servicioProfesor = servicioProfesor;
 	}
 
 	@RequestMapping(path = "/agregar-clase", method = RequestMethod.GET)
@@ -131,17 +135,32 @@ public class ControladorClase {
 		model.addAttribute("clasesMap",clases);
 		return new ModelAndView("clases-disponibles",model);
     }
-	/*
-	@RequestMapping(path = "filtar-clase" )
-	public ModelAndView buscoClasePorProfesor() {
+	
+	@RequestMapping(path = "filtar-profesor" )
+	public ModelAndView buscoClase(@RequestParam(required = false ,name = "email") String email) {
 		ModelMap model = new ModelMap();
 		Map<Clase, Clase> clasesMap = new HashMap<Clase, Clase>();
-		List<Clase> clases = servicioClase.;
-		
+		List<Clase> clases;
+		if (email != null) {
+			Profesor profesor = servicioProfesor.buscarProfesorPorEmail(email);
+			clases = servicioClase.consultarClasesPorIdProfesor(profesor.getId());			
+		}else {
+			clases = servicioClase.consultarTodasLasClases();
+		}
 		model.addAttribute("clasesMap",clases);
-		return new ModelAndView("clases-disponibles",model);
+		return new ModelAndView("clases-profesor",model);
     }
-	*/
+	/*
+	@RequestMapping(path = "filtar-profesor" )
+	public ModelAndView buscoClasePorProfesor(@RequestParam("email") String email) {
+		ModelMap model = new ModelMap();
+		Map<Clase, Clase> clasesMap = new HashMap<Clase, Clase>();
+		Profesor profesor = servicioProfesor.buscarProfesorPorEmail(email);
+		List<Clase> clases = servicioClase.consultarClasesPorIdProfesor(profesor.getId());
+		model.addAttribute("clasesMap",clases);
+		return new ModelAndView("clases-profesor",model);
+    }
+    */
 	
 	private ModelAndView claseCargadaOk(ModelMap model) {
 		model.put("cargadaOk", true);

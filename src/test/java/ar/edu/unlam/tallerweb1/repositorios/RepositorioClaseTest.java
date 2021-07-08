@@ -100,9 +100,9 @@ public class RepositorioClaseTest extends SpringTest{
 	}
 	@Test @Transactional @Rollback
 	public void queTraigaLasClasesFiltradasPorFecha() {
-		String desde = "2021-08-27";
-		String hasta = "2021-09-01";
-		String fecha = "2021-08-29";
+		String desde = "2021-08-07";
+		String hasta = "2021-08-09";
+		String fecha = "2021-08-08";
 		Profesor profesor = givenCreoElProfesor();
 		Clase clase = whenSeGuardanLosDatos(CLASE,NOMBRE_CLASE,CAPACIDAD,profesor,fecha);
 		

@@ -7,4 +7,5 @@ public interface ServicioProfesor {
 	Profesor agregarProfesor(Profesor profesor);
 	Profesor consultarProfesor(long id);
 	void cambiarClave(String email,String claveNueva,String repiteClaveNueva);
+	Profesor buscarProfesorPorEmail(String email);
 }
