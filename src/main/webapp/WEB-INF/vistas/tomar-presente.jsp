@@ -54,7 +54,11 @@
                 </div>
             </c:if>	
             
+             
             
+             
+            
+            <c:if test="${not empty asistencia}">
 								<table>
 							<tr>
 							<td>Alumno</td>
@@ -77,7 +81,10 @@
 						</c:forEach>
 								
 						 	</table>
-								
+								    </c:if>	
+	
+	
+	   <input type="button" value="Página anterior" onClick="history.go(-1);">
 								
 								</div>
 							</div>

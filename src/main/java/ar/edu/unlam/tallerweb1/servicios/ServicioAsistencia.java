@@ -11,7 +11,7 @@ import ar.edu.unlam.tallerweb1.modelo.Profesor;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 public interface ServicioAsistencia {
 
-	void actualizarAsistencia(Clase buscadaAInscribirse, Usuario usuarioAinscribirse);
+	AsistenciaClase actualizarAsistencia(Clase buscadaAInscribirse, Usuario usuarioAinscribirse);
 	List<AsistenciaClase> consultarAsistenciaPorClase(Clase clase);
 	AsistenciaClase consultarAsistenciaPorClaseYusuario(Clase clase, Usuario usuario,Integer presente);
 }

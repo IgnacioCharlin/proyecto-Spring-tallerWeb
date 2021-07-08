@@ -11,21 +11,16 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import ar.edu.unlam.tallerweb1.excepciones.FaltaCupo;
-import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoProfesor;
-import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoUnaFecha;
+ 
 import ar.edu.unlam.tallerweb1.excepciones.NoTengoClase;
 import ar.edu.unlam.tallerweb1.excepciones.NoTengoUsuario;
-import ar.edu.unlam.tallerweb1.excepciones.UsuarioNoExiste;
-import ar.edu.unlam.tallerweb1.modelo.AsistenciaClase;
+ import ar.edu.unlam.tallerweb1.modelo.AsistenciaClase;
 import ar.edu.unlam.tallerweb1.modelo.Clase;
-import ar.edu.unlam.tallerweb1.modelo.DatosClase;
-import ar.edu.unlam.tallerweb1.modelo.Profesor;
+ import ar.edu.unlam.tallerweb1.modelo.Profesor;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioAsistencia;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioClase;
-import ar.edu.unlam.tallerweb1.repositorios.RepositorioProfesor;
-import ar.edu.unlam.tallerweb1.repositorios.RepositorioUsuario;
+ import ar.edu.unlam.tallerweb1.repositorios.RepositorioUsuario;
 
 public class ServicioAsistenciaTest {
  
@@ -90,22 +85,24 @@ public class ServicioAsistenciaTest {
 
 	  
 	  
-	/*  
+	 
 	  @Test
 	  public void siTengoClaseYusuarioPuedoActualizarAsistencia() {
 		  Usuario usuario= givenTengoUnUsuario();
 		  Clase clase= givenObtenClase();
-		  whenCargoAsistencia(clase,usuario);
-		  whenCargoAsistencia(clase,usuario);
-		  thenPuedoActualizarAsistencia(clase,usuario);
+ 		  Integer presente = 1;
+  		  AsistenciaClase buscoAsistencia =   whenActualizoAsistencia(clase,usuario,presente);
+  		  Integer presenteActualizado = 0;
+		  
+		  thenPuedeActualizarAsistencia(buscoAsistencia,presenteActualizado);
 
 	  }
 	  
-		private void thenPuedoActualizarAsistencia(Clase clase, Usuario usuario) { 
-			verify(repositorioAsistencia,times(1)).modificarAsistencia(clase,usuario);
+		private void thenPuedeActualizarAsistencia(AsistenciaClase buscoAsistencia, Integer presente) { 
+			verify(repositorioAsistencia,times(1)).modificarAsistencia(buscoAsistencia,presente);
 		}
 		  
-		*/
+		
 	  
 	  
 
@@ -123,9 +120,19 @@ public class ServicioAsistenciaTest {
  
 	  
 
-	    
-		private void whenCargoAsistencia(Clase clase, Usuario usuario) {
-			servicioAsistencia.actualizarAsistencia(clase,usuario);
+	  
+		private AsistenciaClase whenActualizoAsistencia(Clase clase, Usuario usuario,Integer presente) {
+ 		 	AsistenciaClase buscoAsistencia=new AsistenciaClase(usuario,clase,presente);
+			when(repositorioAsistencia.buscarPorUsuarioYClase(usuario, clase)).thenReturn(buscoAsistencia);
+			return servicioAsistencia.actualizarAsistencia(clase,usuario); 
+			  
+
+		}
+		
+		
+		private AsistenciaClase whenCargoAsistencia(Clase clase, Usuario usuario) {
+			return servicioAsistencia.actualizarAsistencia(clase,usuario);
+			
 		}
 		
 		

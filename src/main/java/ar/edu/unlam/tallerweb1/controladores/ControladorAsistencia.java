@@ -21,6 +21,8 @@ import ar.edu.unlam.tallerweb1.excepciones.FechaYaPaso;
 import ar.edu.unlam.tallerweb1.excepciones.NoEsProfesor;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoProfesor;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoUnaFecha;
+import ar.edu.unlam.tallerweb1.excepciones.NoTengoClase;
+import ar.edu.unlam.tallerweb1.excepciones.NoTengoUsuario;
 import ar.edu.unlam.tallerweb1.modelo.AsistenciaClase;
 import ar.edu.unlam.tallerweb1.modelo.Clase;
 import ar.edu.unlam.tallerweb1.modelo.DatosClase;
@@ -72,6 +74,7 @@ public class ControladorAsistencia{
 
         	
         } 
+  
 		return new ModelAndView("tomar-presente",model); 
 
 	 
@@ -89,12 +92,21 @@ public class ControladorAsistencia{
     @RequestMapping(path = "guardarAsistencia/{idClase}/{idUsuario}" , method = RequestMethod.GET)
 	public ModelAndView guardarAsistencia(@PathVariable Integer idClase,@PathVariable Integer idUsuario) {
         ModelMap model = new ModelMap();
-        
+        try {
 		Clase clase = servicioClase.consultarClasePorId((long)idClase);
 		Usuario usuario = servicioUsuario.consultarUsuarioPorId((long)idUsuario); 
     	servicioAsistencia.actualizarAsistencia(clase,usuario); 
     	return new ModelAndView("redirect:/tomarPresente/"+idClase+"/"+idUsuario);
-      	 
+        }
+        catch(NoTengoUsuario e){
+             model.put("msj","Usuario invalido.");         
+        } 
+        catch(NoTengoClase e){
+            model.put("msj","Clase invalida.");         
+       } 
+        
+ 		return new ModelAndView("tomar-presente",model); 
+
    	 	
 	 
     }

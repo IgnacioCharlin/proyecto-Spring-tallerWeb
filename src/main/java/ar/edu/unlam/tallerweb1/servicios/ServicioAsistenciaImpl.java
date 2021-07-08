@@ -45,17 +45,17 @@ public class ServicioAsistenciaImpl implements ServicioAsistencia{
 	}
 
 	@Override
-	public void actualizarAsistencia(Clase clase, Usuario usuario) {
+	public AsistenciaClase actualizarAsistencia(Clase clase, Usuario usuario) {
 		
 		
 		if(usuario==null) {
 			throw new NoTengoUsuario();
-		} 
+		}  
 		
 		if(clase==null) {
 			throw new NoTengoClase();
-		} 
-		
+		}  
+ 
 	 	AsistenciaClase buscoAsistencia= repositorioAsistencia.buscarPorUsuarioYClase(usuario,clase);
 		if(buscoAsistencia==null) {
 			repositorioAsistencia.guardarAsistencia(clase,usuario);
@@ -69,7 +69,7 @@ public class ServicioAsistenciaImpl implements ServicioAsistencia{
 			repositorioAsistencia.modificarAsistencia(buscoAsistencia,nuevoPresente);
 		}
 		
-		
+		return buscoAsistencia;
 	}
 	
 	
