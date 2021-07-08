@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.excepciones.NoTengoClase;
+import ar.edu.unlam.tallerweb1.excepciones.NoTengoUsuario;
 import ar.edu.unlam.tallerweb1.modelo.Clase;
 import ar.edu.unlam.tallerweb1.modelo.ClasesInscriptas;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
@@ -49,7 +50,7 @@ public class ControladorInscibirseClases {
 	public ModelAndView confirmaInscripcion(@PathVariable("idUsuario")Long idUsuario, @PathVariable("id") Long id) {
 		ModelMap model = new ModelMap();
 
-	 
+	 try {
 		Clase buscadaAInscribirse = servicioClase.consultarClasePorId(id);
 				
 		Usuario usuarioAinscribirse = servicioUsuario.consultarUsuarioPorId(idUsuario);
@@ -65,7 +66,10 @@ public class ControladorInscibirseClases {
 
 		}  
 		return new ModelAndView("redirect:/home", model);
-	 
+	 }catch(NoTengoUsuario e) {
+			return new ModelAndView("redirect:/login", model);
+
+	 }
 		
 		
 	}

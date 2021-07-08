@@ -84,7 +84,7 @@
 								    </c:if>	
 	
 	
-	   <input type="button" value="Página anterior" onClick="history.go(-1);">
+	   <input type="button" value="Página anterior" class="btn btn-danger btn-block mt-2 w-50" onClick="history.go(-1);">
 								
 								</div>
 							</div>
