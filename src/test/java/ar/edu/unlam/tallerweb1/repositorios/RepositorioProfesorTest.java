@@ -3,6 +3,8 @@ package ar.edu.unlam.tallerweb1.repositorios;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.junit.Test;
@@ -10,12 +12,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 
 import ar.edu.unlam.tallerweb1.SpringTest;
+import ar.edu.unlam.tallerweb1.modelo.Clase;
 import ar.edu.unlam.tallerweb1.modelo.Profesor;
 
 public class RepositorioProfesorTest extends SpringTest{
 
 	@Autowired
 	private RepositorioProfesor repositorioProfesor;
+	
+	@Autowired
+	private RepositorioClase repositorioClase;
 	
 	private final long ID = 1l;
 	private final String EMAIL ="pepe@asd.com";
@@ -64,6 +70,34 @@ public class RepositorioProfesorTest extends SpringTest{
 		thenElProfesorSeModificoConExito(profesor);
 	}
 	
+	@Test @Transactional @Rollback
+	public void queTraigaLasClasesDadasPorElProfesor() {
+		Profesor profesor = givenCreoUnProfesor();
+		Clase clase = givenCreoUnaClase(profesor);
+		List<Clase> clases= whenTraigoClaseDadasPorElProfesor(profesor);
+		thenTraeCorrectamenteLasClasesDadasPorEseProfesor(clases);
+	}
+	
+	private void thenTraeCorrectamenteLasClasesDadasPorEseProfesor(List<Clase> clases) {
+		assertThat(clases).hasSize(1);
+		assertThat(clases.get(0).getProfesor().getEmail()).isEqualTo(EMAIL);
+	}
+
+	private List<Clase> whenTraigoClaseDadasPorElProfesor(Profesor profesor) {
+		return repositorioClase.buscarClasePorProfesor(profesor);
+	}
+
+	private Clase givenCreoUnaClase(Profesor profesor) {
+		Clase clase = new Clase();
+		clase.setNombre("Zumba");
+		clase.setHorarioYFecha("2021-08-08");
+		clase.setId(1L);
+		clase.setCapacidad(20L);
+		clase.setEstado("activa");
+		clase.setProfesor(profesor);
+		return clase;
+	}
+
 	private void whenElProfesorSeModifica(Profesor profesor) {
 		String emailNuevo = "nuevo@nuevo.com";
 		profesor.setEmail(emailNuevo);

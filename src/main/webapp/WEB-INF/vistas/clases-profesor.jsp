@@ -42,21 +42,21 @@
 						<h1 class="display-5 text-center col-12 mb-5">Clases disponibles</h1>
 						
 						<div class="col-12">
-						<form class="d-flex col-6 mx-auto flex-column mb-4" action="filtar-clase">
+						<form class="d-flex col-6 mx-auto flex-column mb-4" action="">
 			 					<div class="d-flex flex-row justify-content-between">
-			 						<div class="col-4">
-			 							<label id="desde" class="text-secondary">Desde</label>
-			 							<input type="date" name="desde" class="form-control">
-			 						</div>
-			 						<div class="col-4">
-			 							<label id="hasta" class="text-secondary">Hasta</label>
-			 							<input type="date" name="hasta" class="form-control">
+			 						<div class="col-12">
+			 							<label id="email" class="text-secondary">Email:</label>
+			 							<input type="email" name="email" class="form-control" placeholder="Ingresar email profesor">
 			 						</div>
 			 					</div>
 			 					<div class="">
 			 						<input type="submit" value="Buscar" class="btn btn-primary w-100 mt-4"> 
 			 					</div>
 			 			</form>
+			 			<c:if test="${not empty error}">
+			        <div class="alert alert-danger mt-2" role="alert" >${error}</div>
+			        <br>
+		        </c:if>	
 			 			</div>
 						<c:forEach var="i" items="${clasesMap}">
 							<div class="card mx-auto mb-3 text-center" style="width: 18rem;">
@@ -64,7 +64,7 @@
 									<h5 class="card-title">${i.nombre}</h5>
 								</div>
 								<div class="card-body">
-									<p class="card-text">${i.HorarioYFecha}</p>
+									<p class="card-text">${i.HorarioYFecha}</p> 
 									<p class="card-text">Capacidad: ${i.capacidad}</p>
 									<p class="card-text">Inscriptos: ${i.inscriptos}</p> 
 									<p class="card-text">Disponibilidad: ${i.capacidad - i.inscriptos}</p>

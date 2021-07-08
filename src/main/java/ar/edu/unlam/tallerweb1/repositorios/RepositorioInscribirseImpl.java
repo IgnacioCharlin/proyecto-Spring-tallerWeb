@@ -41,10 +41,6 @@ public class RepositorioInscribirseImpl implements RepositorioInscribirse{
  		sessionFactory.getCurrentSession().save(clasesInscripta);
 		
 	}
- 
- 
-
- 
 	
 	@Override
 	public ClasesInscriptas buscarPorUsuarioYClase(Usuario usuario, Clase clase) {
