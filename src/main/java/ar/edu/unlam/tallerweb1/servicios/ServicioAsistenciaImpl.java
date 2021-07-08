@@ -9,12 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ar.edu.unlam.tallerweb1.excepciones.AlumnoNoPerteneceAlaClase;
 import ar.edu.unlam.tallerweb1.excepciones.ClaseInvalida;
 import ar.edu.unlam.tallerweb1.excepciones.FaltaCupo;
 import ar.edu.unlam.tallerweb1.excepciones.FechaYaPaso;
 import ar.edu.unlam.tallerweb1.excepciones.NoEsProfesor;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoProfesor;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoUnaFecha;
+import ar.edu.unlam.tallerweb1.excepciones.NoTengoClase;
+import ar.edu.unlam.tallerweb1.excepciones.NoTengoUsuario;
+import ar.edu.unlam.tallerweb1.excepciones.UsuarioNoExiste;
+import ar.edu.unlam.tallerweb1.excepciones.UsuarioYaEstabaInscrito;
 import ar.edu.unlam.tallerweb1.modelo.AsistenciaClase;
 import ar.edu.unlam.tallerweb1.modelo.CalificacionClase;
 import ar.edu.unlam.tallerweb1.modelo.Clase;
@@ -42,11 +47,21 @@ public class ServicioAsistenciaImpl implements ServicioAsistencia{
 	}
 
 	@Override
-	public void actualizarAsistencia(Clase clase, Usuario usuario) {
+	public AsistenciaClase actualizarAsistencia(Clase clase, Usuario usuario) {
 		
+		
+		if(usuario==null) {
+			throw new NoTengoUsuario();
+		}  
+		
+		if(clase==null) {
+			throw new NoTengoClase();
+		}  
+ 
 	 	AsistenciaClase buscoAsistencia= repositorioAsistencia.buscarPorUsuarioYClase(usuario,clase);
 		if(buscoAsistencia==null) {
-			repositorioAsistencia.guardarAsistencia(clase,usuario);
+			//			repositorioAsistencia.guardarAsistencia(clase,usuario);
+			throw new AlumnoNoPerteneceAlaClase();
 		}else {
 			Integer presente=buscoAsistencia.getPresente();
 			Integer nuevoPresente=1;
@@ -57,11 +72,34 @@ public class ServicioAsistenciaImpl implements ServicioAsistencia{
 			repositorioAsistencia.modificarAsistencia(buscoAsistencia,nuevoPresente);
 		}
 		
-		
+		return buscoAsistencia;
 	}
 	
 	
  
+	@Override
+	public AsistenciaClase cargarAsistencia(Clase clase, Usuario usuario) {
+		
+		
+		if(usuario==null) {
+			throw new NoTengoUsuario();
+		}  
+		
+		if(clase==null) {
+			throw new NoTengoClase();
+		}  
+ 
+	 	AsistenciaClase buscoAsistencia= repositorioAsistencia.buscarPorUsuarioYClase(usuario,clase);
+		if(buscoAsistencia==null) {
+			repositorioAsistencia.guardarAsistencia(clase,usuario);
+		}else { 
+			throw new UsuarioYaEstabaInscrito();
+		}
+		
+		return buscoAsistencia;
+	}
+	
+	
 	
 	@Override
 	public List<AsistenciaClase> consultarAsistenciaPorClase(Clase clase ) {
