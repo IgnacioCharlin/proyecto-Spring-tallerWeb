@@ -16,3 +16,5 @@ hs_err_pid*
 .idea/*
 *.iml
 /.java-version
+src/main/resources/hibernateContext.xml
+src/main/resources/hibernateContextMio.xml

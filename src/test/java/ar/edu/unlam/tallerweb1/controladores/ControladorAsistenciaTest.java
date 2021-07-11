@@ -11,9 +11,8 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.stereotype.Controller;
-//import org.springframework.test.annotation.Rollback;
-import org.springframework.transaction.annotation.Transactional;
+
+
 import org.springframework.web.servlet.ModelAndView;
 
 import static org.assertj.core.api.Assertions.*;
@@ -28,7 +27,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
  
-@Controller
+
 public class ControladorAsistenciaTest  {
 	
 	 
@@ -46,13 +45,11 @@ public class ControladorAsistenciaTest  {
 	   servicioClase= mock(ServicioClase.class);
 	   controladorAsitencia = new ControladorAsistencia(servicioAsistencia,servicioUsuario,servicioClase);
  
-
    }
 
      
    @Test
-   @Transactional
-   public void siNoTengoIdClaseNoPuedoDarPresente(){
+    public void siNoTengoIdClaseNoPuedoDarPresente(){
    	      	
    Integer idUsuario= 1;  
    Integer idClase= 0;  
@@ -78,12 +75,9 @@ public class ControladorAsistenciaTest  {
 
 		
 }
-
- 
  
 
 @Test
-@Transactional
 public void noTengoAlumnosEnLaClase(){
 	      	
  	Clase clase= new Clase() ; 
@@ -97,11 +91,8 @@ public void noTengoAlumnosEnLaClase(){
 }
 
 
-
-
 private void thanClaseSinAlumnos() {
 		assertThat(mav.getModel().get("msj")).isEqualTo("Esta clase no contiene alumnos."); 		
-
 		
 }
  
