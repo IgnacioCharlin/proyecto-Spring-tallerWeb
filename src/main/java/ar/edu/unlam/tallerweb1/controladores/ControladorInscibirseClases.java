@@ -13,10 +13,12 @@ import ar.edu.unlam.tallerweb1.excepciones.NoTengoUsuario;
 import ar.edu.unlam.tallerweb1.modelo.Clase;
 import ar.edu.unlam.tallerweb1.modelo.ClasesInscriptas;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.modelo.UsuariosFichas;
 import ar.edu.unlam.tallerweb1.servicios.ServicioAsistencia;
 import ar.edu.unlam.tallerweb1.servicios.ServicioClase;
 import ar.edu.unlam.tallerweb1.servicios.ServicioInscribirse;
 import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
+import ar.edu.unlam.tallerweb1.servicios.ServicioUsuarioFichas;
 
 @Controller
 public class ControladorInscibirseClases {
@@ -26,13 +28,15 @@ public class ControladorInscibirseClases {
 	private ServicioClase servicioClase;
 	private ServicioAsistencia servicioAsistencia;
 	private ServicioInscribirse servicioInscribirse;
+	private ServicioUsuarioFichas servicioUsuarioFichas;
 	
 	@Autowired
-	public ControladorInscibirseClases(ServicioInscribirse servicioInscribirse,ServicioClase servicioClase, ServicioUsuario servicioUsuario, ServicioAsistencia servicioAsistencia) {
+	public ControladorInscibirseClases(ServicioInscribirse servicioInscribirse,ServicioClase servicioClase, ServicioUsuario servicioUsuario, ServicioAsistencia servicioAsistencia, ServicioUsuarioFichas servicioUsuarioFichas) {
 		this.servicioClase = servicioClase;
 		this.servicioUsuario = servicioUsuario;
 		this.servicioAsistencia = servicioAsistencia;
 		this.servicioInscribirse = servicioInscribirse;
+		this.servicioUsuarioFichas = servicioUsuarioFichas;
 	}
 	
 	
@@ -54,12 +58,20 @@ public class ControladorInscibirseClases {
 		Clase buscadaAInscribirse = servicioClase.consultarClasePorId(id);
 				
 		Usuario usuarioAinscribirse = servicioUsuario.consultarUsuarioPorId(idUsuario);
-		
-
 		ClasesInscriptas clasesInscripta=servicioInscribirse.buscarInscripcion(buscadaAInscribirse,usuarioAinscribirse);
+
+ 		 UsuariosFichas fichasDisponibles=servicioUsuarioFichas.buscarFichasPorUsuario(idUsuario);
+ 		if(fichasDisponibles == null || fichasDisponibles.getCantidad()<=0) {
+            model.put("msj","El usuario no tiene creditos para poder inscribirse, debe comprar una tarjeta para adquirirlos."); 
+			return new ModelAndView("redirect:/comprarTarjeta/"+idUsuario, model);
+ 		}
+ 		
+ 		
 		if(clasesInscripta == null) {
 			servicioInscribirse.guardarInscripcion(buscadaAInscribirse,usuarioAinscribirse);
 			servicioAsistencia.cargarAsistencia(buscadaAInscribirse,usuarioAinscribirse);
+			servicioUsuarioFichas.descontarClase(usuarioAinscribirse);
+			
 		}else{
             model.put("msj","El usuario ya estaba inscripto."); 
     		return new ModelAndView("inscribirseClase", model);
