@@ -71,7 +71,7 @@
 									<p class="card-text">${i.descripcion}</p>
 									<p class="card-text">Precio:$ ${i.precio}</p>
 									<p class="card-text">Cantidad de Clases: ${i.cantidad}</p> 
-									<img src="/EnerGym/images/tarjeta${i.id}.png" alt="${i.nombre}">
+									<img src="${contextPath}/images/tarjeta${i.id}.png" alt="${i.nombre}">
  
 <c:if test="${i.id==1}">
 <script
