@@ -33,7 +33,7 @@ public class ControladorInscripcionTest {
 		servicioClase = mock(ServicioClase.class);
 		servicioAsistencia = mock(ServicioAsistencia.class);
 		servicioInscribirse = mock(ServicioInscribirse.class);
-		controladorInscribirseClases = new ControladorInscibirseClases(servicioInscribirse, servicioClase, servicioUsuario, servicioAsistencia);
+		controladorInscribirseClases = new ControladorInscibirseClases(servicioInscribirse, servicioClase, servicioUsuario, servicioAsistencia, null);
 		
 	}
 	
