@@ -38,7 +38,7 @@
 			            </c:if>	
             
             	 <c:if test="${not empty json}">
-			  123
+
 				${json}
  
 			         
