@@ -2,22 +2,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 	<head>
-	<!-- Bootstrap core CSS 
-	    <link href="css/bootstrap.min.css" rel="stylesheet" >
-	    <!-- Bootstrap theme 
-	    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
-	-->
+	<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 	</head>
-	<body>
+	<body class="w3l-login">
 		<div class = "container">
-			<div id="loginbox" class="pt-5 col-6 mx-auto text-center">
+			<div id="loginbox" class="pt-5 col-6 mx-auto text-center form-section">
 				<%--Definicion de un form asociado a la accion /validar-login por POST. Se indica ademas que el model attribute se--%>
 				<%--debe referenciar con el nombre usuario, spring mapea los elementos de la vista con los atributos de dicho objeto--%>
 					<%--para eso debe coincidir el valor del elemento path de cada input con el nombre de un atributo del objeto --%>
 				<form:form action="validar-login" method="POST" modelAttribute="usuario">
-			    	<h3 class="form-signin-heading display-5">EnerGym</h3>
-					<hr class="colorgraph"><br>
+			    	<h3 class="form-signin-heading display-5 text-white"><img src="/proyecto-limpio-spring/images/logo.png"></h3>
 
 					<%--Elementos de entrada de datos, el elemento path debe indicar en que atributo del objeto usuario se guardan los datos ingresados--%>
 					<form:input path="email" id="email" type="email" class="form-control mb-2" placeholder='Ingresar Mail' />

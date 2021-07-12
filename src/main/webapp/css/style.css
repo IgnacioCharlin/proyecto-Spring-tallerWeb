@@ -88,6 +88,9 @@
       padding: 0;
   }
 
+  header a:hover{
+  	text-decoration: revert !important;
+  }
 
   .w3l-login {
       position: relative;
@@ -95,6 +98,23 @@
       background: url(../images/bgimage.jpg) no-repeat 0px 0px;
       background-size: cover;
   }
+  
+  .w3l-home {
+      position: relative;
+      height: 100vh;
+      background: url(../images/Yoga.jpg) no-repeat 0px 0px;
+      background-size: cover;
+  }
+  
+  .titulo-home{
+  	margin-top: 15% !important;
+    color: white;
+    font-size: 9rem !important;
+    font-weight: 700 !important;
+    font-style: italic !important;
+  }
+  
+ 
 
   .logo {
       text-align: center;
