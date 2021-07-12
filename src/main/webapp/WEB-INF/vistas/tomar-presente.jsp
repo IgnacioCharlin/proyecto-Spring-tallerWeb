@@ -18,21 +18,29 @@
 </head>
 
 
-<c:set  value='<%= session.getAttribute("idUsuario") %>' var="idUsuario"  /> 
-  <c:if test="${empty idUsuario}">
-  <c:set  value="0" var="idUsuario"  />
-  </c:if>	
-  
-  
-  
+<c:set value='<%=session.getAttribute("idUsuario")%>' var="idUsuario" />
+<c:if test="${empty idUsuario}">
+	<c:set value="0" var="idUsuario" />
+</c:if>
+<c:set value='<%=session.getAttribute("rolUsuario")%>' var="rol" />
+<c:if test="${empty rol}">
+	<c:set value="null" var="rol" />
+</c:if>
+
+
 <body class="mw-100">
 	<div class="container-fluid">
 		<div class="row">
 			<div class="d-flex flex-column col-2 p-3 mb-2 bg-primary text-white">
 				<a href="../../home" class="text-white text-decoration-none fw-bold">Home</a>
 				<a href="../../clases-disponibles" class="text-white text-decoration-none fw-bold">Clases Disponibles</a>
+				<c:if test="${ rol == 'admin' }">
 				<a href="../../agregar-profesor" class="text-white text-decoration-none fw-bold">Agregar Profesor</a>
+				</c:if>
+				<c:if test="${ rol == 'usuario' }">	
 				<a href="../../clases-inscriptas/${idUsuario}" class="text-white text-decoration-none fw-bold">Clases incriptas</a>
+				
+				</c:if>
 			</div>
 			<div class="col-10">
 				<div class="container">

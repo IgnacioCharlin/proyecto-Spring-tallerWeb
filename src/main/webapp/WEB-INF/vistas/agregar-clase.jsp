@@ -19,15 +19,7 @@
 		<hr class="colorgraph">
 		<br>
 
-				<%--Elementos de entrada de datos, el elemento path debe indicar en que atributo del objeto usuario se guardan los datos ingresados
-		private String nombre;
-    	private String fechaYHora;
-    	private Long idProfesor;
-    	private Long cupo;
-		
-		
-		--%>
-
+	
 		<form:input path="nombre" id="nombre" type="text" class="form-control mb-2" placeholder="Ingresar Nombre"/>
 		<form:input path="fechaYHora" id="fechaYHora" type="datetime-local" class="form-control mb-2" />
 		<form:input path="cupo" type="number" id="cupo" class="form-control mb-2" placeholder="Ingresar capacidad"/>
@@ -38,8 +30,9 @@
 			        <div class="alert alert-danger mt-2" role="alert" >${error}</div>
 		
 		        </c:if>
-		
+		<a href="home" class="btn btn-lg btn-danger btn-block mt-2 w-25">Volver</a>
 		<button class="btn btn-lg btn-primary btn-block mt-2 w-100" Type="Submit" />Agregar</button>
+		
 		
 	</form:form>
 

@@ -58,7 +58,8 @@ public class ControladorLogin {
 		try {
 			Usuario usuarioBuscado = servicioUsuario.consultarUsuario(datos);
 			//guardo el id del usuario logueado
-			request.getSession().setAttribute("idUsuario", usuarioBuscado.getId());			
+			request.getSession().setAttribute("idUsuario", usuarioBuscado.getId());
+			request.getSession().setAttribute("rolUsuario", usuarioBuscado.getRol());
 			return new ModelAndView("redirect:/home");
 			
 		} catch (UsuarioNoExiste e) {

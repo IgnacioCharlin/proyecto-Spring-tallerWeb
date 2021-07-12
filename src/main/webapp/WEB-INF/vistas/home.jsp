@@ -26,6 +26,10 @@
 <c:if test="${empty idUsuario}">
 	<c:set value="0" var="idUsuario" />
 </c:if>
+<c:set  value='<%= session.getAttribute("rolUsuario") %>' var="rol"  />
+<c:if test="${empty rol}">
+  <c:set  value="null" var="rol"  />
+  </c:if>  
 
 <c:set  value="<%=request.getContextPath()%>" var="contextPath"  />
 </head>
@@ -36,27 +40,34 @@
 				<div
 					class="d-flex flex-col w-100 p-3 mb-2 text-white justify-content-around">
 					<a href="home" class="h5 text-white text-decoration-none fw-bold">Home</a>
+				<c:if test="${ rol == 'admin' }">
+					<a href="agregar-profesor"
+						class="h5 text-white text-decoration-none fw-bold">Agregar
+						Profesor</a>
+				</c:if>
+					<a href="filtar-profesor"
+						class="h5 text-white text-decoration-none fw-bold">Clase Por
+						Profesor</a> 
 					<a href="clases-disponibles"
 						class="h5 text-white text-decoration-none fw-bold">Clases
-						Disponibles</a> <a href="agregar-profesor"
-						class="h5 text-white text-decoration-none fw-bold">Agregar
-						Profesor</a> <a href="clases-inscriptas/${idUsuario}"
+						Disponibles</a>
+				<c:if test="${ rol == 'usuario' }">		
+					<a href="clases-inscriptas/${idUsuario}"
 						class="h5 text-white text-decoration-none fw-bold">Clases
-						incriptas</a> <a href="filtar-profesor"
-						class="h5 text-white text-decoration-none fw-bold">Clase Por
-						Profesor</a> <a href="comprarTarjeta/${idUsuario}"
+						incriptas</a>
+					<a href="comprarTarjeta/${idUsuario}"
 						class="h5 text-white text-decoration-none fw-bold">Comprar
 						Tarjetas</a>
-
+				</c:if>
 				</div>
 				<h1 class="display-5 text-center titulo-home">JUST DO IT</h1>
 	</header>
 	<div class="col-10">
 		<div class="container">
-
+	<c:if test="${ rol == 'admin' }">
 			<a href="agregar-clase" class="btn btn-success">Agregar Clase</a>
+	</c:if>
 			<main class="mt-4 d-flex flex-wrap">
-
 
 				<c:forEach var="i" items="${clasesMap}">
 					<div class="card" style="width: 18rem;">

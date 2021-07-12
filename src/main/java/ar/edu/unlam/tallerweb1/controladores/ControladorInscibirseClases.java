@@ -44,15 +44,11 @@ public class ControladorInscibirseClases {
 	@RequestMapping(path = "/inscribirseclase/{id}", method = RequestMethod.GET)
 	public ModelAndView inscribirseAunaClase(Usuario usuario, @PathVariable("id") Long id, HttpServletRequest request) {
 		ModelMap model = new ModelMap();
-		Long idABuscar= (Long) request.getSession().getAttribute("idUsuario");
-		Usuario usuarioBuscado = servicioUsuario.consultarUsuarioPorId(idABuscar);
+		String rolUsuario=  (String) request.getSession().getAttribute("rolUsuario");
 		
-		if(idABuscar != null) {
-		if (usuarioBuscado.getRol() != "usuario") {
-			 model.put("error","Solo los Usuarios se puden inscribir a las clases"); 
-	    		return new ModelAndView("redirect:/home", model);
-			
-		}
+		
+		if(rolUsuario != null) {
+		
 		Clase buscadaAInscribirse = servicioClase.consultarClasePorId(id);
 		
 		model.put("clase", buscadaAInscribirse);

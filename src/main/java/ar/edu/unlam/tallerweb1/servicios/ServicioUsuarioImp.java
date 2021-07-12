@@ -4,7 +4,6 @@ import ar.edu.unlam.tallerweb1.excepciones.ClaveNuevaIgualActual;
 import ar.edu.unlam.tallerweb1.excepciones.ClavesNoCoinciden;
 import ar.edu.unlam.tallerweb1.excepciones.UsuarioExistente;
 import ar.edu.unlam.tallerweb1.excepciones.UsuarioNoExiste;
-import ar.edu.unlam.tallerweb1.modelo.Clase;
 import ar.edu.unlam.tallerweb1.modelo.DatosRegistro;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioUsuario;
@@ -16,7 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class ServicioUsuarioImp implements ServicioUsuario {
 
-    private RepositorioUsuario repositorioUsuario;
+    private static final String USUARIO = "usuario";
+	private RepositorioUsuario repositorioUsuario;
 
     @Autowired
     public ServicioUsuarioImp(RepositorioUsuario repositorioUsuario){
@@ -33,6 +33,7 @@ public class ServicioUsuarioImp implements ServicioUsuario {
         Usuario nuevoUsuario = new Usuario();
         nuevoUsuario.setEmail(datos.getEmail());
         nuevoUsuario.setPassword(datos.getPassword());
+        nuevoUsuario.setRol(USUARIO);
         repositorioUsuario.guardar(nuevoUsuario);
         return nuevoUsuario;
     }
