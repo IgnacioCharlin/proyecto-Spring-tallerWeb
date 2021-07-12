@@ -22,6 +22,7 @@
 
 }</style>
 </head>
+<c:set  value="<%=request.getContextPath()%>" var="contextPath"  />
 
 
 <c:set value='<%=session.getAttribute("idUsuario")%>' var="idUsuario" />
@@ -37,15 +38,17 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="d-flex flex-column col-2 p-3 mb-2 bg-primary text-white">
-				a href="./home" class="text-white text-decoration-none fw-bold">Home</a>
-				<a href="./clases-disponibles" class="text-white text-decoration-none fw-bold">Clases Disponibles</a>
+				<a href="${contextPath}/home" class="text-white text-decoration-none fw-bold">Home</a>
+				<a href="${contextPath}/clases-disponibles" class="text-white text-decoration-none fw-bold">Clases Disponibles</a>
 				<c:if test="${ rol == 'admin' }">
-					<a href="agregar-profesor"
+					<a href="${contextPath}/agregar-profesor"
 						class="h5 text-white text-decoration-none fw-bold">Agregar
 						Profesor</a>
 				</c:if>
-				<a href="./clases-inscriptas/${idUsuario}" class="text-white text-decoration-none fw-bold">Clases incriptas</a>
-				<a href="./filtar-profesor" class="text-white text-decoration-none fw-bold">Clase Por Profesor</a>
+				<a href="${contextPath}/filtar-profesor" class="text-white text-decoration-none fw-bold">Clase Por Profesor</a>
+				<a href="${contextPath}/clases-inscriptas/${idUsuario}" class="text-white text-decoration-none fw-bold">Clases incriptas</a>
+				<a href="${contextPath}/comprarTarjeta/${idUsuario}" class="text-white text-decoration-none fw-bold">Comprar Tarjetas</a>
+				<a href="${contextPath}/verMisCompras/${idUsuario}" class="text-white text-decoration-none fw-bold">Ver mis Compras</a>
 			</div>
 			<div class="col-10">
 				<div class="container">
@@ -86,8 +89,8 @@
 					  </c:if>
   
 						<tr class="${cssClass}">
-						<td><fmt:formatDate value="${i.fecha}" pattern="dd/MM/yyy" /></td>
-						<td>${i.tarjeta.nombre} $ ${i.tarjeta.precio}<img src="../../images/tarjeta${i.tarjeta.id}.png" alt="${i.tarjeta.nombre}" class="imgTarjeta"></td>
+						<td><fmt:formatDate value="${i.fecha}" pattern="dd/MM/yyyy" /></td>
+						<td>${i.tarjeta.nombre} $ ${i.tarjeta.precio}<img src="${contextPath}/images/tarjeta${i.tarjeta.id}.png" alt="${i.tarjeta.nombre}" class="imgTarjeta"></td>
 						<td>${i.cantidad}</td>
 						<td>${i.estado}</td>
 						

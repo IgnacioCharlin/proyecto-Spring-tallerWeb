@@ -113,6 +113,8 @@ public class RepositorioClaseImpl implements RepositorioClase{
 				+ " where"
 				+ where + ""
 			    + " GROUP by (clase.id) "
+			    + " ORDER BY clase.HorarioYFecha asc"
+
 			    //+ " HAVING clase.capacidad>count(clases_inscriptas.id_usuario)"
 
  			    )
@@ -140,6 +142,7 @@ public class RepositorioClaseImpl implements RepositorioClase{
 				+ " where"
 				+ where + "and clase.estado = 'activa'"
 			    + " GROUP by (clase.id) "
+			    + " ORDER BY clase.HorarioYFecha asc"
 			 //   + " HAVING clase.capacidad>count(clases_inscriptas.id_usuario)"
  			    )
 				;

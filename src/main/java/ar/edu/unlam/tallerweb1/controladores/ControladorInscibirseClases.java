@@ -80,13 +80,15 @@ public class ControladorInscibirseClases {
 			servicioInscribirse.guardarInscripcion(buscadaAInscribirse,usuarioAinscribirse);
 			servicioAsistencia.cargarAsistencia(buscadaAInscribirse,usuarioAinscribirse);
 			servicioUsuarioFichas.descontarClase(usuarioAinscribirse);
-			
+            model.put("msj","La inscripción se logró correctamente."); 
+
 		}else{
             model.put("msj","El usuario ya estaba inscripto."); 
-    		return new ModelAndView("inscribirseClase", model);
+    		return new ModelAndView("notificacion", model);
 
 		}  
-		return new ModelAndView("redirect:/home", model);
+		//return new ModelAndView("redirect:/home", model);
+		return new ModelAndView("notificacion", model);
 	 }catch(NoTengoUsuario e) {
 			return new ModelAndView("redirect:/login", model);
 

@@ -16,8 +16,20 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 </head>
+<%@ page import="java.util.*" %>
 
+<%@ page import="java.text.SimpleDateFormat"%>
+ <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+ 
+<%
+   Date dNow = new Date();
+   SimpleDateFormat ft = 
+   new SimpleDateFormat ("yyyy-MM-dd hh:mm");
+   String hoy = ft.format(dNow);
+%> 
+<c:set  value='<%= hoy %>' var="hoy"  /> 
 
+ 
  
 <c:set  value='<%= session.getAttribute("idUsuario") %>' var="idUsuario"  /> 
   <c:if test="${empty idUsuario}">
@@ -28,7 +40,7 @@
   <c:set  value="null" var="rol"  />
   </c:if>  
   
-  
+   
 <body class="mw-100">
 	<div class="container-fluid">
 		<div class="row">
@@ -72,7 +84,12 @@
 									<h5 class="card-title">${i.nombre}</h5>
 								</div>
 								<div class="card-body">
-									<p class="card-text">${i.HorarioYFecha}</p>
+									<p class="card-text">
+ <c:set var="dateParts" value="${fn:split(i.HorarioYFecha, ' ')}" />
+ <c:set var="dia" value="${fn:split(dateParts[0], '-')}" />
+ <c:set var="hora" value="${fn:split(dateParts[1], ':')}" />
+ 		 ${dia[2]}/${dia[1]}/${dia[0]} ${hora[0]}:${hora[1]}
+									 </p>
 									<p class="card-text">Capacidad: ${i.capacidad}</p>
 									<p class="card-text">Inscriptos: ${i.inscriptos}</p> 
 									<p class="card-text">Disponibilidad: ${i.capacidad - i.inscriptos}</p>
@@ -82,7 +99,7 @@
 									</p>
 								</c:if>
 								<c:if test="${ rol == 'usuario' }">
-									   <c:if test="${ i.capacidad>i.inscriptos}">
+									   <c:if test="${ i.capacidad>i.inscriptos && i.HorarioYFecha>hoy }">
 									<p>	<a class="btn btn-success text-white w-100" href="inscribirseclase/${i.id}/${idUsuario}">Inscribirse</a>
   									  </p>
   									  </c:if>
