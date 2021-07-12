@@ -3,7 +3,6 @@ package ar.edu.unlam.tallerweb1.controladores;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
 import ar.edu.unlam.tallerweb1.modelo.CalificacionClase;
 import ar.edu.unlam.tallerweb1.modelo.Clase;
 import ar.edu.unlam.tallerweb1.modelo.ClasesInscriptas;
@@ -45,7 +43,7 @@ private ServicioInscribirse servicioInscribirse;
 	 	
 		Map<Clase, Clase> clasesMap = new HashMap<Clase, Clase>();
 		ModelMap model = new ModelMap();
-	//	Set<Clase> clases = servicioUsuario.consultarUsuarioPorId((long)idUsuario).getClases();
+	
 		
 		List<ClasesInscriptas> clases = servicioInscribirse.consultarUsuarioPorId((long)idUsuario);
 		List<CalificacionClase> calificaciones = servicioCalificar.consultarPorIdUsuario((long)idUsuario);

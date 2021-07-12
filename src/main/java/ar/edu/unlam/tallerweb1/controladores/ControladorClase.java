@@ -1,10 +1,10 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
 import ar.edu.unlam.tallerweb1.excepciones.FaltaCupo;
 import ar.edu.unlam.tallerweb1.excepciones.FechaYaPaso;
 import ar.edu.unlam.tallerweb1.excepciones.NoEsProfesor;
@@ -23,7 +22,6 @@ import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoUnaFecha;
 import ar.edu.unlam.tallerweb1.modelo.Clase;
 import ar.edu.unlam.tallerweb1.modelo.DatosClase;
 import ar.edu.unlam.tallerweb1.modelo.Profesor;
-import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioClase;
 import ar.edu.unlam.tallerweb1.servicios.ServicioProfesor;
 
@@ -108,17 +106,28 @@ public class ControladorClase {
 	}
 	
 	@RequestMapping(path = "/home", method = RequestMethod.GET)
-	public ModelAndView irAHome() {
+	public ModelAndView irAHome(HttpServletRequest request) {
+		String rolUsuario=  (String) request.getSession().getAttribute("rolUsuario");
+		
+		if(rolUsuario != null) {
 		Map<Clase, Clase> clasesMap = new HashMap<Clase, Clase>();
 		ModelMap model = new ModelMap();
 		List<Clase> clases = servicioClase.consultarTodasLasClases();
 		
 		model.addAttribute("clasesMap",clases);
 		return new ModelAndView("home",model);
+		}
+		else {
+			return new ModelAndView("redirect:/login");
+		}
 	}
 	
 	@RequestMapping("clases-disponibles")
-	public ModelAndView irAClasesDisponibles(){
+	public ModelAndView irAClasesDisponibles(HttpServletRequest request){
+		String rolUsuario=  (String) request.getSession().getAttribute("rolUsuario");
+		if(rolUsuario == null)
+			return new ModelAndView("redirect:/login");
+			
 		ModelMap model = new ModelMap();
 		Map<Clase, Clase> clasesMap = new HashMap<Clase, Clase>();
 		List<Clase> clases = servicioClase.consultarTodasLasClases();

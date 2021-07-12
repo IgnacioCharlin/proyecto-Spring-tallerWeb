@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
 import ar.edu.unlam.tallerweb1.excepciones.NoTengoClase;
 import ar.edu.unlam.tallerweb1.excepciones.NoTengoUsuario;
 import ar.edu.unlam.tallerweb1.modelo.Clase;
@@ -18,7 +17,9 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioAsistencia;
 import ar.edu.unlam.tallerweb1.servicios.ServicioClase;
 import ar.edu.unlam.tallerweb1.servicios.ServicioInscribirse;
 import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
+import javax.servlet.http.HttpServletRequest;
 import ar.edu.unlam.tallerweb1.servicios.ServicioUsuarioFichas;
+
 
 @Controller
 public class ControladorInscibirseClases {
@@ -41,13 +42,21 @@ public class ControladorInscibirseClases {
 	
 	
 	@RequestMapping(path = "/inscribirseclase/{id}", method = RequestMethod.GET)
-	public ModelAndView inscribirseAunaClase(Usuario usuario, @PathVariable("id") Long id) {
+	public ModelAndView inscribirseAunaClase(Usuario usuario, @PathVariable("id") Long id, HttpServletRequest request) {
+		ModelMap model = new ModelMap();
+		String rolUsuario=  (String) request.getSession().getAttribute("rolUsuario");
+		
+		
+		if(rolUsuario != null) {
 		
 		Clase buscadaAInscribirse = servicioClase.consultarClasePorId(id);
-		ModelMap model = new ModelMap();
+		
 		model.put("clase", buscadaAInscribirse);
 		
 		return new ModelAndView("inscribirseClase", model);
+		}else {
+			return new ModelAndView("redirect:/login", model);
+		}
 		
 	}
 	@RequestMapping(path = "/inscribirseclase/{id}/{idUsuario}", method = RequestMethod.GET)
