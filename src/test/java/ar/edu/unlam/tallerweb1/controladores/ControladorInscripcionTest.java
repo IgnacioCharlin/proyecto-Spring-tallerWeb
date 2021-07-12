@@ -17,6 +17,7 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioAsistencia;
 import ar.edu.unlam.tallerweb1.servicios.ServicioClase;
 import ar.edu.unlam.tallerweb1.servicios.ServicioInscribirse;
 import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
+import ar.edu.unlam.tallerweb1.servicios.ServicioUsuarioFichas;
 
 public class ControladorInscripcionTest {
 
@@ -29,14 +30,15 @@ public class ControladorInscripcionTest {
 	private ServicioClase servicioClase;
 	private ServicioAsistencia servicioAsistencia;
 	private ServicioInscribirse servicioInscribirse;
-	
+	private ServicioUsuarioFichas servicioUsuarioFichas;
 	@Before
 	public void init() {
 		servicioUsuario = mock(ServicioUsuario.class);
 		servicioClase = mock(ServicioClase.class);
 		servicioAsistencia = mock(ServicioAsistencia.class);
 		servicioInscribirse = mock(ServicioInscribirse.class);
-		controladorInscribirseClases = new ControladorInscibirseClases(servicioInscribirse, servicioClase, servicioUsuario, servicioAsistencia);
+		servicioUsuarioFichas = mock(ServicioUsuarioFichas.class);
+		controladorInscribirseClases = new ControladorInscibirseClases(servicioInscribirse, servicioClase, servicioUsuario, servicioAsistencia, servicioUsuarioFichas );
 		
 	}
 	

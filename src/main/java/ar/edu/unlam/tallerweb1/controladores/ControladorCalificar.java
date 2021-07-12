@@ -75,7 +75,7 @@ public class ControladorCalificar {
 		   		 return new ModelAndView("redirect:/login");
 		   		}
 		}catch(UsuarioNoEstaPresenteEnLaClase e) {
-			model.addAttribute("msj","El usuario no participo de la clase, por tal motivo no puedo calificarla.");
+			model.addAttribute("msj","El usuario no participo de la clase, por tal motivo no podra calificarla.");
 			return new ModelAndView("notificacion",model); 
 		}
 

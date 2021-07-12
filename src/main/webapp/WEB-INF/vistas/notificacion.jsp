@@ -37,6 +37,14 @@
 			                </div>
 			            </c:if>	
             
+            	 <c:if test="${not empty json}">
+
+				${json}
+ 
+			         
+			            </c:if>	
+			            
+			            
             			<a onClick="history.go(-1);" class="btn btn-danger btn-block mt-2 w-50"/>Volver</a>
 						</div>
 						

@@ -30,6 +30,8 @@
 				<a href="agregar-profesor" class="text-white text-decoration-none fw-bold">Agregar Profesor</a>
 				<a href="clases-inscriptas/${idUsuario}" class="text-white text-decoration-none fw-bold">Clases incriptas</a>
 				<a href="filtar-profesor" class="text-white text-decoration-none fw-bold">Clase Por Profesor</a>
+				<a href="comprarTarjeta/${idUsuario}" class="text-white text-decoration-none fw-bold">Comprar Tarjetas</a>
+		
 			</div>
 			<div class="col-10">
 				<div class="container">
