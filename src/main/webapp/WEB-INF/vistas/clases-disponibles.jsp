@@ -18,11 +18,12 @@
 </head>
 
 
+ 
 <c:set  value='<%= session.getAttribute("idUsuario") %>' var="idUsuario"  /> 
   <c:if test="${empty idUsuario}">
   <c:set  value="0" var="idUsuario"  />
   </c:if>	
-  
+<c:set  value='<%= session.getAttribute("rol") %>' var="rol"  />  
   
   
 <body class="mw-100">
@@ -72,12 +73,12 @@
 
 									<a class="btn btn-primary text-white w-100" href="tomarPresente/${i.id}/${idUsuario}">Tomar Asistencia</a>
 									</p>
-								
+								<%-- <c:if test="${ rol == 'usuario' }"> --%>
 									   <c:if test="${ i.capacidad>i.inscriptos}">
 									<p>	<a class="btn btn-success text-white w-100" href="inscribirseclase/${i.id}">Inscribirse</a>
   									  </p>
   									  </c:if>
-    
+    							<%-- </c:if> --%>
 								</div>
 							</div>
 						</c:forEach>
