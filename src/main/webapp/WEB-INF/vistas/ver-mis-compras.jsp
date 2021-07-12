@@ -81,7 +81,7 @@
   
 						<tr class="${cssClass}">
 						<td><fmt:formatDate value="${i.fecha}" pattern="dd/MM/yyy" /></td>
-						<td>${i.tarjeta.nombre} $ ${i.tarjeta.precio}<img src="../images/tarjeta${i.tarjeta.id}.png" alt="${i.tarjeta.nombre}" class="imgTarjeta"></td>
+						<td>${i.tarjeta.nombre} $ ${i.tarjeta.precio}<img src="../../images/tarjeta${i.tarjeta.id}.png" alt="${i.tarjeta.nombre}" class="imgTarjeta"></td>
 						<td>${i.cantidad}</td>
 						<td>${i.estado}</td>
 						

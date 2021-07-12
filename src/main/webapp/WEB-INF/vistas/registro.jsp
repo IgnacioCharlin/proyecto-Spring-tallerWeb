@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 	<head>
+	<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
 	<!-- Bootstrap core CSS 
 	    <link href="css/bootstrap.min.css" rel="stylesheet" >
 	    <!-- Bootstrap theme 
@@ -9,13 +10,11 @@
 	-->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 	</head>
-	<body>
+	<body class="w3l-login">
 		<div class = "container">
-			<div id="loginbox" class="pt-5 col-6 mx-auto text-center">
+			<div id="loginbox" class="pt-5 col-6 mx-auto text-center form-section">
 				<form:form action="validar-registro" method="POST" modelAttribute="datosRegistro">
-		<h3 class="form-signin-heading display-5">EnerGym</h3>
-		<hr class="colorgraph">
-		<br>
+		<h3 class="form-signin-heading display-5"><img src="/proyecto-limpio-spring/images/logo.png"></h3>
 
 		<%--Elementos de entrada de datos, el elemento path debe indicar en que atributo del objeto usuario se guardan los datos ingresados--%>
 		<form:input path="email" id="email" type="email"

@@ -46,7 +46,7 @@
 			 					<div class="d-flex flex-row justify-content-between">
 			 						<div class="col-12">
 			 							<label id="email" class="text-secondary">Email:</label>
-			 							<input type="email" name="email" class="form-control" placeholder="Ingresar email profesor">
+			 							<input type="email" name="email" class="form-control" placeholder="Ingresar email profesor" required>
 			 						</div>
 			 					</div>
 			 					<div class="">
