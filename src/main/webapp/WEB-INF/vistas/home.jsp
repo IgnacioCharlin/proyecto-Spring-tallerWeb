@@ -62,30 +62,18 @@
 				</div>
 				<h1 class="display-5 text-center titulo-home">JUST DO IT</h1>
 	</header>
-	<div class="col-10">
+	<div class="col-10 mx-auto mt-4">
 		<div class="container">
 	<c:if test="${ rol == 'admin' }">
 			<a href="agregar-clase" class="btn btn-success">Agregar Clase</a>
 	</c:if>
-			<main class="mt-4 d-flex flex-wrap">
+			<main class="mt-4 d-flex flex-wrap justify-content-between">
 
 				<c:forEach var="i" items="${clasesMap}">
-					<div class="card" style="width: 18rem;">
+					<div class="card text-center" style="width: 18rem;">
 						<img src="${contextPath}/images/${i.nombre}.jpg" class="card-img-top" alt="...">
 						<div class="card-body">
 							<h5 class="card-title">${i.nombre}</h5>
-							<p class="card-text">${i.HorarioYFecha}</p>
-							<p class="card-text">Capacidad: ${i.capacidad}</p>
-							<a class="btn btn-warning text-white" href="modificar/${i.id}">Modificar</a>
-							<a class="btn btn-danger" href="eliminar/${i.id}">Eliminar</a>
-						</div>
-					</div>
-					
-					<div class="card mx-auto mb-3 text-center" style="width: 18rem;">
-						<div class="card-body">
-							<h5 class="card-title">${i.nombre}</h5>
-						</div>
-						<div class="card-body">
 							<p class="card-text">${i.HorarioYFecha}</p>
 							<p class="card-text">Capacidad: ${i.capacidad}</p>
 							<a class="btn btn-warning text-white" href="modificar/${i.id}">Modificar</a>
