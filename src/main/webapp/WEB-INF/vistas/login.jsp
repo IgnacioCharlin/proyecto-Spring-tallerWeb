@@ -1,5 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set  value="<%=request.getContextPath()%>" var="contextPath"  />
 <!DOCTYPE html>
 	<head>
 	<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
@@ -12,7 +13,7 @@
 				<%--debe referenciar con el nombre usuario, spring mapea los elementos de la vista con los atributos de dicho objeto--%>
 					<%--para eso debe coincidir el valor del elemento path de cada input con el nombre de un atributo del objeto --%>
 				<form:form action="validar-login" method="POST" modelAttribute="usuario">
-			    	<h3 class="form-signin-heading display-5 text-white"><img src="/proyecto-limpio-spring/images/logo.png"></h3>
+			    	<h3 class="form-signin-heading display-5 text-white"><img src="${contextPath}/images/logo.png"></h3>
 
 					<%--Elementos de entrada de datos, el elemento path debe indicar en que atributo del objeto usuario se guardan los datos ingresados--%>
 					<form:input path="email" id="email" type="email" class="form-control mb-2" placeholder='Ingresar Mail' />

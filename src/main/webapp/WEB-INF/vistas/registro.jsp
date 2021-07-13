@@ -1,5 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set  value="<%=request.getContextPath()%>" var="contextPath"  />
 <!DOCTYPE html>
 	<head>
 	<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
@@ -14,7 +15,7 @@
 		<div class = "container">
 			<div id="loginbox" class="pt-5 col-6 mx-auto text-center form-section">
 				<form:form action="validar-registro" method="POST" modelAttribute="datosRegistro">
-		<h3 class="form-signin-heading display-5"><img src="/proyecto-limpio-spring/images/logo.png"></h3>
+		<h3 class="form-signin-heading display-5"><img src="${contextPath}/images/logo.png"></h3>
 
 		<%--Elementos de entrada de datos, el elemento path debe indicar en que atributo del objeto usuario se guardan los datos ingresados--%>
 		<form:input path="email" id="email" type="email"
