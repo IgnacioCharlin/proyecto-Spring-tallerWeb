@@ -53,6 +53,30 @@ public class RepositorioTarjetasCompradasImpl implements RepositorioTarjetasComp
                .add(Restrictions.eq("usuario", usuario) )
                .list();
 	}
+	@Override
+	public List<TarjetasCompradas> buscarPendiente() {
+
+        final Session session = this.sessionFactory.getCurrentSession();
+        return session.createCriteria(TarjetasCompradas.class)
+                .add(Restrictions.ne("estado", "Abonada") )
+               .add(Restrictions.ne("estado", "Eliminada") )
+               .list();
+        
+        
+	}
+	@Override
+	public TarjetasCompradas buscarPorId(long idTarjetaComprada) {
+		return (TarjetasCompradas) sessionFactory.getCurrentSession().createCriteria(TarjetasCompradas.class)
+				.add(Restrictions.eq("id", idTarjetaComprada))
+				.uniqueResult();
+	}
+	@Override
+	public void actualizarEstado(TarjetasCompradas tarjetaComprada, String estado) {
+ 
+		tarjetaComprada.setEstado(estado);
+		sessionFactory.getCurrentSession().update(tarjetaComprada);
+ 		
+	}
 	
  
 	

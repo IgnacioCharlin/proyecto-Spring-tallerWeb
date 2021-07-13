@@ -220,4 +220,54 @@ public class ControladorTarjeta{
     
     
     
+    @RequestMapping(path = "listado-pendiente/{idUsuario}" , method = RequestMethod.GET)
+	public ModelAndView aprobarCompra(@PathVariable Integer idUsuario)  {
+    	ModelMap model = new ModelMap();  
+
+		   	 	if (idUsuario!=0) { 
+
+		   	 	List<TarjetasCompradas> comprasPendientes= servicioTarjetasCompradas.pagoPendiente();
+		   	 	
+   	            model.put("comprasPendientes",comprasPendientes);         
+		   		 
+		   		}else {
+		      		 return new ModelAndView("redirect:/login");
+		      	}
+      
+  
+		return new ModelAndView("listado-pendiente",model);
+	 
+    }
+    
+    
+    
+    @RequestMapping(path = "aprobar-compra/{idTarjetaComprada}/{idUsuario}/{estado}/" , method = RequestMethod.GET)
+	public ModelAndView aprobarCompra(@PathVariable Integer idTarjetaComprada,@PathVariable Integer idUsuario,@PathVariable String estado ,@RequestParam (required = false) String collection_status,@RequestParam (required = false)  String collection_id)  {
+    	ModelMap model = new ModelMap();  
+     	if (idUsuario!=0) { 
+			
+			   	 	TarjetasCompradas tarjetaComprada= servicioTarjetasCompradas.buscoPorId((long) idTarjetaComprada);
+				    	servicioTarjetasCompradas.cambioEstado(tarjetaComprada,estado);
+ 				    		if(estado.equals("Abonada")) {
+				    		System.out.println(estado);
+				   	 	servicioTarjetasCompradas.actualizoFichas(tarjetaComprada,idUsuario,1);
+		 		   		UsuariosFichas fichasActuales = servicioUsuarioFichas.buscarFichasPorUsuario((long)idUsuario); 
+				   	    model.put("msj","El pago se efectuo correctamente. El usuario" + fichasActuales.getUsuario().getEmail() + " cuenta con " + fichasActuales.getCantidad()+" creditos .");         
+				   		   }
+ 				    		if(estado.equals("Eliminada")) {
+ 					   	    model.put("msj","La Compra se elimino correctamente.");         
+				    	}
+ 	
+
+		   		}else {
+		      		 return new ModelAndView("redirect:/login");
+		      	}
+ 
+  
+		return new ModelAndView("listado-pendiente",model);
+	 
+    }
+    
+    
+    
 }

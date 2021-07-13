@@ -19,4 +19,10 @@ public interface ServicioTarjetasCompradas {
 
 	void actualizoFichas(TarjetasCompradas tarjetaComprada, Integer idUsuario, Integer estado);
 
+	List<TarjetasCompradas> pagoPendiente();
+
+	TarjetasCompradas buscoPorId(long idTarjetaComprada);
+
+	void cambioEstado(TarjetasCompradas tarjetaComprada, String estado);
+
  }

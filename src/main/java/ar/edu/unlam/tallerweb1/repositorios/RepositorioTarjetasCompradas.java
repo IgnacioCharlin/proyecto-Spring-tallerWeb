@@ -19,7 +19,13 @@ public interface RepositorioTarjetasCompradas{
 
 	TarjetasCompradas guardarCompra(Tarjeta tarjeta, Usuario usuario, Date fechaCompra,String estado, String collection_id);
 
-	List<TarjetasCompradas> buscarComprasPorUsuario(Usuario usuario); 
+	List<TarjetasCompradas> buscarComprasPorUsuario(Usuario usuario);
+
+	List<TarjetasCompradas> buscarPendiente();
+
+	TarjetasCompradas buscarPorId(long idTarjetaComprada);
+
+	void actualizarEstado(TarjetasCompradas tarjetaComprada, String estado); 
  }
 
 
