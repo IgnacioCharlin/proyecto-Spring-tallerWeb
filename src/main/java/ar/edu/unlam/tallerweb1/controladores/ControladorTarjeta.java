@@ -1,11 +1,20 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
-import java.io.BufferedReader;
+import java.io.BufferedReader;  
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +36,7 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioTarjeta;
 import ar.edu.unlam.tallerweb1.servicios.ServicioTarjetasCompradas;
 import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioUsuarioFichas;
+import ar.edu.unlam.tallerweb1.servicios.ServicioEmail;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.mercadopago.MercadoPago;
@@ -47,15 +57,18 @@ public class ControladorTarjeta{
 	private ServicioTarjeta servicioTarjeta;
 	private ServicioTarjetasCompradas servicioTarjetasCompradas;
 	private ServicioUsuarioFichas servicioUsuarioFichas;
+	private ServicioEmail servicioEmail;
 	
     private ModelAndView mav;
 	private List<Preference> listapreference; 
 
 	@Autowired
-	public ControladorTarjeta(ServicioTarjeta servicioTarjeta,ServicioTarjetasCompradas servicioTarjetasCompradas,ServicioUsuarioFichas servicioUsuarioFichas) {
+	public ControladorTarjeta(ServicioTarjeta servicioTarjeta,ServicioTarjetasCompradas servicioTarjetasCompradas,ServicioUsuarioFichas servicioUsuarioFichas,ServicioEmail servicioEmail) {
 		this.servicioTarjeta = servicioTarjeta; 
 		this.servicioTarjetasCompradas = servicioTarjetasCompradas; 
 		this.servicioUsuarioFichas = servicioUsuarioFichas; 
+		this.servicioEmail = servicioEmail; 
+		
 	} 
 	
 	
@@ -248,12 +261,18 @@ public class ControladorTarjeta{
 			
 			   	 	TarjetasCompradas tarjetaComprada= servicioTarjetasCompradas.buscoPorId((long) idTarjetaComprada);
 				    	servicioTarjetasCompradas.cambioEstado(tarjetaComprada,estado);
- 				    		if(estado.equals("Abonada")) {
-				    		System.out.println(estado);
-				   	 	servicioTarjetasCompradas.actualizoFichas(tarjetaComprada,idUsuario,1);
+ 				    	if(estado.equals("Abonada")) {
+
+ 				    	servicioTarjetasCompradas.actualizoFichas(tarjetaComprada,idUsuario,1);
 		 		   		UsuariosFichas fichasActuales = servicioUsuarioFichas.buscarFichasPorUsuario((long)idUsuario); 
-				   	    model.put("msj","El pago se efectuo correctamente. El usuario" + fichasActuales.getUsuario().getEmail() + " cuenta con " + fichasActuales.getCantidad()+" creditos .");         
-				   		   }
+		 		   		String emailUsuario=fichasActuales.getUsuario().getEmail();
+				    	String mensaje ="El pago se efectuo correctamente. El usuario " + emailUsuario + " cuenta con " + fichasActuales.getCantidad()+" creditos .";
+				    	model.put("msj",mensaje);         
+				    	String asunto ="EnerGym - Compra Abonada Correctamente";
+ 				    	String de ="EnerGym@gmail.com";
+				        servicioEmail.envierEmail(asunto,emailUsuario,de,mensaje); 
+				        
+ 				    	}
  				    		if(estado.equals("Eliminada")) {
  					   	    model.put("msj","La Compra se elimino correctamente.");         
 				    	}
@@ -269,5 +288,10 @@ public class ControladorTarjeta{
     }
     
     
+     
     
 }
+
+
+    
+ 
