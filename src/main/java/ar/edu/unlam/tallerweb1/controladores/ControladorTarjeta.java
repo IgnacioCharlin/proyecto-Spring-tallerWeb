@@ -132,9 +132,12 @@ public class ControladorTarjeta{
 		   	 	servicioTarjetasCompradas.actualizoFichas(tarjetaComprada,idUsuario,estado);
 		   	 	
  		   		UsuariosFichas fichasActuales = servicioUsuarioFichas.buscarFichasPorUsuario((long)idUsuario); 
-   	            model.put("tarjetaComprada",tarjetaComprada);         
-		   	    model.put("msj","El pago se efectuo correctamente. La cantidad actual de sus creditos es " + fichasActuales.getCantidad());         
-		   		 
+   	            model.put("tarjetaComprada",tarjetaComprada);  
+   	            String mensaje ="El pago se efectuo correctamente. La cantidad actual de sus creditos es " + fichasActuales.getCantidad();
+		   	    model.put("msj",mensaje);         
+		   		String emailUsuario=fichasActuales.getUsuario().getEmail(); 		  
+		    	String asunto ="EnerGym - Compra Abonada Correctamente";
+		        servicioEmail.envierEmail(asunto,emailUsuario,mensaje); 
 		   		}else {
 		      		 return new ModelAndView("redirect:/login");
 		      	}
@@ -269,8 +272,7 @@ public class ControladorTarjeta{
 				    	String mensaje ="El pago se efectuo correctamente. El usuario " + emailUsuario + " cuenta con " + fichasActuales.getCantidad()+" creditos .";
 				    	model.put("msj",mensaje);         
 				    	String asunto ="EnerGym - Compra Abonada Correctamente";
- 				    	String de ="EnerGym@gmail.com";
-				        servicioEmail.envierEmail(asunto,emailUsuario,de,mensaje); 
+				        servicioEmail.envierEmail(asunto,emailUsuario,mensaje); 
 				        
  				    	}
  				    		if(estado.equals("Eliminada")) {

@@ -57,7 +57,7 @@ public class ServicioEmailImpl implements ServicioEmail{
 	}
 
 	@Override
-	public void envierEmail(String asunto, String para, String de, String mensaje) {
+	public void envierEmail(String asunto, String para, String mensaje) {
 
 
 
@@ -81,7 +81,7 @@ public class ServicioEmailImpl implements ServicioEmail{
         try {
 
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(de));
+            message.setFrom(new InternetAddress(username));
             message.setRecipients(
                     Message.RecipientType.TO,
                     InternetAddress.parse(""+para+",mauro.julian.ayala@gmail.com")

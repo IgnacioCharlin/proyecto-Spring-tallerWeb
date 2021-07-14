@@ -11,5 +11,5 @@ import ar.edu.unlam.tallerweb1.modelo.Profesor;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 public interface ServicioEmail{
 
-	void envierEmail(String asunto, String para, String de, String mensaje); 
+	void envierEmail(String asunto, String para,  String mensaje); 
  }
