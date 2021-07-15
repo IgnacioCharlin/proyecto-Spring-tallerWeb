@@ -75,8 +75,8 @@ public class ServicioClaseImpl implements ServicioClase {
 
 	@Override
 	public void eliminarClase(Clase clase) {
-		Clase claseBuscada = repositorioClase.buscarClase(clase.getNombre());
-		repositorioClase.eliminarClase(claseBuscada);
+	//	Clase claseBuscada = repositorioClase.buscarClase(clase.getNombre());
+		repositorioClase.eliminarClase(clase);
 	}
 
 	@Override
