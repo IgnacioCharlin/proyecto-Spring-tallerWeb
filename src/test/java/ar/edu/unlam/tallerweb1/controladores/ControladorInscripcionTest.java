@@ -13,6 +13,7 @@ import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
 import ar.edu.unlam.tallerweb1.modelo.Clase;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.modelo.UsuariosFichas;
 import ar.edu.unlam.tallerweb1.servicios.ServicioAsistencia;
 import ar.edu.unlam.tallerweb1.servicios.ServicioClase;
 import ar.edu.unlam.tallerweb1.servicios.ServicioInscribirse;
@@ -86,11 +87,20 @@ public class ControladorInscripcionTest {
 	}
 
 	private void thenMeRedireccionaAlHome(ModelAndView mav) {
-		assertThat(mav.getViewName()).isEqualTo(REDIRECT_HOME);
+		//assertThat(mav.getViewName()).isEqualTo(REDIRECT_HOME);
+ 		assertThat(mav.getModel().get("msj")).isEqualTo("La inscripción se logró correctamente.");
+
+
 	}
 
 	private ModelAndView whenInscriboAlUsuarioEnLaClase(Usuario usuario, Clase clase) {
 		when(servicioInscribirse.buscarInscripcion(clase,usuario)).thenReturn(null);
+		 UsuariosFichas fichasDisponible = new UsuariosFichas();
+		 fichasDisponible.setCantidad(2);
+		 fichasDisponible.setUsuario(usuario);
+		 
+			when(servicioUsuarioFichas.buscarFichasPorUsuario(usuario.getId())).thenReturn(fichasDisponible);
+
 		return controladorInscribirseClases.confirmaInscripcion(usuario.getId(), clase.getId());
 		
 	}
