@@ -32,11 +32,13 @@ public class RepositorioClaseImpl implements RepositorioClase{
 	
 	@Override
 	public Clase guardarClase(Clase clase) {
-		if(buscarClase(clase.getNombre()) == null) {
+		/*if(buscarClase(clase.getNombre()) == null) {
 			sessionFactory.getCurrentSession().save(clase);
 			return clase;
 		}
-		return null;
+		return null;*/
+		sessionFactory.getCurrentSession().save(clase);
+		return clase;
 	}
 
 
