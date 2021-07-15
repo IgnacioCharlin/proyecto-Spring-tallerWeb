@@ -16,47 +16,47 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 </head>
+<%@ page import="java.util.*" %>
 
+<%@ page import="java.text.SimpleDateFormat"%>
+ <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+ 
+<%
+   Date dNow = new Date();
+   SimpleDateFormat ft = 
+   new SimpleDateFormat ("yyyy-MM-dd hh:mm");
+   String hoy = ft.format(dNow);
+%> 
+<c:set  value='<%= hoy %>' var="hoy"  /> 
 
-<c:set value='<%=session.getAttribute("idUsuario")%>' var="idUsuario" />
-<c:if test="${empty idUsuario}">
-	<c:set value="0" var="idUsuario" />
-</c:if>
-<c:set value='<%=session.getAttribute("rolUsuario")%>' var="rol" />
+ 
+ 
+<c:set  value='<%= session.getAttribute("idUsuario") %>' var="idUsuario"  /> 
+  <c:if test="${empty idUsuario}">
+  <c:set  value="0" var="idUsuario"  />
+  </c:if>	
+<c:set  value='<%= session.getAttribute("rolUsuario") %>' var="rol"  />
 <c:if test="${empty rol}">
-	<c:set value="null" var="rol" />
-</c:if>
-
-
-
+  <c:set  value="null" var="rol"  />
+  </c:if>  
+  <c:set  value="<%=request.getContextPath()%>" var="contextPath"  />
+  
+   
 <body class="mw-100">
 	<div class="container-fluid">
 		<div class="row">
 			<div class="d-flex flex-column col-2 p-3 mb-2 bg-primary text-white">
-			<jsp:include page="menu.jsp" />
-				</div>
+				<jsp:include page="menu.jsp" />
+			
+			</div>
 			<div class="col-10">
 				<div class="container">
 				
 					<main class="mt-4 d-flex flex-wrap">
-						<h1 class="display-5 text-center col-12 mb-5">Clases disponibles</h1>
+						<h1 class="display-5 text-center col-12 mb-5">Clases Eliminadas</h1>
 						
 						<div class="col-12">
-						<form class="d-flex col-6 mx-auto flex-column mb-4" action="">
-			 					<div class="d-flex flex-row justify-content-between">
-			 						<div class="col-12">
-			 							<label id="email" class="text-secondary">Email:</label>
-			 							<input type="email" name="email" class="form-control" placeholder="Ingresar email profesor" required>
-			 						</div>
-			 					</div>
-			 					<div class="">
-			 						<input type="submit" value="Buscar" class="btn btn-primary w-100 mt-4"> 
-			 					</div>
-			 			</form>
-			 			<c:if test="${not empty error}">
-			        <div class="alert alert-danger mt-2" role="alert" >${error}</div>
-			        <br>
-		        </c:if>	
+ 
 			 			</div>
 						<c:forEach var="i" items="${clasesMap}">
 							<div class="card mx-auto mb-3 text-center" style="width: 18rem;">
@@ -64,26 +64,17 @@
 									<h5 class="card-title">${i.nombre}</h5>
 								</div>
 								<div class="card-body">
-									<p class="card-text">${i.HorarioYFecha}</p> 
+									<p class="card-text">
+ <c:set var="dateParts" value="${fn:split(i.HorarioYFecha, ' ')}" />
+ <c:set var="dia" value="${fn:split(dateParts[0], '-')}" />
+ <c:set var="hora" value="${fn:split(dateParts[1], ':')}" />
+ 		 ${dia[2]}/${dia[1]}/${dia[0]} ${hora[0]}:${hora[1]}
+									 </p>
 									<p class="card-text">Capacidad: ${i.capacidad}</p>
 									<p class="card-text">Inscriptos: ${i.inscriptos}</p> 
 									<p class="card-text">Disponibilidad: ${i.capacidad - i.inscriptos}</p>
-									<c:if test="${ rol == 'admin' || rol == 'profesor' }">
-										<p>
-											<a class="btn btn-primary text-white w-100"
-												href="tomarPresente/${i.id}/${idUsuario}">Tomar
-												Asistencia</a>
-										</p>
-									</c:if>
-									<c:if test="${ rol == 'usuario' }">
-										<c:if test="${ i.capacidad>i.inscriptos}">
-											<p>
-												<a class="btn btn-success text-white w-100"
-													href="inscribirseclase/${i.id}/${idUsuario}">Inscribirse</a>
-											</p>
-										</c:if>
-									</c:if>
-
+				
+							
 								</div>
 							</div>
 						</c:forEach>

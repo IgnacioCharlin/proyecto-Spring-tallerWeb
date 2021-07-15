@@ -75,8 +75,8 @@ public class ServicioClaseImpl implements ServicioClase {
 
 	@Override
 	public void eliminarClase(Clase clase) {
-		Clase claseBuscada = repositorioClase.buscarClase(clase.getNombre());
-		repositorioClase.eliminarClase(claseBuscada);
+	//	Clase claseBuscada = repositorioClase.buscarClase(clase.getNombre());
+		repositorioClase.eliminarClase(clase);
 	}
 
 	@Override
@@ -130,5 +130,12 @@ public class ServicioClaseImpl implements ServicioClase {
 		}
 		
 		return claseBuscada;
+	}
+
+	@Override
+	public List<Clase> consultarClasesEliminadas() {
+		List<Clase> clases = new ArrayList<Clase>();
+		clases.addAll(repositorioClase.dameClasesEliminadas());
+		return clases;
 	}
 }

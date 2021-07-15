@@ -135,6 +135,20 @@ public class ControladorClase {
 		return new ModelAndView("clases-disponibles",model);
 	}
 	
+	@RequestMapping("clases-eliminadas")
+	public ModelAndView irAClasesEliminadas(HttpServletRequest request){
+		String rolUsuario=  (String) request.getSession().getAttribute("rolUsuario");
+		if(rolUsuario == null)
+			return new ModelAndView("redirect:/login");
+			
+		ModelMap model = new ModelMap();
+		Map<Clase, Clase> clasesMap = new HashMap<Clase, Clase>();
+		List<Clase> clases = servicioClase.consultarClasesEliminadas();
+		model.addAttribute("clasesMap",clases);
+		return new ModelAndView("clases-eliminadas",model);
+	}
+	
+	
 	@RequestMapping(path = "filtar-clase" , method = RequestMethod.GET)
 	public ModelAndView buscoClasePorFechas(@RequestParam("desde") String desde,@RequestParam("hasta") String hasta) {
 		ModelMap model = new ModelMap();

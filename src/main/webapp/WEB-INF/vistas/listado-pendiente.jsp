@@ -29,22 +29,17 @@
 <c:if test="${empty idUsuario}">
 	<c:set value="0" var="idUsuario" />
 </c:if>
-<c:set  value='<%= session.getAttribute("rolUsuario") %>' var="rol"  />
 <c:if test="${empty rol}">
-  <c:set  value="null" var="rol"  />
-  </c:if>  
-   
+	<c:set value="null" var="rol" />
+</c:if>
 
 
 <body class="mw-100">
 	<div class="container-fluid">
 		<div class="row">
 			<div class="d-flex flex-column col-2 p-3 mb-2 bg-primary text-white">
-				 
-				 <jsp:include page="menu.jsp" />
-				 
-				
-						</div>
+			<jsp:include page="menu.jsp" />
+			</div>
 			<div class="col-10">
 				<div class="container">
 				
@@ -60,7 +55,6 @@
                 </div>
             </c:if>	
             
-            
 			 			</div>
 			 			<table class="table"> 
 			 			<thead>
@@ -68,13 +62,13 @@
 			 			<th>Fecha</th>
 			 			<th>Tarjeta</th>
 			 			<th>Cantidad</th>
+			 			<th>Usuario</th>
 			 			<th>Estado</th>
 			 			</tr>
 			 			</thead>
 			 			<tbody>
 			 			
-						<c:forEach var="i" items="${comprasRealizadas}">
-						
+						<c:forEach var="i" items="${comprasPendientes}">
 					  <c:set  value="" var="cssClass"  />
 					  <c:if test="${i.estado=='Pendiente'}">
 					  <c:set  value="table-warning" var="cssClass"  />
@@ -87,7 +81,12 @@
 						<td><fmt:formatDate value="${i.fecha}" pattern="dd/MM/yyyy" /></td>
 						<td>${i.tarjeta.nombre} $ ${i.tarjeta.precio}<img src="${contextPath}/images/tarjeta${i.tarjeta.id}.png" alt="${i.tarjeta.nombre}" class="imgTarjeta"></td>
 						<td>${i.cantidad}</td>
-						<td>${i.estado}</td>
+						<td>${i.usuario.email}</td>
+						<td>
+						${i.estado}
+						<a href="${contextPath}/aprobar-compra/${i.id}/${i.usuario.id}/Eliminada/" class="btn btn-danger">Eliminar</a>
+						<a href="${contextPath}/aprobar-compra/${i.id}/${i.usuario.id}/Abonada/" class="btn btn-primary">Aprobar compra</a>
+						</td>
 						
  					   	</tr>
 						</c:forEach>

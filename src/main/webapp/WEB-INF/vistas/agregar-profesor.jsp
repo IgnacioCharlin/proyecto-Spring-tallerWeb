@@ -10,13 +10,21 @@
 	rel="stylesheet"
 	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
 	crossorigin="anonymous">
+	<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
 </head>
-<body>
-
-
-
+<body class="w3l-home overflow-hidden">
+	<div id="loginbox" class=" col-6 mx-auto text-center pt-2 form-profesor mt-5">
+	<h1 class="display-5 mb-2">Agregar Profesor</h1>
+	
+						 <c:if test="${not empty msj}">
+			                <div class="alert alert-warning" role="alert">
+			                    <p>${msj}</p>
+			                </div>
+			            </c:if>	
+			            
+			            
 	<form:form action="agregarProfesor" method="POST" 
-	modelAttribute="registrarProfesor" class="w-75 mx-auto mt-4">
+	modelAttribute="registrarProfesor" class="p-4 w-75 mx-auto">
 		<form:input path="email" id="email" type="mail"
 			class="form-control mb-2" placeholder="Ingresar email" />
 		<form:input path="password" id="password" type="password"
@@ -34,6 +42,6 @@
 		</div>
 	</form:form>
 
-
+	</div>
 </body>
 </html>

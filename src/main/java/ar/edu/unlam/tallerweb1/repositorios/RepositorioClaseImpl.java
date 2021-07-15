@@ -3,6 +3,7 @@ package ar.edu.unlam.tallerweb1.repositorios;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -31,11 +32,13 @@ public class RepositorioClaseImpl implements RepositorioClase{
 	
 	@Override
 	public Clase guardarClase(Clase clase) {
-		if(buscarClase(clase.getNombre()) == null) {
+		/*if(buscarClase(clase.getNombre()) == null) {
 			sessionFactory.getCurrentSession().save(clase);
 			return clase;
 		}
-		return null;
+		return null;*/
+		sessionFactory.getCurrentSession().save(clase);
+		return clase;
 	}
 
 
@@ -113,6 +116,8 @@ public class RepositorioClaseImpl implements RepositorioClase{
 				+ " where"
 				+ where + ""
 			    + " GROUP by (clase.id) "
+			    + " ORDER BY clase.HorarioYFecha asc"
+
 			    //+ " HAVING clase.capacidad>count(clases_inscriptas.id_usuario)"
 
  			    )
@@ -140,6 +145,7 @@ public class RepositorioClaseImpl implements RepositorioClase{
 				+ " where"
 				+ where + "and clase.estado = 'activa'"
 			    + " GROUP by (clase.id) "
+			    + " ORDER BY clase.HorarioYFecha asc"
 			 //   + " HAVING clase.capacidad>count(clases_inscriptas.id_usuario)"
  			    )
 				;
@@ -148,5 +154,28 @@ public class RepositorioClaseImpl implements RepositorioClase{
  return query.list();
  		
  
- 	} 
+ 	}
+
+ 
+	@Override
+	public List<Clase> dameClasesEliminadas() {
+		String fechaHoy = LocalDate.now().toString();
+
+		String where =" clase.estado='cancelada' ";
+   
+		SQLQuery query =	sessionFactory.getCurrentSession().createSQLQuery(""
+				+ " SELECT clase.*,count(clases_inscriptas.id_usuario) as inscriptos"
+				+ " FROM `clase`  "
+				+ " LEFT join clases_inscriptas on clases_inscriptas.id_clase=clase.id "
+				+ " where"
+				+ where + ""
+			    + " GROUP by (clase.id) "
+			    + " ORDER BY clase.HorarioYFecha asc"
+			 //   + " HAVING clase.capacidad>count(clases_inscriptas.id_usuario)"
+ 			    )
+				;
+		
+ 			query.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+ return query.list();
+	} 
 }

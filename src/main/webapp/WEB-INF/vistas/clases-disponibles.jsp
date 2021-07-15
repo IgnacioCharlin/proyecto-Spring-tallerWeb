@@ -16,8 +16,20 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 </head>
+<%@ page import="java.util.*" %>
 
+<%@ page import="java.text.SimpleDateFormat"%>
+ <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+ 
+<%
+   Date dNow = new Date();
+   SimpleDateFormat ft = 
+   new SimpleDateFormat ("yyyy-MM-dd hh:mm");
+   String hoy = ft.format(dNow);
+%> 
+<c:set  value='<%= hoy %>' var="hoy"  /> 
 
+ 
  
 <c:set  value='<%= session.getAttribute("idUsuario") %>' var="idUsuario"  /> 
   <c:if test="${empty idUsuario}">
@@ -27,21 +39,15 @@
 <c:if test="${empty rol}">
   <c:set  value="null" var="rol"  />
   </c:if>  
+  <c:set  value="<%=request.getContextPath()%>" var="contextPath"  />
   
-  
+   
 <body class="mw-100">
 	<div class="container-fluid">
 		<div class="row">
 			<div class="d-flex flex-column col-2 p-3 mb-2 bg-primary text-white">
-				<a href="./home" class="text-white text-decoration-none fw-bold">Home</a>
-				<a href="./clases-disponibles" class="text-white text-decoration-none fw-bold">Clases Disponibles</a>
-				<c:if test="${ rol == 'admin' }">
-					<a href="agregar-profesor"
-						class="h5 text-white text-decoration-none fw-bold">Agregar
-						Profesor</a>
-				</c:if>
-				<a href="./clases-inscriptas/${idUsuario}" class="text-white text-decoration-none fw-bold">Clases incriptas</a>
-				<a href="./filtar-profesor" class="text-white text-decoration-none fw-bold">Clase Por Profesor</a>
+				<jsp:include page="menu.jsp" />
+			
 			</div>
 			<div class="col-10">
 				<div class="container">
@@ -72,7 +78,12 @@
 									<h5 class="card-title">${i.nombre}</h5>
 								</div>
 								<div class="card-body">
-									<p class="card-text">${i.HorarioYFecha}</p>
+									<p class="card-text">
+ <c:set var="dateParts" value="${fn:split(i.HorarioYFecha, ' ')}" />
+ <c:set var="dia" value="${fn:split(dateParts[0], '-')}" />
+ <c:set var="hora" value="${fn:split(dateParts[1], ':')}" />
+ 		 ${dia[2]}/${dia[1]}/${dia[0]} ${hora[0]}:${hora[1]}
+									 </p>
 									<p class="card-text">Capacidad: ${i.capacidad}</p>
 									<p class="card-text">Inscriptos: ${i.inscriptos}</p> 
 									<p class="card-text">Disponibilidad: ${i.capacidad - i.inscriptos}</p>
@@ -81,8 +92,14 @@
 									<a class="btn btn-primary text-white w-100" href="tomarPresente/${i.id}/${idUsuario}">Tomar Asistencia</a>
 									</p>
 								</c:if>
+								
+							<c:if test="${ rol == 'admin' }">
+							<a class="btn btn-warning text-white" href="${contextPath}/modificar/${i.id}">Modificar</a>
+							<a class="btn btn-danger" href="${contextPath}/eliminar/${i.id}">Eliminar</a>
+								</c:if>
+								
 								<c:if test="${ rol == 'usuario' }">
-									   <c:if test="${ i.capacidad>i.inscriptos}">
+									   <c:if test="${ i.capacidad>i.inscriptos && i.HorarioYFecha>hoy }">
 									<p>	<a class="btn btn-success text-white w-100" href="inscribirseclase/${i.id}/${idUsuario}">Inscribirse</a>
   									  </p>
   									  </c:if>
