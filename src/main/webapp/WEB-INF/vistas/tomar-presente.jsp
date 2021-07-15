@@ -33,7 +33,6 @@
 		<div class="row">
 			<div class="d-flex flex-column col-2 p-3 mb-2 bg-primary text-white">
 			<jsp:include page="menu.jsp" />		
-				</c:if>
 			</div>
 			<div class="col-10">
 				<div class="container">
