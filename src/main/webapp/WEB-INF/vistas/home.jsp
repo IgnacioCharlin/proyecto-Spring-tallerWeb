@@ -44,6 +44,10 @@
 					<a href="agregar-profesor"
 						class="h5 text-white text-decoration-none fw-bold">Agregar
 						Profesor</a>
+						
+					<a href="listado-pendiente/${idUsuario}"
+						class="h5 text-white text-decoration-none fw-bold">Aprobar
+						Compras</a>
 				</c:if>
 					<a href="filtar-profesor"
 						class="h5 text-white text-decoration-none fw-bold">Clase Por

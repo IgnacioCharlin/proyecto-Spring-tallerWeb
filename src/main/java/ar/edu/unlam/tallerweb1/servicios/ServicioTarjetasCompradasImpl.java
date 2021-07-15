@@ -110,6 +110,25 @@ public class ServicioTarjetasCompradasImpl implements ServicioTarjetasCompradas{
 		return repositorioTarjetasCompradas.buscarComprasPorUsuario(usuario);
 	}
 
+	@Override
+	public List<TarjetasCompradas> pagoPendiente() {
+		List<TarjetasCompradas> comprasPendientes = repositorioTarjetasCompradas.buscarPendiente();
+
+		return comprasPendientes;
+	}
+
+	@Override
+	public TarjetasCompradas buscoPorId(long idTarjetaComprada) {
+		TarjetasCompradas tarjetasComprada = repositorioTarjetasCompradas.buscarPorId(idTarjetaComprada);
+		return tarjetasComprada;
+	}
+
+	@Override
+	public void cambioEstado(TarjetasCompradas tarjetaComprada, String estado) {
+		  repositorioTarjetasCompradas.actualizarEstado(tarjetaComprada,estado);
+		
+	}
+
  
 
 	

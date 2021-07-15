@@ -1,11 +1,20 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
-import java.io.BufferedReader;
+import java.io.BufferedReader;  
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +36,7 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioTarjeta;
 import ar.edu.unlam.tallerweb1.servicios.ServicioTarjetasCompradas;
 import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioUsuarioFichas;
+import ar.edu.unlam.tallerweb1.servicios.ServicioEmail;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.mercadopago.MercadoPago;
@@ -47,15 +57,18 @@ public class ControladorTarjeta{
 	private ServicioTarjeta servicioTarjeta;
 	private ServicioTarjetasCompradas servicioTarjetasCompradas;
 	private ServicioUsuarioFichas servicioUsuarioFichas;
+	private ServicioEmail servicioEmail;
 	
     private ModelAndView mav;
 	private List<Preference> listapreference; 
 
 	@Autowired
-	public ControladorTarjeta(ServicioTarjeta servicioTarjeta,ServicioTarjetasCompradas servicioTarjetasCompradas,ServicioUsuarioFichas servicioUsuarioFichas) {
+	public ControladorTarjeta(ServicioTarjeta servicioTarjeta,ServicioTarjetasCompradas servicioTarjetasCompradas,ServicioUsuarioFichas servicioUsuarioFichas,ServicioEmail servicioEmail) {
 		this.servicioTarjeta = servicioTarjeta; 
 		this.servicioTarjetasCompradas = servicioTarjetasCompradas; 
 		this.servicioUsuarioFichas = servicioUsuarioFichas; 
+		this.servicioEmail = servicioEmail; 
+		
 	} 
 	
 	
@@ -119,9 +132,12 @@ public class ControladorTarjeta{
 		   	 	servicioTarjetasCompradas.actualizoFichas(tarjetaComprada,idUsuario,estado);
 		   	 	
  		   		UsuariosFichas fichasActuales = servicioUsuarioFichas.buscarFichasPorUsuario((long)idUsuario); 
-   	            model.put("tarjetaComprada",tarjetaComprada);         
-		   	    model.put("msj","El pago se efectuo correctamente. La cantidad actual de sus creditos es " + fichasActuales.getCantidad());         
-		   		 
+   	            model.put("tarjetaComprada",tarjetaComprada);  
+   	            String mensaje ="El pago se efectuo correctamente. La cantidad actual de sus creditos es " + fichasActuales.getCantidad();
+		   	    model.put("msj",mensaje);         
+		   		String emailUsuario=fichasActuales.getUsuario().getEmail(); 		  
+		    	String asunto ="EnerGym - Compra Abonada Correctamente";
+		        servicioEmail.envierEmail(asunto,emailUsuario,mensaje); 
 		   		}else {
 		      		 return new ModelAndView("redirect:/login");
 		      	}
@@ -220,4 +236,64 @@ public class ControladorTarjeta{
     
     
     
+    @RequestMapping(path = "listado-pendiente/{idUsuario}" , method = RequestMethod.GET)
+	public ModelAndView aprobarCompra(@PathVariable Integer idUsuario)  {
+    	ModelMap model = new ModelMap();  
+
+		   	 	if (idUsuario!=0) { 
+
+		   	 	List<TarjetasCompradas> comprasPendientes= servicioTarjetasCompradas.pagoPendiente();
+		   	 	
+   	            model.put("comprasPendientes",comprasPendientes);         
+		   		 
+		   		}else {
+		      		 return new ModelAndView("redirect:/login");
+		      	}
+      
+  
+		return new ModelAndView("listado-pendiente",model);
+	 
+    }
+    
+    
+    
+    @RequestMapping(path = "aprobar-compra/{idTarjetaComprada}/{idUsuario}/{estado}/" , method = RequestMethod.GET)
+	public ModelAndView aprobarCompra(@PathVariable Integer idTarjetaComprada,@PathVariable Integer idUsuario,@PathVariable String estado ,@RequestParam (required = false) String collection_status,@RequestParam (required = false)  String collection_id)  {
+    	ModelMap model = new ModelMap();  
+     	if (idUsuario!=0) { 
+			
+			   	 	TarjetasCompradas tarjetaComprada= servicioTarjetasCompradas.buscoPorId((long) idTarjetaComprada);
+				    	servicioTarjetasCompradas.cambioEstado(tarjetaComprada,estado);
+ 				    	if(estado.equals("Abonada")) {
+
+ 				    	servicioTarjetasCompradas.actualizoFichas(tarjetaComprada,idUsuario,1);
+		 		   		UsuariosFichas fichasActuales = servicioUsuarioFichas.buscarFichasPorUsuario((long)idUsuario); 
+		 		   		String emailUsuario=fichasActuales.getUsuario().getEmail();
+				    	String mensaje ="El pago se efectuo correctamente. El usuario " + emailUsuario + " cuenta con " + fichasActuales.getCantidad()+" creditos .";
+				    	model.put("msj",mensaje);         
+				    	String asunto ="EnerGym - Compra Abonada Correctamente";
+				        servicioEmail.envierEmail(asunto,emailUsuario,mensaje); 
+				        
+ 				    	}
+ 				    		if(estado.equals("Eliminada")) {
+ 					   	    model.put("msj","La Compra se elimino correctamente.");         
+				    	}
+ 	
+
+		   		}else {
+		      		 return new ModelAndView("redirect:/login");
+		      	}
+ 
+  
+		return new ModelAndView("listado-pendiente",model);
+	 
+    }
+    
+    
+     
+    
 }
+
+
+    
+ 
