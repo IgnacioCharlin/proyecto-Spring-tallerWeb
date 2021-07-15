@@ -55,36 +55,7 @@ public class ControladorInscripcionTest {
 		thenMeRedireccionaAlHome(mav);
 				
 	}
-	@Test
-	public void  siElRolNoEsUsuarioNoSePuedeInscribir() {
-		Usuario usuario = givenUnUsuarioRolProfesor();
-		Clase clase = gicenUnaClase();
-		
-		mav = whenVouALaVistaInscribirme(usuario, clase);
-		
-		thenMeRedireccionaAlHomeConMensajeDeError(mav);
-				
-	}
-
-	private ModelAndView whenVouALaVistaInscribirme(Usuario usuario, Clase clase) {
-		HttpServletRequest request = mock(HttpServletRequest.class);
-		when(servicioUsuario.consultarUsuarioPorId(IDUSUARIO)).thenReturn(usuario);
-		doReturn(IDUSUARIO).when(request).getAttribute("idUsuario");
-//		when(request.getSession().getAttribute("idUsuario")).thenReturn(IDUSUARIO);
-		return controladorInscribirseClases.inscribirseAunaClase(usuario, clase.getId(), request);
-	}
-
-	private void thenMeRedireccionaAlHomeConMensajeDeError(ModelAndView mav2) {
-		assertThat(mav.getViewName()).isEqualTo("home");
-		assertThat(mav.getModel().get("error")).isEqualTo("Solo los Usuarios se puden inscribir a las clases");
-	}
-
-	private Usuario givenUnUsuarioRolProfesor() {
-		Usuario usuario = new Usuario();
-		usuario.setId(IDUSUARIO);
-		usuario.setRol("profesor");
-		return usuario;
-	}
+  
 
 	private void thenMeRedireccionaAlHome(ModelAndView mav) {
 		//assertThat(mav.getViewName()).isEqualTo(REDIRECT_HOME);
