@@ -22,6 +22,7 @@
 				<a href="${contextPath}/agregar-profesor" class="text-white text-decoration-none fw-bold">Agregar Profesor</a>
 							
 				<a href="${contextPath}/listado-pendiente/${idUsuario}"	class="text-white text-decoration-none fw-bold">Aprobar Compras</a>
+				<a href="${contextPath}/clases-eliminadas" class="text-white text-decoration-none fw-bold">Clases Eliminadas</a>	
 						
 				</c:if>
 				<a href="${contextPath}/filtar-profesor" class="text-white text-decoration-none fw-bold">Clases por profesor</a>

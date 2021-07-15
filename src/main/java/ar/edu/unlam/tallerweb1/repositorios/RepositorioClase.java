@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
+import java.util.Collection;
 import java.util.List;
 
 import ar.edu.unlam.tallerweb1.modelo.Clase;
@@ -16,6 +17,7 @@ public interface RepositorioClase {
 	List<Clase> buscarClasePorProfesor(Profesor profesor);
 	List<Clase> filtrarClasesPorFecha(String fechaDesde , String fechaHasta);
 	List<Clase> dameClasesConDisponibilidad();
+	Collection<? extends Clase> dameClasesEliminadas();
 
 }
 

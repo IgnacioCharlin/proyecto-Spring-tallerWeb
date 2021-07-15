@@ -49,7 +49,7 @@
 	<div class="col-10 mx-auto mt-4">
 		<div class="container">
 	<c:if test="${ rol == 'admin' }">
-			<a href="agregar-clase" class="btn btn-success">Agregar Clase</a>
+			<a href="${contextPath}/agregar-clase" class="btn btn-success">Agregar Clase</a>
 	</c:if>
 			<main class="mt-4 d-flex flex-wrap justify-content-between">
 
@@ -60,8 +60,11 @@
 							<h5 class="card-title">${i.nombre}</h5>
 							<p class="card-text">${i.HorarioYFecha}</p>
 							<p class="card-text">Capacidad: ${i.capacidad}</p>
-							<a class="btn btn-warning text-white" href="modificar/${i.id}">Modificar</a>
-							<a class="btn btn-danger" href="eliminar/${i.id}">Eliminar</a>
+							
+								<c:if test="${ rol == 'admin' }">
+							<a class="btn btn-warning text-white" href="${contextPath}/modificar/${i.id}">Modificar</a>
+							<a class="btn btn-danger" href="${contextPath}/eliminar/${i.id}">Eliminar</a>
+								</c:if>
 						</div>
 					</div>
 				</c:forEach>
