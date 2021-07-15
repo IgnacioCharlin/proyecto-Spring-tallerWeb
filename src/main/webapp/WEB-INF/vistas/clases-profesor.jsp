@@ -33,6 +33,7 @@
 <body class="mw-100 w3l-home">
 	<div class="container-fluid">
 		<div class="row">
+<<<<<<< HEAD
 			<div
 				class="d-flex flex-col w-100 p-3 mb-2 text-white justify-content-around">
 				<a href="./home" class="text-white text-decoration-none fw-bold">Home</a>
@@ -63,6 +64,38 @@
 									<label id="email" class="text-secondary">Email:</label> <input
 										type="email" name="email" class="form-control"
 										placeholder="Ingresar email profesor" required>
+=======
+			<div class="d-flex flex-column col-2 p-3 mb-2 bg-primary text-white">
+			<jsp:include page="menu.jsp" />
+				</div>
+			<div class="col-10">
+				<div class="container">
+				
+					<main class="mt-4 d-flex flex-wrap">
+						<h1 class="display-5 text-center col-12 mb-5">Clases disponibles</h1>
+						
+						<div class="col-12">
+						<form class="d-flex col-6 mx-auto flex-column mb-4" action="">
+			 					<div class="d-flex flex-row justify-content-between">
+			 						<div class="col-12">
+			 							<label id="email" class="text-secondary">Email:</label>
+			 							<input type="email" name="email" class="form-control" placeholder="Ingresar email profesor" required>
+			 						</div>
+			 					</div>
+			 					<div class="">
+			 						<input type="submit" value="Buscar" class="btn btn-primary w-100 mt-4"> 
+			 					</div>
+			 			</form>
+			 			<c:if test="${not empty error}">
+			        <div class="alert alert-danger mt-2" role="alert" >${error}</div>
+			        <br>
+		        </c:if>	
+			 			</div>
+						<c:forEach var="i" items="${clasesMap}">
+							<div class="card mx-auto mb-3 text-center" style="width: 18rem;">
+								<div class="card-body">
+									<h5 class="card-title">${i.nombre}</h5>
+>>>>>>> 5aeede4c6bcff133d9e4f092feda428afe3d4440
 								</div>
 							</div>
 							<div class="">

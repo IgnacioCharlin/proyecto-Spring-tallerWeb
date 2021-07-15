@@ -32,15 +32,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="d-flex flex-column col-2 p-3 mb-2 bg-primary text-white">
-				<a href="../../home" class="text-white text-decoration-none fw-bold">Home</a>
-				<a href="../../clases-disponibles" class="text-white text-decoration-none fw-bold">Clases Disponibles</a>
-				<c:if test="${ rol == 'admin' }">
-				<a href="../../agregar-profesor" class="text-white text-decoration-none fw-bold">Agregar Profesor</a>
-				</c:if>
-				<c:if test="${ rol == 'usuario' }">	
-				<a href="../../clases-inscriptas/${idUsuario}" class="text-white text-decoration-none fw-bold">Clases incriptas</a>
-				
-				</c:if>
+			<jsp:include page="menu.jsp" />		
 			</div>
 			<div class="col-10">
 				<div class="container">

@@ -53,24 +53,10 @@
 				<div class="container">
 				
 					<main class="mt-4 d-flex flex-wrap">
-						<h1 class="display-5 text-center col-12 mb-5">Clases disponibles</h1>
+						<h1 class="display-5 text-center col-12 mb-5">Clases Eliminadas</h1>
 						
 						<div class="col-12">
-						<form class="d-flex col-6 mx-auto flex-column mb-4" action="filtar-clase">
-			 					<div class="d-flex flex-row justify-content-between">
-			 						<div class="col-4">
-			 							<label id="desde" class="text-secondary">Desde</label>
-			 							<input type="date" name="desde" class="form-control">
-			 						</div>
-			 						<div class="col-4">
-			 							<label id="hasta" class="text-secondary">Hasta</label>
-			 							<input type="date" name="hasta" class="form-control">
-			 						</div>
-			 					</div>
-			 					<div class="">
-			 						<input type="submit" value="Buscar" class="btn btn-primary w-100 mt-4"> 
-			 					</div>
-			 			</form>
+ 
 			 			</div>
 						<c:forEach var="i" items="${clasesMap}">
 							<div class="card mx-auto mb-3 text-center" style="width: 18rem;">
@@ -87,23 +73,8 @@
 									<p class="card-text">Capacidad: ${i.capacidad}</p>
 									<p class="card-text">Inscriptos: ${i.inscriptos}</p> 
 									<p class="card-text">Disponibilidad: ${i.capacidad - i.inscriptos}</p>
-								<c:if test="${ rol == 'admin' || rol == 'profesor' }">
-									<p>
-									<a class="btn btn-primary text-white w-100" href="tomarPresente/${i.id}/${idUsuario}">Tomar Asistencia</a>
-									</p>
-								</c:if>
-								
-							<c:if test="${ rol == 'admin' }">
-							<a class="btn btn-warning text-white" href="${contextPath}/modificar/${i.id}">Modificar</a>
-							<a class="btn btn-danger" href="${contextPath}/eliminar/${i.id}">Eliminar</a>
-								</c:if>
-								
-								<c:if test="${ rol == 'usuario' }">
-									   <c:if test="${ i.capacidad>i.inscriptos && i.HorarioYFecha>hoy }">
-									<p>	<a class="btn btn-success text-white w-100" href="inscribirseclase/${i.id}/${idUsuario}">Inscribirse</a>
-  									  </p>
-  									  </c:if>
-    							</c:if>
+				
+							
 								</div>
 							</div>
 						</c:forEach>

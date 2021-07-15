@@ -131,4 +131,11 @@ public class ServicioClaseImpl implements ServicioClase {
 		
 		return claseBuscada;
 	}
+
+	@Override
+	public List<Clase> consultarClasesEliminadas() {
+		List<Clase> clases = new ArrayList<Clase>();
+		clases.addAll(repositorioClase.dameClasesEliminadas());
+		return clases;
+	}
 }
