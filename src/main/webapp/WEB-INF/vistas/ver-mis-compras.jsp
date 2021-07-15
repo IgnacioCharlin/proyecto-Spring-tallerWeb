@@ -29,27 +29,22 @@
 <c:if test="${empty idUsuario}">
 	<c:set value="0" var="idUsuario" />
 </c:if>
+<c:set  value='<%= session.getAttribute("rolUsuario") %>' var="rol"  />
 <c:if test="${empty rol}">
-	<c:set value="null" var="rol" />
-</c:if>
+  <c:set  value="null" var="rol"  />
+  </c:if>  
+   
 
 
 <body class="mw-100">
 	<div class="container-fluid">
 		<div class="row">
 			<div class="d-flex flex-column col-2 p-3 mb-2 bg-primary text-white">
-				<a href="${contextPath}/home" class="text-white text-decoration-none fw-bold">Home</a>
-				<a href="${contextPath}/clases-disponibles" class="text-white text-decoration-none fw-bold">Clases Disponibles</a>
-				<c:if test="${ rol == 'admin' }">
-					<a href="${contextPath}/agregar-profesor"
-						class="h5 text-white text-decoration-none fw-bold">Agregar
-						Profesor</a>
-				</c:if>
-				<a href="${contextPath}/filtar-profesor" class="text-white text-decoration-none fw-bold">Clase Por Profesor</a>
-				<a href="${contextPath}/clases-inscriptas/${idUsuario}" class="text-white text-decoration-none fw-bold">Clases incriptas</a>
-				<a href="${contextPath}/comprarTarjeta/${idUsuario}" class="text-white text-decoration-none fw-bold">Comprar Tarjetas</a>
-				<a href="${contextPath}/verMisCompras/${idUsuario}" class="text-white text-decoration-none fw-bold">Ver mis Compras</a>
-			</div>
+				 
+				 <jsp:include page="menu.jsp" />
+				 
+				
+						</div>
 			<div class="col-10">
 				<div class="container">
 				

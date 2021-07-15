@@ -21,6 +21,7 @@
 	crossorigin="anonymous">
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set  value="<%=request.getContextPath()%>" var="contextPath"  />
 
 <c:set value='<%=session.getAttribute("idUsuario")%>' var="idUsuario" />
 <c:if test="${empty idUsuario}">
@@ -39,30 +40,9 @@
 			<div class="row">
 				<div
 					class="d-flex flex-col w-100 p-3 mb-2 text-white justify-content-around">
-					<a href="home" class="h5 text-white text-decoration-none fw-bold">Home</a>
-				<c:if test="${ rol == 'admin' }">
-					<a href="agregar-profesor"
-						class="h5 text-white text-decoration-none fw-bold">Agregar
-						Profesor</a>
-						
-					<a href="listado-pendiente/${idUsuario}"
-						class="h5 text-white text-decoration-none fw-bold">Aprobar
-						Compras</a>
-				</c:if>
-					<a href="filtar-profesor"
-						class="h5 text-white text-decoration-none fw-bold">Clase Por
-						Profesor</a> 
-					<a href="clases-disponibles"
-						class="h5 text-white text-decoration-none fw-bold">Clases
-						Disponibles</a>
-				<c:if test="${ rol == 'usuario' }">		
-					<a href="clases-inscriptas/${idUsuario}"
-						class="h5 text-white text-decoration-none fw-bold">Clases
-						incriptas</a>
-					<a href="comprarTarjeta/${idUsuario}"
-						class="h5 text-white text-decoration-none fw-bold">Comprar
-						Tarjetas</a>
-				</c:if>
+
+				<jsp:include page="menu.jsp" />
+
 				</div>
 				<h1 class="display-5 text-center titulo-home">JUST DO IT</h1>
 	</header>

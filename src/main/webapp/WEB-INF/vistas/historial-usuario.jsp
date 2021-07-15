@@ -37,16 +37,8 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="d-flex flex-column col-2 p-3 mb-2 bg-primary text-white">
-				<a href="${contextPath}/home" class="text-white text-decoration-none fw-bold">Home</a>
-				<a href="${contextPath}/clases-disponibles" class="text-white text-decoration-none fw-bold">Clases Disponibles</a>
-				<c:if test="${ rol == 'admin' }">
-					<a href="agregar-profesor"
-						class="h5 text-white text-decoration-none fw-bold">Agregar
-						Profesor</a>
-				</c:if>
-				<a href="${contextPath}/clases-inscriptas/${idUsuario}" class="text-white text-decoration-none fw-bold">Clases incriptas</a>
-				<a href="${contextPath}/filtar-profesor" class="text-white text-decoration-none fw-bold">Clase Por Profesor</a>
-			</div>
+			<jsp:include page="menu.jsp" />			
+					</div>
 			
 			<div class="col-10">
 				<div class="container">
