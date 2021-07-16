@@ -1,5 +1,7 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
+import java.util.List;
+
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +46,12 @@ public class RepositorioProfesorImp implements RepositorioProfesor {
 	@Override
 	public void modificarProfesor(Profesor profesor) {
 		sessionFactory.getCurrentSession().update(profesor);
+	}
+
+	@Override
+	public List<Profesor> listarProfesores() {
+		 return sessionFactory.getCurrentSession().createCriteria(Profesor.class)
+ 		.list();
 	}
 
 }

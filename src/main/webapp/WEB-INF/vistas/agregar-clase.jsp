@@ -23,19 +23,25 @@
 		<form:input path="nombre" id="nombre" type="text" class="form-control mb-2" placeholder="Ingresar Nombre"/>
 		<form:input path="fechaYHora" id="fechaYHora" type="datetime-local" class="form-control mb-2" />
 		<form:input path="cupo" type="number" id="cupo" class="form-control mb-2" placeholder="Ingresar capacidad"/>
-		<form:input path="idProfesor" type="number" id="idProfesor" class="form-control mb-2" placeholder="Ingresar el Id del profe"/>
+	
+		<form:select path="idProfesor"  id="idProfesor" class="form-control mb-2"
+		 placeholder="Ingresar el Id del profe">
+		 <c:forEach var="i" items="${listaProfesores}">
+		 <option value="${i.id}">${i.email}</option>
+		 </c:forEach>
+		 </form:select>
 		
 				<%--Bloque que es visible si el elemento error no está vacío	--%>
 				<c:if test="${not empty error}">
 			        <div class="alert alert-danger mt-2" role="alert" >${error}</div>
 		
 		        </c:if>
-		<a href="home" class="btn btn-lg btn-danger btn-block mt-2 w-25">Volver</a>
+
 		<button class="btn btn-lg btn-primary btn-block mt-2 w-100" Type="Submit" />Agregar</button>
 		
 		
 	</form:form>
-
+		<a href="home" class="btn btn-lg btn-danger btn-block mt-2 w-25">Volver</a>
 			</div>
 
 		</div>
