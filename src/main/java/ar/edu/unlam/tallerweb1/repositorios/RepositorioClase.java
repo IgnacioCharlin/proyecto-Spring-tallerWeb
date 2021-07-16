@@ -18,6 +18,7 @@ public interface RepositorioClase {
 	List<Clase> filtrarClasesPorFecha(String fechaDesde , String fechaHasta);
 	List<Clase> dameClasesConDisponibilidad();
 	Collection<? extends Clase> dameClasesEliminadas();
+	List<Clase> clasesConNotificacion(Long idUsuario);
 
 }
 

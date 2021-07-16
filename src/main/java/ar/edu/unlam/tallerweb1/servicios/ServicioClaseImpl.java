@@ -138,4 +138,18 @@ public class ServicioClaseImpl implements ServicioClase {
 		clases.addAll(repositorioClase.dameClasesEliminadas());
 		return clases;
 	}
+
+	@Override
+	public List<Clase> notificar(Long idUsuario) {
+		List<Clase> clases = repositorioClase.clasesConNotificacion(idUsuario);
+		return clases;
+	}
+
+	@Override
+	public void leerNotificacion(Long idClase) {
+		Clase leer = repositorioClase.buscarClasePorId(idClase);
+		leer.setNotificado(true);
+		repositorioClase.guardarClase(leer);
+		
+	}
 }

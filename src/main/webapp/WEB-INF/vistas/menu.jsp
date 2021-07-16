@@ -32,6 +32,7 @@
 				<a href="${contextPath}/clases-inscriptas/${idUsuario}" class="text-white text-decoration-none fw-bold">Clases incriptas</a>
 				<a href="${contextPath}/comprarTarjeta/${idUsuario}" class="text-white text-decoration-none fw-bold">Comprar Tarjetas</a>
 				<a href="${contextPath}/verMisCompras/${idUsuario}" class="text-white text-decoration-none fw-bold">Ver mis Compras</a>
+				<a href="${contextPath}/notificaciones" class="text-white text-decoration-none fw-bold">notificaciones</a>
 				</c:if>
 				<a href="${contextPath}/login" class="text-white text-decoration-none fw-bold">Salir</a>
 				
