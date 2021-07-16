@@ -41,12 +41,17 @@ public class ControladorClase {
 	public ModelAndView irAgregarClase() {
 		ModelMap model = new ModelMap();
 		model.put("registrarClase", new DatosClase());
+		List<Profesor> listaProfesores=servicioProfesor.listarProfesores();
+		model.put("listaProfesores", listaProfesores);
+		
 		return new ModelAndView("agregar-clase", model);
 	}
 
 	@RequestMapping(path = "/agregarClase", method = RequestMethod.POST)
 	public ModelAndView registrarClase(@ModelAttribute("registrarClase") DatosClase clase) {
 		ModelMap model = new ModelMap();
+		List<Profesor> listaProfesores=servicioProfesor.listarProfesores();
+		model.put("listaProfesores", listaProfesores);
 		String error;
 		try {
 				servicioClase.agregarClase(clase);
@@ -81,6 +86,9 @@ public class ControladorClase {
 		Clase claseBuscada = servicioClase.consultarClasePorId(id);
 		System.out.println(claseBuscada.getHorarioYFecha() + " " +claseBuscada.getId());
 		model.put("clase", claseBuscada);
+		List<Profesor> listaProfesores=servicioProfesor.listarProfesores();
+		model.put("listaProfesores", listaProfesores);
+		
 		return new ModelAndView("modificar",model);
 	}
 	

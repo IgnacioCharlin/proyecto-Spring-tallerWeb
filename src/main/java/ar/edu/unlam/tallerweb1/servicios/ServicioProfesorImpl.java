@@ -1,5 +1,7 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,6 +70,12 @@ public class ServicioProfesorImpl implements ServicioProfesor {
 		} catch (Exception e) {
 			throw new NoEsProfesor();
 		}*/
+	}
+
+
+	@Override
+	public List<Profesor> listarProfesores() {
+		return repositorioProfesor.listarProfesores();
 	}
 
 
