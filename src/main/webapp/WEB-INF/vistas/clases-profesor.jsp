@@ -7,7 +7,7 @@
 	    <!-- Bootstrap theme 
 	    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
 	-->
-<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
+	<link href="css/estilo.css" rel="stylesheet">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -15,7 +15,6 @@
 	crossorigin="anonymous">
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set value="<%=request.getContextPath()%>" var="contextPath" />
 </head>
 
 
@@ -30,41 +29,9 @@
 
 
 
-<body class="mw-100 w3l-home">
+<body class="mw-100">
 	<div class="container-fluid">
 		<div class="row">
-<<<<<<< HEAD
-			<div
-				class="d-flex flex-col w-100 p-3 mb-2 text-white justify-content-around">
-				<a href="./home" class="text-white text-decoration-none fw-bold">Home</a>
-				<a href="./clases-disponibles"
-					class="text-white text-decoration-none fw-bold">Clases
-					Disponibles</a>
-				<c:if test="${ rol == 'admin' }">
-					<a href="agregar-profesor"
-						class="h5 text-white text-decoration-none fw-bold">Agregar
-						Profesor</a>
-				</c:if>
-				<a href="./clases-inscriptas/${idUsuario}"
-					class="text-white text-decoration-none fw-bold">Clases
-					incriptas</a> <a href="./filtar-profesor"
-					class="text-white text-decoration-none fw-bold">Clase Por
-					Profesor</a>
-			</div>
-			<div class="container">
-
-				<div class="card col-5 mx-auto d-flex" >
-					<h1 class="display-5 text-center col-12 mb-5">Clases
-						disponibles</h1>
-
-					<div class="col-12">
-						<form class="d-flex col-10 mx-auto flex-column mb-4" action="">
-							<div class="d-flex flex-row justify-content-between">
-								<div class="col-12">
-									<label id="email" class="text-secondary">Email:</label> <input
-										type="email" name="email" class="form-control"
-										placeholder="Ingresar email profesor" required>
-=======
 			<div class="d-flex flex-column col-2 p-3 mb-2 bg-primary text-white">
 			<jsp:include page="menu.jsp" />
 				</div>
@@ -95,53 +62,29 @@
 							<div class="card mx-auto mb-3 text-center" style="width: 18rem;">
 								<div class="card-body">
 									<h5 class="card-title">${i.nombre}</h5>
->>>>>>> 5aeede4c6bcff133d9e4f092feda428afe3d4440
 								</div>
-							</div>
-							<div class="">
-								<input type="submit" value="Buscar"
-									class="btn btn-primary w-100 mt-4">
-							</div>
-						</form>
-						<c:if test="${not empty error}">
-							<div class="alert alert-danger mt-2" role="alert">${error}</div>
-							<br>
-						</c:if>
-					</div>
-					</div>
-				<main class="mt-4 d-flex flex-wrap">
-				
-					<c:forEach var="i" items="${clasesMap}">
-						<div class="card mx-auto mb-3 text-center" style="width: 18rem;">
-							<div class="card-body">
-								<h5 class="card-title">${i.nombre}</h5>
-							</div>
-							<div class="card-body">
-								<p class="card-text">${i.HorarioYFecha}</p>
-								<p class="card-text">Capacidad: ${i.capacidad}</p>
-								<p class="card-text">Inscriptos: ${i.inscriptos}</p>
-								<p class="card-text">Disponibilidad: ${i.capacidad - i.inscriptos}</p>
-								<c:if test="${ rol == 'admin' || rol == 'profesor' }">
+								<div class="card-body">
+									<p class="card-text">${i.HorarioYFecha}</p> 
+									<p class="card-text">Capacidad: ${i.capacidad}</p>
+									<p class="card-text">Inscriptos: ${i.inscriptos}</p> 
+									<p class="card-text">Disponibilidad: ${i.capacidad - i.inscriptos}</p>
+									<c:if test="${ rol == 'admin' || rol == 'profesor' }">
 									<p>
-										<a class="btn btn-primary text-white w-100"
-											href="tomarPresente/${i.id}/${idUsuario}">Tomar
-											Asistencia</a>
+									<a class="btn btn-primary text-white w-100" href="tomarPresente/${i.id}/${idUsuario}">Tomar Asistencia</a>
 									</p>
 								</c:if>
 								<c:if test="${ rol == 'usuario' }">
-									<c:if test="${ i.capacidad>i.inscriptos}">
-										<p>
-											<a class="btn btn-success text-white w-100"
-												href="inscribirseclase/${i.id}/${idUsuario}">Inscribirse</a>
-										</p>
-									</c:if>
-								</c:if>
-
+									   <c:if test="${ i.capacidad>i.inscriptos}">
+									<p>	<a class="btn btn-success text-white w-100" href="inscribirseclase/${i.id}/${idUsuario}">Inscribirse</a>
+  									  </p>
+  									  </c:if>
+    							</c:if>
+    
+								</div>
 							</div>
-						</div>
-					</c:forEach>
-				</main>
-
+						</c:forEach>
+					</main>
+				</div>
 			</div>
 		</div>
 	</div>
