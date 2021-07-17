@@ -69,17 +69,21 @@
 									<p class="card-text">Inscriptos: ${i.inscriptos}</p> 
 									<p class="card-text">Disponibilidad: ${i.capacidad - i.inscriptos}</p>
 									<c:if test="${ rol == 'admin' || rol == 'profesor' }">
-									<p>
-									<a class="btn btn-primary text-white w-100" href="tomarPresente/${i.id}/${idUsuario}">Tomar Asistencia</a>
-									</p>
-								</c:if>
-								<c:if test="${ rol == 'usuario' }">
-									   <c:if test="${ i.capacidad>i.inscriptos}">
-									<p>	<a class="btn btn-success text-white w-100" href="inscribirseclase/${i.id}/${idUsuario}">Inscribirse</a>
-  									  </p>
-  									  </c:if>
-    							</c:if>
-    
+										<p>
+											<a class="btn btn-primary text-white w-100"
+												href="tomarPresente/${i.id}/${idUsuario}">Tomar
+												Asistencia</a>
+										</p>
+									</c:if>
+									<c:if test="${ rol == 'usuario' }">
+										<c:if test="${ i.capacidad>i.inscriptos}">
+											<p>
+												<a class="btn btn-success text-white w-100"
+													href="inscribirseclase/${i.id}/${idUsuario}">Inscribirse</a>
+											</p>
+										</c:if>
+									</c:if>
+
 								</div>
 							</div>
 						</c:forEach>

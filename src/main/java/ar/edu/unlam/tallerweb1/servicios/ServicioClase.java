@@ -19,4 +19,5 @@ public interface ServicioClase {
 	List<Clase> consultarClasePorFiltroFecha(String desde, String hasta);
 	Clase buscarClaseId(Long id);
 	List<Clase> consultarClasesEliminadas();
+	
 }

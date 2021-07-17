@@ -21,6 +21,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "clases_inscriptas")
 public class ClasesInscriptas{
+	
+	private Boolean notificado;
  
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -62,14 +64,23 @@ public class ClasesInscriptas{
 	}
 
  
-	public ClasesInscriptas(){}
+	public ClasesInscriptas(){
+		this.notificado = false;
+	}
  
     public ClasesInscriptas(Usuario idUsuario,Clase idClase){
 		this.usuario = idUsuario;
 		this.clase = idClase;
  
 	}	 
+    
+	public Boolean getNotificado() {
+		return notificado;
+	}
 
+	public void setNotificado(Boolean notificado) {
+		this.notificado = notificado;
+	}
 
 	
 }

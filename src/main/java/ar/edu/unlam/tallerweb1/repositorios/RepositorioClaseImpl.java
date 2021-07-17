@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import ar.edu.unlam.tallerweb1.modelo.Clase;
+import ar.edu.unlam.tallerweb1.modelo.ClasesInscriptas;
 import ar.edu.unlam.tallerweb1.modelo.Profesor;
 
 @Repository("repositorioClase")
@@ -32,11 +33,13 @@ public class RepositorioClaseImpl implements RepositorioClase{
 	
 	@Override
 	public Clase guardarClase(Clase clase) {
-		if(buscarClase(clase.getNombre()) == null) {
+		/*if(buscarClase(clase.getNombre()) == null) {
 			sessionFactory.getCurrentSession().save(clase);
 			return clase;
 		}
-		return null;
+		return null;*/
+		sessionFactory.getCurrentSession().save(clase);
+		return clase;
 	}
 
 
@@ -175,5 +178,7 @@ public class RepositorioClaseImpl implements RepositorioClase{
 		
  			query.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
  return query.list();
-	} 
+	}
+
+	
 }

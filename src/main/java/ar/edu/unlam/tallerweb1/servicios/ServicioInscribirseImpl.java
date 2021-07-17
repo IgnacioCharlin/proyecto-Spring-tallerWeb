@@ -40,6 +40,19 @@ public class ServicioInscribirseImpl implements ServicioInscribirse{
 		return repositorioInscribirse.buscarPorUsuario(idUsuario);
 
 	}
+	
+	@Override
+	public List<Clase> notificar(Long idUsuario) {
+		List<Clase> clases = repositorioInscribirse.clasesConNotificacion(idUsuario);
+		return clases;
+	}
+	@Override
+	public void leerNotificacion(Clase clase, Usuario usuario) {
+		ClasesInscriptas leer = repositorioInscribirse.buscarPorUsuarioYClase(usuario,clase);
+		leer.setNotificado(true);
+		repositorioInscribirse.guardarClase(leer);
+		
+	}
 
-	 
+	
 }

@@ -16,6 +16,7 @@ import ar.edu.unlam.tallerweb1.excepciones.NoEsProfesor;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoProfesor;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoUnaFecha;
 import ar.edu.unlam.tallerweb1.modelo.Clase;
+import ar.edu.unlam.tallerweb1.modelo.ClasesInscriptas;
 import ar.edu.unlam.tallerweb1.modelo.DatosClase;
 import ar.edu.unlam.tallerweb1.modelo.Profesor;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioClase;
@@ -75,8 +76,8 @@ public class ServicioClaseImpl implements ServicioClase {
 
 	@Override
 	public void eliminarClase(Clase clase) {
-		Clase claseBuscada = repositorioClase.buscarClase(clase.getNombre());
-		repositorioClase.eliminarClase(claseBuscada);
+	//	Clase claseBuscada = repositorioClase.buscarClase(clase.getNombre());
+		repositorioClase.eliminarClase(clase);
 	}
 
 	@Override
@@ -138,4 +139,9 @@ public class ServicioClaseImpl implements ServicioClase {
 		clases.addAll(repositorioClase.dameClasesEliminadas());
 		return clases;
 	}
+
+	
+	
+
+
 }

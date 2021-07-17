@@ -19,4 +19,8 @@ public interface ServicioInscribirse{
 
 	List<ClasesInscriptas> consultarUsuarioPorId(long idUsuario);
 
+	List<Clase> notificar(Long idUsuario);
+
+	void leerNotificacion(Clase clase, Usuario usuario);
+
  }
