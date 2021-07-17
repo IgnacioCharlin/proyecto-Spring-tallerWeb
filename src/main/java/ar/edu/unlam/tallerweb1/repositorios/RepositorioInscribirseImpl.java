@@ -60,6 +60,44 @@ public class RepositorioInscribirseImpl implements RepositorioInscribirse{
                 .list();
         
 	}
+	@Override
+	public List<Clase> clasesConNotificacion(Long idUsuario) {
+		String fechaHoy = LocalDate.now().toString();
+		String fechaHoyMas1 = LocalDate.now().plusDays(2).toString();
+		
+		
+		String where =" clase.HorarioYFecha between  '"+fechaHoy+ "' and '"+fechaHoyMas1+"'";
+		   
+		SQLQuery  query =	sessionFactory.getCurrentSession().createSQLQuery(""
+				+ " SELECT clase.*"
+				+ " FROM clase  "
+				+ " LEFT join clases_inscriptas on clases_inscriptas.id_clase=clase.id "
+				+ " where"
+				+ where +"AND clases_inscriptas.notificado = false "
+				+ "AND id_usuario = " + idUsuario
+				
+//			    + " GROUP by (clase.id) "
+			    + " ORDER BY clase.HorarioYFecha asc"
+
+			    //+ " HAVING clase.capacidad>count(clases_inscriptas.id_usuario)"
+
+ 			    )
+				;
+ 			query.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+ return query.list();
+	
+	}
+	@Override
+	public ClasesInscriptas buscarClasePorId(Long id) {
+		return (ClasesInscriptas) sessionFactory.getCurrentSession().createCriteria(ClasesInscriptas.class)
+				.add(Restrictions.eq("id_clase", id))
+				.uniqueResult();
+	}
+	@Override
+	public void guardarClase(ClasesInscriptas claseIncripta) {
+		this.sessionFactory.getCurrentSession().update(claseIncripta);
+		
+	}
 	 
 	
 	

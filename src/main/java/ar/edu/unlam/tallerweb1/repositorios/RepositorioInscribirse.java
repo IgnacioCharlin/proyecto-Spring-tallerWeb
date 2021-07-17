@@ -18,6 +18,9 @@ public interface RepositorioInscribirse{
 	ClasesInscriptas buscarPorUsuarioYClase(Usuario usuario, Clase clase);
 	void guardarInscripcion(Clase clase,Usuario usuario);
 	List<ClasesInscriptas> buscarPorUsuario(long idUsuario);
+	List<Clase> clasesConNotificacion(Long idUsuario);
+	ClasesInscriptas buscarClasePorId(Long idClase);
+	void guardarClase(ClasesInscriptas leer);
 	}
 
 

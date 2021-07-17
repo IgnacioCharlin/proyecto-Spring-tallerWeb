@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.modelo.Clase;
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioClase;
+import ar.edu.unlam.tallerweb1.servicios.ServicioInscribirse;
+import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
 
 import java.util.List;
 
@@ -21,10 +24,15 @@ import javax.servlet.http.HttpServletRequest;
 public class ControladorNotificaciones {
 
 	
+	private ServicioInscribirse servicioInscribirse;
+	private ServicioUsuario servicioUsuario;
 	private ServicioClase servicioClase;
+
 	
 	@Autowired
-	public ControladorNotificaciones(ServicioClase servicioClase) {
+	public ControladorNotificaciones(ServicioInscribirse servicioInscribirse,ServicioUsuario servicioUsuario,ServicioClase servicioClase) {
+		this.servicioInscribirse = servicioInscribirse;
+		this.servicioUsuario = servicioUsuario;
 		this.servicioClase = servicioClase;
 	}
 	
@@ -33,16 +41,19 @@ public class ControladorNotificaciones {
 	public ModelAndView verNotificaciones(HttpServletRequest request) {
 		ModelMap model = new ModelMap();
 		Long idUsuario = (Long) request.getSession().getAttribute("idUsuario");
-		List<Clase> clases = servicioClase.notificar(idUsuario);
+		List<Clase> clases = servicioInscribirse.notificar(idUsuario);
 		model.put("clases", clases);
 		return new ModelAndView("notificaciones", model);
 		
 	}
+	
+	
 	@RequestMapping(path = "/notificaciones/leerNotificacion/{idClase}", method = RequestMethod.GET)
-	public ModelAndView verNotificaciones(@PathVariable Long idClase) {
-		
-		
-		servicioClase.leerNotificacion(idClase);
+	public ModelAndView verNotificaciones(@PathVariable Long idClase,HttpServletRequest request) {
+		Long idUsuario = (Long) request.getSession().getAttribute("idUsuario");
+		Usuario buscado = servicioUsuario.consultarUsuarioPorId(idUsuario);
+		Clase buscada = servicioClase.buscarClaseId(idClase);
+		servicioInscribirse.leerNotificacion(buscada, buscado);
 		
 		return new ModelAndView("redirect:/notificaciones");
 		

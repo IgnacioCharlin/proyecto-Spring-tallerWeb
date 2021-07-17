@@ -19,6 +19,5 @@ public interface ServicioClase {
 	List<Clase> consultarClasePorFiltroFecha(String desde, String hasta);
 	Clase buscarClaseId(Long id);
 	List<Clase> consultarClasesEliminadas();
-	List<Clase> notificar(Long idUsuario);
-	void leerNotificacion(Long idClase);
+	
 }

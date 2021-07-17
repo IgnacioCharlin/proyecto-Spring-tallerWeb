@@ -16,6 +16,7 @@ import ar.edu.unlam.tallerweb1.excepciones.NoEsProfesor;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoProfesor;
 import ar.edu.unlam.tallerweb1.excepciones.NoSeCargoUnaFecha;
 import ar.edu.unlam.tallerweb1.modelo.Clase;
+import ar.edu.unlam.tallerweb1.modelo.ClasesInscriptas;
 import ar.edu.unlam.tallerweb1.modelo.DatosClase;
 import ar.edu.unlam.tallerweb1.modelo.Profesor;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioClase;
@@ -139,17 +140,8 @@ public class ServicioClaseImpl implements ServicioClase {
 		return clases;
 	}
 
-	@Override
-	public List<Clase> notificar(Long idUsuario) {
-		List<Clase> clases = repositorioClase.clasesConNotificacion(idUsuario);
-		return clases;
-	}
+	
+	
 
-	@Override
-	public void leerNotificacion(Long idClase) {
-		Clase leer = repositorioClase.buscarClasePorId(idClase);
-		leer.setNotificado(true);
-		repositorioClase.guardarClase(leer);
-		
-	}
+
 }
