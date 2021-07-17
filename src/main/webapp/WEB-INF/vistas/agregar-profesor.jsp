@@ -14,7 +14,7 @@
 </head>
 <body class="w3l-home overflow-hidden">
 	<div id="loginbox" class=" col-6 mx-auto text-center pt-2 form-profesor mt-5">
-	<h1 class="display-5 mb-2">Agregar Profesor</h1>
+	<h1 class="display-5 mb-2 text-white">Agregar Profesor</h1>
 	
 						 <c:if test="${not empty msj}">
 			                <div class="alert alert-warning" role="alert">
@@ -26,10 +26,10 @@
 	<form:form action="agregarProfesor" method="POST" 
 	modelAttribute="registrarProfesor" class="p-4 w-75 mx-auto">
 		<form:input path="email" id="email" type="mail"
-			class="form-control mb-2" placeholder="Ingresar email" />
+			class="form-control mb-2 bg-dark text-white" placeholder="Ingresar email" />
 		<form:input path="password" id="password" type="password"
-			placeholder="Ingresar Contraseña" class="form-control mb-2" />
-		<form:input path="rol" type="text" id="rol" class="form-control mb-2"
+			placeholder="Ingresar Contraseña" class="form-control mb-2 bg-dark text-white" />
+		<form:input path="rol" type="text" id="rol" class="form-control mb-2 bg-dark text-white"
 			placeholder="Ingresar rol" />
 
 		<c:if test="${not empty error}">

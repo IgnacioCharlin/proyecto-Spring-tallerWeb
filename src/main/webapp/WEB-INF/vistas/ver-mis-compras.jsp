@@ -5,6 +5,7 @@
 <head>
 
 	<link href="css/estilo.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -36,7 +37,7 @@
    
 
 
-<body class="mw-100">
+<body class="mw-100 w3l-home">
 	<div class="container-fluid">
 		<div class="row">
 			<div class="d-flex flex-column col-2 p-3 mb-2 bg-primary text-white">

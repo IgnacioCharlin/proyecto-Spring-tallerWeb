@@ -15,16 +15,16 @@
 		<div class = "container">
 			<div id="loginbox" class="pt-5 col-6 mx-auto text-center form-section">
 				<form:form action="validar-registro" method="POST" modelAttribute="datosRegistro">
-		<h3 class="form-signin-heading display-5"><img src="${contextPath}/images/logo.png"></h3>
+		<h3 class="form-signin-heading display-5"><img src="${contextPath}/images/logo1.png"></h3>
 
 		<%--Elementos de entrada de datos, el elemento path debe indicar en que atributo del objeto usuario se guardan los datos ingresados--%>
 		<form:input path="email" id="email" type="email"
-			class="form-control mb-2" placeholder="Ingresar Mail"/>
+			class="form-control mb-2 bg-dark text-white" placeholder="Ingresar Mail"/>
 		<form:input path="password" type="password" id="password"
-			class="form-control mb-2" placeholder="Ingresar contraseña"/>
+			class="form-control mb-2 bg-dark text-white" placeholder="Ingresar contraseña"/>
 		<form:input path="repitePassword" type="password" id="password"
-			class="form-control mb-2" placeholder="Repetir contraseña"/>
-		<button class="btn btn-lg btn-primary btn-block mt-2 w-100" Type="Submit" />Registrar</button>
+			class="form-control mb-2 bg-dark text-white" placeholder="Repetir contraseña"/>
+		<button class="btn btn-lg btn-danger btn-block mt-2 w-100" Type="Submit" />Registrar</button>
 	</form:form>
 				<%--Bloque que es visible si el elemento error no estÃ¡ vacÃ­o	--%>
 				<c:if test="${not empty error}">

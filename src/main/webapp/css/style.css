@@ -116,7 +116,7 @@
   
  .form-profesor{
     border-radius: 4px;
-    background: #fff;
+    background: #1A1A1A;
     }	
 
   .logo {
@@ -127,6 +127,10 @@
       color: #000000;
       color: #fff;
       font-size: 42px;
+  }
+  
+  .background-body{
+  	background-color: #151515!important;
   }
 
   .w3l-login .overlay {
@@ -143,7 +147,7 @@
       padding: 2rem 3rem;
       border-radius: 4px;
       box-shadow: 0px 9px 24px 5px rgba(0, 0, 0, 0.04);
-      background: #fff;
+      background: #1A1A1A;
   }
 
   .w3l-login .form-section h3 {
@@ -368,6 +372,14 @@
 
   .copy-right p a:hover {
       text-decoration: none;
+  }
+  
+  .buscador-profesor input{
+  	border-radius:5px 0px 0px 5px !important;
+  }
+  
+  .buscador-profesor button{
+  	border-radius:0px 5px 5px 0px !important;
   }
 
   @media (max-width: 767px) {

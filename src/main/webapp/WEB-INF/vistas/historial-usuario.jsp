@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- Bootstrap core CSS 
-	    <link href="css/bootstrap.min.css" rel="stylesheet" >
-	    <!-- Bootstrap theme 
-	    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
-	-->
- <link
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
+<link href="css/font-awesome.min.css" rel="stylesheet">
+<link
+	href="//fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700"
+	rel="stylesheet">
+<link
+	href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i"
+	rel="stylesheet">
+<link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
@@ -33,7 +37,7 @@
 </c:if>
 <c:set  value="<%=request.getContextPath()%>" var="contextPath"  />
 
-<body class="mw-100">
+<body class="mw-100 w3l-home">
 	<div class="container-fluid">
 		<div class="row">
 			<div class="d-flex flex-column col-2 p-3 mb-2 bg-primary text-white">

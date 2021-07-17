@@ -34,7 +34,7 @@
 
 <c:set  value="<%=request.getContextPath()%>" var="contextPath"  />
 </head>
-<body class="mw-100">
+<body class="mw-100 background-body">
 	<header class="w3l-home">
 		<div class="container-fluid">
 			<div class="row">
@@ -54,7 +54,7 @@
 			<main class="mt-4 d-flex flex-wrap justify-content-between">
 
 				<c:forEach var="i" items="${clasesMap}">
-					<div class="card text-center" style="width: 18rem;">
+					<div class="card text-center bg-dark text-white" style="width: 18rem;">
 						<img src="${contextPath}/images/${i.nombre}.jpg" class="card-img-top" alt="...">
 						<div class="card-body">
 							<h5 class="card-title">${i.nombre}</h5>
