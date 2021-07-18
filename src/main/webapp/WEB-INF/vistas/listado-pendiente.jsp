@@ -61,7 +61,8 @@
 			</div>
 			<div class="container">
 				<main class="mt-4 d-flex flex-wrap col-8 mx-auto card bg-dark">
-					<h1 class="display-5 text-center col-12 mb-4 text-white">Histo de compras realizadas</h1>
+					<h1 class="display-5 text-center col-12 mb-4 text-white">
+					Aprobar Compras</h1>
 
  						
 						<div class="col-12">
