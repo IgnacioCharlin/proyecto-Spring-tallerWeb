@@ -76,9 +76,11 @@ public class ControladorClase {
 	
 	@RequestMapping(path = "/eliminar/{id}", method = RequestMethod.GET)
 	public ModelAndView eliminarClase(@PathVariable("id") Long id) {
+		ModelMap model = new ModelMap();
 		Clase buscada = servicioClase.consultarClasePorId(id);
 		servicioClase.eliminarClase(buscada);
-		return new ModelAndView("redirect:/home");
+		model.put("msj","La clase se elimino correctamente.");     
+        return new ModelAndView("notificacion",model); 
 	}
 	@RequestMapping(path = "/modificar/{id}", method = RequestMethod.GET)
 	public ModelAndView irAModificarClase(@PathVariable("id") Long id , @ModelAttribute("modificar") DatosClase clase) {
@@ -100,7 +102,8 @@ public class ControladorClase {
 		
 		try {
 				servicioClase.modificarClase(id, datos);
-				return claseCargadaOk(model);
+				model.put("msj","La clase se modifico correctamente.");     
+		        return new ModelAndView("notificacion",model); 
 		} catch (FaltaCupo e) {
 			error ="Falto cargar el cupo";
 		} catch (NoSeCargoProfesor e) {
