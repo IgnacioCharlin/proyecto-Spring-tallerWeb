@@ -10,7 +10,11 @@
 
 
 <c:set  value="<%=request.getContextPath()%>" var="contextPath"  />
-
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+	crossorigin="anonymous">
 <link rel="stylesheet" href="${contextPath}/css/style.css" type="text/css" media="all" />
 <link rel="stylesheet" href="${contextPath}/css/estilo.css" type="text/css" media="all" />
 <link rel="stylesheet" href="${contextPath}/css/bootstrap.css">
@@ -23,11 +27,7 @@
 <link
 	href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i"
 	rel="stylesheet">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
-	crossorigin="anonymous">
+
 	
 	
 	
@@ -40,7 +40,7 @@
 				<div class="col-12 mx-auto mt-4">
 		<div class="container">
 		
-	<div id="loginbox" class="text-white col-6 mx-auto text-center pt-2 form-profesor mt-5"
+	<div id="loginbox" class="text-white col-6 mx-auto text-center pt-2 form-profesor mt-5 bg-dark"
 	 style="margin-bottom: 6em;padding: 1em;">
 	<h1 class="text-white display-5 mb-2">Agregar Profesor</h1>
 		<hr class="colorgraph">
@@ -48,7 +48,7 @@
 	
 						 <c:if test="${not empty msj}">
 			                <div class="alert alert-warning" role="alert">
-			                    <p>${msj}</p>
+			                    <p style="    color: #000;">${msj}</p>
 			                </div>
 			            </c:if>	
 			            
@@ -56,14 +56,14 @@
 	<form:form action="agregarProfesor" method="POST" 
 	modelAttribute="registrarProfesor"  >
 		<form:input path="email" id="email" type="mail"
-			class="form-control mb-2" placeholder="Ingresar email" />
+			class="form-control mb-2 bg-dark " placeholder="Ingresar email" />
 		<form:input path="password" id="password" type="password"
-			placeholder="Ingresar Contraseña" class="form-control mb-2" />
-		<form:input path="rol" type="text" id="rol" class="form-control mb-2"
+			placeholder="Ingresar Contraseña" class="form-control mb-2 bg-dark " />
+		<form:input path="rol" type="text" id="rol" class="form-control mb-2 bg-dark "
 			placeholder="Ingresar rol" />
 
 		<c:if test="${not empty error}">
-			<div class="alert alert-danger mt-2" role="alert">${error}</div>
+			<div class="alert alert-danger mt-2 bg-dark " role="alert">${error}</div>
 		</c:if>
 		<div class="d-flex justify-content-around">
 			<button class="btn btn-lg btn-primary btn-block mt-2 "

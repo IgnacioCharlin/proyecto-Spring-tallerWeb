@@ -5,10 +5,14 @@
 <head>
 <title>EnerGym</title>	
 <c:set  value="<%=request.getContextPath()%>" var="contextPath"  />
-
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+	crossorigin="anonymous">
 <link rel="stylesheet" href="${contextPath}/css/style.css" type="text/css" media="all" />
 <link rel="stylesheet" href="${contextPath}/css/estilo.css" type="text/css" media="all" />
-<link rel="stylesheet" href="${contextPath}/css/bootstrap.css">
+<link rel="stylesheet" href="${contextPath}/css/bootstrap.css?v2.2">
 <link href="${contextPath}/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -18,11 +22,7 @@
 <link
 	href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i"
 	rel="stylesheet">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
-	crossorigin="anonymous">
+ 
 
 	
 	</head>
@@ -32,7 +32,7 @@
 			</div>
 			
 		<div class = "container">
-		<div id="loginbox" class=" col-6 mx-auto text-center pt-2 form-profesor mt-5"
+		<div id="loginbox" class=" col-6 mx-auto text-center pt-2 form-profesor mt-5 bg-dark"
 	 style="margin-bottom: 6em;padding: 1em;">
 	 
 				<form:form action="agregarClase" method="POST"
@@ -43,11 +43,11 @@
 		<br>
 
 	
-		<form:input path="nombre" id="nombre" type="text" class="form-control mb-2" placeholder="Ingresar Nombre"/>
-		<form:input path="fechaYHora" id="fechaYHora" type="datetime-local" class="form-control mb-2" />
-		<form:input path="cupo" type="number" id="cupo" class="form-control mb-2" placeholder="Ingresar capacidad"/>
+		<form:input path="nombre" id="nombre" type="text" class="form-control mb-2 bg-dark " placeholder="Ingresar Nombre"/>
+		<form:input path="fechaYHora" id="fechaYHora" type="datetime-local" class="form-control mb-2 bg-dark " />
+		<form:input path="cupo" type="number" id="cupo" class="form-control mb-2 bg-dark " placeholder="Ingresar capacidad"/>
 	
-		<form:select path="idProfesor"  id="idProfesor" class="form-control mb-2"
+		<form:select path="idProfesor"  id="idProfesor" class="form-control mb-2 bg-dark "
 		 placeholder="Ingresar el Id del profe">
 		 <c:forEach var="i" items="${listaProfesores}">
 		 <option value="${i.id}">${i.email}</option>

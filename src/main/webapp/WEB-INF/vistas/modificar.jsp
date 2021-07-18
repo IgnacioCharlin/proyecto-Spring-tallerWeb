@@ -8,7 +8,11 @@
 
 
 <c:set  value="<%=request.getContextPath()%>" var="contextPath"  />
-
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+	crossorigin="anonymous">
 <link rel="stylesheet" href="${contextPath}/css/style.css" type="text/css" media="all" />
 <link rel="stylesheet" href="${contextPath}/css/estilo.css" type="text/css" media="all" />
 <link rel="stylesheet" href="${contextPath}/css/bootstrap.css">
@@ -21,11 +25,7 @@
 <link
 	href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i"
 	rel="stylesheet">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
-	crossorigin="anonymous">
+ 
 	
 	
 		</head>
@@ -38,20 +38,21 @@
  
 	 
 		<div class = "container">
-		<div id="loginbox" class=" col-6 mx-auto text-center pt-2 form-profesor mt-5"
+		<div id="loginbox" class=" col-6 mx-auto text-center pt-2 form-profesor mt-5 bg-dark"
 	 style="margin-bottom: 6em;padding: 1em;">
 	 
 				<form:form action="${contextPath}/modificar/${id}" method="POST" modelAttribute="modificar">
-		<h3 class="form-signin-heading display-5">Modificar Clase</h3>
+ 				<h3 class="text-white form-signin-heading display-5">Modificar Clase</h3>
+		
 		<hr class="colorgraph">
 		<br>
 
 
-		<form:input path="nombre" id="nombre" type="text" class="form-control mb-2" placeholder="Ingresar Nombre" value="${clase.getNombre()}"/>
-		<form:input path="fechaYHora" id="fechaYHora" type="text" class="form-control mb-2" placeholder="Ingresar fecha y hora de la clase" value="${clase.getHorarioYFecha()}"/>
-		<form:input path="cupo" type="number" id="cupo" class="form-control mb-2" placeholder="Ingresar capacidad" value="${clase.getCapacidad()}"/>
+		<form:input path="nombre" id="nombre" type="text" class="form-control mb-2 bg-dark " placeholder="Ingresar Nombre" value="${clase.getNombre()}"/>
+		<form:input path="fechaYHora" id="fechaYHora" type="text" class="form-control mb-2 bg-dark " placeholder="Ingresar fecha y hora de la clase" value="${clase.getHorarioYFecha()}"/>
+		<form:input path="cupo" type="number" id="cupo" class="form-control mb-2 bg-dark " placeholder="Ingresar capacidad" value="${clase.getCapacidad()}"/>
 
-		<form:select path="idProfesor"  id="idProfesor" class="form-control mb-2"
+		<form:select path="idProfesor"  id="idProfesor" class="form-control mb-2 bg-dark "
 		 placeholder="Ingresar el Id del profe">
 		 <c:forEach var="i" items="${listaProfesores}">
 		 <option value="${i.id}">${i.email}</option>

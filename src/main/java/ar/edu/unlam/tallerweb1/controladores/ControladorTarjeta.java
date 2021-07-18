@@ -260,6 +260,8 @@ public class ControladorTarjeta{
     @RequestMapping(path = "aprobar-compra/{idTarjetaComprada}/{idUsuario}/{estado}/" , method = RequestMethod.GET)
 	public ModelAndView aprobarCompra(@PathVariable Integer idTarjetaComprada,@PathVariable Integer idUsuario,@PathVariable String estado ,@RequestParam (required = false) String collection_status,@RequestParam (required = false)  String collection_id)  {
     	ModelMap model = new ModelMap();  
+  
+
      	if (idUsuario!=0) { 
 			
 			   	 	TarjetasCompradas tarjetaComprada= servicioTarjetasCompradas.buscoPorId((long) idTarjetaComprada);
@@ -279,7 +281,9 @@ public class ControladorTarjeta{
  					   	    model.put("msj","La Compra se elimino correctamente.");         
 				    	}
  	
-
+ 				      	 	List<TarjetasCompradas> comprasPendientes= servicioTarjetasCompradas.pagoPendiente();
+ 				           model.put("comprasPendientes",comprasPendientes);       
+ 				           
 		   		}else {
 		      		 return new ModelAndView("redirect:/login");
 		      	}

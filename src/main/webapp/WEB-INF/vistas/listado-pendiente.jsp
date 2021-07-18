@@ -8,7 +8,11 @@
 <c:set  value="<%=request.getContextPath()%>" var="contextPath"  />
 
 	
- 
+ <link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+	crossorigin="anonymous">
 
 <link rel="stylesheet" href="${contextPath}/css/style.css" type="text/css" media="all" />
 <link rel="stylesheet" href="${contextPath}/css/estilo.css" type="text/css" media="all" />
@@ -22,11 +26,7 @@
 <link
 	href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i"
 	rel="stylesheet">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
-	crossorigin="anonymous">
+
 
 <style>
 .imgTarjeta{
@@ -60,7 +60,7 @@
 
 			</div>
 			<div class="container">
-				<main class="mt-4 d-flex flex-wrap col-8 mx-auto card bg-dark">
+				<main class="mt-4 d-flex flex-wrap col-12 mx-auto card bg-dark">
 					<h1 class="display-5 text-center col-12 mb-4 text-white">
 					Aprobar Compras</h1>
 
@@ -70,7 +70,7 @@
             
              		 <c:if test="${not empty msj}">
                 <div class="alert alert-success" role="alert">
-                    <p>${msj}</p>
+                    <p style="    color: #000;">${msj}</p>
                 </div>
             </c:if>	
             

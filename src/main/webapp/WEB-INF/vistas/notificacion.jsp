@@ -8,7 +8,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="UTF-8" />
-
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+	crossorigin="anonymous">
 
 <link rel="stylesheet" href="${contextPath}/css/style.css" type="text/css" media="all" />
 <link rel="stylesheet" href="${contextPath}/css/estilo.css" type="text/css" media="all" />
@@ -22,11 +26,7 @@
 <link
 	href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i"
 	rel="stylesheet">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
-	crossorigin="anonymous">
+
 	
 
 </head>
@@ -53,11 +53,12 @@
   
   
 	<div class="container-fluid">
-					<main class="pt-5 col-6 mx-auto text-center">
-						<div class="card mx-auto"  style="margin-bottom: 7em;">
-						 <h1 class="display-5 text-center col-12 mb-5">Notificación</h1>
-							 
-						<div class="card-body">
+					<main class="pt-5 col-6 mx-auto text-center bg-dark">
+						<div class=""  style="margin-bottom: 7em;"> 
+    	 				<h3 class="text-white form-signin-heading display-5">Notificación</h3>
+ 
+ 	<hr class="colorgraph">
+						<div style="    padding-bottom: 2em;">
 			
 					 <c:if test="${not empty msj}">
 			                <div class="alert alert-warning" role="alert">
