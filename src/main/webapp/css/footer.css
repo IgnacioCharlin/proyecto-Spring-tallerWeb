@@ -1,0 +1,285 @@
+.footer {
+	  margin-top: 55px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background: #212529;
+/*  position: relative;*/
+  z-index: 9;
+     width: 100%;
+    bottom: 0px;
+}
+
+/* line 9, ../../Arafath/CL/Cl November/227. Health _ Fitness/HTML/scss/_footer.scss */
+.footer .footer_top {
+  padding-top: 55px;
+
+}
+
+@media (max-width: 767px) {
+  /* line 9, ../../Arafath/CL/Cl November/227. Health _ Fitness/HTML/scss/_footer.scss */
+  .footer .footer_top {
+    padding-top: 60px;
+    padding-bottom: 30px;
+  }
+}
+
+@media (max-width: 767px) {
+  /* line 16, ../../Arafath/CL/Cl November/227. Health _ Fitness/HTML/scss/_footer.scss */
+  .footer .footer_top .footer_widget {
+    margin-bottom: 30px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  /* line 16, ../../Arafath/CL/Cl November/227. Health _ Fitness/HTML/scss/_footer.scss */
+  .footer .footer_top .footer_widget {
+    margin-bottom: 30px;
+  }
+}
+
+/* line 23, ../../Arafath/CL/Cl November/227. Health _ Fitness/HTML/scss/_footer.scss */
+.footer .footer_top .footer_widget .links {
+  position: relative;
+  top: -14px;
+}
+
+/* line 27, ../../Arafath/CL/Cl November/227. Health _ Fitness/HTML/scss/_footer.scss */
+.footer .footer_top .footer_widget .footer_title {
+  font-size: 20px;
+  font-weight: 400;
+  color: #FF1414;
+  text-transform: capitalize;
+  margin-bottom: 45px;
+  font-family: "Teko", sans-serif;
+}
+
+@media (max-width: 767px) {
+  /* line 27, ../../Arafath/CL/Cl November/227. Health _ Fitness/HTML/scss/_footer.scss */
+  .footer .footer_top .footer_widget .footer_title {
+    margin-bottom: 20px;
+  }
+}
+
+/* line 38, ../../Arafath/CL/Cl November/227. Health _ Fitness/HTML/scss/_footer.scss */
+.footer .footer_top .footer_widget .footer_logo {
+  font-size: 22px;
+  font-weight: 400;
+  color: #fff;
+  text-transform: capitalize;
+  margin-bottom: 40px;
+}
+
+@media (max-width: 767px) {
+  /* line 38, ../../Arafath/CL/Cl November/227. Health _ Fitness/HTML/scss/_footer.scss */
+  .footer .footer_top .footer_widget .footer_logo {
+    margin-bottom: 20px;
+  }
+}
+
+/* line 48, ../../Arafath/CL/Cl November/227. Health _ Fitness/HTML/scss/_footer.scss */
+.footer .footer_top .footer_widget p {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 26px;
+  color: #fff;
+}
+
+/* line 55, ../../Arafath/CL/Cl November/227. Health _ Fitness/HTML/scss/_footer.scss */
+.footer .footer_top .footer_widget p a {
+  color: #fff;
+}
+
+/* line 57, ../../Arafath/CL/Cl November/227. Health _ Fitness/HTML/scss/_footer.scss */
+.footer .footer_top .footer_widget p a:hover {
+  color: #FF1414;
+}
+
+/* line 63, ../../Arafath/CL/Cl November/227. Health _ Fitness/HTML/scss/_footer.scss */
+.footer .footer_top .footer_widget p.footer_text {
+  font-size: 16px;
+  color: #B2B2B2;
+  margin-bottom: 23px;
+  font-weight: 400;
+  line-height: 26px;
+}
+
+/* line 69, ../../Arafath/CL/Cl November/227. Health _ Fitness/HTML/scss/_footer.scss */
+.footer .footer_top .footer_widget p.footer_text a.domain {
+  color: #B2B2B2;
+  font-weight: 400;
+}
+
+/* line 72, ../../Arafath/CL/Cl November/227. Health _ Fitness/HTML/scss/_footer.scss */
+.footer .footer_top .footer_widget p.footer_text a.domain:hover {
+  color: #FF1414;
+  border-bottom: 1px solid #FF1414;
+}
+
+/* line 78, ../../Arafath/CL/Cl November/227. Health _ Fitness/HTML/scss/_footer.scss */
+.footer .footer_top .footer_widget p.footer_text.doanar a {
+  font-weight: 500;
+  color: #B2B2B2;
+}
+
+/* line 82, ../../Arafath/CL/Cl November/227. Health _ Fitness/HTML/scss/_footer.scss */
+.footer .footer_top .footer_widget p.footer_text.doanar a:hover {
+  color: #FF1414;
+  border-bottom: 1px solid #FF1414;
+}
+
+/* line 86, ../../Arafath/CL/Cl November/227. Health _ Fitness/HTML/scss/_footer.scss */
+.footer .footer_top .footer_widget p.footer_text.doanar a.first {
+  margin-bottom: 10px;
+}
+
+/* line 94, ../../Arafath/CL/Cl November/227. Health _ Fitness/HTML/scss/_footer.scss */
+.footer .footer_top .footer_widget ul li {
+  color: #ACACAC;
+  font-size: 14px;
+  line-height: 36px;
+}
+
+/* line 98, ../../Arafath/CL/Cl November/227. Health _ Fitness/HTML/scss/_footer.scss */
+.footer .footer_top .footer_widget ul li a {
+  color: #fff;
+  font-weight: 400;
+  text-decoration: none;
+  font-family: "Montserrat", sans-serif;
+}
+
+/* line 102, ../../Arafath/CL/Cl November/227. Health _ Fitness/HTML/scss/_footer.scss */
+.footer .footer_top .footer_widget ul li a:hover {
+  color: #FF1414;
+}
+
+/* line 108, ../../Arafath/CL/Cl November/227. Health _ Fitness/HTML/scss/_footer.scss */
+.footer .footer_top .footer_widget .newsletter_form {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+/* line 111, ../../Arafath/CL/Cl November/227. Health _ Fitness/HTML/scss/_footer.scss */
+.footer .footer_top .footer_widget .newsletter_form input {
+  width: 100%;
+  height: 50px;
+  background: #F5FBFF;
+  padding-left: 20px;
+  font-size: 15px;
+  color: #000;
+  border: none;
+  border: 1px solid #E8E8E8;
+  border-radius: 30px;
+  font-family: "Montserrat", sans-serif;
+  padding-right: 120px;
+}
+
+/* line 123, ../../Arafath/CL/Cl November/227. Health _ Fitness/HTML/scss/_footer.scss */
+.footer .footer_top .footer_widget .newsletter_form input::placeholder {
+  font-size: 15px;
+  color: #fff;
+}
+
+/* line 127, ../../Arafath/CL/Cl November/227. Health _ Fitness/HTML/scss/_footer.scss */
+.footer .footer_top .footer_widget .newsletter_form input:focus {
+  outline: none;
+}
+
+/* line 131, ../../Arafath/CL/Cl November/227. Health _ Fitness/HTML/scss/_footer.scss */
+.footer .footer_top .footer_widget .newsletter_form button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 40px;
+  border: none;
+  font-size: 14px;
+  color: #fff;
+  background: #FF1414;
+  padding: 10px;
+  padding: 0 22px;
+  cursor: pointer;
+  border-radius: 30px;
+  top: 5px;
+  right: 5px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: "Montserrat", sans-serif;
+}
+
+/* line 151, ../../Arafath/CL/Cl November/227. Health _ Fitness/HTML/scss/_footer.scss */
+.footer .footer_top .footer_widget .newsletter_text {
+  font-size: 14px;
+  color: #fff;
+  line-height: 26px;
+  font-family: "Montserrat", sans-serif;
+}
+
+/* line 159, ../../Arafath/CL/Cl November/227. Health _ Fitness/HTML/scss/_footer.scss */
+.footer .copy-right_text {
+  padding-bottom: 26px;
+}
+
+/* line 161, ../../Arafath/CL/Cl November/227. Health _ Fitness/HTML/scss/_footer.scss */
+.footer .copy-right_text .footer_border {
+  border-top: 1px solid #f5f3f3;
+  padding-bottom: 26px;
+}
+
+/* line 165, ../../Arafath/CL/Cl November/227. Health _ Fitness/HTML/scss/_footer.scss */
+.footer .copy-right_text .copy_right {
+  font-size: 15px;
+  color: #fff;
+  margin-bottom: 0;
+  font-weight: 500;
+}
+
+@media (max-width: 767px) {
+  /* line 165, ../../Arafath/CL/Cl November/227. Health _ Fitness/HTML/scss/_footer.scss */
+  .footer .copy-right_text .copy_right {
+    font-size: 14px;
+  }
+}
+
+/* line 173, ../../Arafath/CL/Cl November/227. Health _ Fitness/HTML/scss/_footer.scss */
+.footer .copy-right_text .copy_right a {
+  color: #FF1414;
+}
+
+/* line 178, ../../Arafath/CL/Cl November/227. Health _ Fitness/HTML/scss/_footer.scss */
+.footer .socail_links {
+  margin-top: 47px;
+}
+
+@media (max-width: 767px) {
+  /* line 178, ../../Arafath/CL/Cl November/227. Health _ Fitness/HTML/scss/_footer.scss */
+  .footer .socail_links {
+    margin-top: 30px;
+  }
+}
+
+/* line 184, ../../Arafath/CL/Cl November/227. Health _ Fitness/HTML/scss/_footer.scss */
+.footer .socail_links ul li {
+  display: inline-block;
+}
+
+/* line 187, ../../Arafath/CL/Cl November/227. Health _ Fitness/HTML/scss/_footer.scss */
+.footer .socail_links ul li a {
+  font-size: 15px;
+  color: #C3B2F0;
+  width: 30px;
+  display: inline-block;
+  text-align: center;
+  background: transparent;
+  margin-right: 7px;
+  color: #FFFFFF;
+  line-height: 40px !important;
+  color: #E8E8E8;
+}
+
+/* line 202, ../../Arafath/CL/Cl November/227. Health _ Fitness/HTML/scss/_footer.scss */
+.footer .socail_links ul li a:hover {
+  color: #FF1414 !important;
+  border-color: transparent;
+}

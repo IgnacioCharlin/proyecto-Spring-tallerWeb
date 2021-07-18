@@ -20,6 +20,7 @@
 			
 				<c:if test="${ rol == 'admin' }">
 				<a href="${contextPath}/agregar-profesor" class="text-white text-decoration-none fw-bold">Agregar Profesor</a>
+				<a href="${contextPath}/agregar-clase" class="text-white text-decoration-none fw-bold">Agregar Clase</a>
 							
 				<a href="${contextPath}/listado-pendiente/${idUsuario}"	class="text-white text-decoration-none fw-bold">Aprobar Compras</a>
 				<a href="${contextPath}/clases-eliminadas" class="text-white text-decoration-none fw-bold">Clases Eliminadas</a>	
@@ -32,7 +33,7 @@
 				<a href="${contextPath}/clases-inscriptas/${idUsuario}" class="text-white text-decoration-none fw-bold">Clases incriptas</a>
 				<a href="${contextPath}/comprarTarjeta/${idUsuario}" class="text-white text-decoration-none fw-bold">Comprar Tarjetas</a>
 				<a href="${contextPath}/verMisCompras/${idUsuario}" class="text-white text-decoration-none fw-bold">Ver mis Compras</a>
-				<a href="${contextPath}/notificaciones" class="text-white text-decoration-none fw-bold">notificaciones</a>
+				<a href="${contextPath}/notificaciones" class="text-white text-decoration-none fw-bold">Notificaciones</a>
 				</c:if>
 				<a href="${contextPath}/login" class="text-white text-decoration-none fw-bold">Salir</a>
 				

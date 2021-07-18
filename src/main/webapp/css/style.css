@@ -5,6 +5,7 @@
   /* reset code */
   html {
       scroll-behavior: smooth;
+      background: #1b1b1a;
   }
 
   body,
@@ -101,11 +102,24 @@
   
   .w3l-home {
       position: relative;
-      height: 100vh;
+      height: 60vh;
       background: url(../images/3.jpg) no-repeat 0px 0px;
       background-size: cover;
   }
   
+  .bg-dark {
+    margin-bottom: 1em !important;
+     border: none !important;
+    box-shadow: 2px 2px 2px 1px rgb(0 0 0 / 20%) !important;
+}
+.background-body{
+background-color: #fff!important;  
+}
+
+.card-img, .card-img-bottom, .card-img-top {
+     height: 170px;
+    }
+    
   .titulo-home{
   	margin-top: 15% !important;
     color: white;
@@ -116,7 +130,7 @@
   
  .form-profesor{
     border-radius: 4px;
-    background: #1A1A1A;
+    background: #fff;
     }	
 
   .logo {
@@ -128,10 +142,10 @@
       color: #fff;
       font-size: 42px;
   }
-  
+  /*
   .background-body{
   	background-color: #151515!important;
-  }
+  }*/
 
   .w3l-login .overlay {
       background: linear-gradient(to right, rgba(29, 75, 174, 0.38), rgba(79, 219, 146, 0.44));

@@ -1,16 +1,49 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<c:set  value="<%=request.getContextPath()%>" var="contextPath"  />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8" />
+
+
+<link rel="stylesheet" href="${contextPath}/css/style.css" type="text/css" media="all" />
+<link rel="stylesheet" href="${contextPath}/css/estilo.css" type="text/css" media="all" />
+<link rel="stylesheet" href="${contextPath}/css/bootstrap.css">
+<link href="${contextPath}/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link
+	href="//fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700"
+	rel="stylesheet">
+<link
+	href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i"
+	rel="stylesheet">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+	crossorigin="anonymous">
 	
-	
-<meta charset="ISO-8859-1">
-<title>Notificacion</title>
+
 </head>
-<body>
+
+
+
+<body class="mw-100 w3l-home">
+			<div
+				class="d-flex flex-col w-100 p-3 mb-2 text-white justify-content-around">
+				<jsp:include page="menu.jsp" />
+
+			</div>
+			
+<div class="col-12 mx-auto mt-4">
+<div class="container">
+ 
+	
+ 
 
 <c:set  value='<%= session.getAttribute("idUsuario") %>' var="idUsuario"  /> 
   <c:if test="${empty idUsuario}">
@@ -26,14 +59,16 @@
 
             
             
-						<h1 class="display-5 text-center col-12 mb-5">Notificación</h1>
-						<div class="card mx-auto" >
+						<div class="card mx-auto"  style="margin-bottom: 7em;">
+						 <h1 class="display-5 text-center col-12 mb-5">Notificación</h1>
 							 
 						<div class="card-body">
 			
 					 <c:if test="${not empty msj}">
 			                <div class="alert alert-warning" role="alert">
-			                    <p>${msj}</p>
+			                    <p style="
+    color: #0a0a0a;
+">${msj}</p>
 			                </div>
 			            </c:if>	
             
@@ -43,16 +78,16 @@
  
 			         
 			            </c:if>	
-			            
-			            
-            			<a onClick="history.go(-1);" class="btn btn-danger btn-block mt-2 w-50"/>Volver</a>
-						</div>
+			             
+            			<a onClick="history.go(-1);" class="btn btn-danger btn-block mt-2 " style="    color: white;">Volver</a>
+						</div></div>
 						
 	</main>
 	</div>
 
 
-
+</div></div>
+              				<jsp:include page="pie.jsp" />
 
 
 <script

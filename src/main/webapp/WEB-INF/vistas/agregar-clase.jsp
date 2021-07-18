@@ -3,19 +3,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- Bootstrap core CSS 
-	    <link href="css/bootstrap.min.css" rel="stylesheet" >
-	    <!-- Bootstrap theme 
-	    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
-	-->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+<c:set  value="<%=request.getContextPath()%>" var="contextPath"  />
+
+<link rel="stylesheet" href="${contextPath}/css/style.css" type="text/css" media="all" />
+<link rel="stylesheet" href="${contextPath}/css/estilo.css" type="text/css" media="all" />
+<link rel="stylesheet" href="${contextPath}/css/bootstrap.css">
+<link href="${contextPath}/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link
+	href="//fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700"
+	rel="stylesheet">
+<link
+	href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i"
+	rel="stylesheet">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+	crossorigin="anonymous">
+	
+	
 	</head>
-	<body>
+<body class="w3l-home overflow-hidden">
+				<div class="d-flex flex-col w-100 p-3 mb-2 text-white justify-content-around">
+				<jsp:include page="menu.jsp" /> 
+			</div>
+			
 		<div class = "container">
-			<div id="loginbox" class="pt-5 col-6 mx-auto text-center">
+		<div id="loginbox" class=" col-6 mx-auto text-center pt-2 form-profesor mt-5"
+	 style="margin-bottom: 6em;padding: 1em;">
+	 
 				<form:form action="agregarClase" method="POST"
-		modelAttribute="registrarClase">
-		<h3 class="form-signin-heading display-5">EnerGym</h3>
+		modelAttribute="registrarClase"  >
+		
+		<h3 class="form-signin-heading display-5">Agregar Clase</h3>
 		<hr class="colorgraph">
 		<br>
 
@@ -37,15 +60,17 @@
 		
 		        </c:if>
 
-		<button class="btn btn-lg btn-primary btn-block mt-2 w-100" Type="Submit" />Agregar</button>
+		<button class="btn btn-lg btn-primary btn-block mt-2 " Type="Submit" />Agregar</button>
 		
 		
 	</form:form>
-		<a href="home" class="btn btn-lg btn-danger btn-block mt-2 w-25">Volver</a>
-			</div>
+ 			</div>
 
 		</div>
 	</div>
+
+              				<jsp:include page="pie.jsp" />
+
 
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script

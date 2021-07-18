@@ -1,10 +1,18 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+</head>
+<%@ page import="java.util.*"%>
 
+<%@ page import="java.text.SimpleDateFormat"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<c:set value="<%=request.getContextPath()%>" var="contextPath" />
 <!DOCTYPE html>
 <html>
-<head>
-<link rel="stylesheet" href="css/bootstrap.css">
-<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
-<link href="css/font-awesome.min.css" rel="stylesheet">
+<head><link rel="stylesheet" href="${contextPath}/css/style.css" type="text/css" media="all" />
+<link rel="stylesheet" href="${contextPath}/css/estilo.css" type="text/css" media="all" />
+<link rel="stylesheet" href="${contextPath}/css/bootstrap.css">
+<link href="${contextPath}/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link
 	href="//fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700"
 	rel="stylesheet">
@@ -17,12 +25,6 @@
 	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
 	crossorigin="anonymous">
 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-</head>
-<%@ page import="java.util.*"%>
-
-<%@ page import="java.text.SimpleDateFormat"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <%
 Date dNow = new Date();
@@ -41,12 +43,11 @@ String hoy = ft.format(dNow);
 <c:if test="${empty rol}">
 	<c:set value="null" var="rol" />
 </c:if>
-<c:set value="<%=request.getContextPath()%>" var="contextPath" />
 
 
 <body class="mw-100 w3l-home">
 	<div class="container-fluid">
-		<div class="row">
+		<div class="row" style="    padding-bottom: 6em;">
 			<div
 				class="d-flex flex-col w-100 p-3 mb-2 text-white justify-content-around">
 				<jsp:include page="menu.jsp" />
@@ -73,14 +74,16 @@ String hoy = ft.format(dNow);
 							<c:forEach var="i" items="${clasesMap}">
 								<tr>
 									<th scope="row">${i.nombre}</th>
-									<td>${i.HorarioYFecha}</td>
+									<td>	<c:set var="dateParts"
+										value="${fn:split(i.HorarioYFecha, ' ')}" />
+									<c:set var="dia" value="${fn:split(dateParts[0], '-')}" />
+									<c:set var="hora" value="${fn:split(dateParts[1], ':')}" />
+									${dia[2]}/${dia[1]}/${dia[0]} ${hora[0]}:${hora[1]}</td>
 									<td>${i.capacidad}</td>
 									<td>${i.inscriptos}</td>
 									<td>${i.capacidad - i.inscriptos}</td>
 								</tr>
-							</tbody>
-						</table>
-					
+				
 					
 					
 					<!-- 
@@ -105,12 +108,17 @@ String hoy = ft.format(dNow);
 						</div>
 						 -->
 					</c:forEach>
+					
+								</tbody>
+						</table>
+					
 				</main>
 			</div>
 		</div>
 	</div>
+              				<jsp:include page="pie.jsp" />
 
-	<!-- Placed at the end of the document so the pages load faster -->
+
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script>

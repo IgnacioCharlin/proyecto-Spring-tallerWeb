@@ -1,9 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="css/bootstrap.css">
-<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
-<link href="css/font-awesome.min.css" rel="stylesheet">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<c:set  value="<%=request.getContextPath()%>" var="contextPath"  />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8" />
+
+
+<link rel="stylesheet" href="${contextPath}/css/style.css" type="text/css" media="all" />
+<link rel="stylesheet" href="${contextPath}/css/estilo.css" type="text/css" media="all" />
+<link rel="stylesheet" href="${contextPath}/css/bootstrap.css">
+<link href="${contextPath}/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link
 	href="//fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700"
 	rel="stylesheet">
@@ -15,8 +26,8 @@
 	rel="stylesheet"
 	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
 	crossorigin="anonymous">
+	
 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <style>
     .formulario{
@@ -27,6 +38,9 @@
     </style>
 </head>
 
+<%@ page import="java.text.SimpleDateFormat"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+ 
 	<c:set  value='<%= session.getAttribute("idUsuario") %>' var="idUsuario"  /> 
   <c:if test="${empty idUsuario}">
   <c:set  value="0" var="idUsuario"  />
@@ -40,28 +54,39 @@
 <body class="mw-100 w3l-home">
 	<div class="container-fluid">
 		<div class="row">
-			<div class="d-flex flex-column col-2 p-3 mb-2 bg-primary text-white">
-			<jsp:include page="menu.jsp" />			
-					</div>
-			
-			<div class="col-10">
-				<div class="container">
-					<main class="mt-4 d-flex flex-wrap">
-						<h1 class="display-5 text-center col-12 mb-5">Clases inscriptas</h1>
+			<div
+				class="d-flex flex-col w-100 p-3 mb-2 text-white justify-content-around">
+				<jsp:include page="menu.jsp" />
 
+			</div>
+			<div class="container">
+				<main class="mt-4 d-flex flex-wrap col-8 mx-auto card bg-dark">
+					<h1 class="display-5 text-center col-12 mb-4 text-white">Clases inscriptas</h1>
+					 
+						 
+			
+			
+					<table class="table mt-3 table-hover table-dark text-center">
+						<thead>
+							<tr>
+								<th scope="col">Nombre</th>
+								<th scope="col">Fecha</th>
+								<th scope="col">Calificacion</th>
+						
+							</tr>
+						</thead>
+						<tbody>
+ 
 						<c:forEach var="i" items="${clasesMap}">
+							<tr>
 						  <c:set  value="0" var="estrellas"  />
 						
-							<div class="card mx-auto mb-3 text-center" style="width: 18rem;">
-								<div class="card-body">
-									<h5 class="card-title">${i.clase.nombre}</h5>
-								</div>
-								<div class="card-body ">
-									<p class="card-text">${i.clase.getHorarioYFecha()}</p>
-									<p class="card-text">Capacidad: ${i.clase.capacidad}</p>
-							
+							<th scope="row">${i.clase.nombre}</th>
+							<th >${ i.clase.getHorarioYFecha()}
+									
+								 </th>
 								
-								
+							<th >	
 							<c:forEach var="calificacion" items="${calificaciones}">
 							  <c:if test="${calificacion.clase.id==i.clase.id}">
   						 	  <c:set  value="${calificacion.calificacion}" var="estrellas"  />
@@ -69,42 +94,33 @@
 							</c:forEach>
 							
 	
-<c:forEach begin="1" step="1" end="3" var="estrella"> 
-		<form action="../agregarCalificacion/${i.clase.id}/${idUsuario}/${estrella}" class="formulario">
-		
-		<c:if test="${estrellas>=estrella}">			
-		<input title="boton enviar" alt="Completa" src="../images/estrellaComleta.png" type="image" style=" width: 50px;"/>
- 		</c:if> 
-		<c:if test="${estrellas<estrella}">			
-		<input title="boton enviar" alt="Vacia"    src="../images/estrellaVacia.png" type="image" style=" width: 50px;"/>
-		</c:if> 
-		
-		</form> 
-		
-</c:forEach>
-
-	
-	  
-	  
-	  
-	 
-								</div>
-							</div>
+					<c:forEach begin="1" step="1" end="3" var="estrella"> 
+							<form action="${contextPath}/agregarCalificacion/${i.clase.id}/${idUsuario}/${estrella}" class="formulario">
 							
+							<c:if test="${estrellas>=estrella}">			
+							<input title="boton enviar" alt="Completa" src="${contextPath}/images/ellena.png" type="image" style=" width: 50px;"/>
+					 		</c:if> 
+							<c:if test="${estrellas<estrella}">			
+							<input title="boton enviar" alt="Vacia"    src="${contextPath}/images/evacia.png" type="image" style=" width: 50px;"/>
+							</c:if> 
 							
-				
+							</form> 
 							
+					</c:forEach></th>
 							
-							
+							</tr>
 						</c:forEach>
+								</tbody>
+					</table>
 					</main>
 				</div>
 			</div>
 		</div>
-	</div>
+ 
 
  	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+               				<jsp:include page="pie.jsp" />
  
 </body>
 </html>

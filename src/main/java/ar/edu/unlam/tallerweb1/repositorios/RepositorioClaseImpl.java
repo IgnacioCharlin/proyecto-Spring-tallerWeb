@@ -87,8 +87,8 @@ public class RepositorioClaseImpl implements RepositorioClase{
 				+ " SELECT clase.*,count(clases_inscriptas.id_usuario) as inscriptos"
 				+ " FROM clase  "
 				+ " LEFT join clases_inscriptas on clases_inscriptas.id_clase=clase.id "
-				+ " where"
-				+ where + ""
+				+ " where "
+				+ where + " and clase.estado = 'activa' "
 			    + " GROUP by (clase.id) "
 			    //+ " HAVING clase.capacidad>count(clases_inscriptas.id_usuario)"
 
@@ -115,7 +115,7 @@ public class RepositorioClaseImpl implements RepositorioClase{
 				+ " FROM clase  "
 				+ " LEFT join clases_inscriptas on clases_inscriptas.id_clase=clase.id "
 				+ " where"
-				+ where + ""
+				+ where + " and clase.estado = 'activa' "
 			    + " GROUP by (clase.id) "
 			    + " ORDER BY clase.HorarioYFecha asc"
 

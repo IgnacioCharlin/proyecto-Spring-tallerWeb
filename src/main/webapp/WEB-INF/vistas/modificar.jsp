@@ -2,22 +2,46 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-<head>
-<!-- Bootstrap core CSS 
-	    <link href="css/bootstrap.min.css" rel="stylesheet" >
-	    <!-- Bootstrap theme 
-	    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
-	-->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-	</head>
+<head> 
 	<c:set  value="<%=request.getContextPath()%>" var="contextPath"  />
+
+
+<c:set  value="<%=request.getContextPath()%>" var="contextPath"  />
+
+<link rel="stylesheet" href="${contextPath}/css/style.css" type="text/css" media="all" />
+<link rel="stylesheet" href="${contextPath}/css/estilo.css" type="text/css" media="all" />
+<link rel="stylesheet" href="${contextPath}/css/bootstrap.css">
+<link href="${contextPath}/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link
+	href="//fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700"
+	rel="stylesheet">
+<link
+	href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i"
+	rel="stylesheet">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+	crossorigin="anonymous">
 	
 	
-	<body>
+		</head>
+	
+<body class="w3l-home overflow-hidden">
+				<div class="d-flex flex-col w-100 p-3 mb-2 text-white justify-content-around">
+				<jsp:include page="menu.jsp" /> 
+			</div>
+			
+ 
+	 
 		<div class = "container">
-			<div id="loginbox" class="pt-5 col-6 mx-auto text-center">
+		<div id="loginbox" class=" col-6 mx-auto text-center pt-2 form-profesor mt-5"
+	 style="margin-bottom: 6em;padding: 1em;">
+	 
 				<form:form action="${contextPath}/modificar/${id}" method="POST" modelAttribute="modificar">
-		<h3 class="form-signin-heading display-5">EnerGym</h3>
+		<h3 class="form-signin-heading display-5">Modificar Clase</h3>
 		<hr class="colorgraph">
 		<br>
 
@@ -34,9 +58,9 @@
 		 </form:select>
 		 		
 		
-		<button class="btn btn-lg btn-primary btn-block mt-2 w-50" Type="Submit" />Modificar</button>
-		<a href="${contextPath}/home" class="btn btn-lg btn-danger btn-block mt-2 w-50"/>Volver al home</a>
-	</form:form>
+		<button class="btn btn-lg btn-primary btn-block mt-2 " Type="Submit" />Modificar</button>
+		
+ 	</form:form>
 				<%--Bloque que es visible si el elemento error no está vacío	--%>
 				<c:if test="${not empty error}">
 			        <h4><span>${error}</span></h4>
@@ -49,7 +73,10 @@
 	<script>
 	document.getElementById("idProfesor").value=${clase.profesor.id};
 	</script>
-	<!-- Placed at the end of the document so the pages load faster -->
+
+
+              				<jsp:include page="pie.jsp" />
+
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script>

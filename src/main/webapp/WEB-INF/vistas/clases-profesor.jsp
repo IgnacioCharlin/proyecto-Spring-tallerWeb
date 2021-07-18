@@ -2,9 +2,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="css/bootstrap.css">
-<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
-<link href="css/font-awesome.min.css" rel="stylesheet">
+
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<c:set  value="<%=request.getContextPath()%>" var="contextPath"  />
+
+<link rel="stylesheet" href="${contextPath}/css/style.css" type="text/css" media="all" />
+<link rel="stylesheet" href="${contextPath}/css/estilo.css" type="text/css" media="all" />
+<link rel="stylesheet" href="${contextPath}/css/bootstrap.css">
+<link href="${contextPath}/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link
@@ -18,8 +25,8 @@
 	rel="stylesheet"
 	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
 	crossorigin="anonymous">
-
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+	
+	
 </head>
 
 
@@ -138,7 +145,8 @@
 		</div>
 	</div>
 
-	<!-- Placed at the end of the document so the pages load faster -->
+              				<jsp:include page="pie.jsp" />
+
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script>

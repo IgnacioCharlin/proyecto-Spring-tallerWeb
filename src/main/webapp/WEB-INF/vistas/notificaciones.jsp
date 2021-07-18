@@ -1,25 +1,36 @@
-
-<!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="java.util.*" %>
+<%@ page import="java.text.SimpleDateFormat"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+ <!DOCTYPE html>
 <html>
 <head>
-<!-- Bootstrap core CSS 
-	    <link href="css/bootstrap.min.css" rel="stylesheet" >
-	    <!-- Bootstrap theme 
-	    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
-	-->
-	<link href="css/estilo.css" rel="stylesheet">
+
+<c:set  value="<%=request.getContextPath()%>" var="contextPath"  />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8" />
+
+
+<link rel="stylesheet" href="${contextPath}/css/style.css" type="text/css" media="all" />
+<link rel="stylesheet" href="${contextPath}/css/estilo.css" type="text/css" media="all" />
+<link rel="stylesheet" href="${contextPath}/css/bootstrap.css">
+<link href="${contextPath}/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link
+	href="//fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700"
+	rel="stylesheet">
+<link
+	href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i"
+	rel="stylesheet">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
 	crossorigin="anonymous">
 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-</head>
-<%@ page import="java.util.*" %>
 
-<%@ page import="java.text.SimpleDateFormat"%>
- <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
  
 <%
    Date dNow = new Date();
@@ -40,21 +51,34 @@
   <c:set  value="null" var="rol"  />
   </c:if>  
   <c:set  value="<%=request.getContextPath()%>" var="contextPath"  />
-  
-   
-<body class="mw-100">
-	<div class="container-fluid">
-		<div class="row">
-			<div class="d-flex flex-column col-2 p-3 mb-2 bg-primary text-white">
-				<jsp:include page="menu.jsp" />
-			
+ 
+  <style>
+.card-text{
+color:#000;
+}
+.mx-auto {
+    margin-right: 1.5em !important;
+    margin-left: 1.5em !important;
+    float: left !important;
+}
+</style>
+
+   <body class="w3l-home overflow-hidden">
+				<div class="d-flex flex-col w-100 p-3 mb-2 text-white justify-content-around">
+				<jsp:include page="menu.jsp" /> 
 			</div>
-			<div class="col-10">
-				<div class="container">
-				
-					<main class="mt-4 d-flex flex-wrap">
-						<h1 class="display-5 text-center col-12 mb-5">Clases disponibles</h1>
-						
+			
+			
+			
+		<div class = "container">
+ 
+	 
+	<main class="mt-4 d-flex flex-wrap col-12  card bg-dark">
+ 				 <h1 class="display-5 text-center col-12 mb-4 text-white">Clases disponibles</h1>
+				 
+							<hr class="colorgraph" style="    color: white;">
+		<br>
+						<div class="col-12">	
 						
 						<c:forEach var="i" items="${clases}">
 							<div class="card mx-auto mb-3 text-center" style="width: 18rem;">
@@ -84,13 +108,13 @@
 								</div>
 							</div>
 						</c:forEach>
+						</div>
 					</main>
 				</div>
-			</div>
-		</div>
-	</div>
+	 
 
-	<!-- Placed at the end of the document so the pages load faster -->
+              				<jsp:include page="pie.jsp" />
+
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script>
