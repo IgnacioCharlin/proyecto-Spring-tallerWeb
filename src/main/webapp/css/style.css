@@ -157,7 +157,7 @@ background-color: #fff!important;
 
   .w3l-login .form-section {
       max-width: 400px;
-      margin: 20px auto;
+     /* margin: 20px auto;*/
       padding: 2rem 3rem;
       border-radius: 4px;
       box-shadow: 0px 9px 24px 5px rgba(0, 0, 0, 0.04);
