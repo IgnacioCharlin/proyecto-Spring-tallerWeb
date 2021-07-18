@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-
+<title>EnerGym</title>	
 <c:set  value="<%=request.getContextPath()%>" var="contextPath"  />
 
 	

@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 </head>
+<title>EnerGym</title>	
 <%@ page import="java.util.*"%>
 
 <%@ page import="java.text.SimpleDateFormat"%>

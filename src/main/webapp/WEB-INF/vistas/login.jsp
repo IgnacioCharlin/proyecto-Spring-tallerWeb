@@ -3,6 +3,7 @@
 <c:set  value="<%=request.getContextPath()%>" var="contextPath"  />
 <!DOCTYPE html>
 	<head>
+	<title>EnerGym</title>	
 	<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
 	<link rel="stylesheet" href="css/main.css" type="text/css" media="all" />
 	<link rel="stylesheet" href="css/main.css" type="text/css" media="all" />

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>EnerGym</title>	
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="java.text.SimpleDateFormat"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>

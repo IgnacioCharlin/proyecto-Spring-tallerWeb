@@ -5,6 +5,7 @@
  <!DOCTYPE html>
 <html>
 <head>
+<title>EnerGym</title>	
 
 <c:set  value="<%=request.getContextPath()%>" var="contextPath"  />
 
@@ -62,7 +63,7 @@ color:#000;
     float: left !important;
 }
 </style>
-
+</head>
    <body class="w3l-home overflow-hidden">
 				<div class="d-flex flex-col w-100 p-3 mb-2 text-white justify-content-around">
 				<jsp:include page="menu.jsp" /> 

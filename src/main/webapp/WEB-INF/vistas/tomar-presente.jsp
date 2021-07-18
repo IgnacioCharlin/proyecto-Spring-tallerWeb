@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>EnerGym</title>	
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <c:set  value="<%=request.getContextPath()%>" var="contextPath"  />
@@ -22,7 +23,7 @@
 	rel="stylesheet"
 	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
 	crossorigin="anonymous">
-	
+
 	
 </head>
 
@@ -45,14 +46,14 @@
 	 style="margin-bottom: 6em;padding: 1em;">
 	 
 					<main class="mt-12 d-flex flex-wrap">
-						<h1 class="display-12 text-center col-12 mb-5">Tomar Presente</h1>
+						<h1 class="text-white display-12 text-center col-12 mb-5">Tomar Presente</h1>
  
  							<div class="mb-12 text-center"  >
 								<div class="card-body">
-									<h5 class="card-title">Listado de alumnos</h5>
+									<h5 class="text-white card-title">Listado de alumnos</h5>
 								</div>
 								
-								<div class="card-body">
+								<div class="card-body text-white">
 								
 								
 		 <c:if test="${not empty msj}">
@@ -109,6 +110,6 @@
 				|| document
 						.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')
 	</script>
-	<script src="js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="${contextPath}/js/bootstrap.min.js" type="text/javascript"></script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<title>EnerGym</title>	
 <c:set  value="<%=request.getContextPath()%>" var="contextPath"  />
 
 <link rel="stylesheet" href="${contextPath}/css/style.css" type="text/css" media="all" />
@@ -23,7 +23,7 @@
 	rel="stylesheet"
 	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
 	crossorigin="anonymous">
-	
+
 	
 	</head>
 <body class="w3l-home overflow-hidden">
@@ -38,7 +38,7 @@
 				<form:form action="agregarClase" method="POST"
 		modelAttribute="registrarClase"  >
 		
-		<h3 class="form-signin-heading display-5">Agregar Clase</h3>
+		<h3 class="text-white form-signin-heading display-5">Agregar Clase</h3>
 		<hr class="colorgraph">
 		<br>
 

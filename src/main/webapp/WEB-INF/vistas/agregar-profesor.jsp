@@ -40,9 +40,9 @@
 				<div class="col-12 mx-auto mt-4">
 		<div class="container">
 		
-	<div id="loginbox" class=" col-6 mx-auto text-center pt-2 form-profesor mt-5"
+	<div id="loginbox" class="text-white col-6 mx-auto text-center pt-2 form-profesor mt-5"
 	 style="margin-bottom: 6em;padding: 1em;">
-	<h1 class="display-5 mb-2">Agregar Profesor</h1>
+	<h1 class="text-white display-5 mb-2">Agregar Profesor</h1>
 		<hr class="colorgraph">
 		<br>
 	

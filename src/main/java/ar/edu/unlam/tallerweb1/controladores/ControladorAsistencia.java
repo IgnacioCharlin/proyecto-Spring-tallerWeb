@@ -84,7 +84,9 @@ public class ControladorAsistencia{
 		Clase clase = servicioClase.consultarClasePorId((long)idClase);
 		Usuario usuario = servicioUsuario.consultarUsuarioPorId((long)idUsuario); 
     	servicioAsistencia.actualizarAsistencia(clase,usuario); 
-    	return new ModelAndView("redirect:/tomarPresente/"+idClase+"/"+idUsuario);
+    	model.put("msj","El presente se tomo correctamente.");     
+        return new ModelAndView("notificacion",model); 
+//    	return new ModelAndView("redirect:/tomarPresente/"+idClase+"/"+idUsuario);
         }
         catch(NoTengoUsuario e){
              model.put("msj","Usuario invalido.");         

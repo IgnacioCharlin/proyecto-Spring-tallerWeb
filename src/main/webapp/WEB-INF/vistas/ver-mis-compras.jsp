@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<title>EnerGym</title>
 <c:set  value="<%=request.getContextPath()%>" var="contextPath"  />
 
 <meta name="viewport" content="width=device-width, initial-scale=1">

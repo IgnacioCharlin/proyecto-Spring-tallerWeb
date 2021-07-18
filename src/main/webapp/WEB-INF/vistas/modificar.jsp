@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head> 
+<title>EnerGym</title>	
 	<c:set  value="<%=request.getContextPath()%>" var="contextPath"  />
 
 

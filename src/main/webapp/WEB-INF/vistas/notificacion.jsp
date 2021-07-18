@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>EnerGym</title>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <c:set  value="<%=request.getContextPath()%>" var="contextPath"  />
@@ -53,12 +54,6 @@
   
 	<div class="container-fluid">
 					<main class="pt-5 col-6 mx-auto text-center">
-					
-					
-													
-
-            
-            
 						<div class="card mx-auto"  style="margin-bottom: 7em;">
 						 <h1 class="display-5 text-center col-12 mb-5">Notificación</h1>
 							 
@@ -79,7 +74,7 @@
 			         
 			            </c:if>	
 			             
-            			<a onClick="history.go(-1);" class="btn btn-danger btn-block mt-2 " style="    color: white;">Volver</a>
+            			<a onClick="location.href = document.referrer;" class="btn btn-danger btn-block mt-2 " style="    color: white;">Volver</a>
 						</div></div>
 						
 	</main>
@@ -93,10 +88,11 @@
 <script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script>
+		
 		window.jQuery
 				|| document
 						.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')
 	</script>
-	<script src="js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="${contextPath}/js/bootstrap.min.js" type="text/javascript"></script>
 </body>
 </html>
