@@ -55,7 +55,7 @@
 				<jsp:include page="menu.jsp" />
 
 				</div>
-				<h1 class="display-5 text-center titulo-home">JUST DO IT</h1>
+				<h3 class="display-5 text-center titulo-home ">EnerGym</h3>
 	</header>
 	
 		<c:if test="${ rol == 'admin' }">
@@ -70,7 +70,7 @@
 	
 	<div class="col-12 mx-auto mt-4">
 		<div class="container">
-			<h1 class="display-5 mb-2">Listado de Clases</h1>
+			<h1 class="text-white display-5 mb-2">Listado de Clases</h1>
 		
 
 	

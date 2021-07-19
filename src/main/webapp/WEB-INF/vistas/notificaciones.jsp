@@ -75,7 +75,7 @@ color:#000;
  
 	 
 	<main class="mt-4 d-flex flex-wrap col-12  card bg-dark">
- 				 <h1 class="display-5 text-center col-12 mb-4 text-white">Clases disponibles</h1>
+ 				 <h1 class="display-5 text-center col-12 mb-4 text-white">Notificaciones</h1>
 				 
 							<hr class="colorgraph" style="    color: white;">
 		<br>

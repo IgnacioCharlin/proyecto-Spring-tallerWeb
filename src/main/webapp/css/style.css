@@ -102,9 +102,8 @@
   
   .w3l-home {
       position: relative;
-    height: 100vh;
-    max-height: 500px;
       background: url(../images/3.jpg) no-repeat 0px 0px;
+      height: 70vh;
       background-size: cover;
   }
   
@@ -114,7 +113,7 @@
     box-shadow: 2px 2px 2px 1px rgb(0 0 0 / 20%) !important;
 }
 .background-body{
-background-color: #fff!important;  
+background-color: #25382d!important;  
 }
 
 .card-img, .card-img-bottom, .card-img-top {
@@ -124,7 +123,7 @@ background-color: #fff!important;
   .titulo-home{
   	margin-top: 15% !important;
     color: white;
-    font-size: 9rem !important;
+    font-size: 5.5rem !important;
     font-weight: 700 !important;
     font-style: italic !important;
   }
