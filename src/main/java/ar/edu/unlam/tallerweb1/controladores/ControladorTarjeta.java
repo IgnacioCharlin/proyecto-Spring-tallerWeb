@@ -164,8 +164,11 @@ public class ControladorTarjeta{
 		   	 	if (idUsuario!=0) { 
 		   	 	List<TarjetasCompradas> comprasRealizadas= servicioTarjetasCompradas.buscarComprasPorUsuario(idUsuario);         
  		   		UsuariosFichas fichasActuales = servicioUsuarioFichas.buscarFichasPorUsuario((long)idUsuario); 
+ 		   		if(fichasActuales==null) {
+ 	 		   	    model.put("msj","No cuenta con creditos, debe realizar una compra para poder inscribirse.");         
+ 		   		}else {
  		   	    model.put("msj","La cantidad actual de sus creditos es " + fichasActuales.getCantidad());         
-		   		    
+ 		   		}
 	            model.put("comprasRealizadas",comprasRealizadas);
 
 		   		}else {

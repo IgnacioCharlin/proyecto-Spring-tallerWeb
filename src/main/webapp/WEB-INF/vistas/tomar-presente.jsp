@@ -59,7 +59,7 @@
 								
 		 <c:if test="${not empty msj}">
                 <div class="alert alert-warning" role="alert">
-                    <p>${msj}</p>
+                    <p style="color: #000;">${msj}</p>
                 </div>
             </c:if>	
             
